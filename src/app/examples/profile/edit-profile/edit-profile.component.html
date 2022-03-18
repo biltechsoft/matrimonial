@@ -174,13 +174,13 @@
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" [(ngModel)]="currentUser.height" class="form-control" placeholder="Height" id="height">
+                <input type="number" min="0" [(ngModel)]="currentUser.height" class="form-control" placeholder="Height" id="height">
                 <label for="height">Height (inch)</label>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" [(ngModel)]="currentUser.weight" class="form-control" placeholder="Weight" id="weight">
+                <input type="number" min="0" [(ngModel)]="currentUser.weight" class="form-control" placeholder="Weight" id="weight">
                 <label for="weight">Weight (lb)</label>
             </div>
           </div>
@@ -354,19 +354,21 @@
         <div class="col-sm-3">
         <label>Are you currently employed?</label>
         <br>
-            <div class="form-check-radio">
+        <div class="row">
+            <div class="form-check-radio col-sm-3 radio-check-padded">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" [(ngModel)]="currentUser.employed" name="employed" id="yes" value="Yes" checked="">
                 Yes
                 <span class="form-check-sign"></span>
               </label>
             </div>
-            <div class="form-check-radio">
+            <div class="form-check-radio col-sm-3 radio-check-padded">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" [(ngModel)]="currentUser.employed" name="employed" id="no" value="No" >
                 No
                 <span class="form-check-sign"></span>
               </label>
+            </div>
             </div>
           </div>
         <div class="col-sm-3" *ngIf=isEmployed()>
@@ -383,7 +385,7 @@
         </div>
         <div class="col-sm-3" *ngIf=isEmployed()>
           <div class="form-group form-floating">
-              <input type="number" [(ngModel)]="currentUser.income" class="form-control" placeholder="Income (yearly)" id="income">
+              <input type="number" min="0" [(ngModel)]="currentUser.income" class="form-control" placeholder="Income (yearly)" id="income">
               <label for="income">Income (yearly) $</label>
           </div>
         </div>
@@ -469,6 +471,7 @@ Parent/Guardian's Information
         </div>
       </div>
   </div>
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingFour">
       <button class="btn btn-danger accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
@@ -513,7 +516,7 @@ Personal Information
         </div>
         <div class="row">
           <div class="col-sm-4" *ngIf=isMale()>
-          <h6>This question is only for Brothers</h6>
+          <h6>Do You Have Beard?</h6>
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.beard" name="beard" id="bearded" value="Yes" checked="">
@@ -530,15 +533,17 @@ Personal Information
               </div>
           </div>
           <div class="col-sm-12" *ngIf=!isMale()>
+            
             <h6>I Wear -</h6>
             <div class="row">
                 <div *ngFor="let status of WEARS" class="form-check col-sm-2 radio-check-padded">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value={{status}}>
+                    <input [(ngModel)]="currentUser.wear" class="form-check-input" type="checkbox" value={{status}}>
                     {{status}}
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
+                <p>{{currentUser.wear}}</p>
             </div>
           </div>
           <div class="col-sm-3">
@@ -572,31 +577,16 @@ SPOUSAL PREFERENCES
     <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
         <div class="row">
-          <div class="col-sm-5">
-          <h6>Religious Practices</h6>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preReligious" name="preReligious" id="sunni" value="Sunni" >
-                  Sunni
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preReligious" name="preReligious" id="shiite" value="Shi’ite" >
-                  Shi’ite
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preReligious" name="preReligious" id="other" value="Other" >
-                  Other
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
+          <div class="col-sm-6">
+            <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
+                <select [(ngModel)]="currentUser.preReligious"  class="form-select" id="preReligious">
+                    <option *ngFor="let status of RELIGIOUS_PRACTICE" value={{status}}>{{status}}</option>
+                </select>
+                <label for="preReligious">Preferred Religious Practices</label>
             </div>
-          <div class="col-sm-7" *ngIf=preReligiousOther()>
+          </div>
+
+          <div class="col-sm-6" *ngIf=preReligiousOther()>
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.preReligiousOther" class="form-control" placeholder="if Other, Please Specify" id="preReligiousOther">
                 <label for="preReligiousOther">if Other, Please Specify</label>
@@ -612,9 +602,8 @@ SPOUSAL PREFERENCES
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-5" *ngIf=isMale()>
-          <h6>This question is only for Brothers:</h6>
-          <label>Preferences for a wife-</label>
+          <div class="col-sm-6" *ngIf=isMale()>
+          <h6>Preferences for a wife-</h6>
           <br>
               <div class="form-check-radio">
                 <label class="form-check-label">

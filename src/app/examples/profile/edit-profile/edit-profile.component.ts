@@ -90,15 +90,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
   getAge() {
-<<<<<<< HEAD
     this.currentUser.age = this.service.getAge(this.currentUser.birthYear);
-=======
-    /*var todate = new Date();
-    var bdate = new Date(this.currentUser.dateOfBirth) innovationbd;
-    var diff = todate.getTime() - bdate.getTime(); innovationbd/branch
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));*/
     this.currentUser.age = this.service.getAge(this.currentUser.dateOfBirth);
->>>>>>> a7efd3812fe9b5add4ffcee9e729ebdbfe42380e
     localStorage.setItem('userage',this.currentUser.age);
     return true;
   }
