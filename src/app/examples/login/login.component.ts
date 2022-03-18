@@ -167,40 +167,28 @@ export class LoginComponent implements OnInit {
       this.clickLogin(false);
     }
     else {
-        if(this.currentUser.tempGender == "Male") {
-        var valM={
+
+        var val={
           fullName:this.currentUser.tempName,
           gender:this.currentUser.tempGender,
           state:this.currentUser.tempState,
           cellPhone:this.currentUser.tempCellPhone,
           email:this.currentUser.tempEmail,
-          dateOfBirth:this.currentUser.tempDateOfBirth,
-          age:this.service.getAge(this.currentUser.tempDateOfBirth),
+          birthYear:this.currentUser.tempBirthYear,
+          age:this.service.getAge(this.currentUser.tempBirthYear),
           matchShowLimit:5,
           userPass:this.currentUser.tempPass,
           status:"Inactive",
           openingDate:this.service.getDateTime(),
           lastEdit:this.service.getDateTime()
         };
-        this.service.addMaleUser(valM).subscribe(res=>{
+        if(this.currentUser.tempGender == "Male") {
+          this.service.addMaleUser(val).subscribe(res=>{
           //alert(res.toString());
         });
       }
       else {
-        var valF={
-          fullName:this.currentUser.tempName,
-          gender:this.currentUser.tempGender,
-          state:this.currentUser.tempState,
-          cellPhone:this.currentUser.tempCellPhone,
-          email:this.currentUser.tempEmail,
-          dateOfBirth:this.currentUser.tempDateOfBirth,
-          matchShowLimit:5,
-          userPass:this.currentUser.tempPass,
-          status:"Active",
-          openingDate:this.service.getDateTime(),
-          lastEdit:this.service.getDateTime()
-        };
-        this.service.addFemaleUser(valF).subscribe(res=>{
+        this.service.addFemaleUser(val).subscribe(res=>{
           //alert(res.toString());
         });
       }

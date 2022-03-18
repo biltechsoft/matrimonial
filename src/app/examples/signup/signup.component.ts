@@ -44,19 +44,12 @@ export class SignupComponent implements OnInit {
     code = this.service.getRandomInt(123456,987654);
     regedEmail;
     userAlreadyExist = false;
-    YEARS:any = [];
+    YEARS = this.service.getYEARS();
     STATES = this.service.STATES;
 
     ngOnInit() {
       this.refreshUserList();
-      var year = this.service.getYear();
-      for(var i=0; i<=50; i++)
-      {
-        this.YEARS[i] = year-18-i;  //Assuming minimum marriage age is 18
-      }
     }
-
-
 
     fullNameValidate() {
       if(this.FullName == "") { return false; }

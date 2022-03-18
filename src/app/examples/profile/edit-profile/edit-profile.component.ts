@@ -16,6 +16,7 @@ export class EditProfileComponent implements OnInit {
   model;
   currentUser;
   gotid;
+  YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
 
   ngOnInit(): void {
@@ -71,6 +72,7 @@ export class EditProfileComponent implements OnInit {
   }
   //matchedId = [1,5,3];
   clickSave() {
+    //if(!this.heightOK()) { alert('Height must be integer in inch'); return false; }
     this.currentUser.userToken = localStorage.getItem('usertoken');
     this.currentUser.lastEdit = this.service.getDateTime();
     //this.currentUser.matchId = String(this.matchedId);
@@ -88,14 +90,22 @@ export class EditProfileComponent implements OnInit {
     }
   }
   getAge() {
-    /*var todate = new Date();
-    var bdate = new Date(this.currentUser.dateOfBirth);
-    var diff = todate.getTime() - bdate.getTime();
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));*/
-    this.currentUser.age = this.service.getAge(this.currentUser.dateOfBirth);
+    this.currentUser.age = this.service.getAge(this.currentUser.birthYear);
     localStorage.setItem('userage',this.currentUser.age);
     return true;
   }
+  hasChildren() {
+    if (this.currentUser.children == 'Yes') { return true; }
+    else { return false; }
+  }
+  isEmployed() {
+    if (this.currentUser.employed == 'Yes') { return true; }
+    else { return false; }
+  }
+  /*heightOK() {
+    if (Number.isInteger(Number(this.currentUser.height))) { return true; }
+    else { return false; }
+  }*/
 
   IMMIGRATION_STATUS = ['US Citizen',
               'Parmanent Resident',
@@ -108,6 +118,17 @@ export class EditProfileComponent implements OnInit {
   MARRITAL_STATUS = ['Single',
               'Divorced',
               'Widowed'];
+  EDUCATION_LEVEL = ['Doctorate',
+              'Masters',
+              'Bachelor',
+              'Other'];
+  RELIGIOUS_PRACTICE = ['Sunni',
+              'Shi’ite',
+              'Other'];
+  WEARS = ['Headscarf',
+              'Jelbab/Abaya',
+              'Niqab',
+              'None'];
   FullName;
   NickName;
   Gender;

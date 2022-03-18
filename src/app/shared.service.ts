@@ -46,7 +46,16 @@ readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzV
      var yyyy = Number(today.getFullYear());
      return yyyy;
    }
-   getAge(birthDate) {
+   getYEARS() {
+     var year = this.getYear();
+     var YEARS = [];
+     for(var i=0; i<=50; i++)
+     {
+       YEARS[i] = year-18-i;  //Assuming minimum marriage age is 18
+     }
+     return YEARS;
+   }
+   /*getAge(birthDate) {
      var todate = new Date();
      var bdate = new Date(birthDate);
      var diff = todate.getTime() - bdate.getTime();
@@ -54,6 +63,9 @@ readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzV
      var age = Math.round(diffDays / 365);
      //localStorage.setItem('userage',this.currentUser.age);
      return age;
+   }*/
+   getAge(birthYear) {
+     return this.getYear()-birthYear;
    }
    isAdmin() {
      if(localStorage.getItem('usertype')=='0') {return true;}

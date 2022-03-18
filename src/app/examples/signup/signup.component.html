@@ -75,7 +75,7 @@
                         <div class="col-md-6">
                             <label>Birth Year</label>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
-                              <select [(ngModel)]="BirthYear" class="form-select" id="state">
+                              <select [(ngModel)]="BirthYear" class="form-select" id="BirthYear">
                                 <option *ngFor="let year of YEARS" value={{year}}>{{year}}</option>
                               </select>
 
@@ -144,7 +144,7 @@
                         <div class="col-md-4 mr-auto ml-auto">
                             <button (click)="createClick()" class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
                             <p *ngIf=userAlreadyExist style="color:red; text-align:center;">You have already registered!</p>
-                            <p>{{YEARS[1]}}</p>
+                            <!-- <p>{{YEARS[1]}}</p> -->
                         </div>
                     </div>
 
