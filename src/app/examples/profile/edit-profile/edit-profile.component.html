@@ -533,17 +533,16 @@ Personal Information
               </div>
           </div>
           <div class="col-sm-12" *ngIf=!isMale()>
-            
+
             <h6>I Wear -</h6>
             <div class="row">
-                <div *ngFor="let status of WEARS" class="form-check col-sm-2 radio-check-padded">
+                <div *ngFor="let status of WEARS" class="form-check col-sm-2 radio-check-padded" >
                   <label class="form-check-label">
-                    <input [(ngModel)]="currentUser.wear" class="form-check-input" type="checkbox" value={{status}}>
-                    {{status}}
+                    <input [(ngModel)]="status.checked" class="form-check-input" type="checkbox" (click)=wearClick(status.id)>
+                    {{status.prop}}
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
-                <p>{{currentUser.wear}}</p>
             </div>
           </div>
           <div class="col-sm-3">
@@ -602,38 +601,19 @@ SPOUSAL PREFERENCES
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6" *ngIf=isMale()>
-          <h6>Preferences for a wife-</h6>
-          <br>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preWear" name="preWear" id="headscarf" value="Headscarf">
-                  Headscarf
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preWear" name="preWear" id="jelbab-abaya" value="Jelbab/Abaya" >
-                  Jelbab/Abaya
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio" style="margin-right:28px;">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preWear" name="preWear" id="niqab" value="Niqab">
-                  Niqab
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio" >
-                <label class="form-check-label">
-                  <input class="form-check-input"  type="radio" [(ngModel)]="currentUser.preWear" name="preWear" id="noPreference" value="No Preference">
-                  No Preference
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
+          <div class="col-sm-12" *ngIf=isMale()>
+            <h6>Preferences for a wife-</h6>
+            <div class="row">
+                <div *ngFor="let status of WEARS" class="form-check col-sm-2 radio-check-padded" >
+                  <label class="form-check-label">
+                    <input [(ngModel)]="status.checked" class="form-check-input" type="checkbox" (click)=wearClick(status.id)>
+                    {{status.prop}}
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+            </div>
           </div>
+
           <div class="col-sm-4" *ngIf=!isMale()>
           <h6>This question is only for Sisters</h6>
           <label>Preferences for a husband-</label>
@@ -660,34 +640,36 @@ SPOUSAL PREFERENCES
                 </label>
               </div>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-12">
           <h6>Are You Fine with Smoking?</h6>
-              <div class="form-check-radio">
+          <div class="row">
+              <div class="form-check-radio col-sm-2 radio-check-padded">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preSmoking" name="preSmoking" id="no" value="No" checked="">
                   No
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="form-check-radio">
+              <div class="form-check-radio col-sm-2 radio-check-padded">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preSmoking" name="preSmoking" id="yes" value="Yes" >
                   Yes
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="form-check-radio">
+              <div class="form-check-radio col-sm-6 radio-check-padded">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preSmoking" name="preSmoking" id="noPreference" value="No Preference" >
                   No Preference
                   <span class="form-check-sign"></span>
                 </label>
               </div>
+              </div>
           </div>
           </div>
         <div class="row">
           <h6>Ethnic Background</h6>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEthnic" name="preEthnic" id="own" value="Own Ethnicity" checked="">
@@ -696,13 +678,13 @@ SPOUSAL PREFERENCES
                 </label>
               </div>
             </div>
-            <div class="col-sm-6" *ngIf=ownEthnicity()>
+            <div class="col-sm-12" *ngIf=ownEthnicity()>
                 <div class="form-group form-floating">
                     <input type="text" [(ngModel)]="currentUser.preEthnicSpecific" class="form-control" placeholder="Specify own ethnic background or country" id="preEthnicOwn">
                     <label for="preEthnicOwn">Specify own ethnic background or country</label>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEthnic" name="preEthnic" id="specific" value="Specific Ethnicity" >
@@ -711,7 +693,7 @@ SPOUSAL PREFERENCES
                 </label>
               </div>
             </div>
-            <div class="col-sm-6" *ngIf=specificEthnicity()>
+            <div class="col-sm-12" *ngIf=specificEthnicity()>
                 <div class="form-group form-floating">
                     <input type="text" [(ngModel)]="currentUser.preEthnicSpecific" class="form-control" placeholder="Specify ethnic background or country" id="preEthnicSpecific">
                     <label for="preEthnicSpecific">Specify ethnic background or country</label>

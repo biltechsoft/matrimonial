@@ -16,6 +16,7 @@ export class EditProfileComponent implements OnInit {
   model;
   currentUser;
   gotid;
+
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
 
@@ -37,11 +38,14 @@ export class EditProfileComponent implements OnInit {
     if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
         this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.WEARS[this.WEARS.length-1].prop = 'No Preference';
+          this.getWear(false);
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.getWear(true);
         });
     }
     return true;
@@ -79,11 +83,13 @@ export class EditProfileComponent implements OnInit {
     if(!this.imStatusOther()) { this.currentUser.immigrationStatusOther = null; }
     if(this.currentUser.preEthnic == 'No Preference') { this.currentUser.preEthnicSpecific = this.currentUser.preEthnic; }
     if(this.currentUser.gender == 'Male') {
+      if(this.wearClicked) { this.setWear(false); }
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
     }
     else if (this.currentUser.gender == 'Female') {
+      if(this.wearClicked) { this.setWear(true); }
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
@@ -108,6 +114,44 @@ export class EditProfileComponent implements OnInit {
     else { return false; }
   }*/
 
+  getWear(female) {
+    for(var i=0; i<this.WEARS.length; i++) {
+      if(female) {
+        if (this.currentUser.wear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
+      }
+      else {
+        if (this.currentUser.preWear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
+      }
+    }
+  }
+  setWear(female) {
+    this.currentUser.wear = "";
+    this.currentUser.preWear = "";
+    for(var i=0; i<this.WEARS.length; i++) {
+      if (this.WEARS[i].checked) {
+        if(female) {
+          this.currentUser.wear = this.currentUser.wear + this.WEARS[i].prop + ',';
+        }
+        else {
+          this.currentUser.preWear = this.currentUser.preWear + this.WEARS[i].prop + ',';
+        }
+      }
+    }
+  }
+  wearClicked = false;
+  wearClick(id) {
+    this.wearClicked = true;
+    if(id == this.WEARS.length-1 && !this.WEARS[id].checked) {
+      for(var i=0; i<this.WEARS.length-1; i++) {
+        this.WEARS[i].checked = false;
+      }
+    }
+    else if(!this.WEARS[id].checked) {
+      this.WEARS[this.WEARS.length-1].checked = false;
+    }
+  }
+
+
   IMMIGRATION_STATUS = ['US Citizen',
               'Parmanent Resident',
               'Student Visa',
@@ -126,10 +170,12 @@ export class EditProfileComponent implements OnInit {
   RELIGIOUS_PRACTICE = ['Sunni',
               'Shi’ite',
               'Other'];
-  WEARS = ['Headscarf',
-              'Jelbab/Abaya',
-              'Niqab',
-              'None'];
+  WEARS = [{ id:0, prop:'Headscarf', checked: false},
+              {id:1, prop:'Jelbab/Abaya', checked: false},
+              {id:2, prop:'Niqab', checked: false},
+              {id:3, prop:'None', checked: false}];
+  wearCheck = [false, false, false, false];
+
   FullName;
   NickName;
   Gender;
