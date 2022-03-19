@@ -40,12 +40,14 @@ export class EditProfileComponent implements OnInit {
           this.currentUser = data;
           this.WEARS[this.WEARS.length-1].prop = 'No Preference';
           this.getWear(false);
+          this.getImstat();
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
           this.getWear(true);
+          this.getImstat();
         });
     }
     return true;
@@ -84,12 +86,14 @@ export class EditProfileComponent implements OnInit {
     if(this.currentUser.preEthnic == 'No Preference') { this.currentUser.preEthnicSpecific = this.currentUser.preEthnic; }
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
+      if(this.imstatClicked) { this.setImstat(); }
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
     }
     else if (this.currentUser.gender == 'Female') {
       if(this.wearClicked) { this.setWear(true); }
+      if(this.imstatClicked) { this.setImstat(); }
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
@@ -125,8 +129,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
   setWear(female) {
-    this.currentUser.wear = "";
-    this.currentUser.preWear = "";
+    this.currentUser.wear = null;
+    this.currentUser.preWear = null;
     for(var i=0; i<this.WEARS.length; i++) {
       if (this.WEARS[i].checked) {
         if(female) {
@@ -151,15 +155,43 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  getImstat() {
+    for(var i=0; i<this.IMSTATS.length; i++) {
+      if (this.currentUser.preImmigrationStatus.includes(this.IMSTATS[i].prop)) { this.IMSTATS[i].checked = true; }
+    }
+  }
+  setImstat() {
+    this.currentUser.preImmigrationStatus = null;
+    for(var i=0; i<this.IMSTATS.length; i++) {
+      if (this.IMSTATS[i].checked) {
+        this.currentUser.preImmigrationStatus = this.currentUser.preImmigrationStatus + this.IMSTATS[i].prop + ',';
+      }
+    }
+  }
+  imstatClicked = false;
+  imstatClick(id) {
+    this.imstatClicked = true;
+    if(id == this.IMSTATS.length-1 && !this.IMSTATS[id].checked) {
+      for(var i=0; i<this.IMSTATS.length-1; i++) {
+        this.IMSTATS[i].checked = false;
+      }
+    }
+    else if(!this.IMSTATS[id].checked) {
+      this.IMSTATS[this.IMSTATS.length-1].checked = false;
+    }
+  }
 
-  IMMIGRATION_STATUS = ['US Citizen',
-              'Parmanent Resident',
-              'Student Visa',
-              'F-1',
-              'H1B',
-              'EAD',
-              'Bangladesh',
-              'Other'];
+
+
+  IMSTATS = [{prop:'US Citizen', checked:false},
+              {prop:'Parmanent Resident', checked:false},
+              {prop:'Student Visa', checked:false},
+              {prop:'F-1', checked:false},
+              {prop:'H1B', checked:false},
+              {prop:'EAD', checked:false},
+              {prop:'Bangladesh', checked:false},
+              {prop:'Other', checked:false},
+              {prop:'No Preference', checked:false}];
   MARRITAL_STATUS = ['Single',
               'Divorced',
               'Widowed'];
@@ -174,7 +206,10 @@ export class EditProfileComponent implements OnInit {
               {id:1, prop:'Jelbab/Abaya', checked: false},
               {id:2, prop:'Niqab', checked: false},
               {id:3, prop:'None', checked: false}];
-  wearCheck = [false, false, false, false];
+  ETHNIC_BACKGROUND = ['Bangladeshi',
+              'American',
+              'Other',
+              'No Preference'];
 
   FullName;
   NickName;

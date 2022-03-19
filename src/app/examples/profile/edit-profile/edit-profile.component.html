@@ -249,7 +249,7 @@
           <div class="col-sm-6">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
                 <select [(ngModel)]="currentUser.immigrationStatus" class="form-select" id="immigrationStatus">
-                  <option *ngFor="let status of IMMIGRATION_STATUS" value={{status}}>{{status}}</option>
+                  <option *ngFor="let status of IMSTATS  | slice:0:IMSTATS.length-1" value={{status.prop}}>{{status.prop}}</option>
                 </select>
                 <label for="immigrationStatus">Immigration Status</label>
             </div>
@@ -679,10 +679,12 @@ SPOUSAL PREFERENCES
               </div>
             </div>
             <div class="col-sm-12" *ngIf=ownEthnicity()>
-                <div class="form-group form-floating">
-                    <input type="text" [(ngModel)]="currentUser.preEthnicSpecific" class="form-control" placeholder="Specify own ethnic background or country" id="preEthnicOwn">
-                    <label for="preEthnicOwn">Specify own ethnic background or country</label>
-                </div>
+              <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
+                  <select [(ngModel)]="currentUser.preEthnicSpecific"  class="form-select" id="preEthnicSpecific">
+                      <option *ngFor="let status of ETHNIC_BACKGROUND" value={{status}}>{{status}}</option>
+                  </select>
+                  <label for="preEthnicSpecific">Specify own ethnic background or country</label>
+              </div>
             </div>
             <div class="col-sm-12">
               <div class="form-check-radio">
@@ -694,10 +696,12 @@ SPOUSAL PREFERENCES
               </div>
             </div>
             <div class="col-sm-12" *ngIf=specificEthnicity()>
-                <div class="form-group form-floating">
-                    <input type="text" [(ngModel)]="currentUser.preEthnicSpecific" class="form-control" placeholder="Specify ethnic background or country" id="preEthnicSpecific">
-                    <label for="preEthnicSpecific">Specify ethnic background or country</label>
-                </div>
+              <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
+                  <select [(ngModel)]="currentUser.preEthnicSpecific"  class="form-select" id="preEthnicSpecific">
+                      <option *ngFor="let status of ETHNIC_BACKGROUND" value={{status}}>{{status}}</option>
+                  </select>
+                  <label for="preEthnicSpecific">Specify own ethnic background or country</label>
+              </div>
             </div>
             <div class="col-sm-6">
               <div class="form-check-radio">
@@ -712,37 +716,20 @@ SPOUSAL PREFERENCES
 
         <h6>Immigration Status</h6>
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-12">
           <label>I would prefer my future spouse is a-</label>
           <br>
-              <div class="form-check-radio">
+          <div class="row">
+              <div *ngFor="let status of IMSTATS; let id = index" class="form-check col-sm-4 radio-check-padded" >
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="UScitizen" value="US Citizen" >
-                  US Citizen
+                  <input [(ngModel)]="status.checked" class="form-check-input" type="checkbox" (click)=imstatClick(id)>
+                  {{status.prop}}
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="parmanentResident" value="Parmanent Resident" >
-                  Parmanent Resident
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="citizenResident" value="US Citizen/Parmanent Resident" >
-                  US Citizen/Parmanent Resident
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="noPreference" value="No Preference" >
-                  No Preference
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
+          </div>
+
+
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="other" value="Other" >
