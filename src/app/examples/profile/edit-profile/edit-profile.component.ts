@@ -41,6 +41,7 @@ export class EditProfileComponent implements OnInit {
           this.WEARS[this.WEARS.length-1].prop = 'No Preference';
           this.getWear(false);
           this.getImstat();
+          this.getMarstat();
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
@@ -48,6 +49,7 @@ export class EditProfileComponent implements OnInit {
           this.currentUser = data;
           this.getWear(true);
           this.getImstat();
+          this.getMarstat();
         });
     }
     return true;
@@ -71,7 +73,7 @@ export class EditProfileComponent implements OnInit {
     if(this.currentUser.preImmigrationStatus == "Other") { return true; }
   }
   preEmployed() {
-    if(this.currentUser.preEmployment == "Employed") { return true; }
+    if(this.currentUser.preEmployment == "Yes") { return true; }
   }
   isMale() {
     if(this.currentUser.gender == 'Male') { return true; }
@@ -84,16 +86,17 @@ export class EditProfileComponent implements OnInit {
     //this.currentUser.matchId = String(this.matchedId);
     if(!this.imStatusOther()) { this.currentUser.immigrationStatusOther = null; }
     if(this.currentUser.preEthnic == 'No Preference') { this.currentUser.preEthnicSpecific = this.currentUser.preEthnic; }
+    //if(!this.preEmployed()) { this.currentUser.preIncome = 0; }
+    if(this.imstatClicked) { this.setImstat(); }
+    if(this.marstatClicked) { this.setMarstat(); }
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
-      if(this.imstatClicked) { this.setImstat(); }
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
     }
     else if (this.currentUser.gender == 'Female') {
       if(this.wearClicked) { this.setWear(true); }
-      if(this.imstatClicked) { this.setImstat(); }
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
       });
@@ -181,6 +184,32 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
+  getMarstat() {
+    for(var i=0; i<this.MARSTATS.length; i++) {
+      if (this.currentUser.preMaritalStatus.includes(this.MARSTATS[i].prop)) { this.MARSTATS[i].checked = true; }
+    }
+  }
+  setMarstat() {
+    this.currentUser.preMaritalStatus = null;
+    for(var i=0; i<this.MARSTATS.length; i++) {
+      if (this.MARSTATS[i].checked) {
+        this.currentUser.preMaritalStatus = this.currentUser.preMaritalStatus + this.MARSTATS[i].prop + ',';
+      }
+    }
+  }
+  marstatClicked = false;
+  marstatClick(id) {
+    this.marstatClicked = true;
+    if(id == this.MARSTATS.length-1 && !this.MARSTATS[id].checked) {
+      for(var i=0; i<this.MARSTATS.length-1; i++) {
+        this.MARSTATS[i].checked = false;
+      }
+    }
+    else if(!this.MARSTATS[id].checked) {
+      this.MARSTATS[this.MARSTATS.length-1].checked = false;
+    }
+  }
+
 
 
   IMSTATS = [{prop:'US Citizen', checked:false},
@@ -192,9 +221,10 @@ export class EditProfileComponent implements OnInit {
               {prop:'Bangladesh', checked:false},
               {prop:'Other', checked:false},
               {prop:'No Preference', checked:false}];
-  MARRITAL_STATUS = ['Single',
-              'Divorced',
-              'Widowed'];
+  MARSTATS = [{prop:'Single', checked:false},
+              {prop:'Divorced', checked:false},
+              {prop:'Widowed', checked:false},
+              {prop:'No Preference', checked:false}];
   EDUCATION_LEVEL = ['Doctorate',
               'Masters',
               'Bachelor',

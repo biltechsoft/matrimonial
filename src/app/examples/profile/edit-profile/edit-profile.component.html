@@ -205,7 +205,7 @@
           <div class="col-sm-3">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
                 <select [(ngModel)]="currentUser.maritalStatus" class="form-select" id="maritalStatus">
-                  <option *ngFor="let status of MARRITAL_STATUS" value={{status}}>{{status}}</option>
+                  <option *ngFor="let status of MARSTATS  | slice:0:MARSTATS.length-1" value={{status.prop}}>{{status.prop}}</option>
                 </select>
                 <label for="maritalStatus">Current Marital Status</label>
             </div>
@@ -386,7 +386,7 @@
         <div class="col-sm-3" *ngIf=isEmployed()>
           <div class="form-group form-floating">
               <input type="number" min="0" [(ngModel)]="currentUser.income" class="form-control" placeholder="Income (yearly)" id="income">
-              <label for="income">Income (yearly) $</label>
+              <label for="income">Yearly Income ($)</label>
           </div>
         </div>
       </div>
@@ -673,7 +673,7 @@ SPOUSAL PREFERENCES
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEthnic" name="preEthnic" id="own" value="Own Ethnicity" checked="">
-                  I prefer my future spouse from my own ethnic background or country of origin (specify)
+                  I prefer my future spouse from my own ethnic background or country of origin
                   <span class="form-check-sign"></span>
                 </label>
               </div>
@@ -683,14 +683,14 @@ SPOUSAL PREFERENCES
                   <select [(ngModel)]="currentUser.preEthnicSpecific"  class="form-select" id="preEthnicSpecific">
                       <option *ngFor="let status of ETHNIC_BACKGROUND" value={{status}}>{{status}}</option>
                   </select>
-                  <label for="preEthnicSpecific">Specify own ethnic background or country</label>
+                  <label for="preEthnicSpecific">Specify ethnic background or country</label>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="form-check-radio">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEthnic" name="preEthnic" id="specific" value="Specific Ethnicity" >
-                  I am seeking my future spouse to be from a specific ethnicity or country (specify)
+                  I am seeking my future spouse to be from a specific ethnicity or country
                   <span class="form-check-sign"></span>
                 </label>
               </div>
@@ -700,7 +700,7 @@ SPOUSAL PREFERENCES
                   <select [(ngModel)]="currentUser.preEthnicSpecific"  class="form-select" id="preEthnicSpecific">
                       <option *ngFor="let status of ETHNIC_BACKGROUND" value={{status}}>{{status}}</option>
                   </select>
-                  <label for="preEthnicSpecific">Specify own ethnic background or country</label>
+                  <label for="preEthnicSpecific">Specify ethnic background or country</label>
               </div>
             </div>
             <div class="col-sm-6">
@@ -717,7 +717,7 @@ SPOUSAL PREFERENCES
         <h6>Immigration Status</h6>
         <div class="row">
             <div class="col-sm-12">
-          <label>I would prefer my future spouse is a-</label>
+          <label>I would prefer immigration status of my future spouse is-</label>
           <br>
           <div class="row">
               <div *ngFor="let status of IMSTATS; let id = index" class="form-check col-sm-4 radio-check-padded" >
@@ -729,16 +729,8 @@ SPOUSAL PREFERENCES
               </div>
           </div>
 
-
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preImmigrationStatus" name="preImmigrationStatus" id="other" value="Other" >
-                  Other (specify)
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
             </div>
-          <div class="col-sm-5" *ngIf=preImStatusOther()>
+          <div class="col-sm-5" *ngIf=false>
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.preImmigrationStatusOther" class="form-control" placeholder="if Other, Please Specify" id="preImmigrationStatusOther">
                 <label for="preImmigrationStatusOther">if Other, Please Specify</label>
@@ -752,48 +744,31 @@ SPOUSAL PREFERENCES
           <div class="col-sm-12">
           <label>I prefer a spouse who’s-</label>
           <br>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preMaritalStatus" name="preMaritalStatus" id="single" value="Single" checked="">
-              Single
-              <span class="form-check-sign"></span>
-            </label>
+          <div class="row">
+              <div *ngFor="let status of MARSTATS; let id = index" class="form-check col-sm-2 radio-check-padded" >
+                <label class="form-check-label">
+                  <input [(ngModel)]="status.checked" class="form-check-input" type="checkbox" (click)=marstatClick(id)>
+                  {{status.prop}}
+                  <span class="form-check-sign"></span>
+                </label>
+              </div>
           </div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preMaritalStatus" name="preMaritalStatus" id="divorced" value="Divorced" >
-              Divorced
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preMaritalStatus" name="preMaritalStatus" id="widowed" value="Widowed" >
-              Widowed
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preMaritalStatus" name="preMaritalStatus" id="noPreference" value="No Preference" >
-              No Preference
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
+
+
           </div>
           <h6>Children</h6>
 
             <div class="col-sm-12">
             <label>I am willing to consider a spouse with existing children-</label>
-            <br>
-            <div class="form-check-radio">
+            <div class="row">
+            <div class="form-check-radio col-sm-2 radio-check-padded">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preChildren" name="preChildren" id="yes" value="Yes">
                 Yes
                 <span class="form-check-sign"></span>
               </label>
             </div>
-            <div class="form-check-radio">
+            <div class="form-check-radio col-sm-2 radio-check-padded">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preChildren" name="preChildren" id="no" value="No" >
                 No
@@ -801,34 +776,21 @@ SPOUSAL PREFERENCES
               </label>
             </div>
             </div>
+            </div>
 
             <h6>Education</h6>
 
               <div class="col-sm-12">
               <label>Preferred Minimum Education Level of my Future Spouse-</label>
-              <br>
-              <div class="form-check-radio">
+              <div class="row">
+              <div *ngFor="let status of EDUCATION_LEVEL | slice:0:EDUCATION_LEVEL.length-1" class="form-check-radio col-sm-2 radio-check-padded">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="doctorate" value="Doctorate">
-                  Doctorate
+                  {{status}}
                   <span class="form-check-sign"></span>
                 </label>
               </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="masters" value="Masters">
-                  Masters
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
-                <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="bachelor" value="Bachelor">
-                  Bachelor
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-              <div class="form-check-radio">
+              <div class="form-check-radio col-sm-3 radio-check-padded">
                 <label class="form-check-label">
                   <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="noPreference" value="No Preference">
                   No Preference
@@ -836,28 +798,29 @@ SPOUSAL PREFERENCES
                 </label>
               </div>
               </div>
+              </div>
 
               <h6>Employment</h6>
 
                 <div class="col-sm-12">
                 <label>Preferred Employment Status of Future Spouse-</label>
-                <br>
-                <div class="form-check-radio">
+                <div class="row">
+                <div class="form-check-radio col-sm-3 radio-check-padded">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="employed" value="Employed">
+                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="employed" value="Yes">
                     Employed
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
 
-                <div class="form-check-radio">
+                <div class="form-check-radio col-sm-3 radio-check-padded">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="notEmployed" value="Not Employed" >
+                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="notEmployed" value="No" >
                     Not Employed
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
-                <div class="form-check-radio">
+                <div class="form-check-radio col-sm-3 radio-check-padded">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="noPreference" value="No Preference" >
                     No Preference
@@ -865,9 +828,10 @@ SPOUSAL PREFERENCES
                   </label>
                 </div>
                 </div>
+                </div>
                 <div class="col-sm-6" *ngIf=preEmployed()>
                   <div class="form-group form-floating">
-                      <input type="text" [(ngModel)]="currentUser.preIncome" class="form-control" placeholder="Preferred minimum yearly Income" id="preIncome">
+                      <input type="number" min="0" [(ngModel)]="currentUser.preIncome" class="form-control" placeholder="Preferred minimum yearly Income" id="preIncome">
                       <label for="preIncome">Preferred minimum yearly Income of future spouse (USD)</label>
                   </div>
                 </div>
@@ -877,7 +841,7 @@ SPOUSAL PREFERENCES
                   <div class="col-sm-12"></div>
                   <div class="col-sm-6">
                     <div class="form-group form-floating">
-                        <input type="text" [(ngModel)]="currentUser.preAgeGap" class="form-control" placeholder="Maximum Age Difference" id="preAgeGap">
+                        <input type="number" min="0" max="50" step="1" [(ngModel)]="currentUser.preAgeGap" class="form-control" placeholder="Maximum Age Difference" id="preAgeGap">
                         <label for="preIncome">Preferred Maximum Age Difference of Future Spouse</label>
                     </div>
                   </div>
@@ -890,11 +854,11 @@ SPOUSAL PREFERENCES
     <h2 class="accordion-header" id="flush-headingSix">
       <button class="btn btn-danger accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
 
-Personal Information
+Reference
       </button>
     </h2>
     <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Yes. Registration is completely free. But you may donate us if you like our service.</div>
+      <div class="accordion-body">You may add reference who can introduce you.</div>
     </div>
   </div>
 
