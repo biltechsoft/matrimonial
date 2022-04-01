@@ -785,7 +785,7 @@ SPOUSAL PREFERENCES
               <div class="row">
               <div *ngFor="let status of EDUCATION_LEVEL | slice:0:EDUCATION_LEVEL.length-1" class="form-check-radio col-sm-2 radio-check-padded">
                 <label class="form-check-label">
-                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="doctorate" value="Doctorate">
+                  <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEducation" name="preEducation" id="doctorate" value={{status}}>
                   {{status}}
                   <span class="form-check-sign"></span>
                 </label>

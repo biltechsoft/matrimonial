@@ -89,16 +89,29 @@ export class EditProfileComponent implements OnInit {
     //if(!this.preEmployed()) { this.currentUser.preIncome = 0; }
     if(this.imstatClicked) { this.setImstat(); }
     if(this.marstatClicked) { this.setMarstat(); }
+    var activateRequest = false;
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
+      this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, true);
+      if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
+        activateRequest = true;
+        this.currentUser.status = 'Pending';
+      }
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
+        if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
       });
     }
     else if (this.currentUser.gender == 'Female') {
       if(this.wearClicked) { this.setWear(true); }
+      this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, false);
+      if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
+        activateRequest = true;
+        this.currentUser.status = 'Pending';
+      }
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
+        if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
       });
     }
   }

@@ -6,7 +6,11 @@ import {SharedService} from 'app/shared.service';
 @Component({
   selector: 'app-adminuser',
   templateUrl: './adminuser.component.html',
-  styleUrls: ['./adminuser.component.css']
+  styleUrls: ['./adminuser.component.css',
+              './edmin/bootstrap/css/bootstrap.min.css',
+              './edmin/css/theme.css',
+              './edmin/bootstrap/css/bootstrap-responsive.min.css',
+              './edmin/images/icons/css/font-awesome.css']
 })
 
 export class AdminuserComponent implements OnInit {

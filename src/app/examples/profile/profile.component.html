@@ -13,9 +13,13 @@
     <div class="col-md-6 ml-auto mr-auto text-center">
         <h6 class="description">Profile Completeness</h6>
         <ngb-progressbar type="success" class="mt-0" [value]=pct [striped]="true" [animated]="true"><i>{{pct}}%</i></ngb-progressbar><br>
-        <div *ngIf=!profileComplete()>
+        <div *ngIf="currentUser.status == 'Inactive'">
           <p>Your profile is not complete yet. To see who best matches you, please complete your profile.</p>
           <button [routerLink]="['/edit-profile']" type="button" class="btn btn-outline-danger btn-round">Complete Profile</button>
+        </div>
+        <div *ngIf="currentUser.status == 'Pending'">
+          <p>Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to see your best matches after admin approval. It may take 72 hours to 1 week to review your request.</p>
+          <button [routerLink]="['/edit-profile']" type="button" class="btn btn-outline-danger btn-round">Edit Profile</button>
         </div>
         <br>
         <div *ngIf=profileComplete()>

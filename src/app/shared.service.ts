@@ -252,6 +252,52 @@ readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzV
      localStorage.setItem('isLoggedOut','True');
    }
 
+   profilePercentage(user, male=true) {
+     var param = [
+       Number(user.fullName != null),
+       Number(user.city != null),
+       Number(user.state != null),
+       Number(user.cellPhone != null),
+       Number(user.email != null),
+       Number(user.age != null),
+       Number(user.height != null),
+       Number(user.weight != null),
+       Number(user.maritalStatus != null),
+       Number(user.children != null),
+       Number(user.immigrationStatus != null),
+       Number(user.highSchool != null),
+       Number(user.bachelors != null),
+       Number(user.highestEducation != null),
+       Number(user.employed != null),
+       Number(user.religiousPractice != null),
+       Number(user.smoker != null),
+       Number(user.preReligious != null),
+       Number(user.preSmoking != null),
+       Number(user.PreEthnicSpecific != null),
+       Number(user.preImmigrationStatus != null),
+       Number(user.preMaritalStatus != null),
+       Number(user.preChildren != null),
+       Number(user.preEducation != null),
+       Number(user.preEmployment != null),
+       Number(user.preIncome != null),
+       Number(user.preAgeGap != null),
+       Number(user.photo != null)
+     ];
+     if (male) {
+       param.push(Number(user.beard != null));
+       param.push(Number(user.preWear != null));
+     }
+     else {
+       param.push(Number(user.wear != null));
+       param.push(Number(user.preBeard != null));
+     }
+     var sum = 0;
+     for(var i=0; i<param.length; i++) {
+       sum = sum + param[i];
+     }
+     return Math.floor(sum*100/30);  //total 30 parameter taken
+   }
+
 
   STATES = [
     {
