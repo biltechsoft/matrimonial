@@ -117,7 +117,7 @@ export class EditProfileComponent implements OnInit {
   }
   getAge() {
     this.currentUser.age = this.service.getAge(this.currentUser.birthYear);
-    this.currentUser.age = this.service.getAge(this.currentUser.dateOfBirth);
+    //this.currentUser.age = this.service.getAge(this.currentUser.dateOfBirth);
     localStorage.setItem('userage',this.currentUser.age);
     return true;
   }

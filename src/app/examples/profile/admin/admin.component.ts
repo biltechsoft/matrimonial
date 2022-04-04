@@ -32,6 +32,9 @@ export class AdminComponent implements OnInit {
   Email=null;
   DateOfBirth=null;
 
+  requestId=[0];
+  //alerts = this.notify.alerts;
+
 
   ngOnInit(): void {
     this.service.loginauth();
@@ -187,6 +190,12 @@ export class AdminComponent implements OnInit {
           this.refreshMaleList();
         });
       }
+    }
+  }
+  anyRequest(user) {
+    if (user.status == 'Pending') { return true; }
+    else if (user.reqSent != null) {
+      return true;
     }
   }
 
