@@ -198,6 +198,12 @@ export class AdminComponent implements OnInit {
       return true;
     }
   }
+  requestType(user) {
+    if (user.status == 'Pending') { return "Profile Activation Request"; }
+    else if (user.reqSent != null) {
+      return "View Top Matches Profile";
+    }
+  }
 
   menu = [
     {
