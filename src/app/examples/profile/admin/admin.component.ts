@@ -201,7 +201,23 @@ export class AdminComponent implements OnInit {
   requestType(user) {
     if (user.status == 'Pending') { return "Profile Activation Request"; }
     else if (user.reqSent != null) {
-      return "View Top Matches Profile";
+      return "View Matching Profile";
+    }
+  }
+  profileActivate(user) {
+    if(user.gender == 'Male') {
+      var val = { userId: user.userId, status: 'Active' };
+      this.service.updateMaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        this.refreshMaleList();
+      });
+    }
+    else if(user.gender == 'Female') {
+      var val = { userId: user.userId, status: 'Active' };
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        this.refreshFemaleList();
+      });
     }
   }
 
