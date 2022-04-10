@@ -8,9 +8,9 @@
       <div class="col-lg-3">
           <div *ngFor="let item of menu | slice:superadmin">
             <button type="button" class="btn btn-success sidebar" (click)=activeMenu(item.id)>{{item.name}}</button>
-            <div *ngFor="let subitem of menu[item.id].submenu">
+            <div *ngFor="let subitem of menu[item.id].submenu; let i=index">
               <button type="button" class="btn btn-success sidebar-sub" *ngIf=item.sub
-              data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addClick()">{{subitem}}
+              data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addClick(i)">{{subitem}}
               </button>
             </div>
           </div>
@@ -134,18 +134,40 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let user of maleusers.concat(femaleusers)"><ng-container *ngIf=anyRequest(user)>
+                  <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
                       <td style="vertical-align: middle;"> {{user.userId}}</td>
                       <td style="vertical-align: middle;">{{user.fullName}}    </td>
                       <td style="vertical-align: middle;">{{requestType(user)}}    </td>
                       <td style="vertical-align: middle;">{{user.reqSent}}    </td>
-                      <td style="vertical-align: middle;">
-                          <button type="button" class="btn btn-outline-default btn-sm" (click)=profileActivate(user)>Accept</button>
-                          <button type="button" class="btn btn-outline-default btn-sm">Reject</button>
-                      </td></ng-container>
+                      <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
+                          <button type="button" class="btn btn-outline-default btn-sm" (click)=profileActivate(user,i)>Accept</button>
+                          <button type="button" class="btn btn-outline-default btn-sm" (click)=profileReject(user,i)>Reject</button>
+                      </td>
+                      <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
+                    </ng-container>
                   </tr>
               </tbody>
           </table>
+          <div class="modal fade" id="exampleModal" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{matchingVar}}</h5>
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                  <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">
+                  OK
+                  </button>
+
+              </div>
+
+          </div>
+          </div>
+          </div>
         </div>
         <!-- ========= end Dashboard -->
 

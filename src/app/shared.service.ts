@@ -147,7 +147,9 @@ readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzV
   sendEmail(val:any) {
     return this.http.post (this.APIUrl + '/sendmail', val);
   }
-
+  makeMatching() {
+    return this.http.get<any[]> (this.APIUrl + '/matchmaking/');
+  }
 
   UploadPhoto(val:any) {
     return this.http.post (this.APIUrl + '/SaveFile', val);

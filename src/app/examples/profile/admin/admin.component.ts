@@ -34,6 +34,9 @@ export class AdminComponent implements OnInit {
 
   requestId=[0];
   //alerts = this.notify.alerts;
+  acceptedIndex: any=[];
+  rejectedIndex: any=[];
+  matchingVar;
 
 
   ngOnInit(): void {
@@ -87,7 +90,7 @@ export class AdminComponent implements OnInit {
     //localStorage.setItem('menuadmin', item);
   }
 
-  addClick(){
+  addClick(i){
     this.modalTitle="Add Admin";
     this.AdminId=0;
     this.AdminUserName="";
@@ -95,6 +98,12 @@ export class AdminComponent implements OnInit {
     this.AdminFullName="";
     this.AdminLevel="";
     this.AdminStatus="";
+    this.matchingVar = "Matching is being Processed...";
+    if(this.menu[1].status && i==0) {  //i=0 for submenu 'Run Matching'
+      this.service.makeMatching().subscribe(res=>{
+        if(res.toString().includes('Done')) { this.matchingVar = 'Matching Done!'; }
+      });
+    }
   }
 
   editClick(admin:any){
@@ -204,21 +213,46 @@ export class AdminComponent implements OnInit {
       return "View Matching Profile";
     }
   }
-  profileActivate(user) {
+  profileActivate(user,i) {
     if(user.gender == 'Male') {
       var val = { userId: user.userId, status: 'Active' };
       this.service.updateMaleUser(val).subscribe(res=>{
         //alert(res.toString());
-        this.refreshMaleList();
+        //this.refreshMaleList();
+        if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
     else if(user.gender == 'Female') {
       var val = { userId: user.userId, status: 'Active' };
       this.service.updateFemaleUser(val).subscribe(res=>{
         //alert(res.toString());
-        this.refreshFemaleList();
+        //this.refreshFemaleList();
+        if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
+  }
+  profileReject(user,i) {
+    if(user.gender == 'Male') {
+      var val = { userId: user.userId, status: 'Inactive' };
+      this.service.updateMaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshMaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
+    }
+    else if(user.gender == 'Female') {
+      var val = { userId: user.userId, status: 'Inactive' };
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshFemaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
+    }
+  }
+  actionPerformed(i) {
+    if(this.acceptedIndex.includes(i)) { return 'Accepted'; }
+    else if(this.rejectedIndex.includes(i)) { return 'Rejected'; }
+    else { return ''; }
   }
 
   menu = [
@@ -232,7 +266,7 @@ export class AdminComponent implements OnInit {
     {
       id: 1,
       name: "Dashboard",
-      submenu: [],
+      submenu: ['Run Matching'],
       status: true,
       sub: false
     },
