@@ -6,15 +6,38 @@
     <div class="section-low-padding profile-content">
         <div class="container">
             <div class="owner">
-                <div class="avatar">
-                    <img src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
+              <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#exampleModal"  placement="top" ngbTooltip="View/Change Picture">
+                  <img *ngIf="!pad" src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                  <img *ngIf="pad" src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-padding img-responsive">
+              </div>
+
                 <div class="name">
                     <h4 class="title">{{currentUser.fullName}}</h4>
                     <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
                 </div>
             </div>
           </div>
+
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl modal-dialog-centered">
+<div class="modal-content">
+    <div class="modal-header">
+        <img [src]=PhotoFilePath alt="{{PhotoFilePath}}" class="img-rounded img-padding img-responsive">
+        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="ml-3 bd-highlight" style="width: 40%;">
+          <img [src]=PhotoFilePath height="250px;" width="200px;">
+          <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+        </div>
+    </div>
+
+</div>
 </div>
 </div>
 

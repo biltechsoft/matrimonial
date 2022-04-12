@@ -36,7 +36,7 @@ export class AdminComponent implements OnInit {
   //alerts = this.notify.alerts;
   acceptedIndex: any=[];
   rejectedIndex: any=[];
-  matchingVar;
+  matchingVar = "Matching is being Processed...";
 
 
   ngOnInit(): void {

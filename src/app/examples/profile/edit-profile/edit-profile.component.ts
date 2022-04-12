@@ -16,6 +16,7 @@ export class EditProfileComponent implements OnInit {
   model;
   currentUser;
   gotid;
+  PhotoFilePath;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -42,6 +43,7 @@ export class EditProfileComponent implements OnInit {
           this.getWear(false);
           this.getImstat();
           this.getMarstat();
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
@@ -50,6 +52,7 @@ export class EditProfileComponent implements OnInit {
           this.getWear(true);
           this.getImstat();
           this.getMarstat();
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
     return true;
