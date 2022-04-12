@@ -17,7 +17,8 @@ export class ProfileComponent implements OnInit {
     val = false;
     pct;  //percentage of profile completeness
     topMatches;
-    matchIds;
+    topMatchPct;
+    users;
 
     ngOnInit() {
       this.getCurrentUser();
@@ -26,16 +27,13 @@ export class ProfileComponent implements OnInit {
     profileComplete() {
       this.pct = Number(this.currentUser.profileCompleteness);
       if (this.currentUser.status == 'Active') {
-        this.getTopMatches();
+        this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+        this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
         return true;
       }
     }
     getTopMatches() {
-      this.matchIds = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
-      this.service.getMaleUserList([61,62]).subscribe(data=>{
-        this.topMatches = data;
-        //this.pct = this.profilePercentage(this.currentUser);
-      });
+      return this.users.filter(user => this.topMatches.includes(user.userId.toString()));
     }
 
     getCurrentUser() {
@@ -44,11 +42,17 @@ export class ProfileComponent implements OnInit {
             this.currentUser = data;
             //this.pct = this.profilePercentage(this.currentUser);
           });
+          this.service.getFemaleUserList().subscribe(data=>{
+            this.users = data;
+          });
       }
       else if(localStorage.getItem('usertype')=='2') {
           this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
             this.currentUser = data;
             //this.pct = this.profilePercentage(this.currentUser,false);
+          });
+          this.service.getMaleUserList().subscribe(data=>{
+            this.users = data;
           });
       }
     }
