@@ -12,7 +12,7 @@ export class SharedService {
 //readonly PhotoUrl = "http://127.0.0.1:8000/media/";
 
 readonly APIUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzVkV0ZYUm5OTmFsRXdUWHBSUFE9PQ==";
-readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzVkV0ZYUm5OTmFsRXdUWHBSUFE9PQ==/Photos/";
+readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzVkV0ZYUm5OTmFsRXdUWHBSUFE9PQ%3D%3D/media/";
 
 //readonly APIUrl = "https://marufbuet.pythonanywhere.com";
 //readonly PhotoUrl = "https://marufbuet.pythonanywhere.com/media/";

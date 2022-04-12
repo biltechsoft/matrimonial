@@ -16,7 +16,9 @@ export class EditProfileComponent implements OnInit {
   model;
   currentUser;
   gotid;
+  PhotoFileName;
   PhotoFilePath;
+  uploading=false;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -56,6 +58,19 @@ export class EditProfileComponent implements OnInit {
         });
     }
     return true;
+  }
+  uploadPhoto(event:any){
+    this.uploading = true;
+    var file=event.target.files[0];
+    const formData:FormData=new FormData();
+    formData.append('uploadedFile',file,file.name);
+
+    this.service.UploadPhoto(formData).subscribe((data:any)=>{
+      this.PhotoFileName=data.toString();
+      this.currentUser.photo = this.PhotoFileName;
+      this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
+      this.uploading = false;
+    })
   }
   imStatusOther() {
     if(this.currentUser.immigrationStatus == "Other") { return true; }
@@ -225,6 +240,8 @@ export class EditProfileComponent implements OnInit {
       this.MARSTATS[this.MARSTATS.length-1].checked = false;
     }
   }
+
+
 
 
 

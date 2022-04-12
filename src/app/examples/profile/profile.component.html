@@ -43,16 +43,31 @@
                                         <div class="col-md-2 col-sm-2 ml-auto mr-auto">
                                             <img src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                         </div>
-                                        <div class="col-md-7 col-sm-4 ml-auto">
-                                            <h6>Bony<br/><small>Age 23</small></h6>
+                                        <div class="col-md-3 col-sm-4 ml-auto">
+                                            <h6>Bony<br/><small>Age 23, BSc</small></h6>
                                         </div>
-                                        <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                                            <div class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="">
-                                                <span class="form-check-sign"></span>
-                                              </label>
-                                            </div>
+                                        <div class="col-md-3 col-sm-4 ml-auto">
+                                            <h6>70% Matching<br/><small>State: Ohio</small><br/>{{topMatches[0].fullName}}</h6>
+                                        </div>
+                                        <div class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
+                                            <button type="button" class="btn btn-warning btn-sm" (click)=profileActivate(user,i)>Request Info</button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <hr />
+                                <li *ngFor="let matchId of topMatches" >
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2 ml-auto mr-auto">
+                                            <img src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                        </div>
+                                        <div class="col-md-3 col-sm-4 ml-auto">
+                                            <h6>Bony<br/><small>Age 23, BSc</small></h6>
+                                        </div>
+                                        <div class="col-md-3 col-sm-4 ml-auto">
+                                            <h6>70% Matching<br/><small>State: Ohio</small></h6>
+                                        </div>
+                                        <div class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
+                                            <button type="button" class="btn btn-warning btn-sm" (click)=profileActivate(user,i)>Request Info</button>
                                         </div>
                                     </div>
                                 </li>

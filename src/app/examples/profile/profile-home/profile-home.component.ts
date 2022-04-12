@@ -17,6 +17,7 @@ export class ProfileHomeComponent implements OnInit {
   currentUser;
   man;
   gotid;
+  PhotoFilePath;
   ngOnInit(): void {
     this.userName = localStorage.getItem('username');
     this.userAge = localStorage.getItem('userage');
@@ -31,11 +32,13 @@ export class ProfileHomeComponent implements OnInit {
     if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
         this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
   }

@@ -16,14 +16,28 @@ export class ProfileComponent implements OnInit {
     userId;
     val = false;
     pct;  //percentage of profile completeness
+    topMatches;
+    matchIds;
+
     ngOnInit() {
       this.getCurrentUser();
     }
 
     profileComplete() {
       this.pct = Number(this.currentUser.profileCompleteness);
-      if (this.currentUser.status == 'Active') { return true; }
+      if (this.currentUser.status == 'Active') {
+        this.getTopMatches();
+        return true;
+      }
     }
+    getTopMatches() {
+      this.matchIds = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+      this.service.getMaleUserList([61,62]).subscribe(data=>{
+        this.topMatches = data;
+        //this.pct = this.profilePercentage(this.currentUser);
+      });
+    }
+
     getCurrentUser() {
       if(localStorage.getItem('usertype')=='1') {
           this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
