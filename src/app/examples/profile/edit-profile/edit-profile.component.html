@@ -6,7 +6,7 @@
     <div class="section-low-padding profile-content">
         <div class="container">
             <div class="owner">
-              <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#exampleModal"  placement="top" ngbTooltip="View/Change Picture">
+              <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#photoModal"  placement="top" ngbTooltip="View/Change Picture">
                   <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                   <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive">
               </div>
@@ -23,7 +23,7 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1"
+<div class="modal fade" id="photoModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-xl modal-dialog-centered">
 <div class="modal-content">

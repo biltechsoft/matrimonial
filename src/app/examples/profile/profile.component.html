@@ -38,8 +38,8 @@
                     <div class="row following" id="follows">
                         <div class="col-md-6 ml-auto mr-auto">
                             <ul class="list-unstyled follows">
-                                <ng-container *ngFor="let user of getTopMatches(); let i=index">
-                                <li >
+                                <ng-container *ngFor="let Id of topMatches; let i=index">
+                                <li *ngFor="let user of getTopMatches(Id)">
                                     <div class="row">
                                         <div class="col-md-2 col-sm-2 ml-auto mr-auto">
                                             <img src="./assets/img/faces/profile-icon.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
@@ -51,7 +51,14 @@
                                             <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
                                         </div>
                                         <div class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <button type="button" class="btn btn-warning btn-sm" (click)=profileActivate(user,i)>Request Info</button>
+                                            <button *ngIf="!isReqSent(user) && !isAdmin()" type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
+                                            <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
+                                              <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked="" disabled>
+                                                <span class="form-check-sign">Request Sent</span>
+                                              </label>
+                                            </div>
+                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-warning btn-sm" (click)=giveAccess(user,i)>Give Access</button>
                                         </div>
                                     </div>
                                     <hr />

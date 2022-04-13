@@ -213,6 +213,7 @@ export class AdminComponent implements OnInit {
       return "View Matching Profile";
     }
   }
+
   profileActivate(user,i) {
     if(user.gender == 'Male') {
       var val = { userId: user.userId, status: 'Active' };

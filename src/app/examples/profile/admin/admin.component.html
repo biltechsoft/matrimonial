@@ -142,6 +142,8 @@
                       <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
                           <button type="button" class="btn btn-outline-default btn-sm" (click)=profileActivate(user,i)>Accept</button>
                           <button type="button" class="btn btn-outline-default btn-sm" (click)=profileReject(user,i)>Reject</button>
+                          <button type="button" class="btn btn-outline-default btn-sm"
+                          (mouseover)=editUser(user) data-bs-toggle="modal" data-bs-target="#viewModal">View Requests</button>
                       </td>
                       <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
                     </ng-container>
@@ -166,6 +168,19 @@
               </div>
 
           </div>
+          </div>
+          </div>
+
+          <div class="modal fade" id="viewModal" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content">
+            <app-profile></app-profile>
+          </div>
+
+
+
+
           </div>
           </div>
         </div>
@@ -296,8 +311,12 @@
         </div>
 
 
+
+
         </div>
         </div>
+
+
         </div>
 
         <!-- ========= end Male User -->
