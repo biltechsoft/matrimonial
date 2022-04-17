@@ -207,10 +207,10 @@ export class AdminComponent implements OnInit {
       return true;
     }
   }
-  requestType(user) {
-    if (user.status == 'Pending') { return "Profile Activation Request"; }
+  requestIndex(user) {
+    if (user.status == 'Pending') { return 0; }
     else if (user.reqSent != null) {
-      return "View Matching Profile";
+      return 1;
     }
   }
 
@@ -233,21 +233,23 @@ export class AdminComponent implements OnInit {
     }
   }
   profileReject(user,i) {
-    if(user.gender == 'Male') {
-      var val = { userId: user.userId, status: 'Inactive' };
-      this.service.updateMaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshMaleList();
-        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
-      });
-    }
-    else if(user.gender == 'Female') {
-      var val = { userId: user.userId, status: 'Inactive' };
-      this.service.updateFemaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshFemaleList();
-        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
-      });
+    if(confirm('Are you sure you want to reject the request?')){
+      if(user.gender == 'Male') {
+        var val = { userId: user.userId, status: 'Inactive' };
+        this.service.updateMaleUser(val).subscribe(res=>{
+          //alert(res.toString());
+          //this.refreshMaleList();
+          if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+        });
+      }
+      else if(user.gender == 'Female') {
+        var val = { userId: user.userId, status: 'Inactive' };
+        this.service.updateFemaleUser(val).subscribe(res=>{
+          //alert(res.toString());
+          //this.refreshFemaleList();
+          if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+        });
+      }
     }
   }
   actionPerformed(i) {
@@ -293,5 +295,7 @@ export class AdminComponent implements OnInit {
       sub: false
     },
   ];
+
+  requestType = ["Profile Activation Request", "View Matching Profile"];
 
 }

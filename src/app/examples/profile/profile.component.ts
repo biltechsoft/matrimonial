@@ -30,14 +30,13 @@ export class ProfileComponent implements OnInit {
 
     requestInfo(user,i) {
       //if(this.currentUser.reqSent == null) { this.currentUser.reqSent = ""; }
+      var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=','+user.userId+',' };
       if(this.currentUser.gender == 'Male') {
-        var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=user.userId+',' };
         this.service.updateMaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
         });
       }
       else if(this.currentUser.gender == 'Female') {
-        var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=user.userId+',' };
         this.service.updateFemaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
         });
@@ -47,19 +46,25 @@ export class ProfileComponent implements OnInit {
       return this.currentUser.reqSent.includes(user.userId.toString());
     }
     giveAccess(user,i) {
+      if(this.currentUser.reqAccepted == null) { this.currentUser.reqAccepted = ""; }
       var newReqSent = this.currentUser.reqSent.split(','+user.userId+',');
+      if(newReqSent.length == 1) { this.currentUser.reqSent = newReqSent; }
+      else if (newReqSent.length == 2) { this.currentUser.reqSent = newReqSent[0] + newReqSent[1]; }
+      else { this.currentUser.reqSent = null; }
+      var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent, reqAccepted: this.currentUser.reqAccepted+=','+user.userId+',' };
       if(this.currentUser.gender == 'Male') {
-        var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=user.userId+',' };
         this.service.updateMaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
         });
       }
       else if(this.currentUser.gender == 'Female') {
-        var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=user.userId+',' };
         this.service.updateFemaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
         });
       }
+    }
+    isReqAccepted(user) {
+      return this.currentUser.reqAccepted.includes(user.userId.toString());
     }
 
     profileComplete() {
