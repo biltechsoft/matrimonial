@@ -36,7 +36,7 @@
             <ngb-tab title="">
                 <ng-template ngbTabContent >
                     <div class="row following" id="follows">
-                        <div class="col-md-6 ml-auto mr-auto">
+                        <div class="col-lg-9 col-md-6 ml-auto mr-auto">
                             <ul class="list-unstyled follows">
                                 <ng-container *ngFor="let Id of topMatches; let i=index">
                                 <li *ngFor="let user of getTopMatches(Id)">
@@ -58,8 +58,10 @@
                                                 <span class="form-check-sign">Request Sent</span>
                                               </label>
                                             </div>
-                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm" (click)=viewprofile>View Profile</button>
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-warning btn-sm" (click)=giveAccess(user,i)>Give Access</button>
+                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm" (click)=viewProfile>View Profile</button>
+
+                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm" (click)=giveAccess(user,i)>Give Access</button>
+                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm" (click)=rejectAccess(user,i)>Reject</button>
                                             <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
                                               <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" value="" checked="" disabled>
