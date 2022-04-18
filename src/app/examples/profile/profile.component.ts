@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
     userId;
     val = false;
     gotid;
+    PhotoFilePath;
     pct;  //percentage of profile completeness
     topMatches;
     topMatchPct;
@@ -122,6 +123,7 @@ export class ProfileComponent implements OnInit {
         if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
           this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
             this.currentUser = data;
+            this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
             //this.pct = this.profilePercentage(this.currentUser);
           });
           this.service.getFemaleUserList().subscribe(data=>{
@@ -131,6 +133,7 @@ export class ProfileComponent implements OnInit {
       else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
           this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
             this.currentUser = data;
+            this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
             //this.pct = this.profilePercentage(this.currentUser,false);
           });
           this.service.getMaleUserList().subscribe(data=>{

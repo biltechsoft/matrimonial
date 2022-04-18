@@ -1,5 +1,38 @@
-<div>
-<app-profile-home></app-profile-home>
+
+  <div class="wrapper" *ngIf=getU()>
+      <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/furkan-cover-photo.jpg');">
+          <div class="filter"></div>
+      </div>
+
+      <div class="section-low-padding profile-content">
+          <div class="container">
+              <div class="owner">
+                <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#photoModal"  placement="top" ngbTooltip="View Picture">
+                    <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive" height="150px;" width="200px;">
+                    <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive" height="150px;" width="200px;">
+                </div>
+                  <div class="name">
+                      <h4 class="title">{{currentUser.fullName}}</h4>
+                      <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
+                  </div>
+              </div>
+            </div>
+  </div>
+  </div>
+
+  <div class="modal fade" id="photoModal" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+  <div class="modal-content">
+      <div class="modal-header">
+          <img [src]="PhotoFilePath" alt="{{PhotoFilePath}}" class="img-rounded img-padding img-responsive">
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+
+  </div>
+  </div>
+  </div>
 
 <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
@@ -87,7 +120,7 @@
         </ngb-tabset>
     </div>
 </div>
-</div>
+
 
 <div class="modal fade" id="viewProfileModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">

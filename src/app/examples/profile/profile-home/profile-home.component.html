@@ -6,9 +6,9 @@
     <div class="section-low-padding profile-content">
         <div class="container">
             <div class="owner">
-              <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#photoModal"  placement="top" ngbTooltip="View/Change Picture">
-                  <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                  <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive">
+              <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#photoModal"  placement="top" ngbTooltip="View Picture">
+                  <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive" height="150px;" width="200px;">
+                  <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive" height="150px;" width="200px;">
               </div>
                 <div class="name">
                     <h4 class="title">{{currentUser.fullName}}</h4>

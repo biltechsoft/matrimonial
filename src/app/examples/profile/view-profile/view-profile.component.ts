@@ -14,6 +14,8 @@ export class ViewProfileComponent implements OnInit {
   focus;
   currentUser;
   user;
+  gotid;
+  PhotoFilePath;
   STATES = this.service.STATES;
   ngOnInit(): void {
     this.getCurrentUser();
@@ -26,6 +28,7 @@ export class ViewProfileComponent implements OnInit {
             if(this.user.reqAccepted.includes(','+localStorage.getItem('xuser')+',')) {
               this.service.getFemaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
                 this.currentUser = xuser;
+                this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
               });
             }
           });
@@ -36,6 +39,7 @@ export class ViewProfileComponent implements OnInit {
             if(this.user.reqAccepted.includes(','+localStorage.getItem('xuser')+',')) {
               this.service.getMaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
                 this.currentUser = xuser;
+                this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
               });
             }
           });
@@ -44,13 +48,24 @@ export class ViewProfileComponent implements OnInit {
     else if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
         this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
         });
     }
+  }
+  getU() {
+    if(localStorage.getItem('usertype')=='0') {
+      if(localStorage.getItem('userid') != this.gotid) {
+        this.getCurrentUser();
+        this.gotid=localStorage.getItem('userid');
+      }
+    }
+    return true;
   }
   imStatusOther() {
     if(this.currentUser.immigrationStatus == null) { return false; }
