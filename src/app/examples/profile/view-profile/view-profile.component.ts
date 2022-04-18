@@ -13,17 +13,40 @@ export class ViewProfileComponent implements OnInit {
               private router : Router) { }
   focus;
   currentUser;
+  user;
   STATES = this.service.STATES;
   ngOnInit(): void {
     this.getCurrentUser();
   }
   getCurrentUser() {
-    if(localStorage.getItem('usertype')=='1') {
+    if(localStorage.getItem('xuser') != '0') {
+      if(localStorage.getItem('usertype')=='1') {
+          this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+            this.user = data;
+            if(this.user.reqAccepted.includes(','+localStorage.getItem('xuser')+',')) {
+              this.service.getFemaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
+                this.currentUser = xuser;
+              });
+            }
+          });
+      }
+      else if(localStorage.getItem('usertype')=='2') {
+          this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+            this.user = data;
+            if(this.user.reqAccepted.includes(','+localStorage.getItem('xuser')+',')) {
+              this.service.getMaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
+                this.currentUser = xuser;
+              });
+            }
+          });
+      }
+    }
+    else if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
         this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
         });
     }
-    else if(localStorage.getItem('usertype')=='2') {
+    else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
         });

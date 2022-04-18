@@ -51,17 +51,22 @@
                                             <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
                                         </div>
                                         <div class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
+                                            <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isAdmin()"
+                                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
                                             <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
                                               <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" value="" checked="" disabled>
                                                 <span class="form-check-sign">Request Sent</span>
                                               </label>
                                             </div>
-                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm" (click)=viewProfile>View Profile</button>
+                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            (mouseover)=setXuser(user.userId)
+                                            data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile {{xuser}}</button>
 
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm" (click)=giveAccess(user,i)>Give Access</button>
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm" (click)=rejectAccess(user,i)>Reject</button>
+                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            (click)=giveAccess(user,i)>Give Access</button>
+                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
+                                            (click)=rejectAccess(user,i)>Reject</button>
                                             <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
                                               <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" value="" checked="" disabled>
@@ -82,4 +87,13 @@
         </ngb-tabset>
     </div>
 </div>
+</div>
+
+<div class="modal fade" id="viewProfileModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <app-view-profile></app-view-profile>
+    </div>
+  </div>
 </div>

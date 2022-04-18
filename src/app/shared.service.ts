@@ -20,6 +20,7 @@ readonly PhotoUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzV
   adminUser;
   isadmin=false;
   checked = false;
+  xuser = { gender: null, userId: 0 };  //for view matching id profile, by default 0 (no match)
 
   constructor(private http:HttpClient, private router : Router) { }
 
