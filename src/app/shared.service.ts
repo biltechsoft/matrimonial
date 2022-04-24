@@ -145,16 +145,43 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     return this.http.delete (this.APIUrl + '/femaleuser/' + val);
   }
 
+  getPostList(id=0): Observable<any[]> {
+    if(id==0) {
+      return this.http.get<any[]> (this.APIUrl + '/post');
+    }
+    else {
+      return this.http.get<any[]> (this.APIUrl + '/post/' + id);
+    }
+  }
+  addPost(val:any) {
+    return this.http.post (this.APIUrl + '/post', val);
+  }
+  updatePost(val:any) {
+    return this.http.put (this.APIUrl + '/post', val);
+  }
+  deletePost(val:any) {
+    return this.http.delete (this.APIUrl + '/post/' + val);
+  }
+
 
   sendEmail(val:any) {
     return this.http.post (this.APIUrl + '/sendmail', val);
   }
   makeMatching() {
-    return this.http.get<any[]> (this.APIUrl + '/matchmaking/');
+    return this.http.get<any[]> (this.APIUrl + '/matchmaking');
+  }
+  getMatchingTable() {
+    return this.http.get<any[]> (this.APIUrl + '/matchingtable');
+  }
+  updateMatchingTable(val:any) {
+    return this.http.put (this.APIUrl + '/matchingtable', val);
   }
 
   UploadPhoto(val:any) {
     return this.http.post (this.PhotoAPIUrl + '/SaveFile', val);
+  }
+  deletePhoto(val:any) {
+    return this.http.post (this.PhotoAPIUrl + '/DeleteFilelskhdjfklsdhfg', val);
   }
 
   loginauth() {

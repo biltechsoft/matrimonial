@@ -17,6 +17,7 @@ export class AdminComponent implements OnInit {
   maleusers: any=  [];
   femaleusers: any=  [];
   users: any=[];
+  matchingtables: any=[];
   adminUser;
   modalTitle="";
   AdminId=0;
@@ -26,6 +27,12 @@ export class AdminComponent implements OnInit {
   AdminLevel="";
   AdminStatus="";
   superadmin=1;
+
+  MatchingId =0;
+  MatchingIndicator=null;
+  MalePoint=null;
+  FemalePoint=null;
+  MatchingDetails=null;
 
   FullName=null;
   CellPhone=null;
@@ -51,6 +58,7 @@ export class AdminComponent implements OnInit {
     });
     this.refreshMaleList();
     this.refreshFemaleList();
+    this.refreshMatchingTable();
 
   }
   refreshMaleList() {
@@ -63,6 +71,11 @@ export class AdminComponent implements OnInit {
     this.service.getFemaleUserList().subscribe(data=>{
       this.femaleusers = data;
       this.users=data;
+    });
+  }
+  refreshMatchingTable() {
+    this.service.getMatchingTable().subscribe(data=>{
+      this.matchingtables = data;
     });
   }
   getCurrentAdmin() {
@@ -87,6 +100,7 @@ export class AdminComponent implements OnInit {
         this.menu[i].sub = false;
       }
     }
+    this.refreshList();
     //localStorage.setItem('menuadmin', item);
   }
 
@@ -177,6 +191,23 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  updateUser(user) {
+    var val = {
+      userId: user.userId,
+      matchShowLimit: user.matchShowLimit,
+      status: user.status
+    }
+    if(user.gender=='Male') {
+      this.service.updateMaleUser(val).subscribe(res=>{
+        this.refreshList();
+      });
+    }
+    else {
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        this.refreshList();
+      });
+    }
+  }
   deleteClick(id:any){
     if(confirm('Are you sure?')){
     this.service.deleteAdminUser(id).subscribe(res=>{
@@ -201,6 +232,29 @@ export class AdminComponent implements OnInit {
       }
     }
   }
+  editMatchingClick(matching:any){
+    this.modalTitle="Edit Matching Point";
+    this.MatchingId=matching.matchingId;
+    this.MatchingIndicator=matching.matchingIndicator;
+    this.MalePoint=matching.malePoint;
+    this.FemalePoint=matching.femalePoint;
+    this.MatchingDetails=matching.matchingDetails;
+  }
+  updateMatchingClick(){
+    var val={
+      matchingId:this.MatchingId,
+      matchingIndicator:this.MatchingIndicator,
+      malePoint:this.MalePoint,
+      femalePoint:this.FemalePoint,
+      matchingDetails:this.MatchingDetails
+    };
+
+    this.service.updateMatchingTable(val).subscribe(res=>{
+      alert(res.toString());
+      this.refreshList();
+    });
+  }
+
   anyRequest(user) {
     if (user.status == 'Pending') { return true; }
     else if (user.reqSent != null) {
@@ -289,6 +343,13 @@ export class AdminComponent implements OnInit {
     },
     {
       id: 4,
+      name: "Matching Criteria",
+      submenu: [],
+      status: false,
+      sub: false
+    },
+    {
+      id: 5,
       name: "Message",
       submenu: [],
       status: false,
@@ -297,5 +358,9 @@ export class AdminComponent implements OnInit {
   ];
 
   requestType = ["Profile Activation Request", "View Matching Profile"];
+
+  profileStatus = ['Inactive','Pending','Active','Deactivated'];
+
+  topMatchLimits = [5,6,7,8,9,10];
 
 }

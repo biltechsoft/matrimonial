@@ -65,6 +65,12 @@ export class ViewProfileComponent implements OnInit {
         this.gotid=localStorage.getItem('userid');
       }
     }
+    else if(localStorage.getItem('xuser')!='0') {
+      if(localStorage.getItem('xuser') != this.gotid) {
+        this.getCurrentUser();
+        this.gotid=localStorage.getItem('userid');
+      }
+    }
     return true;
   }
   imStatusOther() {

@@ -18,6 +18,7 @@ export class EditProfileComponent implements OnInit {
   gotid;
   PhotoFileName;
   PhotoFilePath;
+  prevPhoto;
   uploading=false;
 
   YEARS = this.service.getYEARS();
@@ -46,6 +47,7 @@ export class EditProfileComponent implements OnInit {
           this.getImstat();
           this.getMarstat();
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.prevPhoto = this.currentUser.photo;
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
@@ -55,13 +57,18 @@ export class EditProfileComponent implements OnInit {
           this.getImstat();
           this.getMarstat();
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.prevPhoto = this.currentUser.photo;
         });
     }
     return true;
   }
   uploadPhoto(event:any){
     this.uploading = true;
+    if(this.prevPhoto != null || this.prevPhoto != 'anonymous.png') {
+      this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
+    }
     var file=event.target.files[0];
+    //file.name='mariuf';
     const formData:FormData=new FormData();
     formData.append('uploadedFile',file,file.name);
 
@@ -69,6 +76,7 @@ export class EditProfileComponent implements OnInit {
       this.PhotoFileName=data.toString();
       this.currentUser.photo = this.PhotoFileName;
       this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
+      this.clickSave();
       this.uploading = false;
     })
   }
@@ -118,6 +126,7 @@ export class EditProfileComponent implements OnInit {
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
+        this.getCurrentUser();
       });
     }
     else if (this.currentUser.gender == 'Female') {
@@ -130,6 +139,7 @@ export class EditProfileComponent implements OnInit {
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
         alert(res.toString());
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
+        this.getCurrentUser();
       });
     }
   }
@@ -163,8 +173,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
   setWear(female) {
-    this.currentUser.wear = null;
-    this.currentUser.preWear = null;
+    this.currentUser.wear = '';
+    this.currentUser.preWear = '';
     for(var i=0; i<this.WEARS.length; i++) {
       if (this.WEARS[i].checked) {
         if(female) {
@@ -175,6 +185,8 @@ export class EditProfileComponent implements OnInit {
         }
       }
     }
+    if(this.currentUser.wear == '') { this.currentUser.wear = null; }
+    if(this.currentUser.preWear == '') { this.currentUser.preWear = null; }
   }
   wearClicked = false;
   wearClick(id) {
@@ -195,12 +207,13 @@ export class EditProfileComponent implements OnInit {
     }
   }
   setImstat() {
-    this.currentUser.preImmigrationStatus = null;
+    this.currentUser.preImmigrationStatus = '';
     for(var i=0; i<this.IMSTATS.length; i++) {
       if (this.IMSTATS[i].checked) {
         this.currentUser.preImmigrationStatus = this.currentUser.preImmigrationStatus + this.IMSTATS[i].prop + ',';
       }
     }
+    if(this.currentUser.preImmigrationStatus == '') { this.currentUser.preImmigrationStatus = null; }
   }
   imstatClicked = false;
   imstatClick(id) {
@@ -221,12 +234,13 @@ export class EditProfileComponent implements OnInit {
     }
   }
   setMarstat() {
-    this.currentUser.preMaritalStatus = null;
+    this.currentUser.preMaritalStatus = '';
     for(var i=0; i<this.MARSTATS.length; i++) {
       if (this.MARSTATS[i].checked) {
         this.currentUser.preMaritalStatus = this.currentUser.preMaritalStatus + this.MARSTATS[i].prop + ',';
       }
     }
+    if(this.currentUser.preMaritalStatus == '') { this.currentUser.preMaritalStatus = null; }
   }
   marstatClicked = false;
   marstatClick(id) {

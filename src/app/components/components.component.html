@@ -1,3 +1,89 @@
+<div class="modal fade" id="bannerModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+        <button type="button" class="btn-close float-end" data-dismiss="modal"
+        aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    <div class="d-flex flex-row bd-highlight">
+        <div class="p-4 w-100 bd-highlight">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="webtitle" class="form-control" placeholder="Enter Your Full Name" id="fullName">
+              <label for="FullName">Website Title</label>
+          </div>
+
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="webslogan" class="form-control" placeholder="Cell Phone Number" id="cellPhone">
+              <label for="CellPhone">Website Slogan</label>
+          </div>
+
+        </div>
+    </div>
+
+        <button type="button" 
+        class="btn btn-primary float-end" data-dismiss="modal">
+        Update Banner
+        </button>
+
+    </div>
+
+
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="sliderModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Slider</h5>
+        <button type="button" class="btn-close float-end" data-dismiss="modal"
+        aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    <div class="d-flex flex-row bd-highlight">
+        <div class="row">
+          <div class="col-md-6" *ngFor="let slider of sliders">
+            <img [src]="PhotoUrl+slider.postPhoto" class="img-rounded img-padding img-responsive"
+            style="width:100%; height:200px;">
+            <div class="row form-group form-floating">
+                <input type="file" title="image" (change)="uploadPhoto($event,slider)" class="mt-2 col-md-8"/>
+                <button type="button" name="button" style="height:30px;" class="col-md-3" (click)=deleteSlider(slider)>Delete</button>
+            </div>
+
+            <div class="form-group form-floating">
+                <input type="text" [(ngModel)]=slider.postDetails class="form-control" placeholder="Enter Your Full Name" id="fullName">
+                <label for="FullName">Caption</label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <img src="assets/img/intro-carousel/791768-middle.png" class="img-rounded img-padding img-responsive"
+            style="width:100%; height:200px;">
+            <div class="form-group form-floating">
+                <input type="file" title="image" (change)="uploadPhoto($event,0)" class="mt-2"/>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+        <button type="button" (click)="updateSlider()"
+        class="btn btn-primary float-end" data-dismiss="modal">
+        Update Slider
+        </button>
+
+    </div>
+
+
+</div>
+</div>
+</div>
+
 
 <!--==========================
   Intro Section
@@ -5,16 +91,25 @@
 <section id="intro">
   <div class="intro-content">
     <h2><span>MUNA Matrimonial</span><br>Let's Walk Together
-      <button *ngIf="isAdmin()" type="button" class="btn btn-light mr-1"
+      <button *ngIf=false type="button" class="btn btn-light mr-1"
       data-toggle="modal" data-target="#bannerModal"
-    (click)="editClick(['Banner'])"
-    data-backdrop="static" data-keyboard="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-  </svg>
-                  </button>
-    </h2>
+      (click)="editClick('Banner')"
+      data-backdrop="static" data-keyboard="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+      </button>
+      </h2>
+      <button *ngIf="isAdmin()" type="button" class="btn btn-light mr-1"
+      data-toggle="modal" data-target="#sliderModal"
+      data-backdrop="static" data-keyboard="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+      Update Slider</button>
+
 
     <!--<div>
       <a href="#contact" class="btn-get-started scrollto">Contact Us</a>
@@ -66,33 +161,66 @@
                   -->
 
                   <a  *ngIf="!isAdmin()" [routerLink]="['/signup']"><button class="btn btn-danger btn-block btn-round">Let's Begin</button></a>
-                  <a  *ngIf="isAdmin()" ><button *ngIf="isAdmin()" type="button" class="btn btn-light mr-1"
-                  data-toggle="modal" data-target="#exampleModal"
-                (click)="editClick(dataItem)"
-                data-backdrop="static" data-keyboard="false">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-              </svg>
-                              Edit Slider</button></a>
+                  <a  *ngIf="isAdmin()" ></a>
               </form>
           </div>
         </div>
   </div>
    <div id="intro-carousel" class="owl-carousel" >
-    <div class="item" style="background-image: url('assets/img/intro-carousel/Picture1.jpg');">
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[0].postPhoto}}');">
       <div class="caption">
-          <p>Hasan & Sumaiya: They Got Married.</p>
+          <p>{{psliders[0].postDetails}}</p>
       </div>
     </div>
-    <div class="item" style="background-image: url('assets/img/intro-carousel/Picture2.jpg');">
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[1].postPhoto}}');">
       <div class="caption">
-          <p>Sadia & Tarik: They Got Married!</p>
+          <p>{{psliders[1].postDetails}}</p>
       </div>
     </div>
 
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[2].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[2].postDetails}}</p>
+      </div>
+    </div>
+
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[3].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[3].postDetails}}</p>
+      </div>
+    </div>
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[4].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[4].postDetails}}</p>
+      </div>
+    </div>
+
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[3].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[5].postDetails}}</p>
+      </div>
+    </div>
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[4].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[6].postDetails}}</p>
+      </div>
+    </div>
+
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[3].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[7].postDetails}}</p>
+      </div>
+    </div>
+    <div class="item" style="background-image: url('{{PhotoUrl}}{{psliders[4].postPhoto}}');">
+      <div class="caption">
+          <p>{{psliders[8].postDetails}}</p>
+      </div>
+    </div>
+
+
   </div>
 </section><!-- #intro -->
+
 
 
 
@@ -108,42 +236,7 @@
   <app-contact></app-contact>
 </main><!-- housing -->
 
-<div class="modal fade" id="bannerModal" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
-        <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-        aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-    <div class="d-flex flex-row bd-highlight">
-        <div class="p-4 w-100 bd-highlight">
-          <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="webtitle" class="form-control" placeholder="Enter Your Full Name" id="fullName">
-              <label for="FullName">Website Title</label>
-          </div>
 
-          <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="webslogan" class="form-control" placeholder="Cell Phone Number" id="cellPhone">
-              <label for="CellPhone">Website Slogan</label>
-          </div>
-
-        </div>
-    </div>
-
-        <button type="button"
-        class="btn btn-primary float-end">
-        Create User
-        </button>
-
-    </div>
-
-
-</div>
-</div>
-</div>
 
 
 

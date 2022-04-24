@@ -14,6 +14,7 @@
                 <div class="name">
                     <h4 class="title">{{currentUser.fullName}}</h4>
                     <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
+                    <h6 class="description">{{prevPhoto}}</h6>
                 </div>
             </div>
           </div>
@@ -875,16 +876,134 @@ SPOUSAL PREFERENCES
       </div>
     </div>
   </div>
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingSix">
-      <button class="btn btn-danger accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-
-Reference
+      <button class="btn btn-danger accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Additional Information
       </button>
     </h2>
     <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">You may add reference who can introduce you.</div>
+      <div class="accordion-body">
+        <h6>Please mention at least 3 personal and/or professional references</h6>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.name1" class="form-control" placeholder="Name1" id="name1">
+              <label for="name1">Name</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-floating">
+                <input type="text" [(ngModel)]="currentUser.relationship1" class="form-control" placeholder="Relationship1" id="relationship1">
+                <label for="relationship1">Relationship</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.phone1" class="form-control" placeholder="Phone1" id="phone1">
+              <label for="phone1">Phone</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.name2" class="form-control" placeholder="Name2" id="name2">
+              <label for="name2">Name</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-floating">
+                <input type="text" [(ngModel)]="currentUser.relationship2" class="form-control" placeholder="Relationship2" id="relationship2">
+                <label for="relationship2">Relationship</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.phone2" class="form-control" placeholder="Phone2" id="phone2">
+              <label for="phone2">Phone</label>
+          </div>
+        </div>
+      </div>
+         <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.name3" class="form-control" placeholder="Name3" id="name3">
+              <label for="name3">Name</label>
+          </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-floating">
+                <input type="text" [(ngModel)]="currentUser.relationship3" class="form-control" placeholder="Relationship3" id="relationship3">
+                <label for="relationship3">Relationship</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group form-floating">
+              <input type="text" [(ngModel)]="currentUser.phone3" class="form-control" placeholder="Phone3" id="phone3">
+              <label for="phone3">Phone</label>
+          </div>
+        </div>
+      </div>
+      <h6> * Please upload a latest color photograph and a copy of your current, government-issued ID </h6>
+      <div class="col-sm-6">
+      <label for="formFileMultiple" class="form-label">  </label>
+      <input class="form-control" type="file" id="formFileMultiple" multiple />
+      </div>
+      </div>
+      </div>
+      </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingSeven">
+      <button class="btn btn-danger accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSix">
+
+Agreement
+      </button>
+    </h2>
+    <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+
+        <p>
+        • I, <b>{{currentUser.fullName}}</b>, hereby certify that the information given in this form is true, correct, and complete in all respects. If there is any incorrect information in this form, I may be removed from the process.
+        <br>
+        • I will promptly inform MUNA Matrimonial Team of any changes in the information provided above. <br>
+        • I authorize MUNA Matrimonial Team to utilize the information provided by me according to the needs of the service.<br>
+        • I pledge to keep all the information provided by the MUNA Matrimonial Team confidential.<br>
+        • If I get married at any time, I will inform the MUNA Matrimonial Team.<br>
+        • As the MUNA Matrimonial Team is only introducing 2 parties to each other, in the event of a failure to arrange a marriage, I shall not hold MUNA Matrimonial Team or MUNA responsible. I agree to abide by decisions and rulings given by MUNA National President or his designated representatives in matters of disputes and will abide by decisions of MUNA, its National President, and/or their representatives.
+
+      </p>
+      <br><br>
+      By submitting this form, I agree to a complete and thorough criminal and background check by MUNA Matrimonial Team.
+      By signing this contract, I approve to a background check.
+
+      <br> <br>
+      Signature
+      <div class="row">
+          <div class="col-md">
+            <div class="form-floating">
+            <label class="form-label" for="customFile"></label>
+            <input type="file" class="form-control" id="customFile" />
+            </div>
+          </div>
+
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="datetime-local" class="form-control" id="floatingInputGrid" placeholder="datetime-local value="datetime-local>
+            <label for="floatingSelectGrid">Date</label>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+      </div>
     </div>
+
+
   </div>
 
   <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
@@ -894,5 +1013,4 @@ Reference
           <button (click)=clickSave() class="btn btn-success btn-block btn-lg btn-fill">Save</button>
       </div>
   </div>
-</div>
 </div>

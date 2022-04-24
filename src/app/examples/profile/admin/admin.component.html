@@ -2,10 +2,10 @@
   About Section
 ============================-->
 <section id="about" class="wow fadeInUp">
-  <div class="container">
+  <div >
 
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-2">
           <div *ngFor="let item of menu | slice:superadmin">
             <button type="button" class="btn btn-success sidebar" (click)=activeMenu(item.id)>{{item.name}}</button>
             <div *ngFor="let subitem of menu[item.id].submenu; let i=index">
@@ -16,7 +16,7 @@
           </div>
       </div>
 
-      <div class="col-lg-9 content">
+      <div class="col-lg-10 content">
         <!-- Admin Panel
         ======================-->
         <div *ngIf=menu[0].status>
@@ -192,6 +192,8 @@
                     <th> Name </th>
                     <th> Email</th>
                     <th> Cell Phone </th>
+                    <th> Top Match Limit </th>
+                    <th> Profile Status </th>
                     <th> Options </th>
                 </tr>
             </thead>
@@ -202,6 +204,20 @@
                     <td style="vertical-align: middle;">{{user.fullName}}</td>
                     <td style="vertical-align: middle;">{{user.email}}</td>
                     <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                    <td style="vertical-align: middle;">
+                      <div class="form-group" style="padding-top:15px;">
+                          <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
+                            <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
+                          </select>
+                      </div>
+                    </td>
+                    <td style="vertical-align: middle;">
+                      <div class="form-group" style="padding-top:15px;">
+                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                            <option *ngFor="let status of profileStatus" value={{status}}>{{status}}</option>
+                          </select>
+                      </div>
+                    </td>
                     <td style="vertical-align: middle;">
                         <button
                         type=button class="btn btn-light mr-1"
@@ -229,6 +245,20 @@
                     <td style="vertical-align: middle;">{{user.fullName}}</td>
                     <td style="vertical-align: middle;">{{user.email}}</td>
                     <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                    <td style="vertical-align: middle;">
+                      <div class="form-group" style="padding-top:15px;">
+                          <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
+                            <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
+                          </select>
+                      </div>
+                    </td>
+                    <td style="vertical-align: middle;">
+                      <div class="form-group" style="padding-top:15px;">
+                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                            <option *ngFor="let status of profileStatus" value={{status}}>{{status}}</option>
+                          </select>
+                      </div>
+                    </td>
                     <td style="vertical-align: middle;">
                         <button
                         type=button class="btn btn-light mr-1"
@@ -317,9 +347,80 @@
 
         <!-- ========= end Male User -->
 
-        <!-- Dashboard
+        <!-- Matching Criteria
         ======================-->
-        <div *ngIf=menu[1].status>
+        <div *ngIf=menu[4].status>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>Matching ID</th>
+                      <th>Matching Details</th>
+                      <th>Point For Male</th>
+                      <th>Point For Female</th>
+                      <th>Options</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let matching of matchingtables">
+                      <td> {{matching.matchingId}} </td>
+                      <td> {{matching.matchingDetails}} </td>
+                      <td> {{matching.malePoint}} </td>
+                      <td> {{matching.femalePoint}} </td>
+                      <td>
+                          <button
+                          type=button class="btn btn-light mr-1"
+                          data-bs-toggle="modal"
+                          data-bs-target="#matchingTableModal"
+                          (click)="editMatchingClick(matching)"
+                          >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                          </button>
+                        </td>
+                  </tr>
+                </tbody>
+          </table>
+          <div class="modal fade" id="matchingTableModal" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Matching Point</h5>
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              <div class="d-flex flex-row bd-highlight">
+                  <div class="p-4 w-100 bd-highlight">
+                      <div class="form-group form-floating">
+                          <input type="text" class="form-control" [(ngModel)]="MatchingDetails" id="MatchingDetails">
+                          <label for="MatchingDetails">Matching Details</label>
+                      </div>
+
+                      <div class="form-group form-floating">
+                          <input type="text" class="form-control" [(ngModel)]="MalePoint" id="MalePoint">
+                          <label for="MalePoint">Male Point</label>
+                      </div>
+
+                      <div class="form-group form-floating">
+                          <input type="text" class="form-control" [(ngModel)]="FemalePoint" id="FemalePoint">
+                          <label for="FemalePoint">Female Point</label>
+                      </div>
+                  </div>
+              </div>
+
+                  <button type="button" (click)="updateMatchingClick()"
+                   class="btn btn-primary float-end">
+                  Update
+                  </button>
+
+              </div>
+
+          </div>
+          </div>
+          </div>
         </div>
         <!-- ========= end Dashboard -->
 

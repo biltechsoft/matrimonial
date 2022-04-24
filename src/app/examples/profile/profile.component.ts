@@ -97,14 +97,8 @@ export class ProfileComponent implements OnInit {
         }
       }
     }
-    xuser=0;
     setXuser(id) {
       localStorage.setItem('xuser',id.toString());
-      this.xuser = id;
-    }
-    resetXuser() {
-      //this.service.xuser = { gender: null, userId: 0 };
-      this.xuser = 0;
     }
 
     profileComplete() {

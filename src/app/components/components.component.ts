@@ -23,7 +23,9 @@ export class ComponentsComponent implements OnInit {
     model: NgbDateStruct;
     photos;
     modalTitle="";
-    webtitle; webslogan;
+    webtitle=""; webslogan="";
+    allpost; sliders; psliders;
+    PhotoUrl = this.service.PhotoUrl;
     constructor(  private renderer : Renderer2,
                   private service:SharedService,
                   private router : Router
@@ -48,12 +50,64 @@ export class ComponentsComponent implements OnInit {
                 input_group[i].classList.remove('input-group-focus');
             });
         }
+        this.refreshPost();
+    }
+    refreshPost() {
+      this.service.getPostList().subscribe(data=>{
+        this.allpost = data;
+        this.getSlider();
+      });
+    }
+    getSlider() {
+      this.sliders = this.allpost.filter(slider => slider.postType=='Slider');
+      this.psliders = this.allpost.filter(slider => slider.postType=='Slider');
+      for(var j=0,i=this.psliders.length; i<10; i++,j++) {
+        this.psliders[i] = this.psliders[j];
+      }
     }
     isAdmin() {
-      if(localStorage.getItem('usertype')=='0') {return true;}
+      return this.service.isAdmin();
     }
     loggedin = this.service.loggedin();
-    editClick(types) {
-      this.modalTitle='Edit'+types[0];
+    editClick(type) {
+      this.modalTitle='Edit '+type;
+    }
+    uploadPhoto(event:any, slider){
+      if(slider != 0) {
+        this.service.deletePhoto({id:1,filetodel:slider.postPhoto}).subscribe();
+      }
+      var file=event.target.files[0];
+      const formData:FormData=new FormData();
+      formData.append('uploadedFile',file,file.name);
+
+      this.service.UploadPhoto(formData).subscribe((data:any)=>{
+        if(slider==0) {
+          var val = {
+            postType: 'Slider',
+            postPhoto: data.toString(),
+            postDetails: 'Success Story!'
+          };
+          this.service.addPost(val).subscribe();
+        }
+        else {
+          var valu = {
+            postId: slider.postId,
+            postPhoto: data.toString()
+          };
+          this.service.updatePost(valu).subscribe();
+        }
+        this.refreshPost();
+      });
+    }
+    updateSlider() {
+      for(var i=0; i<this.sliders.length; i++) {
+        this.service.updatePost(this.sliders[i]).subscribe();
+      }
+      this.refreshPost();
+    }
+    deleteSlider(slider) {
+      this.service.deletePost(slider.postId).subscribe();
+      this.service.deletePhoto({id:1,filetodel:slider.postPhoto}).subscribe();
+      this.refreshPost();
     }
 }
