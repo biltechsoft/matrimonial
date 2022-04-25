@@ -18,6 +18,8 @@ export class AdminComponent implements OnInit {
   femaleusers: any=  [];
   users: any=[];
   matchingtables: any=[];
+  allpost: any=[];
+
   adminUser;
   modalTitle="";
   AdminId=0;
@@ -27,6 +29,13 @@ export class AdminComponent implements OnInit {
   AdminLevel="";
   AdminStatus="";
   superadmin=1;
+
+  PostId=0;
+  PostType="";
+  PostTitle="";
+  PostDetails="";
+  PostPhoto="";
+  PostStatus="";
 
   MatchingId =0;
   MatchingIndicator=null;
@@ -59,7 +68,7 @@ export class AdminComponent implements OnInit {
     this.refreshMaleList();
     this.refreshFemaleList();
     this.refreshMatchingTable();
-
+    this.refreshPost();
   }
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data=>{
@@ -78,6 +87,11 @@ export class AdminComponent implements OnInit {
       this.matchingtables = data;
     });
   }
+  refreshPost() {
+    this.service.getPostList().subscribe(data=>{
+      this.allpost = data;
+    });
+  }
   getCurrentAdmin() {
       this.service.getAdminList(Number(localStorage.getItem('adminid'))).subscribe(data=>{
         this.adminUser = data;
@@ -90,7 +104,6 @@ export class AdminComponent implements OnInit {
   }
 
   activeMenu(item) {
-
     for(var i=0; i<this.menu.length; i++) {
       this.menu[i].status = (i == item);
       if(i == item) {
@@ -105,13 +118,26 @@ export class AdminComponent implements OnInit {
   }
 
   addClick(i){
-    this.modalTitle="Add Admin";
-    this.AdminId=0;
-    this.AdminUserName="";
-    this.AdminPass="";
-    this.AdminFullName="";
-    this.AdminLevel="";
-    this.AdminStatus="";
+    if(this.menu[0].status) {
+      this.modalTitle="Add Admin";
+      this.AdminId=0;
+      this.AdminUserName="";
+      this.AdminPass="";
+      this.AdminFullName="";
+      this.AdminLevel="";
+      this.AdminStatus="";
+    }
+    else if(this.menu[6].status) {
+      this.modalTitle="Add Post";
+      this.PostId=0;
+      this.PostType=null;
+      this.PostTitle=null;
+      this.PostDetails=null;
+      this.PostPhoto=null;
+      this.PostStatus=null;
+    }
+
+
     this.matchingVar = "Matching is being Processed...";
     if(this.menu[1].status && i==0) {  //i=0 for submenu 'Run Matching'
       this.service.makeMatching().subscribe(res=>{
@@ -170,6 +196,19 @@ export class AdminComponent implements OnInit {
         this.refreshList();
       });
     }
+  }
+  createPost(){
+    var val={
+      postType: this.PostType,
+      postTitle: this.PostTitle,
+      postDetails: this.PostDetails,
+      postPhoto: this.PostPhoto,
+      postStatus: this.PostStatus
+    };
+    this.service.addPost(val).subscribe(res=>{
+      alert(res.toString());
+      this.refreshList();
+    });
   }
   editUser(currentUser) {
     localStorage.setItem('userid',currentUser.userId);
@@ -312,6 +351,7 @@ export class AdminComponent implements OnInit {
     else { return ''; }
   }
 
+
   menu = [
     {
       id: 0,
@@ -352,6 +392,13 @@ export class AdminComponent implements OnInit {
       id: 5,
       name: "Message",
       submenu: [],
+      status: false,
+      sub: false
+    },
+    {
+      id: 6,
+      name: "Site Management",
+      submenu: ['Add Post'],
       status: false,
       sub: false
     },
