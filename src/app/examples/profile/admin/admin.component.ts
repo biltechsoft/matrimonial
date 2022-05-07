@@ -410,4 +410,6 @@ export class AdminComponent implements OnInit {
 
   topMatchLimits = [5,6,7,8,9,10];
 
+  postTypes = ['Slider', 'Banner', 'Services', 'Events', 'About', 'Team', 'FAQ', 'Donate', 'Contact'];
+
 }

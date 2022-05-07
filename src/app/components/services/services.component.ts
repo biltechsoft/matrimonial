@@ -12,11 +12,23 @@ export class ServicesComponent implements OnInit {
   focus;
   focus1;
   isAdmin;
+  allpost;
 
   constructor(private service:SharedService) { }
 
   ngOnInit(): void {
-    this.isAdmin = this.service.isAdmin();
+    if(!this.isHome()) { this.refreshPost(); }
+  }
+  refreshPost() {
+    this.service.getPostList().subscribe(data=>{
+      this.allpost = data;
+    });
+  }
+  isAdmin() {
+    return this.service.isAdmin();
+  }
+  isHome() {
+    return this.service.isHome();
   }
 
 

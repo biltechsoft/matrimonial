@@ -455,7 +455,9 @@
                       <td> {{post.postId}} </td>
                       <td> {{post.postType}} </td>
                       <td> {{post.postTitle}} </td>
-                      <td> {{post.postDetails}} </td>
+                      <td *ngIf="post.postDetails.length<=30"> {{post.postDetails}}</td>
+                      <td *ngIf="post.postDetails.length>30"> {{post.postDetails.substring(0,30)}}
+                        <a href="#">...</a> </td>
                       <td> {{post.postPhoto}} </td>
                       <td> {{post.postStatus}} </td>
                       <td>

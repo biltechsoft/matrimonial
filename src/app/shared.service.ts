@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ILogin } from './interfaces/login';
 import { Router } from '@angular/router';
@@ -23,7 +24,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   checked = false;
   xuser = { gender: null, userId: 0 };  //for view matching id profile, by default 0 (no match)
 
-  constructor(private http:HttpClient, private router : Router) { }
+  constructor(public location: Location, private http:HttpClient, private router : Router) { }
 
 
 
@@ -71,6 +72,18 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
    }
    isAdmin() {
      if(localStorage.getItem('usertype')=='0') {return true;}
+   }
+   isHome() {
+     var titlee = this.location.prepareExternalUrl(this.location.path());
+     if(titlee.charAt(0) === '#'){
+         titlee = titlee.slice( 1 );
+     }
+       if( titlee === '/home' ) {
+           return true;
+       }
+       else {
+           return false;
+       }
    }
 
   mEncrypt(val) {
