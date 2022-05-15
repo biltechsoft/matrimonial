@@ -23,7 +23,7 @@
         </div>
     </div>
 
-        <button type="button" 
+        <button type="button"
         class="btn btn-primary float-end" data-dismiss="modal">
         Update Banner
         </button>
@@ -90,7 +90,7 @@
 ============================-->
 <section id="intro">
   <div class="intro-content">
-    <h2><span>MUNA Matrimonial</span><br>Let's Walk Together
+    <h2><span>{{webtitle[0].postDetails}}</span><br>{{webslogan[0].postDetails}}
       <button *ngIf=false type="button" class="btn btn-light mr-1"
       data-toggle="modal" data-target="#bannerModal"
       (click)="editClick('Banner')"

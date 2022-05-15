@@ -158,12 +158,12 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     return this.http.delete (this.APIUrl + '/femaleuser/' + val);
   }
 
-  getPostList(id=0): Observable<any[]> {
+  getPostList(id=0, type='all'): Observable<any[]> {
     if(id==0) {
       return this.http.get<any[]> (this.APIUrl + '/post');
     }
     else {
-      return this.http.get<any[]> (this.APIUrl + '/post/' + id);
+      return this.http.get<any[]> (this.APIUrl + '/post/' + type);
     }
   }
   addPost(val:any) {

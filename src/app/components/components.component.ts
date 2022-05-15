@@ -56,6 +56,8 @@ export class ComponentsComponent implements OnInit {
       this.service.getPostList().subscribe(data=>{
         this.allpost = data;
         this.getSlider();
+        this.webtitle = this.allpost.filter(webtitle => webtitle.postCode=='0001');
+        this.webslogan = this.allpost.filter(webslogan => webslogan.postCode=='0002');
       });
     }
     getSlider() {

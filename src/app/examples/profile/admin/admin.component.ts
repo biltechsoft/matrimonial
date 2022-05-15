@@ -31,11 +31,23 @@ export class AdminComponent implements OnInit {
   superadmin=1;
 
   PostId=0;
+  PostCode="";
   PostType="";
-  PostTitle="";
-  PostDetails="";
+  PageTitle="";
   PostPhoto="";
   PostStatus="";
+  Param1="";
+  Param2="";
+  Param3="";
+  Param4="";
+  Param5="";
+  PhotoFilePath="";
+  NewPhotoUploaded=false;
+  ptype;
+
+  PostTypeFilter:string="";
+  PageTitleFilter:string="";
+  allpostWithoutFilter: any=[];
 
   MatchingId =0;
   MatchingIndicator=null;
@@ -54,8 +66,13 @@ export class AdminComponent implements OnInit {
   rejectedIndex: any=[];
   matchingVar = "Matching is being Processed...";
 
+  viewMoreString;
+  maxPostDetailLen=40;
+  maxPhotoNameLen=15;
+
 
   ngOnInit(): void {
+    this.ptype = this.postTypes[0];
     this.service.loginauth();
     this.refreshList();
     this.getCurrentAdmin();
@@ -90,6 +107,7 @@ export class AdminComponent implements OnInit {
   refreshPost() {
     this.service.getPostList().subscribe(data=>{
       this.allpost = data;
+      this.allpostWithoutFilter=data;
     });
   }
   getCurrentAdmin() {
@@ -130,11 +148,18 @@ export class AdminComponent implements OnInit {
     else if(this.menu[6].status) {
       this.modalTitle="Add Post";
       this.PostId=0;
+      this.PostCode='0000';
       this.PostType=null;
-      this.PostTitle=null;
-      this.PostDetails=null;
+      this.PageTitle=null;
       this.PostPhoto=null;
       this.PostStatus=null;
+      this.Param1=null;
+      this.Param2=null;
+      this.Param3=null;
+      this.Param4=null;
+      this.Param5=null;
+      this.PhotoFilePath="";
+      this.NewPhotoUploaded=false;
     }
 
 
@@ -147,13 +172,32 @@ export class AdminComponent implements OnInit {
   }
 
   editClick(admin:any){
-    this.modalTitle="Edit Admin";
-    this.AdminId=admin.adminId;
-    this.AdminUserName=admin.adminUserName;
-    this.AdminPass=admin.adminPass;
-    this.AdminFullName=admin.adminFullName;
-    this.AdminLevel=admin.adminLevel;
-    this.AdminStatus=admin.adminStatus;
+    if(this.menu[0].status) {
+      this.modalTitle="Edit Admin";
+      this.AdminId=admin.adminId;
+      this.AdminUserName=admin.adminUserName;
+      this.AdminPass=admin.adminPass;
+      this.AdminFullName=admin.adminFullName;
+      this.AdminLevel=admin.adminLevel;
+      this.AdminStatus=admin.adminStatus;
+    }
+    else if(this.menu[6].status) {
+      var post = admin;
+      this.modalTitle="Edit Post";
+      this.PostId=post.postId;
+      this.PostCode=post.postCode;
+      this.PostType=post.postType;
+      this.PageTitle=post.pageTitle;
+      this.PostPhoto=post.postPhoto;
+      this.PostStatus=post.postStatus;
+      this.Param1=post.param1;
+      this.Param2=post.param2;
+      this.Param3=post.param3;
+      this.Param4=post.param4;
+      this.Param5=post.param5;
+      this.PhotoFilePath=this.service.PhotoUrl+post.postPhoto;
+      this.ptypechange();
+    }
   }
 
   createClick(){
@@ -197,18 +241,62 @@ export class AdminComponent implements OnInit {
       });
     }
   }
+
+  addPostClick() {
+    if(this.NewPhotoUploaded) { this.updatePost(); }
+    else { this.createPost(); }
+  }
   createPost(){
     var val={
+      postCode: this.PostCode,
+      pageTitle: this.PageTitle,
       postType: this.PostType,
-      postTitle: this.PostTitle,
-      postDetails: this.PostDetails,
       postPhoto: this.PostPhoto,
-      postStatus: this.PostStatus
+      postStatus: this.PostStatus,
+      param1: this.Param1,
+      param2: this.Param2,
+      param3: this.Param3,
+      param4: this.Param4,
+      param5: this.Param5
     };
     this.service.addPost(val).subscribe(res=>{
       alert(res.toString());
       this.refreshList();
     });
+  }
+  updatePost(){
+    var val={
+      postId: this.PostId,
+      postCode: this.PostCode,
+      pageTitle: this.PageTitle,
+      postType: this.PostType,
+      postPhoto: this.PostPhoto,
+      postStatus: this.PostStatus,
+      param1: this.Param1,
+      param2: this.Param2,
+      param3: this.Param3,
+      param4: this.Param4,
+      param5: this.Param5
+    };
+    this.service.updatePost(val).subscribe(res=>{
+      alert(res.toString());
+      this.refreshPost();
+    });
+  }
+  deletePost(id:any){
+    if(confirm('Are you sure?')){
+    this.service.deletePost(id).subscribe(res=>{
+      alert(res.toString());
+      this.refreshPost();
+    });
+    }
+  }
+  ptypechange() {
+    for(var i=0; i<this.postTypes.length; i++) {
+      if(this.postTypes[i].name == this.PostType) {
+        this.ptype = this.postTypes[i];
+      }
+    }
   }
   editUser(currentUser) {
     localStorage.setItem('userid',currentUser.userId);
@@ -351,6 +439,37 @@ export class AdminComponent implements OnInit {
     else { return ''; }
   }
 
+  viewMore(string) {
+    this.viewMoreString = string;
+  }
+  uploadPhoto(event:any){
+    if(this.PostId!=0 && !(this.PostPhoto=="" || this.PostPhoto==null)) {
+      this.service.deletePhoto({id:1,filetodel:this.PostPhoto}).subscribe();
+    }
+    var file=event.target.files[0];
+    const formData:FormData=new FormData();
+    formData.append('uploadedFile',file,file.name);
+
+    this.service.UploadPhoto(formData).subscribe((data:any)=>{
+      this.PostPhoto = data.toString();
+      this.PhotoFilePath=this.service.PhotoUrl+data.toString();
+      if(this.PostId==0) { this.createPost(); }
+      else { this.updatePost(); }
+      this.NewPhotoUploaded=true;
+    });
+  }
+
+  FilterFn(){
+    var PostTypeFilter = this.PostTypeFilter;
+    var PageTitleFilter = this.PageTitleFilter;
+
+    this.allpost = this.allpostWithoutFilter.filter(function (el:any){
+        return el.postType.toString().toLowerCase().includes(
+          PostTypeFilter.toString().trim().toLowerCase()
+        )
+    });
+  }
+
 
   menu = [
     {
@@ -410,6 +529,82 @@ export class AdminComponent implements OnInit {
 
   topMatchLimits = [5,6,7,8,9,10];
 
-  postTypes = ['Slider', 'Banner', 'Services', 'Events', 'About', 'Team', 'FAQ', 'Donate', 'Contact'];
+  postSTATUS = ['Active', 'Inactive'];
+
+  pageTitles = ['Home', 'Services', 'Events', 'About Us', 'FAQ', 'Donate', 'Contact Us'];
+
+  postTypes = [
+    {
+      id: 0,
+      name: "Banner",
+      param: ['Website Title', 'Website Slogan'],
+      paramlen: ['1', '1'],
+      status: false //for showing submenu
+    },
+    {
+      id: 1,
+      name: "Slider",
+      param: ['Caption'],
+      paramlen: ['1'],
+      status: false //for showing submenu
+    },
+    {
+      id: 2,
+      name: "Heading",
+      param: ['Heading'],
+      paramlen: ['5'],
+      status: false //for showing submenu
+    },
+    {
+      id: 3,
+      name: "Service",
+      param: ['Service Name', 'Service Icon', 'Service Details'],
+      paramlen: ['1', '1', '10'],
+      status: false //for showing submenu
+    },
+    {
+      id: 4,
+      name: "Event",
+      param: ['Caption', 'Date & Time', 'Event Venue', 'Event Details'],
+      paramlen: ['1', '1', '1', '15'],
+      status: false //for showing submenu
+    },
+    {
+      id: 5,
+      name: "About",
+      param: ['Mission', 'Vision', 'Program Heading', 'Program List'],
+      paramlen: ['1', '5', '5', '15'],
+      status: false //for showing submenu
+    },
+    {
+      id: 6,
+      name: "Team",
+      param: ['Name', 'Designation', 'Links'],
+      paramlen: ['1', '1', '10'],
+      status: false //for showing submenu
+    },
+    {
+      id: 7,
+      name: "FAQ",
+      param: ['Question', 'Answer'],
+      paramlen: ['5', '10'],
+      status: false //for showing submenu
+    },
+    {
+      id: 8,
+      name: "Donate",
+      param: ['Link'],
+      paramlen: ['1'],
+      status: false //for showing submenu
+    },
+    {
+      id: 9,
+      name: "Contact",
+      param: ['Address', 'Phone', 'Email', 'Social', 'Map'],
+      paramlen: ['5', '1', '1', '5', '5'],
+      status: false //for showing submenu
+    }];
+
+
 
 }

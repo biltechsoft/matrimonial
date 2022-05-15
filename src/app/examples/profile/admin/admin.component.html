@@ -438,43 +438,76 @@
         <!-- Site Management
         ======================-->
         <div *ngIf=menu[6].status>
+          <div class="row">
+          <div class="form-group form-floating col-lg-3">
+              <select class="form-select" id="PostType"
+              [(ngModel)]="PostTypeFilter" style="width:200px;"
+              (change)="FilterFn()" placeholder="Filter">
+                <option value="">All Types</option>
+                <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
+              </select>
+              <label for="PostType">Search by Post Type</label>
+          </div>
+          <div *ngIf=false class="form-group form-floating col-lg-3">
+              <select class="form-select" id="pageTitle"
+              [(ngModel)]="PageTitleFilter" style="width:200px;"
+              (change)="FilterFn()" placeholder="Filter">
+                <option value="">All Pages</option>
+                <option *ngFor="let pageTitle of pageTitles" value={{pageTitle}}>{{pageTitle}}</option>
+              </select>
+              <label for="pageTitle">Search by Page Title</label>
+          </div>
+          </div>
           <table class="table table-striped">
+
               <thead>
                   <tr>
-                      <th>Post ID</th>
-                      <th>Post Type</th>
-                      <th>Post Title</th>
-                      <th>Post Details</th>
-                      <th>Post Photo</th>
-                      <th>Post Status</th>
+                      <th>Code</th>
+                      <th>Page</th>
+                      <th>PostType</th>
+                      <th>Details</th>
+                      <th>Photo</th>
+                      <th>Status</th>
                       <th>Options</th>
+                      <th></th>
                   </tr>
               </thead>
               <tbody>
                   <tr *ngFor="let post of allpost">
-                      <td> {{post.postId}} </td>
+                      <td> {{post.postCode}} </td>
+                      <td> {{post.pageTitle}} </td>
                       <td> {{post.postType}} </td>
-                      <td> {{post.postTitle}} </td>
-                      <td *ngIf="post.postDetails.length<=30"> {{post.postDetails}}</td>
-                      <td *ngIf="post.postDetails.length>30"> {{post.postDetails.substring(0,30)}}
-                        <a href="#">...</a> </td>
-                      <td> {{post.postPhoto}} </td>
+                      <ng-container *ngIf="post.param1==null"><td></td></ng-container>
+                      <ng-container *ngIf="post.param1!=null">
+                      <td *ngIf="post.param1.length<=maxPostDetailLen"> {{post.param1}}</td>
+                      <td *ngIf="post.param1.length>maxPostDetailLen"> {{post.param1.substring(0,maxPostDetailLen)}}
+                        <button type="button" class="btn btn-link" (click)=viewMore(post.param1)
+                        data-bs-toggle="modal" data-bs-target="#viewMoreModal"
+                        style="padding-left:0px; padding-right:0px;">....</button> </td>
+                      </ng-container>
+                      <ng-container *ngIf="post.postPhoto==null"><td></td></ng-container>
+                      <ng-container *ngIf="post.postPhoto!=null">
+                        <td *ngIf="post.postPhoto.length<=maxPhotoNameLen"> {{post.postPhoto}} </td>
+                        <td *ngIf="post.postPhoto.length>maxPhotoNameLen"> {{post.postPhoto.substring(0,maxPhotoNameLen)}} </td>
+                      </ng-container>
                       <td> {{post.postStatus}} </td>
                       <td>
                           <button
                           type=button class="btn btn-light mr-1"
                           data-bs-toggle="modal"
-                          data-bs-target="#matchingTableModal"
-                          (click)="editMatchingClick(matching)"
+                          data-bs-target="#exampleModal"
+                          (click)="editClick(post)"
                           >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                             </svg>
                           </button>
+                        </td>
+                        <td>
                           <button
                           type=button class="btn btn-light mr-1"
-                          (click)="deleteClick(admin.adminId)"
+                          (click)="deletePost(post.postId)"
                           >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                               <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
@@ -487,7 +520,7 @@
 
           <div class="modal fade" id="exampleModal" tabindex="-1"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
@@ -498,8 +531,15 @@
               <div class="d-flex flex-row bd-highlight">
                   <div class="p-4 w-100 bd-highlight">
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostType" id="PostType">
+                          <select [(ngModel)]="PostType" class="form-select" id="PostType" (change)=ptypechange()>
+                            <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
+                          </select>
                           <label for="PostType">Post Type</label>
+                      </div>
+
+                      <div *ngIf="PostId==0" class="form-group form-floating">
+                          <input type="text" class="form-control" [(ngModel)]="PostCode" id="PostCode">
+                          <label for="PostCode">Post Code</label>
                       </div>
 
                       <div class="form-group form-floating">
@@ -508,30 +548,67 @@
                       </div>
 
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostDetails" id="PostDetails">
-                          <label for="PostDetails">Post Details</label>
-                      </div>
-
-                      <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostPhoto" id="PostPhoto">
-                          <label for="PostPhoto">Post Photo</label>
-                      </div>
-
-                      <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostStatus" id="PostStatus">
+                          <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
+                            <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
+                          </select>
                           <label for="PostStatus">Post Status</label>
                       </div>
-                  </div>
+
+
+                </div>
+
+                <div *ngIf="!(PostType=='' || PostType==null)" class="p-4 w-50 bd-highlight">
+                  <img [src]=PhotoFilePath height="200px;" width="300px;">
+                  <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+                </div>
               </div>
 
-                  <button type="button" (click)="createPost()"
+              <div *ngFor="let par of ptype.param; let i=index" class="d-flex flex-row bd-highlight">
+                <div class="p-4 w-100 bd-highlight">
+
+                        <div class="form-group form-floating">
+                            <textarea class="form-control" style="min-height: 10em;
+      overflow: auto;" [(ngModel)]="Param1" id="PostDetails" contentEditable></textarea>
+                            <label for="PostDetails">{{par}}</label>
+                        </div>
+
+                </div>
+              </div>
+
+                  <button type="button" (click)="addPostClick()"
                   *ngIf="PostId==0" class="btn btn-primary float-end">
                   Add Post
                   </button>
 
-                  <button type="button" (click)="updateClick()"
+                  <button type="button" (click)="updatePost()"
                   *ngIf="PostId!=0" class="btn btn-primary float-end">
                   Update Post
+                  </button>
+
+              </div>
+
+          </div>
+          </div>
+          </div>
+
+          <div class="modal fade" id="viewMoreModal" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              <div class="d-flex flex-row bd-highlight">
+                  <div class="p-4 w-100 bd-highlight">
+                    {{viewMoreString}}
+                  </div>
+              </div>
+
+                  <button type="button" class="btn btn-primary float-end"
+                  data-bs-dismiss="modal">
+                  OK
                   </button>
 
               </div>
