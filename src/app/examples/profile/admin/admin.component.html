@@ -567,8 +567,8 @@
                 <div class="p-4 w-100 bd-highlight">
 
                         <div class="form-group form-floating">
-                            <textarea class="form-control" style="min-height: 10em;
-      overflow: auto;" [(ngModel)]="Param1" id="PostDetails" contentEditable></textarea>
+                            <textarea class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
+      overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
                             <label for="PostDetails">{{par}}</label>
                         </div>
 

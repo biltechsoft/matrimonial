@@ -36,6 +36,7 @@ export class AdminComponent implements OnInit {
   PageTitle="";
   PostPhoto="";
   PostStatus="";
+  Params: any=[];
   Param1="";
   Param2="";
   Param3="";
@@ -153,11 +154,7 @@ export class AdminComponent implements OnInit {
       this.PageTitle=null;
       this.PostPhoto=null;
       this.PostStatus=null;
-      this.Param1=null;
-      this.Param2=null;
-      this.Param3=null;
-      this.Param4=null;
-      this.Param5=null;
+      this.Params = [null, null, null, null, null];
       this.PhotoFilePath="";
       this.NewPhotoUploaded=false;
     }
@@ -190,11 +187,11 @@ export class AdminComponent implements OnInit {
       this.PageTitle=post.pageTitle;
       this.PostPhoto=post.postPhoto;
       this.PostStatus=post.postStatus;
-      this.Param1=post.param1;
-      this.Param2=post.param2;
-      this.Param3=post.param3;
-      this.Param4=post.param4;
-      this.Param5=post.param5;
+      this.Params[0]=post.param1;
+      this.Params[1]=post.param2;
+      this.Params[2]=post.param3;
+      this.Params[3]=post.param4;
+      this.Params[4]=post.param5;
       this.PhotoFilePath=this.service.PhotoUrl+post.postPhoto;
       this.ptypechange();
     }
@@ -253,11 +250,11 @@ export class AdminComponent implements OnInit {
       postType: this.PostType,
       postPhoto: this.PostPhoto,
       postStatus: this.PostStatus,
-      param1: this.Param1,
-      param2: this.Param2,
-      param3: this.Param3,
-      param4: this.Param4,
-      param5: this.Param5
+      param1: this.Params[0],
+      param2: this.Params[1],
+      param3: this.Params[2],
+      param4: this.Params[3],
+      param5: this.Params[4]
     };
     this.service.addPost(val).subscribe(res=>{
       alert(res.toString());
@@ -272,11 +269,11 @@ export class AdminComponent implements OnInit {
       postType: this.PostType,
       postPhoto: this.PostPhoto,
       postStatus: this.PostStatus,
-      param1: this.Param1,
-      param2: this.Param2,
-      param3: this.Param3,
-      param4: this.Param4,
-      param5: this.Param5
+      param1: this.Params[0],
+      param2: this.Params[1],
+      param3: this.Params[2],
+      param4: this.Params[3],
+      param5: this.Params[4]
     };
     this.service.updatePost(val).subscribe(res=>{
       alert(res.toString());
