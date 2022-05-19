@@ -56,14 +56,15 @@ export class ComponentsComponent implements OnInit {
       this.service.getPostList().subscribe(data=>{
         this.allpost = data;
         this.getSlider();
-        this.webtitle = this.allpost.filter(webtitle => webtitle.postCode=='0001');
-        this.webslogan = this.allpost.filter(webslogan => webslogan.postCode=='0002');
+        var ban = this.allpost.filter(banner => banner.postType=='Banner');
+        this.webtitle = ban[0].param1;
+        this.webslogan = ban[0].param2;
       });
     }
     getSlider() {
       this.sliders = this.allpost.filter(slider => slider.postType=='Slider');
       this.psliders = this.allpost.filter(slider => slider.postType=='Slider');
-      for(var j=0,i=this.psliders.length; i<10; i++,j++) {
+      for(var j=0,i=this.psliders.length; i<9; i++,j++) {
         this.psliders[i] = this.psliders[j];
       }
     }

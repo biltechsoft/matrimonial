@@ -179,6 +179,7 @@ export class LoginComponent implements OnInit {
           matchShowLimit:5,
           userPass:this.currentUser.tempPass,
           status:"Inactive",
+          photo:"anonymous.png",
           openingDate:this.service.getDateTime(),
           lastEdit:this.service.getDateTime()
         };

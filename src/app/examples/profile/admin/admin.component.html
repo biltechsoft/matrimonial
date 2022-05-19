@@ -507,7 +507,7 @@
                         <td>
                           <button
                           type=button class="btn btn-light mr-1"
-                          (click)="deletePost(post.postId)"
+                          (click)="deletePost(post)"
                           >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                               <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
@@ -530,6 +530,14 @@
               <div class="modal-body">
               <div class="d-flex flex-row bd-highlight">
                   <div class="p-4 w-100 bd-highlight">
+
+                    <div class="form-group form-floating">
+                        <select [(ngModel)]="PageTitle" class="form-select" id="PageTitle">
+                          <option *ngFor="let pageTitle of pageTitles" value={{pageTitle}}>{{pageTitle}}</option>
+                        </select>
+                        <label for="PageTitle">Page Title</label>
+                    </div>
+
                       <div class="form-group form-floating">
                           <select [(ngModel)]="PostType" class="form-select" id="PostType" (change)=ptypechange()>
                             <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
@@ -537,15 +545,13 @@
                           <label for="PostType">Post Type</label>
                       </div>
 
-                      <div *ngIf="PostId==0" class="form-group form-floating">
+                      <!-- div *ngIf="PostId==0" class="form-group form-floating"-->
+                      <div class="form-group form-floating">
                           <input type="text" class="form-control" [(ngModel)]="PostCode" id="PostCode">
                           <label for="PostCode">Post Code</label>
                       </div>
 
-                      <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostTitle" id="PostTitle">
-                          <label for="PostTitle">Post Title</label>
-                      </div>
+
 
                       <div class="form-group form-floating">
                           <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
@@ -563,10 +569,10 @@
                 </div>
               </div>
 
-              <div *ngFor="let par of ptype.param; let i=index" class="d-flex flex-row bd-highlight">
+              <div class="d-flex flex-row bd-highlight">
                 <div class="p-4 w-100 bd-highlight">
 
-                        <div class="form-group form-floating">
+                        <div *ngFor="let par of ptype.param; let i=index" class="form-group form-floating">
                             <textarea class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
       overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
                             <label for="PostDetails">{{par}}</label>

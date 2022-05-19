@@ -5,7 +5,8 @@
   <div class="container">
     <div class="section-header">
       <h2>OUR SERVICES</h2>
-      <p>{{services[0].postDetails}}
+      <br>
+      <p>{{serviceHeading}}
         <button *ngIf="false" type="button" class="btn btn-light mr-1"
         data-toggle="modal" data-target="#exampleModal"
       (click)="editClick(dataItem)"
@@ -20,15 +21,46 @@
 
     <div class="row">
 
-      <div class="col-lg-4" *ngFor="let service of services | slice:1; let i=index">
-        <div class="box wow fadeInLeft" *ngIf="i<6">
-          <div class="icon"><i class="fa fa-{{jsonparse(service.postDetails).icon}}"></i></div>
-          <h4 class="title"><a href="">{{service.postTitle}}</a></h4>
-          <p class="description">{{jsonparse(service.postDetails).details}}</p>
+      <div class="col-lg-4" *ngFor="let service of services; let i=index">
+        <div class="box wow fadeInLeft" (click)=viewMore(service)
+        data-bs-toggle="modal" data-bs-target="#viewMoreModal">
+          <div class="icon"><i class="fa fa-{{service.param2}}"></i></div>
+          <h4 class="title"><a>{{service.param1}}</a></h4>
+          <p *ngIf="service.param3.length<=maxServiceLen" class="description">{{service.param3}}</p>
+          <p *ngIf="service.param3.length>maxServiceLen" class="description">
+            {{service.param3.substring(0,maxServiceLen)}} ......
+          </p>
         </div>
       </div>
 
 
+    </div>
+
+    <div class="modal fade" id="viewMoreModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="title"><a>{{currentService.param1}}</a></h4>
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <div class="d-flex flex-row bd-highlight">
+            <div class="p-4 w-100 bd-highlight">
+              {{currentService.param3}}
+            </div>
+        </div>
+
+            <button type="button" class="btn btn-primary float-end"
+            data-bs-dismiss="modal">
+            OK
+            </button>
+
+        </div>
+
+    </div>
+    </div>
     </div>
 
   </div>

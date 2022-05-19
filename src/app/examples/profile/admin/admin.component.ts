@@ -280,9 +280,10 @@ export class AdminComponent implements OnInit {
       this.refreshPost();
     });
   }
-  deletePost(id:any){
+  deletePost(post){
     if(confirm('Are you sure?')){
-    this.service.deletePost(id).subscribe(res=>{
+    this.service.deletePost(post.postId).subscribe(res=>{
+      this.service.deletePhoto({id:1,filetodel:post.PostPhoto}).subscribe();
       alert(res.toString());
       this.refreshPost();
     });
