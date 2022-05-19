@@ -15,16 +15,14 @@ export class ServicesComponent implements OnInit {
   serviceHeading="";
   services;
   maxServiceLen = 160;
-  currentService;
+  currentServiceHeading; currentService;
 
   constructor(private service:SharedService) { }
 
   ngOnInit(): void {
     this.refreshPost();
   }
-  gcon() {
-    return 'university';
-  }
+
   refreshPost() {
     this.service.getPostList(0, 'Services').subscribe(data=>{
       this.allpost = data;
@@ -36,15 +34,14 @@ export class ServicesComponent implements OnInit {
   isAdmin() {
     return this.service.isAdmin();
   }
-  isHome() {
-    return this.service.isHome();
-  }
+
   /*jsonparse(str, item) {
     return JSON.parse(str);
   }*/
 
   viewMore(service) {
-    this.currentService = service;
+    this.currentServiceHeading = service.param1;
+    this.currentService = service.param3.split('\n');
   }
 
 

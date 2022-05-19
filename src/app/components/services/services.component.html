@@ -41,14 +41,14 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
-          <h4 class="title"><a>{{currentService.param1}}</a></h4>
+          <h4 class="title"><a>{{currentServiceHeading}}</a></h4>
             <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
             aria-label="Close"></button>
         </div>
         <div class="modal-body">
         <div class="d-flex flex-row bd-highlight">
             <div class="p-4 w-100 bd-highlight">
-              {{currentService.param3}}
+              <p *ngFor="let para of currentService">{{para}}<br></p>
             </div>
         </div>
 
