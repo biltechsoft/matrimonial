@@ -7,18 +7,7 @@
     <div class="section-header">
       <h2>Contact Us</h2>
       <br>
-      <p>Find your soulmate here. We arrange premarriage seminar/counseling, mediate marriage, Conduct marriages,
-        Marriage Registration, Post marriage Counselling.
-        <button *ngIf="isAdmin()" type="button" class="btn btn-light mr-1"
-        data-toggle="modal" data-target="#bannerModal"
-        (click)="editClick('Banner')"
-        data-backdrop="static" data-keyboard="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-          </svg>
-        </button>
-        </p>
+      <p>{{contactHeading}}</p>
       </div>
 
     <div class="row contact-info">
@@ -26,27 +15,27 @@
         <div class="contact-address">
           <i class="ion-ios-location-outline"></i>
           <h3>Address</h3>
-          <address>MN-12 Lincon Street, NewYork 12356, USA</address>
+          <address>{{contact.param1}}</address>
         </div>
         <div class="contact-phone">
           <i class="ion-ios-telephone-outline"></i>
           <h3>Phone Number</h3>
-          <p><a href="tel:+155895548855">+1 2345 67890 12</a></p>
+          <p><a href="tel:+155895548855">{{contact.param2}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-email-outline"></i>
           <h3>Email</h3>
-          <p><a href="mailto:info@example.com">name@website.com</a></p>
+          <p><a href="mailto:{{contact.param3}}">{{contact.param3}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-chatbubble-outline"></i>
           <h3>Facebook</h3>
-          <p><a href="mailto:info@example.com">facebook.com/munamatrimonial</a></p>
+          <p><a href="{{contact.param4.split('\n')[0]}}">{{contact.param4.split('\n')[0].substring(8)}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-people-outline"></i>
           <h3>Twitter</h3>
-          <p><a href="mailto:info@example.com">twitter.com/munamatrimonial</a></p>
+          <p><a href="{{contact.param4.split('\n')[1]}}">{{contact.param4.split('\n')[1].substring(8)}}</a></p>
         </div>
  </div>
  <div class="col-lg-7">
