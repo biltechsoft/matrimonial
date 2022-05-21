@@ -15,73 +15,115 @@
 
       <div class="col-lg-3 col-md-4">
         <div class="portfolio-item wow fadeInUp">
-          <a href="assets/img/portfolio/11-8-Marriage-seminar.jpg" class="portfolio-popup">
-            <img src="assets/img/portfolio/11-8-Marriage-seminar.jpg" alt="" style="height:200px;">
-
-
+          <a href="{{PhotoUrl+events[0].postPhoto}}" class="portfolio-popup">
+            <img src="{{PhotoUrl+events[0].postPhoto}}" alt="" style="height:200px;">
           <div class="portfolio-overlay">
-            <div class="portfolio-info"><h2 class="wow fadeInUp">Seminar on marriage in Islam</h2></div>
+            <div class="portfolio-info"><h2 class="wow fadeInUp">{{events[0].param1}}</h2></div>
           </div>
           </a>
         </div>
 
         <div class="section-header" style="padding: 10px;">
-          <p>A seminar on Isalmic Marriage will be held at New York on 03 Nov, 2021 at 3pm CST.</p>
+          <h6 style="text-align: center; color: white;">{{events[0].param1}}</h6>
+          <p>{{events[0].param2}}</p>
+          <p>{{events[0].param3}}</p>
+          <p style="text-align: center;">
+            <button type="button" class="btn btn-warning btn-sm btn-link" (click)=viewMore(0)
+            data-bs-toggle="modal" data-bs-target="#viewEventModal">View Details</button>
+          </p>
         </div>
-
       </div>
-
-
 
       <div class="col-lg-3 col-md-4">
         <div class="portfolio-item wow fadeInUp">
-          <a href="assets/img/portfolio/marriage-education.jpg" class="portfolio-popup">
-            <img src="assets/img/portfolio/marriage-education.jpg" alt="" style="height:200px;">
-            <div class="portfolio-overlay">
-              <div class="portfolio-info"><h2 class="wow fadeInUp">Education program</h2></div>
-            </div>
+          <a href="{{PhotoUrl+events[1].postPhoto}}" class="portfolio-popup">
+            <img src="{{PhotoUrl+events[1].postPhoto}}" alt="" style="height:200px;">
+          <div class="portfolio-overlay">
+            <div class="portfolio-info"><h2 class="wow fadeInUp">{{events[1].param1}}</h2></div>
+          </div>
           </a>
         </div>
 
         <div class="section-header" style="padding: 10px;">
-          <p>A seminar on Isalmic Marriage will be held at New York on 03 Nov, 2021 at 3pm CST.</p>
+          <h6 style="text-align: center; color: white;">{{events[1].param1}}</h6>
+          <p>{{events[1].param2}}</p>
+          <p>{{events[1].param3}}</p>
+          <p style="text-align: center;">
+            <button type="button" class="btn btn-warning btn-sm btn-link" (click)=viewMore(1)
+            data-bs-toggle="modal" data-bs-target="#viewEventModal">View Details</button>
+          </p>
         </div>
       </div>
 
-
-
-
-
-
       <div class="col-lg-3 col-md-4">
         <div class="portfolio-item wow fadeInUp">
-          <a href="assets/img/portfolio/reception.jpg" class="portfolio-popup">
-            <img src="assets/img/portfolio/reception.jpg" alt="" style="height:200px;">
-            <div class="portfolio-overlay">
-              <div class="portfolio-info"><h2 class="wow fadeInUp">Post marriage reception</h2></div>
-            </div>
+          <a href="{{PhotoUrl+events[2].postPhoto}}" class="portfolio-popup">
+            <img src="{{PhotoUrl+events[2].postPhoto}}" alt="" style="height:200px;">
+          <div class="portfolio-overlay">
+            <div class="portfolio-info"><h2 class="wow fadeInUp">{{events[2].param1}}</h2></div>
+          </div>
           </a>
         </div>
 
         <div class="section-header" style="padding: 10px;">
-          <p>A seminar on Isalmic Marriage will be held at New York on 03 Nov, 2021 at 3pm CST.</p>
+          <h6 style="text-align: center; color: white;">{{events[2].param1}}</h6>
+          <p>{{events[2].param2}}</p>
+          <p>{{events[2].param3}}</p>
+          <p style="text-align: center;">
+            <button type="button" class="btn btn-warning btn-sm btn-link" (click)=viewMore(2)
+            data-bs-toggle="modal" data-bs-target="#viewEventModal">View Details</button>
+          </p>
         </div>
       </div>
 
-
       <div class="col-lg-3 col-md-4">
         <div class="portfolio-item wow fadeInUp">
-          <a href="assets/img/portfolio/YSM-Attantance-in-Convention.png" class="portfolio-popup">
-            <img src="assets/img/portfolio/YSM-Attantance-in-Convention.png" alt="" style="height:200px;">
-            <div class="portfolio-overlay">
-              <div class="portfolio-info"><h2 class="wow fadeInUp">Islamic cultural program</h2></div>
-            </div>
+          <a href="{{PhotoUrl+events[3].postPhoto}}" class="portfolio-popup">
+            <img src="{{PhotoUrl+events[3].postPhoto}}" alt="" style="height:200px;">
+          <div class="portfolio-overlay">
+            <div class="portfolio-info"><h2 class="wow fadeInUp">{{events[3].param1}}</h2></div>
+          </div>
           </a>
         </div>
 
         <div class="section-header" style="padding: 10px;">
-          <p>A seminar on Isalmic Marriage will be held at New York on 03 Nov, 2021 at 3pm CST.</p>
+          <h6 style="text-align: center; color: white;">{{events[3].param1}}</h6>
+          <p>{{events[3].param2}}</p>
+          <p>{{events[3].param3}}</p>
+          <p style="text-align: center;">
+            <button type="button" class="btn btn-warning btn-sm btn-link" (click)=viewMore(3)
+            data-bs-toggle="modal" data-bs-target="#viewEventModal">View Details</button>
+          </p>
+          <br>
+          <button type="button" class="btn btn-outline-danger" (click)=viewMoreEvent()
+          style="float: right;">{{moreless}}</button>
+          <br>
         </div>
+      </div>
+      </div>
+
+
+      <div *ngIf=moreEvent class="row">
+      <div *ngFor="let event of events | slice:4; let i=index" class="col-lg-3 col-md-4">
+        <div class="portfolio-item wow fadeInUp">
+          <a href="{{PhotoUrl+event.postPhoto}}" target="_blank" class="portfolio-popup">
+            <img src="{{PhotoUrl+event.postPhoto}}" alt="" style="height:200px;">
+          <div class="portfolio-overlay">
+            <div class="portfolio-info"><h2 class="wow fadeInUp">{{event.param1}}</h2></div>
+          </div>
+          </a>
+        </div>
+
+        <div class="section-header" style="padding: 10px;">
+          <h6 style="text-align: center; color: white;">{{event.param1}}</h6>
+          <p>{{event.param2}}</p>
+          <p>{{event.param3}}</p>
+          <p style="text-align: center;">
+            <button type="button" class="btn btn-warning btn-sm btn-link" (click)=viewMore(i)
+            data-bs-toggle="modal" data-bs-target="#viewEventModal">View Details</button>
+          </p>
+        </div>
+      </div>
       </div>
 
 
@@ -137,7 +179,42 @@
         </div>
       </div>  -->
 
-    </div>
+
 
   </div>
 </section><!-- #portfolio -->
+
+
+<div class="modal fade" id="viewEventModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl modal-dialog-centered">
+<div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+      aria-label="Close"></button>
+      <h4 style="text-align:center;"><a>{{currentEvent.param1}}</a></h4>
+      <p></p>
+      <p style="text-align:center;"><a>{{currentEvent.param2}}</a></p>
+      <p style="text-align:center;"><a>{{currentEvent.param3}}</a></p>
+
+    </div>
+    <div class="modal-body">
+    <div class="d-flex flex-row bd-highlight">
+        <div class="p-4 w-100 bd-highlight">
+          <center><img src="{{PhotoUrl+currentEvent.postPhoto}}" style="height: 300px; float:center;"
+               class="img-rounded img-responsive" alt="Rounded Image"></center>
+          <p style="text-align:justify;" *ngFor="let para of currentEventDetails">
+            <br>{{para}}</p>
+        </div>
+    </div>
+
+        <button type="button" class="btn btn-danger float-end"
+        data-bs-dismiss="modal">
+        OK
+        </button>
+
+    </div>
+
+</div>
+</div>
+</div>

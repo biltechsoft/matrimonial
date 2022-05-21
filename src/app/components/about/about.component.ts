@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedService} from 'app/shared.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  allpost;
+  aboutHeading="";
+  about; programs;
+  PhotoUrl = this.service.PhotoUrl;
+  team;
+
+  constructor(private service:SharedService) { }
 
   ngOnInit(): void {
+    this.refreshPost();
+  }
+
+  refreshPost() {
+    this.service.getPostList(0, 'About').subscribe(data=>{
+      this.allpost = data;
+      this.aboutHeading = this.allpost.filter(eventHeading => eventHeading.postCode=='5000')[0].param1;
+      this.about = this.allpost.filter(about => about.postType=='About')[0];
+      this.team = this.allpost.filter(team => team.postType=='Team').sort(
+        (item1,item2) => item1.postCode - item2.postCode);
+      this.getPrograms();
+    });
+  }
+
+  getPrograms() {
+    this.programs = this.about.param5.split('\n');
   }
 
 }

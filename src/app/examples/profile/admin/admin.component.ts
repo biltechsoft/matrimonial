@@ -110,8 +110,20 @@ export class AdminComponent implements OnInit {
       var p = data;
       this.allpost = p.sort((item1, item2) => item1.postCode - item2.postCode);
       this.allpostWithoutFilter=data;
+      this.getNewPostCode();
+      this.FilterFn();
       //this.postTypes[1].newcode = this.allpost.filter(slider => slider.postCode.startsWith('0'))
     });
+  }
+
+  getNewPostCode() {
+    for (var i=0; i<this.postTypes.length; i++) {
+      var items = this.allpost.filter(item => item.postCode.startsWith(i.toString()));
+      if(items != '') {
+        var lastCode = items[items.length-1].postCode;
+        this.postTypes[i].newcode = (Number(lastCode)+1).toString();
+      }
+    }
   }
   getCurrentAdmin() {
       this.service.getAdminList(Number(localStorage.getItem('adminid'))).subscribe(data=>{
@@ -295,6 +307,7 @@ export class AdminComponent implements OnInit {
     for(var i=0; i<this.postTypes.length; i++) {
       if(this.postTypes[i].name == this.PostType) {
         this.ptype = this.postTypes[i];
+        if(this.PostId==0) { this.PostCode = this.postTypes[i].newcode; }
       }
     }
   }
@@ -547,7 +560,7 @@ export class AdminComponent implements OnInit {
       name: "Slider",
       param: ['Caption'],
       paramlen: ['1'],
-      newcode: '0111',
+      newcode: '1111',
       status: false //for showing submenu
     },
     {
@@ -555,7 +568,7 @@ export class AdminComponent implements OnInit {
       name: "Heading",
       param: ['Heading'],
       paramlen: ['5'],
-      newcode: '1234',
+      newcode: '2222',
       status: false //for showing submenu
     },
     {
@@ -563,7 +576,7 @@ export class AdminComponent implements OnInit {
       name: "Service",
       param: ['Service Name', 'Service Icon', 'Service Details'],
       paramlen: ['1', '1', '10'],
-      newcode: '1111',
+      newcode: '3333',
       status: false //for showing submenu
     },
     {
@@ -571,15 +584,15 @@ export class AdminComponent implements OnInit {
       name: "Event",
       param: ['Caption', 'Date & Time', 'Event Venue', 'Event Details'],
       paramlen: ['1', '1', '1', '15'],
-      newcode: '2222',
+      newcode: '4444',
       status: false //for showing submenu
     },
     {
       id: 5,
       name: "About",
-      param: ['Mission', 'Vision', 'Program Heading', 'Program List'],
-      paramlen: ['1', '5', '5', '15'],
-      newcode: '3000',
+      param: ['Image Height', 'Mission', 'Vision', 'Program Heading', 'Program List'],
+      paramlen: ['1', '1', '5', '5', '15'],
+      newcode: '5000',
       status: false //for showing submenu
     },
     {
@@ -587,7 +600,7 @@ export class AdminComponent implements OnInit {
       name: "Team",
       param: ['Name', 'Designation', 'Links'],
       paramlen: ['1', '1', '10'],
-      newcode: '3333',
+      newcode: '6666',
       status: false //for showing submenu
     },
     {
@@ -595,7 +608,7 @@ export class AdminComponent implements OnInit {
       name: "FAQ",
       param: ['Question', 'Answer'],
       paramlen: ['5', '10'],
-      newcode: '4444',
+      newcode: '7777',
       status: false //for showing submenu
     },
     {
@@ -603,15 +616,15 @@ export class AdminComponent implements OnInit {
       name: "Donate",
       param: ['Link'],
       paramlen: ['1'],
-      newcode: '5555',
+      newcode: '8888',
       status: false //for showing submenu
     },
     {
       id: 9,
       name: "Contact",
       param: ['Address', 'Phone', 'Email', 'Social', 'Map'],
-      paramlen: ['5', '1', '1', '5', '5'],
-      newcode: '6000',
+      paramlen: ['5', '1', '1', '5', '10'],
+      newcode: '9000',
       status: false //for showing submenu
     }];
 

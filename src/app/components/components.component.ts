@@ -63,7 +63,8 @@ export class ComponentsComponent implements OnInit {
     }
     getSlider() {
       this.sliders = this.allpost.filter(slider => slider.postType=='Slider');
-      this.psliders = this.allpost.filter(slider => slider.postType=='Slider');
+      this.sliders = this.sliders.sort((item1, item2) => item2.postCode - item1.postCode);
+      this.psliders = this.sliders;
       for(var j=0,i=this.psliders.length; i<9; i++,j++) {
         this.psliders[i] = this.psliders[j];
       }
