@@ -20,22 +20,22 @@
         <div class="contact-phone">
           <i class="ion-ios-telephone-outline"></i>
           <h3>Phone Number</h3>
-          <p><a href="tel:+155895548855">{{contact.param2}}</a></p>
+          <p><a href="tel:{{contact.param2}}"  target="_blank">{{contact.param2}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-email-outline"></i>
           <h3>Email</h3>
-          <p><a href="mailto:{{contact.param3}}">{{contact.param3}}</a></p>
+          <p><a href="mailto:{{contact.param3}}" target="_blank">{{contact.param3}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-chatbubble-outline"></i>
           <h3>Facebook</h3>
-          <p><a href="{{contact.param4.split('\n')[0]}}">{{contact.param4.split('\n')[0].substring(8)}}</a></p>
+          <p><a href="{{contact.param4.split('\n')[0]}}" target="_blank">{{contact.param4.split('\n')[0].substring(8)}}</a></p>
         </div>
         <div class="contact-email">
           <i class="ion-ios-people-outline"></i>
           <h3>Twitter</h3>
-          <p><a href="{{contact.param4.split('\n')[1]}}">{{contact.param4.split('\n')[1].substring(8)}}</a></p>
+          <p><a href="{{contact.param4.split('\n')[1]}}" target="_blank">{{contact.param4.split('\n')[1].substring(8)}}</a></p>
         </div>
  </div>
  <div class="col-lg-7">

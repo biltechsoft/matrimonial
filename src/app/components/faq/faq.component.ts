@@ -9,7 +9,7 @@ import {SharedService} from 'app/shared.service';
 export class FaqComponent implements OnInit {
 
   allpost;
-  faqHeading="";
+  faqHeading;
   faqs;
   PhotoUrl = this.service.PhotoUrl;
   moreless = 'More FAQ ...';
