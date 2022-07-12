@@ -295,7 +295,10 @@ export class AdminComponent implements OnInit {
     });
   }
   deletePost(post){
-    if(confirm('Are you sure?')){
+    if(post.postCode == '0000' || '7000' || '9000') {
+      alert(post.postType + ' cannot be deleted. You may edit this.');
+    }
+    else if(confirm('Are you sure?')){
     this.service.deletePost(post.postId).subscribe(res=>{
       this.service.deletePhoto({id:1,filetodel:post.PostPhoto}).subscribe();
       alert(res.toString());
@@ -552,6 +555,7 @@ export class AdminComponent implements OnInit {
       name: "Banner",
       param: ['Website Title', 'Website Slogan'],
       paramlen: ['1', '1'],
+      required: [0],
       newcode: '0000',
       status: false //for showing submenu
     },
@@ -560,6 +564,7 @@ export class AdminComponent implements OnInit {
       name: "Slider",
       param: ['Caption'],
       paramlen: ['1'],
+      required: [-1],  //for photo required, -1
       newcode: '1111',
       status: false //for showing submenu
     },
@@ -568,6 +573,7 @@ export class AdminComponent implements OnInit {
       name: "Heading",
       param: ['Heading'],
       paramlen: ['5'],
+      required: [0],
       newcode: '2222',
       status: false //for showing submenu
     },
@@ -576,6 +582,7 @@ export class AdminComponent implements OnInit {
       name: "Service",
       param: ['Service Name', 'Service Icon', 'Service Details'],
       paramlen: ['1', '1', '10'],
+      required: [0,1,2],
       newcode: '3333',
       status: false //for showing submenu
     },
@@ -584,6 +591,7 @@ export class AdminComponent implements OnInit {
       name: "Event",
       param: ['Caption', 'Date & Time', 'Event Venue', 'Event Details'],
       paramlen: ['1', '1', '1', '15'],
+      required: [-1,0,1,2,3],
       newcode: '4444',
       status: false //for showing submenu
     },
@@ -592,6 +600,7 @@ export class AdminComponent implements OnInit {
       name: "About",
       param: ['Image Height', 'Mission', 'Vision', 'Program Heading', 'Program List'],
       paramlen: ['1', '1', '5', '5', '15'],
+      required: [-1,0,1,2,3,4],
       newcode: '5000',
       status: false //for showing submenu
     },
@@ -600,6 +609,7 @@ export class AdminComponent implements OnInit {
       name: "Team",
       param: ['Name', 'Designation', 'Links'],
       paramlen: ['1', '1', '10'],
+      required: [0,1,2],
       newcode: '6666',
       status: false //for showing submenu
     },
@@ -608,6 +618,7 @@ export class AdminComponent implements OnInit {
       name: "FAQ",
       param: ['Question', 'Answer'],
       paramlen: ['5', '10'],
+      required: [0,1],
       newcode: '7777',
       status: false //for showing submenu
     },
@@ -616,6 +627,7 @@ export class AdminComponent implements OnInit {
       name: "Donate",
       param: ['Link'],
       paramlen: ['1'],
+      required: [0],
       newcode: '8888',
       status: false //for showing submenu
     },
@@ -624,6 +636,7 @@ export class AdminComponent implements OnInit {
       name: "Contact",
       param: ['Address', 'Phone', 'Email', 'Social', 'Map'],
       paramlen: ['5', '1', '1', '5', '10'],
+      required: [0,1,2,3,4],
       newcode: '9000',
       status: false //for showing submenu
     }];
