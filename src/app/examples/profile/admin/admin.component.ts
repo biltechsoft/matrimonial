@@ -253,60 +253,77 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  addPostClick() {
-    if(this.NewPhotoUploaded) { this.updatePost(); }
-    else { this.createPost(); }
+  addPostClick(id) {
+    if(this.NewPhotoUploaded) { this.updatePost(id); }
+    else { this.createPost(id); }
   }
-  requiredcheck() {
+  requiredcheck(id) {
     if(this.PostCode == '' || null) {
       alert('Post code cannot be empty!');
+      return false;
     }
     else if(this.PageTitle == '' || null) {
       alert('Page Title must be selected!');
+      return false;
     }
     else if(this.PostType == '' || null) {
       alert('Post Type must be selected!');
+      return false;
     }
     else if(this.PostStatus == '' || null) {
       alert('Post Status must be selected!');
+      return false;
+    }
+    else {
+      for(var i=0; i<this.postTypes[id].param.length; i++) {
+        if((this.Params[i] == '' || null) && (this.postTypes[id].required[i])) {
+          alert(this.postTypes[id].param[i] + ' cannot be empty!');
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  createPost(id){
+    if(this.requiredcheck(id)){
+      var val={
+        postCode: this.PostCode,
+        pageTitle: this.PageTitle,
+        postType: this.PostType,
+        postPhoto: this.PostPhoto,
+        postStatus: this.PostStatus,
+        param1: this.Params[0],
+        param2: this.Params[1],
+        param3: this.Params[2],
+        param4: this.Params[3],
+        param5: this.Params[4]
+      };
+      this.service.addPost(val).subscribe(res=>{
+        alert(res.toString());
+        this.refreshList();
+      });
     }
   }
-  createPost(){
-    var val={
-      postCode: this.PostCode,
-      pageTitle: this.PageTitle,
-      postType: this.PostType,
-      postPhoto: this.PostPhoto,
-      postStatus: this.PostStatus,
-      param1: this.Params[0],
-      param2: this.Params[1],
-      param3: this.Params[2],
-      param4: this.Params[3],
-      param5: this.Params[4]
-    };
-    this.service.addPost(val).subscribe(res=>{
-      alert(res.toString());
-      this.refreshList();
-    });
-  }
-  updatePost(){
-    var val={
-      postId: this.PostId,
-      postCode: this.PostCode,
-      pageTitle: this.PageTitle,
-      postType: this.PostType,
-      postPhoto: this.PostPhoto,
-      postStatus: this.PostStatus,
-      param1: this.Params[0],
-      param2: this.Params[1],
-      param3: this.Params[2],
-      param4: this.Params[3],
-      param5: this.Params[4]
-    };
-    this.service.updatePost(val).subscribe(res=>{
-      alert(res.toString());
-      this.refreshPost();
-    });
+  updatePost(id){
+    if(this.requiredcheck(id)){
+      var val={
+        postId: this.PostId,
+        postCode: this.PostCode,
+        pageTitle: this.PageTitle,
+        postType: this.PostType,
+        postPhoto: this.PostPhoto,
+        postStatus: this.PostStatus,
+        param1: this.Params[0],
+        param2: this.Params[1],
+        param3: this.Params[2],
+        param4: this.Params[3],
+        param5: this.Params[4]
+      };
+      this.service.updatePost(val).subscribe(res=>{
+        alert(res.toString());
+        this.refreshPost();
+      });
+    }
   }
   deletePost(post){
     if(post.postCode == '0000' || '7000' || '9000') {
@@ -472,7 +489,7 @@ export class AdminComponent implements OnInit {
   viewMore(string) {
     this.viewMoreString = string;
   }
-  uploadPhoto(event:any){
+  uploadPhoto(event:any, id){
     if(this.PostId!=0 && !(this.PostPhoto=="" || this.PostPhoto==null)) {
       this.service.deletePhoto({id:1,filetodel:this.PostPhoto}).subscribe();
     }
@@ -483,8 +500,8 @@ export class AdminComponent implements OnInit {
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
       this.PostPhoto = data.toString();
       this.PhotoFilePath=this.service.PhotoUrl+data.toString();
-      if(this.PostId==0) { this.createPost(); }
-      else { this.updatePost(); }
+      if(this.PostId==0) { this.createPost(id); }
+      else { this.updatePost(id); }
       this.NewPhotoUploaded=true;
     });
   }
