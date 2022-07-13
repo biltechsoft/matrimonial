@@ -535,20 +535,20 @@
                         <select [(ngModel)]="PageTitle" class="form-select" id="PageTitle">
                           <option *ngFor="let pageTitle of pageTitles" value={{pageTitle}}>{{pageTitle}}</option>
                         </select>
-                        <label for="PageTitle">Page Title</label>
+                        <label for="PageTitle">Page Title <req>*</req></label>
                     </div>
 
                       <div class="form-group form-floating">
                           <select [(ngModel)]="PostType" class="form-select" id="PostType" (change)=ptypechange()>
                             <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
                           </select>
-                          <label for="PostType">Post Type</label>
+                          <label for="PostType">Post Type <req>*</req></label>
                       </div>
 
                       <!-- div *ngIf="PostId==0" class="form-group form-floating"-->
                       <div class="form-group form-floating">
                           <input type="text" class="form-control" [(ngModel)]="PostCode" id="PostCode">
-                          <label for="PostCode">Post Code</label>
+                          <label for="PostCode">Post Code <req>*</req></label>
                       </div>
 
 
@@ -557,7 +557,7 @@
                           <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
                             <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
                           </select>
-                          <label for="PostStatus">Post Status</label>
+                          <label for="PostStatus">Post Status <req>*</req></label>
                       </div>
 
 
@@ -575,7 +575,7 @@
                         <div *ngFor="let par of ptype.param; let i=index" class="form-group form-floating">
                             <textarea class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
       overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
-                            <label for="PostDetails">{{par}}</label>
+                            <label for="PostDetails">{{par}}  <req *ngIf=ptype.required[i]>*</req></label>
                         </div>
 
                 </div>
