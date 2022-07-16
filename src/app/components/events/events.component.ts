@@ -25,7 +25,7 @@ export class EventsComponent implements OnInit {
     this.service.getPostList(0, 'Events').subscribe(data=>{
       this.allpost = data;
       this.eventHeading = this.allpost.filter(eventHeading => eventHeading.postCode=='4000')[0].param1;
-      this.events = this.allpost.filter(events => events.postType=='Event').sort(
+      this.events = this.allpost.filter(events => (events.postType=='Event' && events.postStatus=='Active')).sort(
         (item1,item2) => item2.postCode - item1.postCode);
       this.viewMore(0);
     });

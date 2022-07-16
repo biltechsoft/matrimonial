@@ -140,7 +140,10 @@
               <tbody>
                   <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
                       <td style="vertical-align: middle;"> {{user.userId}}</td>
-                      <td style="vertical-align: middle;">{{user.fullName}}    </td>
+                      <td style="vertical-align: middle;"><b>
+                        <a href=""
+                        (mouseover)=editUser(user) data-bs-toggle="modal" data-bs-target="#editModal">
+                        {{user.fullName}}</a></b>    </td>
                       <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}}    </td>
                       <td style="vertical-align: middle;">{{user.reqSent}}    </td>
                       <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
@@ -333,18 +336,7 @@
         </div>
         </div>
 
-        <div class="modal fade" id="editModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-          <app-edit-profile></app-edit-profile>
-        </div>
 
-
-
-
-        </div>
-        </div>
 
 
         </div>
@@ -639,3 +631,12 @@
 
 
 </section><!-- #about -->
+
+<div class="modal fade" id="editModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl modal-dialog-centered">
+<div class="modal-content">
+  <app-edit-profile></app-edit-profile>
+</div>
+</div>
+</div>

@@ -64,21 +64,41 @@ export class EditProfileComponent implements OnInit {
   }
   uploadPhoto(event:any){
     this.uploading = true;
-    if(this.prevPhoto != null || this.prevPhoto != 'anonymous.png') {
-      this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
-    }
-    var file=event.target.files[0];
-    //file.name='mariuf';
-    const formData:FormData=new FormData();
-    formData.append('uploadedFile',file,file.name);
+    if(this.currentUser.status == "Active") {
+      if(this.currentUser.album != null || this.prevPhoto != 'anonymous.png') {
+        this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
+      }
+      var file=event.target.files[0];
+      //file.name='mariuf';
+      const formData:FormData=new FormData();
+      formData.append('uploadedFile',file,file.name);
 
-    this.service.UploadPhoto(formData).subscribe((data:any)=>{
-      this.PhotoFileName=data.toString();
-      this.currentUser.photo = this.PhotoFileName;
-      this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
-      this.clickSave();
-      this.uploading = false;
-    })
+      this.service.UploadPhoto(formData).subscribe((data:any)=>{
+        this.PhotoFileName=data.toString();
+        this.currentUser.photo = this.PhotoFileName;
+        this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
+        this.clickSave();
+        this.uploading = false;
+      });
+    }
+    else {
+      if(this.prevPhoto != null || this.prevPhoto != 'anonymous.png') {
+        this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
+      }
+      var file=event.target.files[0];
+      //file.name='mariuf';
+      const formData:FormData=new FormData();
+      formData.append('uploadedFile',file,file.name);
+
+      this.service.UploadPhoto(formData).subscribe((data:any)=>{
+        this.PhotoFileName=data.toString();
+        this.currentUser.photo = this.PhotoFileName;
+        this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
+        this.clickSave();
+        this.uploading = false;
+      });
+    }
+
   }
   imStatusOther() {
     if(this.currentUser.immigrationStatus == "Other") { return true; }
@@ -161,6 +181,20 @@ export class EditProfileComponent implements OnInit {
     if (Number.isInteger(Number(this.currentUser.height))) { return true; }
     else { return false; }
   }*/
+  telephoneCheck(str) {
+    var isphone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(str);
+    if(str=='' || str==null) {
+      return true;
+    }
+    return isphone;
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(email=='' || email==null) {
+      return true;
+    }
+    return re.test(email);
+    }
 
   getWear(female) {
     for(var i=0; i<this.WEARS.length; i++) {
@@ -254,10 +288,6 @@ export class EditProfileComponent implements OnInit {
       this.MARSTATS[this.MARSTATS.length-1].checked = false;
     }
   }
-
-
-
-
 
   IMSTATS = [{prop:'US Citizen', checked:false},
               {prop:'Parmanent Resident', checked:false},

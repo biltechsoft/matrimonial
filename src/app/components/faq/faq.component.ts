@@ -24,7 +24,7 @@ export class FaqComponent implements OnInit {
     this.service.getPostList(0, 'Events').subscribe(data=>{
       this.allpost = data;
       this.faqHeading = this.allpost.filter(faqHeading => faqHeading.postCode=='7000')[0];
-      this.faqs = this.allpost.filter(faqs => faqs.postType=='FAQ').sort(
+      this.faqs = this.allpost.filter(faqs => (faqs.postType=='FAQ' && faqs.postStatus=='Active')).sort(
         (item1,item2) => item1.postCode - item2.postCode);
     });
   }

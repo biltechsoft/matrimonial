@@ -139,19 +139,24 @@
           <div class="col-sm-4">
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.cellPhone" class="form-control" placeholder="Cell Phone Number" id="cellPhone">
-                <label for="cellPhone">Cell Phone</label>
+                <label for="cellPhone">Cell Phone
+                  <span class="errortext" *ngIf=!telephoneCheck(currentUser.cellPhone)>Enter valid Phone No</span></label>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.workPhone" class="form-control" placeholder="Work Phone" id="workPhone">
-                <label for="workPhone">Work Phone</label>
+                <label for="workPhone">Work Phone
+                  <span class="errortext" *ngIf=!telephoneCheck(currentUser.workPhone)>Enter valid Phone No</span>
+                </label>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.homePhone" class="form-control" placeholder="Home Phone" id="homePhone">
-                <label for="homePhone">Home Phone</label>
+                <label for="homePhone">Home Phone
+                  <span class="errortext" *ngIf=!telephoneCheck(currentUser.homePhone)>Enter valid Phone No</span>
+                </label>
             </div>
           </div>
         </div>
@@ -159,7 +164,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.email" class="form-control" placeholder="Enter Your Email" id="email">
+                <input type="text" [(ngModel)]="currentUser.email" class="form-control" placeholder="Enter Your Email" id="email" disabled>
                 <label for="email">Email</label>
             </div>
           </div>
@@ -194,19 +199,19 @@
           =================-->
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="text" [ngModel]="currentUser.age" class="form-control" placeholder="Enter Your Age (integer)" id="age">
+                <input disabled type="text" [ngModel]="currentUser.age" class="form-control" placeholder="Enter Your Age (integer)" id="age">
                 <label for="age">Age</label>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" min="0" [(ngModel)]="currentUser.height" class="form-control" placeholder="Height" id="height">
+                <input type="number" min="0" max="120" [(ngModel)]="currentUser.height" class="form-control" placeholder="Height" id="height">
                 <label for="height">Height (inch)</label>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" min="0" [(ngModel)]="currentUser.weight" class="form-control" placeholder="Weight" id="weight">
+                <input type="number" min="0" max="1000" [(ngModel)]="currentUser.weight" class="form-control" placeholder="Weight" id="weight">
                 <label for="weight">Weight (lb)</label>
             </div>
           </div>
@@ -309,7 +314,7 @@
         </div>
         <div class="col-sm-2">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.highSchoolYear" class="form-control" placeholder="High School Year" id="highSchoolYear">
+                <input type="number" min="1900" max="2100" [(ngModel)]="currentUser.highSchoolYear" class="form-control" placeholder="High School Year" id="highSchoolYear">
                 <label for="highSchoolYear">Year</label>
             </div>
         </div>
@@ -321,7 +326,7 @@
         </div>
         <div class="col-sm-2">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.bachelorsYear" class="form-control" placeholder="Bachelors Year" id="bachelorsYear">
+                <input type="number" min="1900" max="2100" [(ngModel)]="currentUser.bachelorsYear" class="form-control" placeholder="Bachelors Year" id="bachelorsYear">
                 <label for="bachelorsYear">Year</label>
             </div>
         </div>
@@ -335,7 +340,7 @@
         </div>
         <div class="col-sm-2">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.mastersYear" class="form-control" placeholder="Masters Year" id="mastersYear">
+                <input type="number" min="1900" max="2100" [(ngModel)]="currentUser.mastersYear" class="form-control" placeholder="Masters Year" id="mastersYear">
                 <label for="mastersYear">Year</label>
             </div>
         </div>
@@ -347,7 +352,7 @@
         </div>
         <div class="col-sm-2">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.doctorateYear" class="form-control" placeholder="Doctorate Year" id="doctorateYear">
+                <input type="number" min="1900" max="2100" [(ngModel)]="currentUser.doctorateYear" class="form-control" placeholder="Doctorate Year" id="doctorateYear">
                 <label for="doctorateYear">Year</label>
             </div>
         </div>
@@ -361,7 +366,7 @@
         </div>
         <div class="col-sm-2">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.otherDegreeYear" class="form-control" placeholder="Other Degree(s) Year" id="otherDegreeYear">
+                <input type="number" min="1900" max="2100" [(ngModel)]="currentUser.otherDegreeYear" class="form-control" placeholder="Other Degree(s) Year" id="otherDegreeYear">
                 <label for="otherDegreeYear">Year(s)</label>
             </div>
         </div>
@@ -468,13 +473,17 @@ Parent/Guardian's Information
           <div class="col-sm-4">
               <div class="form-group form-floating">
                   <input type="text" [(ngModel)]="currentUser.guarPhone" class="form-control" placeholder="Guardian's Phone" id="guarPhone">
-                  <label for="guarPhone">Phone</label>
+                  <label for="guarPhone">Phone
+                    <span class="errortext" *ngIf=!telephoneCheck(currentUser.guarPhone)>Enter Valid Phone No</span>
+                  </label>
               </div>
           </div>
           <div class="col-sm-4">
               <div class="form-group form-floating">
                   <input type="text" [(ngModel)]="currentUser.guarEmail" class="form-control" placeholder="Guardian's Email" id="guarEmail">
-                  <label for="guarEmail">Email</label>
+                  <label for="guarEmail">Email
+                    <span class="errortext" *ngIf=!validateEmail(currentUser.guarEmail)>Enter Valid Email Address</span>
+                  </label>
               </div>
           </div>
         </div>
@@ -902,7 +911,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.phone1" class="form-control" placeholder="Phone1" id="phone1">
-              <label for="phone1">Phone</label>
+              <label for="phone1">Phone
+                <span class="errortext" *ngIf=!telephoneCheck(currentUser.phone1)>Enter Valid Phone No</span>
+              </label>
           </div>
         </div>
       </div>
@@ -923,7 +934,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.phone2" class="form-control" placeholder="Phone2" id="phone2">
-              <label for="phone2">Phone</label>
+              <label for="phone2">Phone
+                <span class="errortext" *ngIf=!telephoneCheck(currentUser.phone2)>Enter Valid Phone No</span>
+              </label>
           </div>
         </div>
       </div>
@@ -943,7 +956,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.phone3" class="form-control" placeholder="Phone3" id="phone3">
-              <label for="phone3">Phone</label>
+              <label for="phone3">Phone
+                <span class="errortext" *ngIf=!telephoneCheck(currentUser.phone3)>Enter Valid Phone No</span>
+              </label>
           </div>
         </div>
       </div>

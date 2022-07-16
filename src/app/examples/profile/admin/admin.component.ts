@@ -181,7 +181,6 @@ export class AdminComponent implements OnInit {
       });
     }
   }
-
   editClick(admin:any){
     if(this.menu[0].status) {
       this.modalTitle="Edit Admin";
@@ -210,7 +209,6 @@ export class AdminComponent implements OnInit {
       this.ptypechange();
     }
   }
-
   createClick(){
     var val={
       adminUserName:this.AdminUserName,
@@ -254,32 +252,36 @@ export class AdminComponent implements OnInit {
   }
 
   addPostClick(id) {
-    if(this.NewPhotoUploaded) { this.updatePost(id); }
-    else { this.createPost(id); }
+    this.createPost(id);
   }
   requiredcheck(id) {
-    if(this.PostCode == '' || null) {
+    if(this.PostCode == '' || this.PostCode == null) {
       alert('Post code cannot be empty!');
       return false;
     }
-    else if(this.PageTitle == '' || null) {
+    else if(this.PageTitle == '' || this.PageTitle == null) {
       alert('Page Title must be selected!');
       return false;
     }
-    else if(this.PostType == '' || null) {
+    else if(this.PostType == '' || this.PostType == null) {
       alert('Post Type must be selected!');
       return false;
     }
-    else if(this.PostStatus == '' || null) {
+    else if(this.PostStatus == '' || this.PostStatus == null) {
       alert('Post Status must be selected!');
       return false;
     }
     else {
-      for(var i=0; i<this.postTypes[id].param.length; i++) {
-        if((this.Params[i] == '' || null) && (this.postTypes[id].required[i])) {
+      var i=0;
+      for(i=0; i<this.postTypes[id].param.length; i++) {
+        if((this.Params[i] == '' || this.Params[i] == null) && (this.postTypes[id].required[i])) {
           alert(this.postTypes[id].param[i] + ' cannot be empty!');
           return false;
         }
+      }
+      if(this.postTypes[id].required[i] == -1 && (this.PostPhoto=="" || this.PostPhoto==null)) {
+        alert('You must upload Photo!');
+        return false;
       }
     }
     return true;
@@ -326,10 +328,10 @@ export class AdminComponent implements OnInit {
     }
   }
   deletePost(post){
-    if(post.postCode == '0000' || '7000' || '9000') {
-      alert(post.postType + ' cannot be deleted. You may edit this.');
+    if(this.mustPost.includes(post.postCode)) {
+      alert('This item cannot be deleted. You may edit this.');
     }
-    else if(confirm('Are you sure?')){
+    else if(confirm('Are you sure you want to delete this?')){
     this.service.deletePost(post.postId).subscribe(res=>{
       this.service.deletePhoto({id:1,filetodel:post.PostPhoto}).subscribe();
       alert(res.toString());
@@ -490,7 +492,7 @@ export class AdminComponent implements OnInit {
     this.viewMoreString = string;
   }
   uploadPhoto(event:any, id){
-    if(this.PostId!=0 && !(this.PostPhoto=="" || this.PostPhoto==null)) {
+    if(!(this.PostPhoto=="" || this.PostPhoto==null)) {
       this.service.deletePhoto({id:1,filetodel:this.PostPhoto}).subscribe();
     }
     var file=event.target.files[0];
@@ -500,9 +502,9 @@ export class AdminComponent implements OnInit {
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
       this.PostPhoto = data.toString();
       this.PhotoFilePath=this.service.PhotoUrl+data.toString();
-      if(this.PostId==0) { this.createPost(id); }
-      else { this.updatePost(id); }
-      this.NewPhotoUploaded=true;
+      //if(this.PostId==0) { this.createPost(id); }
+      //else { this.updatePost(id); }
+      //this.NewPhotoUploaded=true;
     });
   }
 
@@ -671,6 +673,28 @@ export class AdminComponent implements OnInit {
       newcode: '9000',
       status: false //for showing submenu
     }];
+
+  //the posts having following postCodes cannot be deleted, just can be edited.
+  mustPost = ['0000',
+              '3000',
+              '4000',
+              '4001',
+              '4002',
+              '4003',
+              '4004',
+              '5000',
+              '5001',
+              '6001',
+              '6002',
+              '6003',
+              '6004',
+              '7000',
+              '7001',
+              '7002',
+              '7003',
+              '9000',
+              '9001'
+            ];
 
 
 

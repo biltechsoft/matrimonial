@@ -27,7 +27,7 @@ export class ServicesComponent implements OnInit {
     this.service.getPostList(0, 'Services').subscribe(data=>{
       this.allpost = data;
       this.serviceHeading = this.allpost.filter(serviceHeading => serviceHeading.postCode=='3000')[0].param1;
-      this.services = this.allpost.filter(services => services.postType=='Service').sort(
+      this.services = this.allpost.filter(services => (services.postType=='Service' && services.postStatus=='Active')).sort(
         (item1,item2) => item1.postCode - item2.postCode);
       this.currentService = this.services[0];
     });

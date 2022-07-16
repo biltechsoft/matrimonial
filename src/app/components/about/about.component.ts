@@ -25,7 +25,7 @@ export class AboutComponent implements OnInit {
       this.allpost = data;
       this.aboutHeading = this.allpost.filter(eventHeading => eventHeading.postCode=='5000')[0].param1;
       this.about = this.allpost.filter(about => about.postType=='About')[0];
-      this.team = this.allpost.filter(team => team.postType=='Team').sort(
+      this.team = this.allpost.filter(team => (team.postType=='Team' && team.postStatus=='Active')).sort(
         (item1,item2) => item1.postCode - item2.postCode);
       this.getPrograms();
     });
