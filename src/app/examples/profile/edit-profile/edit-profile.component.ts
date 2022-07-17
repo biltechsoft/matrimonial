@@ -18,7 +18,7 @@ export class EditProfileComponent implements OnInit {
   gotid;
   PhotoFileName;
   PhotoFilePath;
-  prevPhoto;
+  prevPhoto; prevAlbum;
   uploading=false;
 
   YEARS = this.service.getYEARS();
@@ -48,6 +48,7 @@ export class EditProfileComponent implements OnInit {
           this.getMarstat();
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.prevPhoto = this.currentUser.photo;
+          this.prevAlbum = this.currentUser.album;
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
@@ -58,6 +59,7 @@ export class EditProfileComponent implements OnInit {
           this.getMarstat();
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.prevPhoto = this.currentUser.photo;
+          this.prevAlbum = this.currentUser.album;
         });
     }
     return true;
@@ -65,8 +67,8 @@ export class EditProfileComponent implements OnInit {
   uploadPhoto(event:any){
     this.uploading = true;
     if(this.currentUser.status == "Active") {
-      if(this.currentUser.album != null || this.prevPhoto != 'anonymous.png') {
-        this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
+      if(this.currentUser.prevAlbum != null) {
+        this.service.deletePhoto({id:1,filetodel:this.currentUser.prevAlbum }).subscribe();
       }
       var file=event.target.files[0];
       //file.name='mariuf';
@@ -75,10 +77,11 @@ export class EditProfileComponent implements OnInit {
 
       this.service.UploadPhoto(formData).subscribe((data:any)=>{
         this.PhotoFileName=data.toString();
-        this.currentUser.photo = this.PhotoFileName;
+        this.currentUser.album = this.PhotoFileName;
         this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
         this.clickSave();
         this.uploading = false;
+        alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.')
       });
     }
     else {

@@ -432,16 +432,18 @@ export class AdminComponent implements OnInit {
   }
 
   anyRequest(user) {
-    if (user.status == 'Pending') { return true; }
+    if (user.status == 'Pending' || user.album != null) { return true; }
     else if (user.reqSent != null) {
       return true;
     }
+    return false;
   }
   requestIndex(user) {
     if (user.status == 'Pending') { return 0; }
     else if (user.reqSent != null) {
       return 1;
     }
+    else if (user.album != null) { return 2; }
   }
 
   profileActivate(user,i) {
@@ -480,6 +482,42 @@ export class AdminComponent implements OnInit {
           if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
         });
       }
+    }
+  }
+  changePP(user,i) {
+    if(user.gender == 'Male') {
+      var val = { userId: user.userId, photo: user.album, album: null };
+      this.service.updateMaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshMaleList();
+        if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
+      });
+    }
+    else if(user.gender == 'Female') {
+      var val = { userId: user.userId, photo: user.album, album: null };
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshFemaleList();
+        if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
+      });
+    }
+  }
+  rejectPP(user,i) {
+    if(user.gender == 'Male') {
+      var val = { userId: user.userId, album: null };
+      this.service.updateMaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshMaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
+    }
+    else if(user.gender == 'Female') {
+      var val = { userId: user.userId, album: null };
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshFemaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
     }
   }
   actionPerformed(i) {
@@ -572,7 +610,7 @@ export class AdminComponent implements OnInit {
     },
   ];
 
-  requestType = ["Profile Activation Request", "View Matching Profile"];
+  requestType = ["Profile Activation Request", "View Matching Profile", "Change Profile Picture"];
 
   profileStatus = ['Inactive','Pending','Active','Deactivated'];
 
