@@ -291,6 +291,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      localStorage.removeItem('userage');
      localStorage.removeItem('gender');
      localStorage.removeItem('menuadmin');
+     localStorage.removeItem('ppchange');
      localStorage.setItem('isLoggedOut','True');
    }
 

@@ -140,10 +140,10 @@
               <tbody>
                   <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
                       <td style="vertical-align: middle;"> {{user.userId}}</td>
-                      <td style="vertical-align: middle;"><b>
+                      <td style="vertical-align: middle;">
                         <a href=""
-                        (mouseover)=editUser(user) data-bs-toggle="modal" data-bs-target="#editModal">
-                        {{user.fullName}}</a></b>    </td>
+                        (mouseover)="editUser(user,requestIndex(user)==2)" data-bs-toggle="modal" data-bs-target="#viewModaledit">
+                        {{user.fullName}}</a>    </td>
                       <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}}    </td>
                       <td style="vertical-align: middle;">{{user.reqSent}}    </td>
                       <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
@@ -153,7 +153,7 @@
                             class="btn btn-outline-default btn-sm" (click)=profileReject(user,i)>Reject</button>
                           <button *ngIf="requestIndex(user)==2" type="button"
                             class="btn btn-outline-default btn-sm" (click)=changePP(user,i)>Accept</button>
-                          <button *ngIf="requestIndex(user)==0" type="button"
+                          <button *ngIf="requestIndex(user)==2" type="button"
                             class="btn btn-outline-default btn-sm" (click)=rejectPP(user,i)>Reject</button>
                           <button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
                             (mouseover)=editUser(user) data-bs-toggle="modal" data-bs-target="#viewModal">View Requests</button>
@@ -184,6 +184,14 @@
           </div>
           </div>
 
+          <div class="modal fade" id="viewModaledit" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <app-edit-profile></app-edit-profile>
+              </div>
+            </div>
+          </div>
           <div class="modal fade" id="viewModal" tabindex="-1"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -294,6 +302,15 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="modal fade" id="editModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <app-edit-profile></app-edit-profile>
+        </div>
+        </div>
+        </div>
 
         <div class="modal fade" id="exampleModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -637,12 +654,3 @@
 
 
 </section><!-- #about -->
-
-<div class="modal fade" id="editModal" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-xl modal-dialog-centered">
-<div class="modal-content">
-  <app-edit-profile></app-edit-profile>
-</div>
-</div>
-</div>

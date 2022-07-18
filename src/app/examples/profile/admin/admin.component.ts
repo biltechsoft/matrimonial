@@ -130,7 +130,7 @@ export class AdminComponent implements OnInit {
         this.adminUser = data;
         if(this.adminUser.adminUserName == "munasuperadmin") {
           this.menu[0].status=true;
-          this.menu[1].status=false;
+          this.menu[6].status=false;
           this.superadmin=0;
         }
       });
@@ -347,9 +347,10 @@ export class AdminComponent implements OnInit {
       }
     }
   }
-  editUser(currentUser) {
+  editUser(currentUser, ppchange=false) {
     localStorage.setItem('userid',currentUser.userId);
     localStorage.setItem('gender',currentUser.gender);
+    localStorage.setItem('ppchange',ppchange.toString());
     //this.router.navigate(['/edit-profile']);
   }
   updateClick(){
@@ -436,14 +437,15 @@ export class AdminComponent implements OnInit {
     else if (user.reqSent != null) {
       return true;
     }
-    return false;
   }
   requestIndex(user) {
-    if (user.status == 'Pending') { return 0; }
+    if (user.status == 'Pending' || user.album != null) {
+      if (user.status == 'Pending') { return 0; }
+      else { return 2; }
+    }
     else if (user.reqSent != null) {
       return 1;
     }
-    else if (user.album != null) { return 2; }
   }
 
   profileActivate(user,i) {
@@ -570,7 +572,7 @@ export class AdminComponent implements OnInit {
       id: 1,
       name: "Dashboard",
       submenu: ['Run Matching'],
-      status: true,
+      status: false,
       sub: false
     },
     {
@@ -605,7 +607,7 @@ export class AdminComponent implements OnInit {
       id: 6,
       name: "Site Management",
       submenu: ['Add Post'],
-      status: false,
+      status: true,
       sub: false
     },
   ];
