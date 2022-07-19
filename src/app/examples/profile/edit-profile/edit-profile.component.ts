@@ -18,6 +18,8 @@ export class EditProfileComponent implements OnInit {
   gotid;
   PhotoFileName;
   PhotoFilePath;
+  govIdPath; cvPath;
+  prevGovId; prevCV;
   prevPhoto; prevAlbum;
   uploading=false;
 
@@ -50,8 +52,12 @@ export class EditProfileComponent implements OnInit {
             this.currentUser.photo = this.currentUser.album;
           }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
+          this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
           this.prevPhoto = this.currentUser.photo;
           this.prevAlbum = this.currentUser.album;
+          this.prevGovId = this.currentUser.govIssuedId;
+          this.prevCV = this.currentUser.cv;
 
         });
     }
@@ -65,8 +71,12 @@ export class EditProfileComponent implements OnInit {
             this.currentUser.photo = this.currentUser.album;
           }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
+          this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
           this.prevPhoto = this.currentUser.photo;
           this.prevAlbum = this.currentUser.album;
+          this.prevGovId = this.currentUser.govIssuedId;
+          this.prevCV = this.currentUser.cv;
         });
     }
     return true;
@@ -109,6 +119,24 @@ export class EditProfileComponent implements OnInit {
       });
     }
 
+  }
+  uploadGovId(event:any){
+    this.uploading = true;
+    if(this.prevGovId != null) {
+      this.service.deletePhoto({id:1,filetodel:this.prevGovId}).subscribe();
+    }
+    var file=event.target.files[0];
+    //file.name='mariuf';
+    const formData:FormData=new FormData();
+    formData.append('uploadedFile',file,file.name);
+
+    this.service.UploadPhoto(formData).subscribe((data:any)=>{
+      var idFileName =data.toString();
+      this.currentUser.govIssuedId = idFileName;
+      this.govIdPath=this.service.PhotoUrl+idFileName;
+      this.clickSave();
+      this.uploading = false;
+    });
   }
   imStatusOther() {
     if(this.currentUser.immigrationStatus == "Other") { return true; }

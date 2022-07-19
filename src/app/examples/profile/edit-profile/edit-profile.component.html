@@ -961,14 +961,22 @@ SPOUSAL PREFERENCES
           </div>
         </div>
       </div>
-      <h6> * Please upload a latest color photograph and a copy of your current, government-issued ID </h6>
+      <h6> * Please upload a copy of your current, government-issued ID </h6>
       <div class="col-sm-6">
-      <label for="formFileMultiple" class="form-label">  </label>
-      <input class="form-control" type="file" id="formFileMultiple" multiple />
+        <label for="formFileMultiple" class="form-label">  </label>
+        <img [src]="govIdPath" alt="{{govIdPath}}" class="img-rounded img-padding img-responsive">
+        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadGovId($event)" class="mt-2" />
+        <img *ngIf=uploading src="./assets/img/preloaders.gif">
       </div>
       </div>
       </div>
       </div>
+
+
+
+
+
+  </div>
 
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingSeven">
@@ -977,7 +985,7 @@ SPOUSAL PREFERENCES
 Agreement
       </button>
     </h2>
-    <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+    <div id="flush-collapseSeven" class="accordion-collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
 
         <p>
@@ -1016,9 +1024,6 @@ Agreement
       </div>
       </div>
     </div>
-
-
-  </div>
 
   <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
       <div class="col-md-9 ml-auto mr-auto" >
