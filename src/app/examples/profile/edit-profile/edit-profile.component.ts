@@ -18,8 +18,8 @@ export class EditProfileComponent implements OnInit {
   gotid;
   PhotoFileName;
   PhotoFilePath;
-  govIdPath; cvPath;
-  prevGovId; prevCV;
+  govIdPath; cvPath; signPath;
+  prevGovId; prevCV; prevSign;
   prevPhoto; prevAlbum;
   uploading=false;
 
@@ -54,11 +54,12 @@ export class EditProfileComponent implements OnInit {
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
+          this.signPath=this.service.PhotoUrl+this.currentUser.signature;
+          this.prevSign = this.currentUser.signature;
           this.prevPhoto = this.currentUser.photo;
           this.prevAlbum = this.currentUser.album;
           this.prevGovId = this.currentUser.govIssuedId;
           this.prevCV = this.currentUser.cv;
-
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
@@ -73,6 +74,8 @@ export class EditProfileComponent implements OnInit {
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
+          this.signPath=this.service.PhotoUrl+this.currentUser.signature;
+          this.prevSign = this.currentUser.signature;
           this.prevPhoto = this.currentUser.photo;
           this.prevAlbum = this.currentUser.album;
           this.prevGovId = this.currentUser.govIssuedId;
@@ -120,11 +123,18 @@ export class EditProfileComponent implements OnInit {
     }
 
   }
-  uploadGovId(event:any){
+  uploadFile(event:any, type){
+    //type=1: GovId, type=2: CV, type=3: Signature
     this.uploading = true;
-    if(this.prevGovId != null) {
-      this.service.deletePhoto({id:1,filetodel:this.prevGovId}).subscribe();
+    var delFile='';
+
+    if(type==1 && this.prevGovId != null) { delFile = this.prevGovId; }
+    else if (type==2 && this.prevCV != null) { delFile = this.prevCV; }
+    else if (type==3 && this.prevSign != null) { delFile = this.prevSign; }
+    if(delFile != '') {
+      this.service.deletePhoto({id:1,filetodel:delFile}).subscribe();
     }
+
     var file=event.target.files[0];
     //file.name='mariuf';
     const formData:FormData=new FormData();
@@ -132,8 +142,19 @@ export class EditProfileComponent implements OnInit {
 
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
       var idFileName =data.toString();
-      this.currentUser.govIssuedId = idFileName;
-      this.govIdPath=this.service.PhotoUrl+idFileName;
+      if(type==1) {
+        this.currentUser.govIssuedId = idFileName;
+        this.govIdPath=this.service.PhotoUrl+idFileName;
+      }
+      else if(type==2) {
+        this.currentUser.cv = idFileName;
+        this.cvPath=this.service.PhotoUrl+idFileName;
+      }
+      else if(type==3) {
+        this.currentUser.signature = idFileName;
+        this.signPath=this.service.PhotoUrl+idFileName;
+      }
+
       this.clickSave();
       this.uploading = false;
     });

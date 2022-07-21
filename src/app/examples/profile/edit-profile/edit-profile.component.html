@@ -961,12 +961,23 @@ SPOUSAL PREFERENCES
           </div>
         </div>
       </div>
-      <h6> * Please upload a copy of your current, government-issued ID </h6>
+      <div class="row">
       <div class="col-sm-6">
+      <h6> * Please upload a copy of your current, government-issued ID </h6>
+
         <label for="formFileMultiple" class="form-label">  </label>
-        <img [src]="govIdPath" alt="{{govIdPath}}" class="img-rounded img-padding img-responsive">
-        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadGovId($event)" class="mt-2" />
+        <a href="{{govIdPath}}" target="blank">View ID</a><br>
+        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,1)" class="mt-2" />
         <img *ngIf=uploading src="./assets/img/preloaders.gif">
+      </div>
+      <div class="col-sm-6">
+      <h6> * You may upload a copy of your current CV </h6>
+
+        <label for="formFileMultiple" class="form-label">  </label>
+        <a href="{{cvPath}}" target="blank">View CV</a><br>
+        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,2)" class="mt-2" />
+        <img *ngIf=uploading src="./assets/img/preloaders.gif">
+      </div>
       </div>
       </div>
       </div>
@@ -1008,7 +1019,9 @@ Agreement
           <div class="col-md">
             <div class="form-floating">
             <label class="form-label" for="customFile"></label>
-            <input type="file" class="form-control" id="customFile" />
+              <img *ngIf="currentUser.signature!=null" [src]="signPath" alt="" class="img-rounded img-padding img-responsive">
+              <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,3)" class="mt-2" />
+              <img *ngIf=uploading src="./assets/img/preloaders.gif">
             </div>
           </div>
 
