@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   femaleusers: any=  [];
   users: any=[];
   matchingtables: any=[];
+  messages: any=[];
   allpost: any=[];
 
   adminUser;
@@ -56,6 +57,13 @@ export class AdminComponent implements OnInit {
   FemalePoint=null;
   MatchingDetails=null;
 
+  MessageId;
+  SenderName;
+  SenderEmail;
+  MessageDetail;
+  MessageReply;
+  MessageDateTime;
+
   FullName=null;
   CellPhone=null;
   Email=null;
@@ -86,6 +94,7 @@ export class AdminComponent implements OnInit {
     this.refreshMaleList();
     this.refreshFemaleList();
     this.refreshMatchingTable();
+    this.refreshMessage();
     this.refreshPost();
   }
   refreshMaleList() {
@@ -103,6 +112,12 @@ export class AdminComponent implements OnInit {
   refreshMatchingTable() {
     this.service.getMatchingTable().subscribe(data=>{
       this.matchingtables = data;
+    });
+  }
+  refreshMessage() {
+    this.service.getMessageList().subscribe(data=>{
+      var m = data;
+      this.messages = m.sort((item2, item1) => item1.messageId - item2.messageId);
     });
   }
   refreshPost() {
@@ -347,6 +362,41 @@ export class AdminComponent implements OnInit {
       }
     }
   }
+
+  replyMessage(message) {
+    this.MessageId = message.messageId;
+    this.SenderName = message.senderId;
+    this.SenderEmail = message.senderEmail;
+    this.MessageDetail = message.messageDetail;
+    this.MessageDateTime = message.dateTime;
+  }
+  sendReply() {
+    var emailVal={
+      subject: "Reply to Your Message from MUNA Matrimonial",
+      message: this.MessageReply + "\n\nOn response to your message:\n\n \""
+                + this.MessageDetail + "\"\nwrote on " + this.MessageDateTime,
+      toEmail: [this.Email]
+    };
+
+    this.service.sendEmail(emailVal).subscribe(res=>{
+      alert(res.toString());
+    });
+
+    var val={
+      senderId:this.MessageId,
+      messageDetail:"Admin Reply: " + this.MessageReply + "\n\nSender Message: "
+                    + this.MessageDetail+ "\"\nwrote on " + this.MessageDateTime,
+      dateTime:this.service.getDateTime()
+    };
+
+    this.service.updateMessage(val).subscribe(res=>{
+      if(res.toString().includes('Successfully')) {
+        alert("Your message has been sent to the user.")
+      }
+      //alert(res.toString());
+    });
+  }
+
   editUser(currentUser, ppchange=false) {
     localStorage.setItem('userid',currentUser.userId);
     localStorage.setItem('gender',currentUser.gender);

@@ -90,6 +90,14 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     return btoa(btoa(btoa(val)));
   }
 
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(email=='' || email==null) {
+      return true;
+    }
+    return re.test(email);
+  }
+
   getAdminList(id=0): Observable<any[]> {
     if(id==0) {
       return this.http.get<any[]> (this.APIUrl + '/adminuser');
@@ -106,6 +114,24 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   }
   deleteAdminUser(val:any) {
     return this.http.delete (this.APIUrl + '/adminuser/' + val);
+  }
+
+  getMessageList(id=0): Observable<any[]> {
+    if(id==0) {
+      return this.http.get<any[]> (this.APIUrl + '/message');
+    }
+    else {
+      return this.http.get<any[]> (this.APIUrl + '/message/' + id);
+    }
+  }
+  addMessage(val:any) {
+    return this.http.post (this.APIUrl + '/message', val);
+  }
+  updateMessage(val:any) {
+    return this.http.put (this.APIUrl + '/message', val);
+  }
+  deleteMessage(val:any) {
+    return this.http.delete (this.APIUrl + '/message/' + val);
   }
 
   getTempList(): Observable<any[]> {

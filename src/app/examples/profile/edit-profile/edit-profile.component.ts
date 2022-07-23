@@ -248,12 +248,8 @@ export class EditProfileComponent implements OnInit {
     return isphone;
   }
   validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(email=='' || email==null) {
-      return true;
-    }
-    return re.test(email);
-    }
+    return this.service.validateEmail(email);
+  }
 
   getWear(female) {
     for(var i=0; i<this.WEARS.length; i++) {
