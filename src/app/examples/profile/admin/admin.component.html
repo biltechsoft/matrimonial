@@ -453,7 +453,7 @@
                       <th>Name</th>
                       <th>Email</th>
                       <th>Message</th>
-                      <th>Date Time</th>
+                      <th>Reply</th>
                       <th>Options</th>
                   </tr>
               </thead>
@@ -461,8 +461,11 @@
                   <tr *ngFor="let message of messages">
                       <td> {{message.senderId}} </td>
                       <td> {{message.senderEmail}} </td>
-                      <td> {{message.messageDetail}} </td>
-                      <td> {{message.dateTime}} </td>
+                      <td> {{message.dateTime}} <br>
+                        {{message.messageDetail.substring(0,30)}}... </td>
+                      <td *ngIf="message.messageReply!=null"> {{message.replyDateTime}} <br>
+                        {{message.messageReply.substring(0,30)}}...</td>
+                      <td *ngIf="message.messageReply==null">No reply yet.</td>
                       <td>
                           <button
                           type=button class="btn btn-light mr-1"

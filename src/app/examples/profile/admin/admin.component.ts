@@ -63,6 +63,7 @@ export class AdminComponent implements OnInit {
   MessageDetail;
   MessageReply;
   MessageDateTime;
+  ReplyDateTime;
 
   FullName=null;
   CellPhone=null;
@@ -368,14 +369,16 @@ export class AdminComponent implements OnInit {
     this.SenderName = message.senderId;
     this.SenderEmail = message.senderEmail;
     this.MessageDetail = message.messageDetail;
+    this.MessageReply = message.messageReply;
     this.MessageDateTime = message.dateTime;
+    this.ReplyDateTime = message.replyDateTime;
   }
   sendReply() {
     var emailVal={
       subject: "Reply to Your Message from MUNA Matrimonial",
       message: this.MessageReply + "\n\nOn response to your message:\n\n \""
                 + this.MessageDetail + "\"\nwrote on " + this.MessageDateTime,
-      toEmail: [this.Email]
+      toEmail: [this.SenderEmail]
     };
 
     this.service.sendEmail(emailVal).subscribe(res=>{
@@ -383,17 +386,15 @@ export class AdminComponent implements OnInit {
     });
 
     var val={
-      senderId:this.MessageId,
-      messageDetail:"Admin Reply: " + this.MessageReply + "\n\nSender Message: "
-                    + this.MessageDetail+ "\"\nwrote on " + this.MessageDateTime,
-      dateTime:this.service.getDateTime()
+      messageId:this.MessageId,
+      messageReply:this.MessageReply,
+      replyDateTime:this.service.getDateTime()
     };
 
     this.service.updateMessage(val).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
         alert("Your message has been sent to the user.")
       }
-      //alert(res.toString());
     });
   }
 
