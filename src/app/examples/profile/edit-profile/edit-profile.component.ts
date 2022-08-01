@@ -20,6 +20,7 @@ export class EditProfileComponent implements OnInit {
   PhotoFilePath;
   govIdPath; cvPath; signPath;
   prevGovId; prevCV; prevSign;
+  gallery; galleryPath;
   prevPhoto; prevAlbum;
   uploading=false;
 
@@ -51,6 +52,7 @@ export class EditProfileComponent implements OnInit {
           if(localStorage.getItem('ppchange')=='true') {
             this.currentUser.photo = this.currentUser.album;
           }
+
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
@@ -70,6 +72,10 @@ export class EditProfileComponent implements OnInit {
           this.getMarstat();
           if(localStorage.getItem('ppchange')=='true') {
             this.currentUser.photo = this.currentUser.album;
+          }
+          this.gallery=this.currentUser.gallery.split(',');
+          for(var i=0; i<4; i++) {
+            this.galleryPath[i]=this.service.PhotoUrl+this.gallery[i];
           }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
@@ -185,7 +191,15 @@ export class EditProfileComponent implements OnInit {
   }
   //matchedId = [1,5,3];
   clickSave() {
-    //if(!this.heightOK()) { alert('Height must be integer in inch'); return false; }
+    if(!(this.telephoneCheck(this.currentUser.cellPhone) && this.telephoneCheck(this.currentUser.workPhone) &&
+        this.telephoneCheck(this.currentUser.homePhone) && this.telephoneCheck(this.currentUser.guarPhone) &&
+        this.telephoneCheck(this.currentUser.phone1) &&
+        this.telephoneCheck(this.currentUser.phone2) && this.telephoneCheck(this.currentUser.phone3))) {
+          alert('Please enter valid phone number!');
+          return false;
+        }
+
+    else if(!this.validateEmail(this.currentUser.guarEmail)) { alert('Please enter valid email address!'); return false; }
     this.currentUser.userToken = localStorage.getItem('usertoken');
     this.currentUser.lastEdit = this.service.getDateTime();
     //this.currentUser.matchId = String(this.matchedId);
@@ -241,11 +255,7 @@ export class EditProfileComponent implements OnInit {
     else { return false; }
   }*/
   telephoneCheck(str) {
-    var isphone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(str);
-    if(str=='' || str==null) {
-      return true;
-    }
-    return isphone;
+    return this.service.telephoneCheck(str);
   }
   validateEmail(email) {
     return this.service.validateEmail(email);

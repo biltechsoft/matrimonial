@@ -45,13 +45,12 @@ export class ContactComponent implements OnInit {
       userType:this.UserType,
       senderEmail:this.Email,
       messageDetail:this.Message,
-      tempEmail:this.Email,
       dateTime:this.service.getDateTime()
     };
 
     this.service.addMessage(val).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
-        alert("Your message is sent! Admin will reply through your email ASAP!")
+        alert("Your message is sent! Admin will reply through your email ASAP!");
       }
       //alert(res.toString());
     });

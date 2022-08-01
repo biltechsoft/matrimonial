@@ -97,6 +97,13 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     }
     return re.test(email);
   }
+  telephoneCheck(str) {
+    var isphone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(str);
+    if(str=='' || str==null) {
+      return true;
+    }
+    return isphone;
+  }
 
   getAdminList(id=0): Observable<any[]> {
     if(id==0) {

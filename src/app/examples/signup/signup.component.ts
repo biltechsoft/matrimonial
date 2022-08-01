@@ -57,10 +57,22 @@ export class SignupComponent implements OnInit {
     }
     emailValidate() {
       if(this.Email == "") { return false; }
-      else { return true; }
+      else { return this.service.validateEmail(this.Email); }
+    }
+    telephoneCheck() {
+      if(this.CellPhone == "") { return false; }
+      return this.service.telephoneCheck(this.CellPhone);
     }
     genderValidate() {
       if(this.Gender == "") { return false; }
+      else { return true; }
+    }
+    stateValidate() {
+      if(this.State == "") { return false; }
+      else { return true; }
+    }
+    birthYearValidate() {
+      if(this.BirthYear == "") { return false; }
       else { return true; }
     }
     passwordValidate() {
@@ -83,7 +95,10 @@ export class SignupComponent implements OnInit {
          this.status = true;
          if(this.FullName==null) { this.FullName=""; this.status=false; }
          if(this.Email==null) { this.Email=""; this.status=false; }
+         if(this.CellPhone==null) { this.CellPhone=""; this.status=false; }
          if(this.Gender==null) { this.Gender=""; this.status=false; }
+         if(this.State==null) { this.State=""; this.status=false; }
+         if(this.BirthYear==null) { this.BirthYear=""; this.status=false; }
          if(this.pass1==null) { this.pass1=""; this.status=false; }
          if(!this.passMatched()) { this.passMisMatched = true; this.status=false; }
          if(this.preRegistered()) { this.userAlreadyExist = true; this.status=false;}

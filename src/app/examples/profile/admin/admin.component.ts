@@ -64,6 +64,7 @@ export class AdminComponent implements OnInit {
   MessageReply;
   MessageDateTime;
   ReplyDateTime;
+  currentMessage;
 
   FullName=null;
   CellPhone=null;
@@ -119,6 +120,7 @@ export class AdminComponent implements OnInit {
     this.service.getMessageList().subscribe(data=>{
       var m = data;
       this.messages = m.sort((item2, item1) => item1.messageId - item2.messageId);
+      this.currentMessage = this.messages[0];
     });
   }
   refreshPost() {
@@ -144,7 +146,7 @@ export class AdminComponent implements OnInit {
   getCurrentAdmin() {
       this.service.getAdminList(Number(localStorage.getItem('adminid'))).subscribe(data=>{
         this.adminUser = data;
-        if(this.adminUser.adminUserName == "munasuperadmin") {
+        if(this.adminUser.adminLevel == "TOP") {
           this.menu[0].status=true;
           this.menu[6].status=false;
           this.superadmin=0;
@@ -165,7 +167,6 @@ export class AdminComponent implements OnInit {
     this.refreshList();
     //localStorage.setItem('menuadmin', item);
   }
-
   addClick(i){
     if(this.menu[0].status) {
       this.modalTitle="Add Admin";
@@ -372,6 +373,7 @@ export class AdminComponent implements OnInit {
     this.MessageReply = message.messageReply;
     this.MessageDateTime = message.dateTime;
     this.ReplyDateTime = message.replyDateTime;
+    this.currentMessage = message;
   }
   sendReply() {
     var emailVal={
@@ -385,17 +387,23 @@ export class AdminComponent implements OnInit {
       alert(res.toString());
     });
 
-    var val={
-      messageId:this.MessageId,
-      messageReply:this.MessageReply,
-      replyDateTime:this.service.getDateTime()
-    };
+    this.currentMessage.messageReply=this.MessageReply;
+    this.currentMessage.replyDateTime=this.service.getDateTime();
 
-    this.service.updateMessage(val).subscribe(res=>{
+    this.service.updateMessage(this.currentMessage).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
-        alert("Your message has been sent to the user.")
+        alert("Your message has been sent to the user's email.");
       }
+      //alert(res.toString());
     });
+  }
+  deleteMessage(message) {
+    if(confirm('Are you sure?')){
+      this.service.deleteMessage(message.messageId).subscribe(res=>{
+        alert(res.toString());
+        this.refreshList();
+      });
+    }
   }
 
   editUser(currentUser, ppchange=false) {
@@ -670,6 +678,8 @@ export class AdminComponent implements OnInit {
   topMatchLimits = [5,6,7,8,9,10];
 
   postSTATUS = ['Active', 'Inactive'];
+
+  adminLevels = ['TOP', 'MODERATOR'];
 
   pageTitles = ['Home', 'Services', 'Events', 'About Us', 'FAQ', 'Donate', 'Contact Us'];
 

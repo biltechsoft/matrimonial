@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-md-6">
                             <label>Email</label>
-                            <span *ngIf=!emailValidate() style="color:red;">. *Please insert your email address.</span>
+                            <span *ngIf=!emailValidate() style="color:red;">. *Please insert valid email address.</span>
 
                             <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
                                 <div class="input-group-prepend">
@@ -46,7 +46,8 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Gender</label><span *ngIf=!genderValidate() style="color:red;">. *Please select gender</span>
+                            <label>Gender</label>
+                            <span *ngIf=!genderValidate() style="color:red;">. *Please select gender</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
 
                                 <select [(ngModel)]="Gender" class="form-select" placeholder="Select Your Gender">
@@ -74,6 +75,7 @@
                         =================-->
                         <div class="col-md-6">
                             <label>Birth Year</label>
+                            <span *ngIf=!birthYearValidate() style="color:red;">. *Please select Birth Year</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
                               <select [(ngModel)]="BirthYear" class="form-select" id="BirthYear">
                                 <option *ngFor="let year of YEARS" value={{year}}>{{year}}</option>
@@ -85,6 +87,7 @@
                       <div class="row">
                         <div class="col-md-6">
                             <label>Cell Phone</label>
+                            <span *ngIf=!telephoneCheck() style="color:red;">. *Please insert valid Phone Number.</span>
                             <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">  <i class="nc-icon nc-mobile"></i></span>
@@ -94,6 +97,7 @@
                         </div>
                         <div class="col-md-6">
                             <label>State</label>
+                            <span *ngIf=!stateValidate() style="color:red;">. *Please select State</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
                               <select [(ngModel)]="State" class="form-select" id="state">
                                 <option *ngFor="let state of STATES" value={{state.State}}>{{state.State}}</option>
@@ -147,6 +151,12 @@
                             <!-- <p>{{YEARS[1]}}</p> -->
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-5 mr-auto ml-auto" >
+                            <a [routerLink]="['/login']" class="btn btn-link" style="color:#F44336;">Already Registered? Click to Login!</a>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>

@@ -94,14 +94,18 @@
                     </div>
 
                     <div class="form-group form-floating">
-                        <input type="text" class="form-control" [(ngModel)]="AdminLevel" id="AdminLevel">
-                        <label for="AdminUserName">Admin Level</label>
+                        <select [(ngModel)]="AdminLevel" class="form-select" id="AdminLevel">
+                          <option *ngFor="let adminLevel of adminLevels" value={{adminLevel}}>{{adminLevel}}</option>
+                        </select>
+                        <label for="AdminLevel">Admin Level</label>
+                    </div>
+                    <div class="form-group form-floating">
+                        <select [(ngModel)]="AdminStatus" class="form-select" id="AdminStatus">
+                          <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
+                        </select>
+                        <label for="AdminStatus">Admin Status</label>
                     </div>
 
-                    <div class="form-group form-floating">
-                        <input type="text" class="form-control" [(ngModel)]="AdminStatus" id="AdminStatus">
-                        <label for="AdminUserName">Admin Status</label>
-                    </div>
                 </div>
             </div>
 
@@ -461,10 +465,11 @@
                   <tr *ngFor="let message of messages">
                       <td> {{message.senderId}} </td>
                       <td> {{message.senderEmail}} </td>
-                      <td> {{message.dateTime}} <br>
-                        {{message.messageDetail.substring(0,30)}}... </td>
-                      <td *ngIf="message.messageReply!=null"> {{message.replyDateTime}} <br>
-                        {{message.messageReply.substring(0,30)}}...</td>
+                      <td> {{message.messageDetail.substring(0,30)}}
+                      <ng-container *ngIf="message.messageDetail.length>30">...</ng-container></td>
+                      <td *ngIf="message.messageReply!=null">
+                        {{message.messageReply.substring(0,30)}}
+                        <ng-container *ngIf="message.messageReply.length>30">...</ng-container></td>
                       <td *ngIf="message.messageReply==null">No reply yet.</td>
                       <td>
                           <button
@@ -473,14 +478,16 @@
                           data-bs-target="#messageModal"
                           (click)="replyMessage(message)"
                           >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
+                          <svg *ngIf="message.messageReply==null" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+                            <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"/>
+                          </svg>
+                          <svg *ngIf="message.messageReply!=null" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
+                          </svg>
                           </button>
                           <button
                           type=button class="btn btn-light mr-1"
-                          (click)="deleteMessage()"
+                          (click)="deleteMessage(message)"
                           >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                               <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
@@ -490,6 +497,8 @@
                   </tr>
                 </tbody>
           </table>
+
+
           <div class="modal fade" id="messageModal" tabindex="-1"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -504,11 +513,17 @@
                   <div class="p-4 w-100 bd-highlight">
                       <div class="form-group form-floating">
                           <table>
-                            <tr><td>{{this.MessageDetail}}</td></tr>
+                            <tr><td>{{currentMessage.dateTime}}</td></tr>
+                            <tr><td><strong>{{currentMessage.messageDetail}}</strong></td></tr>
+                          </table>
+                            <br>
+                          <table *ngIf="currentMessage.messageReply!=null">
+                            <tr><td>Replied: {{currentMessage.replyDateTime}}</td></tr>
+                            <tr><td><strong>{{currentMessage.messageReply}}</strong></td></tr>
                           </table>
                       </div>
 
-                      <div class="form-group form-floating">
+                      <div *ngIf="currentMessage.messageReply==null" class="form-group form-floating">
                         <textarea class="form-control" style="min-height: 10em;
                           overflow: auto;" [(ngModel)]="MessageReply" id="reply" contentEditable></textarea>
                         <label for="reply">Write a reply</label>
@@ -517,9 +532,9 @@
                   </div>
               </div>
 
-                  <button type="button" (click)="sendReply()"
-                   class="btn btn-primary float-end">
-                  Send Reply
+                  <button *ngIf="currentMessage.messageReply==null"
+                  type="button" (click)="sendReply()" class="btn btn-primary float-end">
+                    Send Reply
                   </button>
 
               </div>
