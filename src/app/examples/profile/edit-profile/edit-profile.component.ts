@@ -20,7 +20,7 @@ export class EditProfileComponent implements OnInit {
   PhotoFilePath;
   govIdPath; cvPath; signPath;
   prevGovId; prevCV; prevSign;
-  gallery; galleryPath;
+  gallery; galleryPath = [];
   prevPhoto; prevAlbum;
   uploading=false;
 
@@ -74,7 +74,7 @@ export class EditProfileComponent implements OnInit {
             this.currentUser.photo = this.currentUser.album;
           }
           this.gallery=this.currentUser.gallery.split(',');
-          for(var i=0; i<4; i++) {
+          for(var i=0; i<this.gallery.length; i++) {
             this.galleryPath[i]=this.service.PhotoUrl+this.gallery[i];
           }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
@@ -130,13 +130,16 @@ export class EditProfileComponent implements OnInit {
 
   }
   uploadFile(event:any, type){
-    //type=1: GovId, type=2: CV, type=3: Signature
+    //type=11: GovId, type=12: CV, type=13: Signature
+    //type=0,1,2,3,... for gallery photo id
     this.uploading = true;
     var delFile='';
 
-    if(type==1 && this.prevGovId != null) { delFile = this.prevGovId; }
-    else if (type==2 && this.prevCV != null) { delFile = this.prevCV; }
-    else if (type==3 && this.prevSign != null) { delFile = this.prevSign; }
+    if(type==11 && this.prevGovId != null) { delFile = this.prevGovId; }
+    else if (type==12 && this.prevCV != null) { delFile = this.prevCV; }
+    else if (type==13 && this.prevSign != null) { delFile = this.prevSign; }
+    //for gallery images to delete
+    else if (this.gallery[type]!='gallery'+type.toString()+'.jpg') { delFile = this.gallery[type]; }
     if(delFile != '') {
       this.service.deletePhoto({id:1,filetodel:delFile}).subscribe();
     }
@@ -147,18 +150,22 @@ export class EditProfileComponent implements OnInit {
     formData.append('uploadedFile',file,file.name);
 
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
-      var idFileName =data.toString();
-      if(type==1) {
-        this.currentUser.govIssuedId = idFileName;
-        this.govIdPath=this.service.PhotoUrl+idFileName;
+      var iFileName =data.toString();
+      if(type==11) {
+        this.currentUser.govIssuedId = iFileName;
+        this.govIdPath=this.service.PhotoUrl+iFileName;
       }
-      else if(type==2) {
-        this.currentUser.cv = idFileName;
-        this.cvPath=this.service.PhotoUrl+idFileName;
+      else if(type==12) {
+        this.currentUser.cv = iFileName;
+        this.cvPath=this.service.PhotoUrl+iFileName;
       }
-      else if(type==3) {
-        this.currentUser.signature = idFileName;
-        this.signPath=this.service.PhotoUrl+idFileName;
+      else if(type==13) {
+        this.currentUser.signature = iFileName;
+        this.signPath=this.service.PhotoUrl+iFileName;
+      }
+      else {
+        this.gallery[type] = iFileName;
+        //this.currentUser.gallery
       }
 
       this.clickSave();

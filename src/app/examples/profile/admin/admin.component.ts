@@ -426,7 +426,6 @@ export class AdminComponent implements OnInit {
       this.refreshList();
     });
   }
-
   updateUser(user) {
     var val = {
       userId: user.userId,
