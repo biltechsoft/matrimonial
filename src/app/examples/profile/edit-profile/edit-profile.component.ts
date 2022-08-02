@@ -18,9 +18,10 @@ export class EditProfileComponent implements OnInit {
   gotid;
   PhotoFileName;
   PhotoFilePath;
+  PhotoUrl = this.service.PhotoUrl;
   govIdPath; cvPath; signPath;
   prevGovId; prevCV; prevSign;
-  gallery; galleryPath = [];
+  gallery; tempGallery;
   prevPhoto; prevAlbum;
   uploading=false;
 
@@ -52,7 +53,12 @@ export class EditProfileComponent implements OnInit {
           if(localStorage.getItem('ppchange')=='true') {
             this.currentUser.photo = this.currentUser.album;
           }
-
+          this.gallery=this.currentUser.gallery.split(',');
+          if(this.tempGallery == null || this.tempGallery == '') {
+            this.tempGallery=this.gallery;
+          } else {
+            this.tempGallery=this.currentUser.tempGallery.split(',');
+          }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
@@ -74,8 +80,10 @@ export class EditProfileComponent implements OnInit {
             this.currentUser.photo = this.currentUser.album;
           }
           this.gallery=this.currentUser.gallery.split(',');
-          for(var i=0; i<this.gallery.length; i++) {
-            this.galleryPath[i]=this.service.PhotoUrl+this.gallery[i];
+          if(this.tempGallery == null || this.tempGallery == '') {
+            this.tempGallery=this.gallery;
+          } else {
+            this.tempGallery=this.currentUser.tempGallery.split(',');
           }
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
@@ -107,7 +115,7 @@ export class EditProfileComponent implements OnInit {
         this.PhotoFilePath=this.service.PhotoUrl+this.PhotoFileName;
         this.clickSave();
         this.uploading = false;
-        alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.')
+        alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.');
       });
     }
     else {
@@ -139,7 +147,7 @@ export class EditProfileComponent implements OnInit {
     else if (type==12 && this.prevCV != null) { delFile = this.prevCV; }
     else if (type==13 && this.prevSign != null) { delFile = this.prevSign; }
     //for gallery images to delete
-    else if (this.gallery[type]!='gallery'+type.toString()+'.jpg') { delFile = this.gallery[type]; }
+    //else if (this.gallery[type]!='gallery'+(type+1).toString()+'.jpg') { delFile = this.gallery[type]; }
     if(delFile != '') {
       this.service.deletePhoto({id:1,filetodel:delFile}).subscribe();
     }
@@ -164,9 +172,23 @@ export class EditProfileComponent implements OnInit {
         this.signPath=this.service.PhotoUrl+iFileName;
       }
       else {
-        this.gallery[type] = iFileName;
-        //this.currentUser.gallery
+        this.tempGallery[type] = iFileName;
+        this.currentUser.tempGallery = '';
+        for (var i=0; i<this.tempGallery.length; i++) {
+          this.currentUser.tempGallery += this.tempGallery[i];
+          if(i<this.tempGallery.length-1) { this.currentUser.tempGallery += ','; }
+        }
+        alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.');
       }
+      /*else {
+        this.gallery[type] = iFileName;
+        this.currentUser.gallery = '';
+        for (var i=0; i<this.gallery.length; i++) {
+          this.currentUser.gallery += this.gallery[i];
+          if(i<this.gallery.length-1) { this.currentUser.gallery += ','; }
+        }
+        //this.currentUser.gallery
+      }*/
 
       this.clickSave();
       this.uploading = false;
