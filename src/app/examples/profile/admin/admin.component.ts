@@ -491,13 +491,15 @@ export class AdminComponent implements OnInit {
   }
 
   anyRequest(user) {
-    if (user.status == 'Pending' || user.album != null) { return true; }
+    if (user.status == 'Pending' || user.album != null || user.tempGallery != null) {
+      return true;
+    }
     else if (user.reqSent != null) {
       return true;
     }
   }
   requestIndex(user) {
-    if (user.status == 'Pending' || user.album != null) {
+    if (user.status == 'Pending' || user.album != null || user.tempGallery != null) {
       if (user.status == 'Pending') { return 0; }
       else { return 2; }
     }
@@ -545,8 +547,15 @@ export class AdminComponent implements OnInit {
     }
   }
   changePP(user,i) {
+    var val = {
+      userId: user.userId,
+      //photo: user.album,
+      photo: (user.album!=null ? user.album : user.photo),
+      gallery: (user.gallery!=null ? user.tempGallery : user.gallery),
+      album: null,
+      tempGallery: null
+    };
     if(user.gender == 'Male') {
-      var val = { userId: user.userId, photo: user.album, album: null };
       this.service.updateMaleUser(val).subscribe(res=>{
         //alert(res.toString());
         //this.refreshMaleList();
@@ -554,7 +563,6 @@ export class AdminComponent implements OnInit {
       });
     }
     else if(user.gender == 'Female') {
-      var val = { userId: user.userId, photo: user.album, album: null };
       this.service.updateFemaleUser(val).subscribe(res=>{
         //alert(res.toString());
         //this.refreshFemaleList();
@@ -563,8 +571,8 @@ export class AdminComponent implements OnInit {
     }
   }
   rejectPP(user,i) {
+    var val = { userId: user.userId, album: null, tempGallery: null };
     if(user.gender == 'Male') {
-      var val = { userId: user.userId, album: null };
       this.service.updateMaleUser(val).subscribe(res=>{
         //alert(res.toString());
         //this.refreshMaleList();
@@ -572,7 +580,6 @@ export class AdminComponent implements OnInit {
       });
     }
     else if(user.gender == 'Female') {
-      var val = { userId: user.userId, album: null };
       this.service.updateFemaleUser(val).subscribe(res=>{
         //alert(res.toString());
         //this.refreshFemaleList();
@@ -670,7 +677,7 @@ export class AdminComponent implements OnInit {
     },
   ];
 
-  requestType = ["Profile Activation Request", "View Matching Profile", "Change Profile Picture"];
+  requestType = ["Profile Activation Request", "View Matching Profile", "Change Profile/Gallery Picture"];
 
   profileStatus = ['Inactive','Pending','Active','Deactivated'];
 

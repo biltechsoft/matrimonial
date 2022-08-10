@@ -122,7 +122,6 @@ export class EditProfileComponent implements OnInit {
       if(this.prevPhoto != null || this.prevPhoto != 'anonymous.png') {
         this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
       }
-      else if(!pp && this.gallery[type]!='gallery'+(type+1).toString()+'.jpg') { delFile = this.gallery[type]; }
       var file=event.target.files[0];
       //file.name='mariuf';
       const formData:FormData=new FormData();
