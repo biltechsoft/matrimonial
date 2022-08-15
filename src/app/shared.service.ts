@@ -374,6 +374,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      return Math.floor(sum*100/30);  //total 30 parameter taken
    }
 
+  //The fixed photo that should not be deleted
+  constPhoto = ['anonymous.png', 'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
 
   STATES = [
     {

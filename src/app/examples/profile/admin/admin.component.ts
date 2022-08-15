@@ -547,44 +547,53 @@ export class AdminComponent implements OnInit {
     }
   }
   changePP(user,i) {
+    this.delTempPhoto(user);
     var val = {
       userId: user.userId,
-      //photo: user.album,
       photo: (user.album!=null ? user.album : user.photo),
-      gallery: (user.gallery!=null ? user.tempGallery : user.gallery),
+      gallery: (user.tempGallery!=null ? user.tempGallery : user.gallery),
       album: null,
       tempGallery: null
     };
     if(user.gender == 'Male') {
       this.service.updateMaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshMaleList();
         if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
     else if(user.gender == 'Female') {
       this.service.updateFemaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshFemaleList();
         if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
   }
   rejectPP(user,i) {
+    this.delTempPhoto(user, false);
     var val = { userId: user.userId, album: null, tempGallery: null };
     if(user.gender == 'Male') {
       this.service.updateMaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshMaleList();
         if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
       });
     }
     else if(user.gender == 'Female') {
       this.service.updateFemaleUser(val).subscribe(res=>{
-        //alert(res.toString());
-        //this.refreshFemaleList();
         if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
       });
+    }
+  }
+  delTempPhoto(user, accept=true) {
+    var del = (user.album!=null ? (accept?user.photo:user.album) : '');
+    if(del != '' && !this.service.constPhoto.includes(del)) {
+      this.service.deletePhoto({id:1,filetodel:del}).subscribe();
+    }
+    if(user.tempGallery!= null) {
+      var gal = user.gallery.split(',');
+      var tmp = user.tempGallery.split(',');
+      for (var i=0; i<gal.length; i++) {
+        del = (gal[i]!=tmp[i] ? (accept?gal[i]:tmp[i]) : '');
+        if(del != '' && !this.service.constPhoto.includes(del)) {
+          this.service.deletePhoto({id:1,filetodel:del}).subscribe();
+        }
+      }
     }
   }
   actionPerformed(i) {

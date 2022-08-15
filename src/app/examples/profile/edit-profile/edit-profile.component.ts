@@ -50,16 +50,21 @@ export class EditProfileComponent implements OnInit {
           this.getWear(false);
           this.getImstat();
           this.getMarstat();
-          if(localStorage.getItem('ppchange')=='true') {
-            this.currentUser.photo = this.currentUser.album;
-          }
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+
           this.gallery=this.currentUser.gallery.split(',');
-          if(this.tempGallery == null || this.tempGallery == '') {
+          if(this.currentUser.tempGallery == null || this.currentUser.tempGallery == '') {
             this.tempGallery=this.gallery;
           } else {
             this.tempGallery=this.currentUser.tempGallery.split(',');
           }
-          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+
+          if(localStorage.getItem('ppchange')=='true') {
+            if(this.currentUser.album != null && this.currentUser.album != '') {
+              this.PhotoFilePath=this.service.PhotoUrl + this.currentUser.album;
+            }
+            this.gallery=this.tempGallery;
+          }
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
           this.signPath=this.service.PhotoUrl+this.currentUser.signature;
@@ -76,16 +81,21 @@ export class EditProfileComponent implements OnInit {
           this.getWear(true);
           this.getImstat();
           this.getMarstat();
-          if(localStorage.getItem('ppchange')=='true') {
-            this.currentUser.photo = this.currentUser.album;
-          }
+          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+
           this.gallery=this.currentUser.gallery.split(',');
-          if(this.tempGallery == null || this.tempGallery == '') {
+          if(this.currentUser.tempGallery == null || this.currentUser.tempGallery == '') {
             this.tempGallery=this.gallery;
           } else {
             this.tempGallery=this.currentUser.tempGallery.split(',');
           }
-          this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+
+          if(localStorage.getItem('ppchange')=='true') {
+            if(this.currentUser.album != null && this.currentUser.album != '') {
+              this.PhotoFilePath=this.service.PhotoUrl + this.currentUser.album;
+            }
+            this.gallery=this.tempGallery;
+          }
           this.govIdPath=this.service.PhotoUrl+this.currentUser.govIssuedId;
           this.cvPath=this.service.PhotoUrl+this.currentUser.cv;
           this.signPath=this.service.PhotoUrl+this.currentUser.signature;
@@ -101,7 +111,7 @@ export class EditProfileComponent implements OnInit {
   uploadPhoto(event:any){
     this.uploading = true;
     if(this.currentUser.status == "Active") {
-      if(this.currentUser.prevAlbum != null) {
+      if(this.currentUser.prevAlbum != null && !this.service.constPhoto.includes(this.currentUser.prevAlbum)) {
         this.service.deletePhoto({id:1,filetodel:this.currentUser.prevAlbum }).subscribe();
       }
       var file=event.target.files[0];
@@ -119,7 +129,7 @@ export class EditProfileComponent implements OnInit {
       });
     }
     else {
-      if(this.prevPhoto != null || this.prevPhoto != 'anonymous.png') {
+      if(this.prevPhoto != null && !this.service.constPhoto.includes(this.prevPhoto)) {
         this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
       }
       var file=event.target.files[0];
@@ -149,13 +159,13 @@ export class EditProfileComponent implements OnInit {
     else if (type==13 && this.prevSign != null) { delFile = this.prevSign; }
     //for gallery images to delete
     else if (this.currentUser.status == "Active" &&
-      this.tempGallery[type]!='gallery'+(type+1).toString()+'.jpg') {
+    this.tempGallery[type] != this.gallery[type]) {
       delFile = this.tempGallery[type];
     }
-    else if (this.gallery[type]!='gallery'+(type+1).toString()+'.jpg') {
+    else if (this.currentUser.status != "Active") {
       delFile = this.gallery[type];
     }
-    if(delFile != '') {
+    if(delFile != '' && !this.service.constPhoto.includes(delFile)) {
       this.service.deletePhoto({id:1,filetodel:delFile}).subscribe();
     }
 

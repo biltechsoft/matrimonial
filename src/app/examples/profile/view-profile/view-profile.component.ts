@@ -16,6 +16,8 @@ export class ViewProfileComponent implements OnInit {
   user;
   gotid;
   PhotoFilePath;
+  PhotoUrl = this.service.PhotoUrl;
+  gallery;
   STATES = this.service.STATES;
   ngOnInit(): void {
     this.getCurrentUser();
@@ -29,6 +31,7 @@ export class ViewProfileComponent implements OnInit {
               this.service.getFemaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
                 this.currentUser = xuser;
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+                this.gallery=this.currentUser.gallery.split(',');
               });
             }
           });
@@ -40,6 +43,7 @@ export class ViewProfileComponent implements OnInit {
               this.service.getMaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
                 this.currentUser = xuser;
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+                this.gallery=this.currentUser.gallery.split(',');
               });
             }
           });
@@ -49,12 +53,14 @@ export class ViewProfileComponent implements OnInit {
         this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.gallery=this.currentUser.gallery.split(',');
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
         this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
           this.currentUser = data;
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+          this.gallery=this.currentUser.gallery.split(',');
         });
     }
   }
