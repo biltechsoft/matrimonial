@@ -20,6 +20,10 @@ export class SignupComponent implements OnInit {
     date: {year: number, month: number};
     pass1=null;
     pass2="";
+    agreed=false;
+
+    allpost;
+    policy;
 
     TempId=0;
     FullName=null;
@@ -49,6 +53,14 @@ export class SignupComponent implements OnInit {
 
     ngOnInit() {
       this.refreshUserList();
+      this.refreshPost();
+    }
+
+    refreshPost() {
+      this.service.getPostList(0, 'Services').subscribe(data=>{
+        this.allpost = data;
+        this.policy = this.allpost.filter(policy => policy.postCode=='9100')[0].param1.split('\n');
+      });
     }
 
     fullNameValidate() {
@@ -157,7 +169,11 @@ export class SignupComponent implements OnInit {
         this.UserPass = this.service.mEncrypt(this.pass1);
         return true;
       }
+      else if(this.pass1 == null && this.pass2 == '') { return true; }
       return false;
+    }
+    agreePrivacy() {
+      this.agreed = !this.agreed;
     }
 
     isWeekend(date: NgbDateStruct) {

@@ -136,7 +136,7 @@ export class AdminComponent implements OnInit {
 
   getNewPostCode() {
     for (var i=0; i<this.postTypes.length; i++) {
-      var items = this.allpost.filter(item => item.postCode.startsWith(i.toString()));
+      var items = this.allpost.filter(item => item.postCode.startsWith(this.postTypes[i].id.toString()));
       if(items != '') {
         var lastCode = items[items.length-1].postCode;
         this.postTypes[i].newcode = (Number(lastCode)+1).toString();
@@ -696,7 +696,7 @@ export class AdminComponent implements OnInit {
 
   adminLevels = ['TOP', 'MODERATOR'];
 
-  pageTitles = ['Home', 'Services', 'Events', 'About Us', 'FAQ', 'Donate', 'Contact Us'];
+  pageTitles = ['Home', 'Services', 'Events', 'About Us', 'FAQ', 'Donate', 'Contact Us', 'Signup'];
 
   postTypes = [
     {
@@ -781,12 +781,21 @@ export class AdminComponent implements OnInit {
       status: false //for showing submenu
     },
     {
-      id: 9,
+      id: 90,
       name: "Contact",
       param: ['Address', 'Phone', 'Email', 'Social', 'Map'],
       paramlen: ['5', '1', '1', '5', '10'],
       required: [1,1,1,1,1],
       newcode: '9000',
+      status: false //for showing submenu
+    },
+    {
+      id: 91,
+      name: "Privacy Policy",
+      param: ['Privacy Policy'],
+      paramlen: ['15'],
+      required: [1],
+      newcode: '9100',
       status: false //for showing submenu
     }];
 
@@ -809,7 +818,8 @@ export class AdminComponent implements OnInit {
               '7002',
               '7003',
               '9000',
-              '9001'
+              '9001',
+              '9100'
             ];
 
 
