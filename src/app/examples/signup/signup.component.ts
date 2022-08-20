@@ -149,6 +149,7 @@ export class SignupComponent implements OnInit {
 
         localStorage.setItem('userid', this.Email);
         localStorage.setItem('gotVeriCode', "True");  //for first time registration
+        localStorage.setItem('removeVeriCode', "False");
         this.router.navigate(['/login']);
       }
 

@@ -667,7 +667,7 @@
                           <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
                             <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
                           </select>
-                          <label for="PostStatus">Post Status <req>*</req></label>
+                          <label for="PostStatus">Post Status <ng-container class="req">*</ng-container></label>
                       </div>
 
 
@@ -683,8 +683,11 @@
                 <div class="p-4 w-100 bd-highlight">
 
                         <div *ngFor="let par of ptype.param; let i=index" class="form-group form-floating">
-                            <textarea class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
+                            <textarea *ngIf="!(ptype.name=='Service' && i==1)" class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
       overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
+                            <select *ngIf="(ptype.name=='Service' && i==1)" [(ngModel)]="Params[i]" class="form-select" id="PostDetails">
+                              <option *ngFor="let serviceIcon of serviceIcons" value={{serviceIcon}}>{{serviceIcon}}</option>
+                            </select>
                             <label for="PostDetails">{{par}}  <req *ngIf=ptype.required[i]>*</req></label>
                         </div>
 

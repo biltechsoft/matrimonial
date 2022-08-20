@@ -17,6 +17,7 @@ import { NotificationComponent } from './examples/profile/notification/notificat
 import { TopMatchesComponent } from './examples/profile/top-matches/top-matches.component';
 import { ViewProfileComponent } from './examples/profile/view-profile/view-profile.component';
 import { AdminComponent } from './examples/profile/admin/admin.component';
+import { AdminloginComponent } from './examples/adminlogin/adminlogin.component';
 import { PasswordComponent } from './examples/password/password.component';
 
 import { SignupComponent } from './examples/signup/signup.component';
@@ -45,7 +46,8 @@ const routes: Routes =[
     { path: 'top-matches',      component: TopMatchesComponent },
     { path: 'view-profile',     component: ViewProfileComponent },
     { path: 'adminuser',        component: AdminuserComponent },
-    { path: 'admin',            component: AdminComponent },
+    { path: 'admin',            component: AdminloginComponent },
+    { path: 'adminhome',        component: AdminComponent },
     { path: 'adminuser',        component: AdminuserComponent },
     { path: 'maleuser',         component: MaleuserComponent },
     { path: 'signup',           component: SignupComponent },

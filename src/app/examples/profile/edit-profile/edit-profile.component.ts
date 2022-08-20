@@ -24,6 +24,7 @@ export class EditProfileComponent implements OnInit {
   gallery; tempGallery;
   prevPhoto; prevAlbum;
   uploading=false;
+  pad;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -405,12 +406,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   IMSTATS = [{prop:'US Citizen', checked:false},
-              {prop:'Parmanent Resident', checked:false},
+              {prop:'Permanent Resident', checked:false},
               {prop:'Student Visa', checked:false},
               {prop:'F-1', checked:false},
               {prop:'H1B', checked:false},
               {prop:'EAD', checked:false},
-              {prop:'Bangladesh', checked:false},
               {prop:'Other', checked:false},
               {prop:'No Preference', checked:false}];
   MARSTATS = [{prop:'Single', checked:false},

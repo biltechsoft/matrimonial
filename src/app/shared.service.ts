@@ -228,9 +228,18 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     return this.http.post (this.PhotoAPIUrl + '/DeleteFilelskhdjfklsdhfg', val);
   }
 
+  returnPage() {
+    if(localStorage.getItem('usertype')!='0') {
+      this.router.navigate(['/login']);
+    }
+    else {
+      this.router.navigate(['/admin']);
+    }
+  }
+
   loginauth() {
     if(localStorage.getItem('isLoggedOut') == 'True') {
-      this.router.navigate(['/login']);
+      this.returnPage();
       return true;
     }
     if(localStorage.getItem('fromloginpage') == "True") {
@@ -249,7 +258,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           }
           else {
             this.logout();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/admin']);
           }
         });
         return true;
@@ -286,7 +295,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
         });
         return true;
     }
-    this.router.navigate(['/login']);
+    this.returnPage();
   }
   loggedin() {
     if(localStorage.getItem('isLoggedOut') == 'False') {
@@ -316,7 +325,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
          this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
        });
      }
-     localStorage.removeItem('usertype');
+
+     //localStorage.removeItem('usertype');
      localStorage.removeItem('usertoken');
      localStorage.removeItem('adminid');
      localStorage.removeItem('userid');
@@ -326,6 +336,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      localStorage.removeItem('menuadmin');
      localStorage.removeItem('ppchange');
      localStorage.setItem('isLoggedOut','True');
+
+     this.returnPage();
    }
 
    profilePercentage(user, male=true) {

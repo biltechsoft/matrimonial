@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 import {SharedService} from 'app/shared.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-adminlogin',
+  templateUrl: './adminlogin.component.html',
+  styleUrls: ['./adminlogin.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminloginComponent implements OnInit {
 
   constructor(private service:SharedService,
               private router : Router
@@ -41,12 +41,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem('forgot');
-    if(localStorage.getItem('removeVeriCode') == "False") {
-      localStorage.removeItem('removeVeriCode');
-    }
-    else {
-      localStorage.removeItem('gotVeriCode');
-    }
+    localStorage.removeItem('gotVeriCode');
   }
 
   isSignedUp() {
@@ -58,8 +53,7 @@ export class LoginComponent implements OnInit {
     else {return false;}
   }
   clickLogin(passcheck=true) {
-    //admin login part was here, now removed
-    /*if(this.adminloginValidate(passcheck)) {
+    if(this.adminloginValidate(passcheck)) {
       localStorage.removeItem('isSignedUp');
       var UserToken = this.service.getRandomInt(12345678,87654321);
       localStorage.setItem('usertoken', UserToken);
@@ -74,68 +68,20 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/password']);
       }
       else {
-        this.router.navigate(['/admin']);
-      }
-    }
-    else */if(this.loginValidate(passcheck)) {
-      localStorage.removeItem('isSignedUp');
-      var UserToken = this.service.getRandomInt(12345678,87654321);
-      localStorage.setItem('usertoken', UserToken);
-      localStorage.setItem('userid', this.currentUser.userId);
-      if(this.currentUser.gender == 'Male') {
-        this.service.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
-        localStorage.setItem('usertype', '1');
-      }
-      else {
-        this.service.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
-        localStorage.setItem('usertype', '2');
-      }
-      localStorage.setItem('fromloginpage', 'True');
-      localStorage.setItem('isLoggedOut','False');
-      localStorage.setItem('username',this.currentUser.fullName);
-      localStorage.setItem('userage',this.currentUser.age);
-      if(localStorage.getItem('forgot')=='True') {
-        localStorage.removeItem('forgot');
-        this.router.navigate(['/password']);
-      }
-      else {
-        this.router.navigate(['/user-profile']);
+        this.router.navigate(['/adminhome']);
       }
     }
   }
   refreshUserList() {
     if(!this.gotUserList) {
-      /*this.service.getAdminList().subscribe(data=>{
+      this.service.getAdminList().subscribe(data=>{
         this.AdminUserList = data;
-      });*/
-      this.service.getMaleUserList().subscribe(data=>{
-        this.MaleUserList = data;
-      });
-      this.service.getFemaleUserList().subscribe(data=>{
-        this.FemaleUserList= data;
       });
       this.gotUserList = true;
     }
   }
-  loginValidate(passcheck=true) {
-    this.currentUser = this.MaleUserList.find(e => e.email == this.userEmail);
-    if(this.currentUser == null) {
-      this.currentUser = this.FemaleUserList.find(e => e.email == this.userEmail);
-      if(this.currentUser == null) {
-        this.errorMessage = "Your Email is not Registered. Please Sign Up First.";
-        return false;
-      }
-    }
-    if(passcheck) {  //passcheck is false when forgot password, want to recover it
-      if(this.currentUser.userPass == this.service.mEncrypt(this.password)) { return true; }
-      else {
-        this.errorMessage = "Invalid Email or Password or Both";
-        return false;
-      }
-    }
-    else {return true;}
-  }
-  /*adminloginValidate(passcheck=true) {
+
+  adminloginValidate(passcheck=true) {
     this.adminUser = this.AdminUserList.find(e => e.adminUserName == this.userEmail);
     if(this.adminUser != null) {
       if(passcheck) {  //passcheck is false when forgot password, want to recover it
@@ -147,7 +93,11 @@ export class LoginComponent implements OnInit {
       }
       else {return true;}
     }
-  }*/
+    else {
+      this.errorMessage = "Invalid Email or Password or Both";
+      return false;
+    }
+  }
 
   refreshTempList() {
     if(!this.gotTempList) {
@@ -220,10 +170,10 @@ export class LoginComponent implements OnInit {
     else {return false;}
   }
   sendCode() {
-    /*if(this.adminloginValidate(false)) {
+    if(this.adminloginValidate(false)) {
       localStorage.setItem('usertype','0');
     }
-    else*/ if(!this.loginValidate(false)) {
+    else {
       this.errorMessage = "Your Email is not registered! Please Sign Up.";
       return false;
     }
@@ -245,7 +195,6 @@ export class LoginComponent implements OnInit {
       this.service.updateFemaleUser({userId: this.currentUser.userId, userPass: this.service.mEncrypt(this.code)}).subscribe();
     }
     localStorage.setItem('gotVeriCode','True');
-    localStorage.setItem('removeVeriCode', "False");
   }
 
 

@@ -694,6 +694,20 @@ export class AdminComponent implements OnInit {
 
   postSTATUS = ['Active', 'Inactive'];
 
+  serviceIcons = ['calendar', 'university', 'shopping-bag', 'book', 'child',
+                  'question', 'user', 'film', 'home', 'file-o', 'flag', 'headphones',
+                  'picture-o', 'pencil', 'play', 'pause', 'question', 'question-circle',
+                  'info-circle', 'random', 'comment', 'external-link', 'sign-in',
+                  'unlock', 'credit-card', 'cut', 'scissors', 'truck', 'magic',
+                  'sitemap', 'umbrella', 'building-o', 'spinner', 'circle', 'file',
+                  'xing', 'xing-square', 'gittip', 'gratipay', 'graduation-cap',
+                  'language', 'automobile', 'car', 'cab', 'plug', 'slideshare',
+                  'dashcube', 'heartbeat', 'street-view', 'hand-pointer-o',
+                  'hand-peace-o', 'industry', 'map-pin', 'codiepie', 'shopping-basket',
+                  'hashtag', 'audio-description', 'viadeo', 'handshake-o',
+                  'drivers-license', 'id-badge', 'times-rectangle-o', 'window-close-o',
+                  'envelope-open', 'id-card', 'address-card-o', 'universal-access'];
+
   adminLevels = ['TOP', 'MODERATOR'];
 
   pageTitles = ['Home', 'Services', 'Events', 'About Us', 'FAQ', 'Donate', 'Contact Us', 'Signup'];
