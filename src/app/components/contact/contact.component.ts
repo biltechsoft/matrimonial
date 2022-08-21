@@ -51,6 +51,7 @@ export class ContactComponent implements OnInit {
     this.service.addMessage(val).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
         alert("Your message is sent! Admin will reply through your email ASAP!");
+        this.Name=null; this.Email=null; this.Message=null;
       }
       //alert(res.toString());
     });
