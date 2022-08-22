@@ -389,6 +389,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   //The fixed photo that should not be deleted
   constPhoto = ['anonymous.png', 'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
 
+  REQUIRED = ['fullName','city','state','cellPhone','email','birthYear',
+  'height','weight','placeOfBirth','health','maritalStatus','children','childrenNumber','childrenAges','immigrationStatus','immigrationStatusOther','highSchool','highSchoolYear','bachelors','bachelorsYear','masters','mastersYear','doctorate','doctorateYear','otherDegree','otherDegreeYear','highestEducation','employed','employment','position','income','religiousPractice','religiousPracticeOther','religiousPracticeBrief','revertTime','beard','smoker','preReligious','preReligiousOther','preReligiousBrief','preWear','preSmoking','preEthnic','preEthnicSpecific','preImmigrationStatus','preImmigrationStatusOther','preMaritalStatus','preChildren','preEducation','preEmployment','preIncome','preAgeGap','guarName','guarAddress','guarCity','guarState','guarCountry','guarPhone','guarEmail','guarProfession','familyBrief','refName1','refRelation1','refPhone1',]
+
   STATES = [
     {
       "State": "Alabama",

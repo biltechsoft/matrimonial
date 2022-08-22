@@ -236,6 +236,7 @@ export class EditProfileComponent implements OnInit {
   isMale() {
     if(this.currentUser.gender == 'Male') { return true; }
   }
+
   //matchedId = [1,5,3];
   clickSave(photo='none') {
     if(!(this.telephoneCheck(this.currentUser.cellPhone) && this.telephoneCheck(this.currentUser.workPhone) &&
@@ -256,6 +257,13 @@ export class EditProfileComponent implements OnInit {
     if(this.imstatClicked) { this.setImstat(); }
     if(this.marstatClicked) { this.setMarstat(); }
     var activateRequest = false;
+
+    //set a value to null if found '' value
+    for(var key in this.currentUser) {
+      var value = this.currentUser[key];
+      if(value=='') { this.currentUser[key] = null; }
+    }
+
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
       this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, true);
