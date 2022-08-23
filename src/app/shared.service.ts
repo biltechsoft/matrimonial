@@ -380,8 +380,12 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
        param.push(Number(user.preBeard != null));
      }
      var sum = 0;
-     for(var i=0; i<param.length; i++) {
-       sum = sum + param[i];
+     for(var i=0; i<this.REQUIRED.length; i++) {
+       sum = sum + Number(user[this.REQUIRED[i]] != null);
+     }
+     sum = sum + Number(user.photo != this.constPhoto[0]);
+     for (var i=1; i<this.consPhoto.length; i++) {
+       sum = sum + Number(!user.gallery.includes(this.constPhoto[i]));
      }
      return Math.floor(sum*100/30);  //total 30 parameter taken
    }
@@ -390,7 +394,12 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   constPhoto = ['anonymous.png', 'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
 
   REQUIRED = ['fullName','city','state','cellPhone','email','birthYear',
-  'height','weight','placeOfBirth','health','maritalStatus','children','childrenNumber','childrenAges','immigrationStatus','immigrationStatusOther','highSchool','highSchoolYear','bachelors','bachelorsYear','masters','mastersYear','doctorate','doctorateYear','otherDegree','otherDegreeYear','highestEducation','employed','employment','position','income','religiousPractice','religiousPracticeOther','religiousPracticeBrief','revertTime','beard','smoker','preReligious','preReligiousOther','preReligiousBrief','preWear','preSmoking','preEthnic','preEthnicSpecific','preImmigrationStatus','preImmigrationStatusOther','preMaritalStatus','preChildren','preEducation','preEmployment','preIncome','preAgeGap','guarName','guarAddress','guarCity','guarState','guarCountry','guarPhone','guarEmail','guarProfession','familyBrief','refName1','refRelation1','refPhone1',]
+  'height','weight','maritalStatus','children','childrenNumber','immigrationStatus',
+  'highSchool','bachelors','masters','doctorate','highestEducation','employed',
+  'income','religiousPractice','beard','wear','smoker','preReligious','preWear','preBeard',
+  'preSmoking','preEthnicSpecific','preImmigrationStatus','preMaritalStatus',
+  'preChildren','preEducation','preEmployment','preIncome','preAgeGap','guarName',
+  'guarPhone','guarEmail','refName1','refRelation1','refPhone1'];
 
   STATES = [
     {
