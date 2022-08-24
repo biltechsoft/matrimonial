@@ -384,10 +384,12 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
        sum = sum + Number(user[this.REQUIRED[i]] != null);
      }
      sum = sum + Number(user.photo != this.constPhoto[0]);
-     for (var i=1; i<this.consPhoto.length; i++) {
+     for (var i=1; i<this.constPhoto.length; i++) {
        sum = sum + Number(!user.gallery.includes(this.constPhoto[i]));
      }
-     return Math.floor(sum*100/30);  //total 30 parameter taken
+     return Math.floor(sum*100/(this.constPhoto.length+this.REQUIRED.length-2));
+     //total number of parameters taken in this two array
+     //-2 for wear and beard
    }
 
   //The fixed photo that should not be deleted
