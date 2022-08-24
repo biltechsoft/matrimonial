@@ -1,4 +1,4 @@
-<div class="wrapper">
+form-control requiredform-control required<div class="wrapper">
     <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/furkan-cover-photo.jpg');">
         <div class="filter"></div>
     </div>
@@ -161,7 +161,7 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-5">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.fullName" class="form-control" placeholder="Enter Your Full Name" id="fullName">
+                <input type="text" [(ngModel)]="currentUser.fullName" class="form-control required" placeholder="Enter Your Full Name" id="fullName">
                 <label for="fullName">Full Name</label>
             </div>
           </div>
@@ -215,7 +215,7 @@ GENERAL INFORMATION
           </div>
           <div class="col-sm-4">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
-                <select [(ngModel)]="currentUser.state" class="form-select" id="state">
+                <select [(ngModel)]="currentUser.state" class="form-select required" id="state">
                   <option *ngFor="let state of STATES" value={{state.State}}>{{state.State}}</option>
                 </select>
                 <label for="state">State</label>
@@ -231,7 +231,7 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.cellPhone" class="form-control" placeholder="Cell Phone Number" id="cellPhone">
+                <input type="text" [(ngModel)]="currentUser.cellPhone" class="form-control required" placeholder="Cell Phone Number" id="cellPhone">
                 <label for="cellPhone">Cell Phone
                   <span class="errortext" *ngIf=!telephoneCheck(currentUser.cellPhone)>Enter valid Phone No</span></label>
             </div>
@@ -272,7 +272,7 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
-                <select (click)=getAge() [(ngModel)]="currentUser.birthYear" class="form-select" id="birthYear">
+                <select (click)=getAge() [(ngModel)]="currentUser.birthYear" class="form-select required" id="birthYear">
                   <option *ngFor="let year of YEARS" value={{year}}>{{year}}</option>
                 </select>
                 <label for="birthYear">Year of Birth</label>
@@ -298,13 +298,13 @@ GENERAL INFORMATION
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" min="0" max="120" [(ngModel)]="currentUser.height" class="form-control" placeholder="Height" id="height">
+                <input type="number" min="0" max="120" [(ngModel)]="currentUser.height" class="form-control required" placeholder="Height" id="height">
                 <label for="height">Height (inch)</label>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="number" min="0" max="1000" [(ngModel)]="currentUser.weight" class="form-control" placeholder="Weight" id="weight">
+                <input type="number" min="0" max="1000" [(ngModel)]="currentUser.weight" class="form-control required" placeholder="Weight" id="weight">
                 <label for="weight">Weight (lb)</label>
             </div>
           </div>
@@ -328,14 +328,14 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
-                <select [(ngModel)]="currentUser.maritalStatus" class="form-select" id="maritalStatus">
+                <select [(ngModel)]="currentUser.maritalStatus" class="form-select required" id="maritalStatus">
                   <option *ngFor="let status of MARSTATS  | slice:0:MARSTATS.length-1" value={{status.prop}}>{{status.prop}}</option>
                 </select>
                 <label for="maritalStatus">Current Marital Status</label>
             </div>
           </div>
             <div class="col-sm-3">
-            <label>Do You Have Children?</label>
+            <label class="required">Do You Have Children?</label>
 
             <div class="row">
                 <div class="form-check-radio col-sm-3 radio-check-padded">
@@ -357,7 +357,7 @@ GENERAL INFORMATION
 
           <div *ngIf=hasChildren() class="col-sm-3">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.childrenNumber" class="form-control" placeholder="How many Children?" id="childrenNumber">
+                <input type="text" [(ngModel)]="currentUser.childrenNumber" class="form-control required" placeholder="How many Children?" id="childrenNumber">
                 <label for="childrenNumber">How many Children?</label>
             </div>
           </div>
@@ -372,7 +372,7 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
-                <select [(ngModel)]="currentUser.immigrationStatus" class="form-select" id="immigrationStatus">
+                <select [(ngModel)]="currentUser.immigrationStatus" class="form-select required" id="immigrationStatus">
                   <option *ngFor="let status of IMSTATS  | slice:0:IMSTATS.length-1" value={{status.prop}}>{{status.prop}}</option>
                 </select>
                 <label for="immigrationStatus">Immigration Status</label>
@@ -413,7 +413,7 @@ Academic & Professional Background
         </div>
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.bachelors" class="form-control" placeholder="Bachelors" id="bachelors">
+              <input type="text" [(ngModel)]="currentUser.bachelors" class="form-control required" placeholder="Bachelors" id="bachelors">
               <label for="bachelors">Bachelors</label>
           </div>
         </div>
@@ -427,7 +427,7 @@ Academic & Professional Background
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.masters" class="form-control" placeholder="Masters in" id="masters">
+              <input type="text" [(ngModel)]="currentUser.masters" class="form-control required" placeholder="Masters in" id="masters">
               <label for="masters">Masters in</label>
           </div>
         </div>
@@ -476,7 +476,7 @@ Academic & Professional Background
         <h6>Professional Background</h6>
       <div class="row">
         <div class="col-sm-3">
-        <label>Are you currently employed?</label>
+        <label >Are you currently employed?<span class="req">*</span></label>
         <br>
         <div class="row">
             <div class="form-check-radio col-sm-3 radio-check-padded">
