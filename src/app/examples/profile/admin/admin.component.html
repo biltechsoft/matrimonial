@@ -466,10 +466,14 @@
                       <td> {{message.senderId}} </td>
                       <td> {{message.senderEmail}} </td>
                       <td> {{message.messageDetail.substring(0,30)}}
-                      <ng-container *ngIf="message.messageDetail.length>30">...</ng-container></td>
+                        <ng-container *ngIf="message.messageDetail.length>30">...</ng-container>
+                        <br>{{message.dateTime}}
+                      </td>
                       <td *ngIf="message.messageReply!=null">
                         {{message.messageReply.substring(0,30)}}
-                        <ng-container *ngIf="message.messageReply.length>30">...</ng-container></td>
+                        <ng-container *ngIf="message.messageReply.length>30">...</ng-container>
+                        <br>{{message.replyDateTime}}
+                      </td>
                       <td *ngIf="message.messageReply==null">No reply yet.</td>
                       <td>
                           <button

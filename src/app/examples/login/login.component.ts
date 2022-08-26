@@ -188,7 +188,8 @@ export class LoginComponent implements OnInit {
           status:"Inactive",
           photo:"anonymous.png",
           openingDate:this.service.getDateTime(),
-          lastEdit:this.service.getDateTime()
+          lastEdit:this.service.getDateTime(),
+          gallery:'gallery1.jpg,gallery2.jpg,gallery3.jpg,gallery4.jpg'
         };
         if(this.currentUser.tempGender == "Male") {
           this.service.addMaleUser(val).subscribe(res=>{

@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
         this.sidebarVisible = false;
     }
 
-    userName;
+    userName='';
 
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit {
     }
 
     isLoggedin() {
-      this.userName = localStorage.getItem('username');
+      this.userName = localStorage.getItem('username').split(' ')[0];
       return this.service.loggedin();
       /*var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){

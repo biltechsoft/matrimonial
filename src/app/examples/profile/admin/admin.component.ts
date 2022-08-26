@@ -688,7 +688,7 @@ export class AdminComponent implements OnInit {
 
   requestType = ["Profile Activation Request", "View Matching Profile", "Change Profile/Gallery Picture"];
 
-  profileStatus = ['Inactive','Pending','Active','Deactivated'];
+  profileStatus = ['Inactive','Pending','Active','Locked','Deactivated'];
 
   topMatchLimits = [5,6,7,8,9,10];
 

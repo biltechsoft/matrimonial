@@ -24,7 +24,7 @@ export class EditProfileComponent implements OnInit {
   gallery; tempGallery;
   prevPhoto; prevAlbum;
   uploading=false;
-  pad;
+  pad; pct;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -236,7 +236,11 @@ export class EditProfileComponent implements OnInit {
   isMale() {
     if(this.currentUser.gender == 'Male') { return true; }
   }
-
+  profilePercentage() {
+    this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser);
+    this.pct = Number(this.currentUser.profileCompleteness);
+    return true;
+  }
   //matchedId = [1,5,3];
   clickSave(photo='none') {
     if(!(this.telephoneCheck(this.currentUser.cellPhone) && this.telephoneCheck(this.currentUser.workPhone) &&
@@ -264,9 +268,10 @@ export class EditProfileComponent implements OnInit {
       if(value=='') { this.currentUser[key] = null; }
     }
 
+    this.profilePercentage();
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
-      this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, true);
+      //this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, true);
       if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
         activateRequest = true;
         this.currentUser.status = 'Pending';
@@ -281,7 +286,7 @@ export class EditProfileComponent implements OnInit {
     }
     else if (this.currentUser.gender == 'Female') {
       if(this.wearClicked) { this.setWear(true); }
-      this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, false);
+      //this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, false);
       if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
         activateRequest = true;
         this.currentUser.status = 'Pending';

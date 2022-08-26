@@ -330,7 +330,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      localStorage.removeItem('usertoken');
      localStorage.removeItem('adminid');
      localStorage.removeItem('userid');
-     localStorage.removeItem('username');
+     //localStorage.removeItem('username');
      localStorage.removeItem('userage');
      localStorage.removeItem('gender');
      localStorage.removeItem('menuadmin');
@@ -340,45 +340,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      this.returnPage();
    }
 
-   profilePercentage(user, male=true) {
-     var param = [
-       Number(user.fullName != null),
-       Number(user.city != null),
-       Number(user.state != null),
-       Number(user.cellPhone != null),
-       Number(user.email != null),
-       Number(user.age != null),
-       Number(user.height != null),
-       Number(user.weight != null),
-       Number(user.maritalStatus != null),
-       Number(user.children != null),
-       Number(user.immigrationStatus != null),
-       Number(user.highSchool != null),
-       Number(user.bachelors != null),
-       Number(user.highestEducation != null),
-       Number(user.employed != null),
-       Number(user.religiousPractice != null),
-       Number(user.smoker != null),
-       Number(user.preReligious != null),
-       Number(user.preSmoking != null),
-       Number(user.PreEthnicSpecific != null),
-       Number(user.preImmigrationStatus != null),
-       Number(user.preMaritalStatus != null),
-       Number(user.preChildren != null),
-       Number(user.preEducation != null),
-       Number(user.preEmployment != null),
-       Number(user.preIncome != null),
-       Number(user.preAgeGap != null),
-       Number(user.photo != null)
-     ];
-     if (male) {
-       param.push(Number(user.beard != null));
-       param.push(Number(user.preWear != null));
-     }
-     else {
-       param.push(Number(user.wear != null));
-       param.push(Number(user.preBeard != null));
-     }
+   profilePercentage(user) {
      var sum = 0;
      for(var i=0; i<this.REQUIRED.length; i++) {
        sum = sum + Number(user[this.REQUIRED[i]] != null);
@@ -396,8 +358,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   constPhoto = ['anonymous.png', 'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
 
   REQUIRED = ['fullName','city','state','cellPhone','email','birthYear',
-  'height','weight','maritalStatus','children','childrenNumber','immigrationStatus',
-  'highSchool','bachelors','masters','doctorate','highestEducation','employed',
+  'height','weight','maritalStatus','children','immigrationStatus',
+  'highSchool','bachelors','highestEducation','employed',
   'income','religiousPractice','beard','wear','smoker','preReligious','preWear','preBeard',
   'preSmoking','preEthnicSpecific','preImmigrationStatus','preMaritalStatus',
   'preChildren','preEducation','preEmployment','preIncome','preAgeGap','guarName',
