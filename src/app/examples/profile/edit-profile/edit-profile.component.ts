@@ -25,27 +25,36 @@ export class EditProfileComponent implements OnInit {
   prevPhoto; prevAlbum;
   uploading=false;
   pad; pct;
+  dum;
+  profileNo;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
 
   ngOnInit(): void {
     this.service.loginauth();
-    this.getCurrentUser();
+    this.getCurrentUser(Number(localStorage.getItem('userid')));
     this.gotid=localStorage.getItem('userid');
+    if(localStorage.getItem('profileno')==null) {
+      this.profileNo = 0;
+    }
+    else {
+      this.profileNo = (Number(localStorage.getItem('profileno'))+1)%10;
+    }
+    localStorage.setItem('profileno',this.profileNo.toString());
   }
   getU() {
     if(localStorage.getItem('usertype')=='0') {
       if(localStorage.getItem('userid') != this.gotid) {
-        this.getCurrentUser();
+        this.getCurrentUser(this.currentUser.userId);
         this.gotid=localStorage.getItem('userid');
       }
     }
     return true;
   }
-  getCurrentUser() {
+  getCurrentUser(userid) {
     if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
-        this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+        this.service.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.WEARS[this.WEARS.length-1].prop = 'No Preference';
           this.getWear(false);
@@ -77,7 +86,7 @@ export class EditProfileComponent implements OnInit {
         });
     }
     else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
-        this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+        this.service.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.getWear(true);
           this.getImstat();
@@ -281,7 +290,7 @@ export class EditProfileComponent implements OnInit {
         else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
         else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
-        this.getCurrentUser();
+        this.getCurrentUser(this.currentUser.userId);
       });
     }
     else if (this.currentUser.gender == 'Female') {
@@ -296,7 +305,7 @@ export class EditProfileComponent implements OnInit {
         else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
         else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
-        this.getCurrentUser();
+        this.getCurrentUser(this.currentUser.userId);
       });
     }
   }

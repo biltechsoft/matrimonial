@@ -20,8 +20,10 @@ export class ProfileComponent implements OnInit {
     pct;  //percentage of profile completeness
     topMatches;
     topMatchPct;
+    requested;
     users;
     matchUsers;
+    PhotoUrl = this.service.PhotoUrl;
 
     reqSentIndex;
 
@@ -117,8 +119,7 @@ export class ProfileComponent implements OnInit {
     profileComplete() {
       this.pct = Number(this.currentUser.profileCompleteness);
       if (this.currentUser.status == 'Active') {
-        this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
-        this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
+
         return true;
       }
     }
@@ -131,6 +132,10 @@ export class ProfileComponent implements OnInit {
           this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+            this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+            this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
+            this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
+              +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
             //this.pct = this.profilePercentage(this.currentUser);
           });
           this.service.getFemaleUserList().subscribe(data=>{
@@ -141,6 +146,10 @@ export class ProfileComponent implements OnInit {
           this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
+            this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+            this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
+            this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
+              +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
             //this.pct = this.profilePercentage(this.currentUser,false);
           });
           this.service.getMaleUserList().subscribe(data=>{
