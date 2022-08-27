@@ -21,7 +21,8 @@ export class AdminComponent implements OnInit {
   matchingtables: any=[];
   messages: any=[];
   allpost: any=[];
-  cuser='';
+  cuser=''; topMatches='';
+  firstTime=true;
 
   adminUser;
   modalTitle="";
@@ -430,25 +431,43 @@ export class AdminComponent implements OnInit {
   }
   changeStatus(user) {
     this.cuser = user;
+    this.topMatches = user.matchId.split(',');
+    this.tempstatus = user.status;
     const element = document.getElementById('statusModal') as HTMLElement;
     const myModal = new Modal(element);
     myModal.show();
   }
-  updateUser(user) {
-    var val = {
-      userId: user.userId,
-      matchShowLimit: user.matchShowLimit,
-      status: user.status
+  getName(Id,gender) {
+    if(gender=='Female') {
+      return this.maleusers.filter(user => user.userId.toString()==Id)[0].fullName;
     }
-    if(user.gender=='Male') {
-      this.service.updateMaleUser(val).subscribe(res=>{
-        this.refreshList();
-      });
+    return this.femaleusers.filter(user => user.userId.toString()==Id)[0].fullName;
+  }
+  updateUser(user) {
+    if(user.status=='Locked' && user.lockedId==null) {
+      this.cuser = user;
+      this.topMatches = user.matchId.split(',');
+      const element = document.getElementById('statusModal') as HTMLElement;
+      const myModal = new Modal(element);
+      myModal.show();
     }
     else {
-      this.service.updateFemaleUser(val).subscribe(res=>{
-        this.refreshList();
-      });
+      var val = {
+        userId: user.userId,
+        matchShowLimit: user.matchShowLimit,
+        status: user.status,
+        lockedId: (user.status=='Locked' ? Number(user.lockedId) : null)
+      }
+      if(user.gender=='Male') {
+        this.service.updateMaleUser(val).subscribe(res=>{
+          this.refreshList();
+        });
+      }
+      else {
+        this.service.updateFemaleUser(val).subscribe(res=>{
+          this.refreshList();
+        });
+      }
     }
   }
   deleteClick(id:any){

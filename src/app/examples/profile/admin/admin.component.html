@@ -238,9 +238,12 @@
                     </td>
                     <td style="vertical-align: middle;">
                       <div class="form-group" style="padding-top:15px;">
-                          <select (change)=changeStatus(user) [(ngModel)]="user.status" class="form-select" id="state">
-                            <option *ngFor="let status of profileStatus" value={{status}}>{{status}}</option>
-
+                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                            <option *ngFor="let status of profileStatus" value={{status}}>
+                              <ng-container *ngIf="user.status=='Locked'"
+                              placement="top" ngbTooltip="View/Change Picture">{{status}}</ng-container>
+                              <ng-container *ngIf="user.status!='Locked'">{{status}}</ng-container>
+                            </option>
                           </select>
                       </div>
                     </td>
@@ -273,7 +276,7 @@
                     <td style="vertical-align: middle;">{{user.cellPhone}}</td>
                     <td style="vertical-align: middle;">
                       <div class="form-group" style="padding-top:15px;">
-                          <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
+                          <select (change)=changeStatus(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
                             <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
                           </select>
                       </div>
@@ -320,20 +323,20 @@
             <div class="modal-body">
             <div class="d-flex flex-row bd-highlight">
                 <div class="p-4 w-100 bd-highlight">
-                  <div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
+                  <!--div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
                       <p>Are you Sure?</p>
-                  </div>
-                    <div *ngIf="cuser.status=='Locked'" class="form-group form-floating">
+                  </div-->
+                    <div class="form-group form-floating">
                         <select [(ngModel)]="cuser.lockedId" class="form-select" id="lockedId">
-                          <option *ngFor="let adminLevel of adminLevels" value={{adminLevel}}>{{adminLevel}}</option>
+                          <option *ngFor="let id of topMatches" value={{id}}>{{id}} - {{getName(id)}}</option>
                         </select>
-                        <label for="lockedId">To whom {{cuser.fullName}} is LOCKED?</label>
+                        <label for="lockedId">To Whom {{cuser.fullName}} is LOCKED?</label>
                     </div>
                 </div>
             </div>
 
                 <button type="button" class="btn btn-primary float-end"
-                data-dismiss="modal">OK</button>
+                data-dismiss="modal" (click)=updateUser(cuser)>OK</button>
 
             </div>
 
