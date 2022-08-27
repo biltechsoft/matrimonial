@@ -159,8 +159,8 @@
                             class="btn btn-outline-default btn-sm" (click)=changePP(user,i)>Accept</button>
                           <button *ngIf="requestIndex(user)==2" type="button"
                             class="btn btn-outline-default btn-sm" (click)=rejectPP(user,i)>Reject</button>
-                          <button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
-                            (mouseover)=editUser(user)><a [routerLink]="['/user-profile']" target="_blank">View Requests</a></button>
+                          <a [routerLink]="['/user-profile']" target="_blank"><button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
+                            (mouseover)=editUser(user)>View Requests</button></a>
                       </td>
                       <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
                     </ng-container>

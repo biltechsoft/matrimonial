@@ -96,12 +96,11 @@
                                             <div *ngIf="isReqRejected(user)">
                                               <label class="form-check-label">
                                                 <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Request Rejected</span>
+                                                <span class="form-check-sign">Profile Rejected</span>
                                               </label>
                                             </div>
-                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (mouseover)=setXuser(user.userId)
-                                            data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile {{xuser}}</button>
+                                            <a [routerLink]="['/view-profile']" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
                                             <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
                                             (click)=giveAccess(user,i)>Give Access</button>
@@ -155,12 +154,11 @@
                                             <div *ngIf="isReqRejected(user)">
                                               <label class="form-check-label">
                                                 <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Request Rejected</span>
+                                                <span class="form-check-sign">Profile Rejected</span>
                                               </label>
                                             </div>
-                                            <button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (mouseover)=setXuser(user.userId)
-                                            data-bs-toggle="modal" data-bs-target="#viewProfileModal">View Profile {{xuser}}</button>
+                                            <a [routerLink]="['/view-profile']" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
                                             <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
                                             (click)=giveAccess(user,i)>Give Access</button>
