@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {SharedService} from 'app/shared.service';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-admin',
@@ -20,6 +21,7 @@ export class AdminComponent implements OnInit {
   matchingtables: any=[];
   messages: any=[];
   allpost: any=[];
+  cuser='';
 
   adminUser;
   modalTitle="";
@@ -425,6 +427,12 @@ export class AdminComponent implements OnInit {
       alert(res.toString());
       this.refreshList();
     });
+  }
+  changeStatus(user) {
+    this.cuser = user;
+    const element = document.getElementById('statusModal') as HTMLElement;
+    const myModal = new Modal(element);
+    myModal.show();
   }
   updateUser(user) {
     var val = {

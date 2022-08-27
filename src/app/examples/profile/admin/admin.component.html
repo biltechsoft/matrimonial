@@ -238,8 +238,9 @@
                     </td>
                     <td style="vertical-align: middle;">
                       <div class="form-group" style="padding-top:15px;">
-                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                          <select (change)=changeStatus(user) [(ngModel)]="user.status" class="form-select" id="state">
                             <option *ngFor="let status of profileStatus" value={{status}}>{{status}}</option>
+
                           </select>
                       </div>
                     </td>
@@ -306,6 +307,39 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="modal fade" id="statusModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Profile {{cuser.status}}!</h5>
+                <button type="button" class="btn-close float-end" data-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="d-flex flex-row bd-highlight">
+                <div class="p-4 w-100 bd-highlight">
+                  <div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
+                      <p>Are you Sure?</p>
+                  </div>
+                    <div *ngIf="cuser.status=='Locked'" class="form-group form-floating">
+                        <select [(ngModel)]="cuser.lockedId" class="form-select" id="lockedId">
+                          <option *ngFor="let adminLevel of adminLevels" value={{adminLevel}}>{{adminLevel}}</option>
+                        </select>
+                        <label for="lockedId">To whom {{cuser.fullName}} is LOCKED?</label>
+                    </div>
+                </div>
+            </div>
+
+                <button type="button" class="btn btn-primary float-end"
+                data-dismiss="modal">OK</button>
+
+            </div>
+
+        </div>
+        </div>
+        </div>
 
         <div class="modal fade" id="editModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
