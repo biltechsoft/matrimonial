@@ -429,14 +429,6 @@ export class AdminComponent implements OnInit {
       this.refreshList();
     });
   }
-  changeStatus(user) {
-    this.cuser = user;
-    this.topMatches = user.matchId.split(',');
-    this.tempstatus = user.status;
-    const element = document.getElementById('statusModal') as HTMLElement;
-    const myModal = new Modal(element);
-    myModal.show();
-  }
   getName(Id,gender) {
     if(gender=='Female') {
       return this.maleusers.filter(user => user.userId.toString()==Id)[0].fullName;

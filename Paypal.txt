@@ -1,0 +1,36 @@
+Paypal Sandbox for Matrimonial site
+Sandbox account
+sb-tvllh18058376@business.example.com
+Client ID
+Af5KcflQ3m1tzFTtrADpJHmQSN95fqGQTplcR7SyVGdi8T-zPbYcoptMR-jsERHv3LSBFTnVOHqWOpLk
+
+
+1. index.html-->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=Af5KcflQ3m1tzFTtrADpJHmQSN95fqGQTplcR7SyVGdi8T-zPbYcoptMR-jsERHv3LSBFTnVOHqWOpLk">
+  </script> 
+
+2. npm i creditcardpayments
+
+3. home.html
+
+<div id="payments"></div>
+
+
+4. home.ts---> 
+
+import { render } from 'creditcardpayments/creditCardPayments';
+
+  constructor() { 
+    render(
+      {
+          id: "#payments",
+          currency: "USD",
+          value: "100.00",
+          onApprove: (details) => {
+            alert("Donation Successfull");
+      
+          }
+        }
+      );
+  }
