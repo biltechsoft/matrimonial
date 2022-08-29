@@ -236,13 +236,13 @@
                           </select>
                       </div>
                     </td>
-                    <td style="vertical-align: middle;">
-                      <div class="form-group" style="padding-top:15px;">
+                    <td style="vertical-align: middle;" >
+                      <div class="form-group" style="padding-top:15px;"
+                      placement="bottom" ngbTooltip="{{user.lockedId}}">
                           <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
-                            <option *ngFor="let status of profileStatus" value={{status}}>
-                              <ng-container *ngIf="user.status=='Locked'"
-                              placement="top" ngbTooltip="View/Change Picture">{{status}}</ng-container>
-                              <ng-container *ngIf="user.status!='Locked'">{{status}}</ng-container>
+                            <option *ngFor="let status of profileStatus" value={{status}} placement="top" ngbTooltip="Locked with Afia">
+                              <ng-container *ngIf="user.status=='Locked'">{{status}}</ng-container>
+                              <ng-container *ngIf="user.status!='Locked'" >{{status}}</ng-container>
                             </option>
                           </select>
                       </div>
