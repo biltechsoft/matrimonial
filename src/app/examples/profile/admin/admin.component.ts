@@ -450,15 +450,30 @@ export class AdminComponent implements OnInit {
         status: user.status,
         lockedId: (user.status=='Locked' ? Number(user.lockedId) : null)
       }
+      var val2 = {
+        userId: Number(user.lockedId),
+        status: (user.status=='Locked' ? 'Locked' : 'Active'),
+        lockedId: (user.status=='Locked' ? user.userId : null)
+      }
       if(user.gender=='Male') {
         this.service.updateMaleUser(val).subscribe(res=>{
           this.refreshList();
         });
+        if(user.lockedId != null) {
+          this.service.updateFemaleUser(val2).subscribe(res=>{
+            this.refreshList();
+          });
+        }
       }
       else {
         this.service.updateFemaleUser(val).subscribe(res=>{
           this.refreshList();
         });
+        if(user.lockedId != null) {
+          this.service.updateMaleUser(val2).subscribe(res=>{
+            this.refreshList();
+          });
+        }
       }
     }
   }
