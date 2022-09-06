@@ -40,6 +40,7 @@
                           (mouseover)=viewSelfProfile()>View Profile</a>
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/user-profile']">Top Matches</a>
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/edit-profile']">Edit Profile</a>
+                          <a *ngIf=isAdmin() class="dropdown-item" [routerLink]="['/adminhome']">Dashboard</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" [routerLink]="['/password']">Change Passwords</a>
                           <a class="dropdown-item" [routerLink]="['/user-profile']">Deactivate Account</a>

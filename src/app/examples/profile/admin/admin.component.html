@@ -238,7 +238,7 @@
                     </td>
                     <td style="vertical-align: middle;" >
                       <div class="form-group" style="padding-top:15px;"
-                      placement="bottom" ngbTooltip="{{user.lockedId}}">
+                      placement="bottom" ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
                           <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
                             <option *ngFor="let status of profileStatus" value={{status}}>
                               {{status}}
@@ -282,7 +282,7 @@
                     </td>
                     <td style="vertical-align: middle;">
                       <div class="form-group" style="padding-top:15px;"
-                      placement="bottom" ngbTooltip="{{user.lockedId}}">
+                      placement="bottom" ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
                           <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
                             <option *ngFor="let status of profileStatus" value={{status}}>
                               {{status}}
@@ -330,7 +330,11 @@
                   </div-->
                     <div class="form-group form-floating">
                         <select [(ngModel)]="cuser.lockedId" class="form-select" id="lockedId">
-                          <option *ngFor="let id of topMatches" value={{id}}>{{id}} - {{getName(id,cuser.gender)}}</option>
+                          <ng-container *ngFor="let id of topMatches">
+                          <option *ngIf=!isLocked(id,cuser.gender) value={{id}}>
+                            {{id}} - {{getName(id,cuser.gender)}}
+                          </option>
+                          </ng-container>
                         </select>
                         <label for="lockedId">To Whom {{cuser.fullName}} is LOCKED?</label>
                     </div>

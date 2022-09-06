@@ -435,6 +435,12 @@ export class AdminComponent implements OnInit {
     }
     return this.femaleusers.filter(user => user.userId.toString()==Id)[0].fullName;
   }
+  isLocked(Id,gender) {
+    if(gender=='Female') {
+      return this.maleusers.filter(user => user.userId.toString()==Id)[0].status == 'Locked';
+    }
+    return this.femaleusers.filter(user => user.userId.toString()==Id)[0].status == 'Locked';
+  }
   updateUser(user) {
     if(user.status=='Locked' && user.lockedId==null) {
       this.cuser = user;
