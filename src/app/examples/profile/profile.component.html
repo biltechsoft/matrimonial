@@ -54,6 +54,9 @@
           <p>Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to see your best matches after admin approval. It may take 72 hours to 1 week to review your request.</p>
           <button [routerLink]="['/edit-profile']" type="button" class="btn btn-outline-danger btn-round">Edit Profile</button>
         </div>
+        <div>
+          <p>Your profile is {{currentUser.status}}.</p>
+        </div>
         <br>
         <div *ngIf=profileComplete()>
           <button type="button" class="btn btn-outline-danger btn-round">TOP MATCHES</button>
