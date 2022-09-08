@@ -91,8 +91,12 @@ export class NavbarComponent implements OnInit {
     }
 
     isLoggedin() {
-      this.userName = localStorage.getItem('username').split(' ')[0];
-      return this.service.loggedin();
+      //this.userName = localStorage.getItem('username').split(' ')[0];
+      var ret = this.service.loggedin();
+      if(ret) {
+        this.userName = localStorage.getItem('username').split(' ')[0];
+      }
+      return ret;
       /*var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
           titlee = titlee.slice( 1 );
