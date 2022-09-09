@@ -87,7 +87,17 @@
                                         <div class="col-md-3 col-sm-4 ml-auto">
                                             <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
                                         </div>
-                                        <div class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
+                                        <div *ngIf="user.status!='Active'"
+                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
+                                            <div *ngIf="isReqRejected(user)">
+                                              <label class="form-check-label">
+                                                <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span class="form-check-sign">Profile Rejected</span>
+                                              </label>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="user.status=='Active'"
+                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
                                             <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
                                             type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
                                             <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
