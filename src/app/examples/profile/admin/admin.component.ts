@@ -461,7 +461,13 @@ export class AdminComponent implements OnInit {
         matchShowLimit: user.matchShowLimit,
         status: user.status,
         lockedId: (user.status=='Locked' ? Number(user.lockedId) : null),
-        reqRejected: (user.lockedId!=null ? (user.reqRejected==null ? user.lockedId : user.reqRejected+','+user.lockedId) : user.reqRejected)
+        //reqRejected: ((user.status=='Active' && user.lockedId!=null) ? (user.reqRejected==null ? user.lockedId : user.reqRejected+','+user.lockedId) : user.reqRejected)
+      }
+      var val2 = {
+        userId: Number(user.lockedId),
+        status: (user.status=='Locked' ? 'Locked' : 'Active'),
+        lockedId: (user.status=='Locked' ? user.userId : null),
+        //reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
       }
 
       if(user.gender=='Male') {
@@ -469,13 +475,13 @@ export class AdminComponent implements OnInit {
           this.refreshList();
         });
         if(user.lockedId != null) {
-          var nuser = this.getUser(user.lockedId,user.gender);
+          /*var nuser = this.getUser(user.lockedId,user.gender);
           var val2 = {
             userId: Number(user.lockedId),
             status: (user.status=='Locked' ? 'Locked' : 'Active'),
             lockedId: (user.status=='Locked' ? user.userId : null),
-            reqRejected: (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId)
-          }
+            reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
+          }*/
           this.service.updateFemaleUser(val2).subscribe(res=>{
             this.refreshList();
           });
@@ -486,13 +492,6 @@ export class AdminComponent implements OnInit {
           this.refreshList();
         });
         if(user.lockedId != null) {
-          var nuser = this.getUser(user.lockedId,user.gender);
-          var val2 = {
-            userId: Number(user.lockedId),
-            status: (user.status=='Locked' ? 'Locked' : 'Active'),
-            lockedId: (user.status=='Locked' ? user.userId : null),
-            reqRejected: (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId)
-          }
           this.service.updateMaleUser(val2).subscribe(res=>{
             this.refreshList();
           });
