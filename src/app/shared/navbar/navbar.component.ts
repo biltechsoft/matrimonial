@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
         this.sidebarVisible = false;
     }
 
-    userName='';
+    userName=localStorage.getItem('username');
 
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
@@ -51,6 +51,7 @@ export class NavbarComponent implements OnInit {
         }
     };
     isHome() {
+      this.userName=localStorage.getItem('username');
       return this.service.isHome();
     }
     isDocumentation() {
@@ -93,9 +94,9 @@ export class NavbarComponent implements OnInit {
     isLoggedin() {
       //this.userName = localStorage.getItem('username').split(' ')[0];
       var ret = this.service.loggedin();
-      /*if(ret) {
+      if(ret) {
         this.userName = localStorage.getItem('username').split(' ')[0];
-      }*/
+      }
       return ret;
       /*var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){

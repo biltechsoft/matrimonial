@@ -23,7 +23,7 @@
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#about">About Us</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/abouts']">About Us</a></li>
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#faq">FAQ</a></li>
-              <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/faqs']">FAQ</a></li>
+              <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/faqs']">FAQ {{userName}}</a></li>
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#call-to-action">Donate</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/donate']">Donate</a></li>
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#contact">Contact</a></li>
