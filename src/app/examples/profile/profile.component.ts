@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     users;
     matchUsers;
     PhotoUrl = this.service.PhotoUrl;
-
+    pad=false;
     reqSentIndex;
 
     ngOnInit() {

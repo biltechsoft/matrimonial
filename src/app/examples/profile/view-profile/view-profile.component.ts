@@ -18,6 +18,7 @@ export class ViewProfileComponent implements OnInit {
   PhotoFilePath;
   PhotoUrl = this.service.PhotoUrl;
   gallery;
+  pad=false;
   STATES = this.service.STATES;
   ngOnInit(): void {
     this.getCurrentUser();
