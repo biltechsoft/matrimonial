@@ -39,7 +39,7 @@ export class AdminuserComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.service.loginauth();
+    this.service.loginauth(0,'0');
     this.refreshList();
     this.getCurrentAdmin();
     this.activeMenu(localStorage.getItem('menuadmin'));

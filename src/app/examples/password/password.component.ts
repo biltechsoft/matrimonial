@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ILogin } from 'app/interfaces/login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {SharedService} from 'app/shared.service';
 
 @Component({
@@ -14,7 +14,8 @@ import {SharedService} from 'app/shared.service';
 export class PasswordComponent implements OnInit {
 
   constructor(private service:SharedService,
-              private router : Router
+              private router : Router,
+              private arout : ActivatedRoute
               ) { }
   test : Date = new Date();
   focus;
@@ -29,24 +30,27 @@ export class PasswordComponent implements OnInit {
 
   pass1=""; pass2;
   UserPass;
+  userid; usertype;
 
   ngOnInit(): void {
-    this.service.loginauth();
-    this.getCurrentUser();
+    this.userid = Number(this.arout.snapshot.paramMap.get("id"));
+    this.usertype = this.arout.snapshot.paramMap.get("g");
+    this.service.loginauth(this.userid, this.usertype);
+    this.getCurrentUser(this.userid, this.usertype);
   }
-  getCurrentUser() {
+  getCurrentUser(userid, usertype) {
     if(localStorage.getItem('usertype')=='0') {
         this.service.getAdminList(Number(localStorage.getItem('adminid'))).subscribe(data=>{
           this.adminUser = data;
         });
     }
-    else if(localStorage.getItem('usertype')=='1') {
-        this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if(usertype=='1') {
+        this.service.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
         });
     }
-    else if(localStorage.getItem('usertype')=='2') {
-        this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if(usertype=='2') {
+        this.service.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
         });
     }

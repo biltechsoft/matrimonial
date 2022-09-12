@@ -82,13 +82,16 @@ export class LoginComponent implements OnInit {
       var UserToken = this.service.getRandomInt(12345678,87654321);
       localStorage.setItem('usertoken', UserToken);
       localStorage.setItem('userid', this.currentUser.userId);
+      var usertype='';
       if(this.currentUser.gender == 'Male') {
         this.service.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
         localStorage.setItem('usertype', '1');
+        usertype='1';
       }
       else {
         this.service.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
         localStorage.setItem('usertype', '2');
+        usertype='2';
       }
       localStorage.setItem('fromloginpage', 'True');
       localStorage.setItem('isLoggedOut','False');
@@ -96,10 +99,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userage',this.currentUser.age);
       if(localStorage.getItem('forgot')=='True') {
         localStorage.removeItem('forgot');
-        this.router.navigate(['/password']);
+        this.router.navigate(['/password',usertype,this.currentUser.userId]);
       }
       else {
-        this.router.navigate(['/user-profile']);
+        this.router.navigate(['/user-profile',usertype,this.currentUser.userId]);
       }
     }
   }

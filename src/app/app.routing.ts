@@ -24,8 +24,7 @@ import { SignupComponent } from './examples/signup/signup.component';
 import { LoginComponent } from './examples/login/login.component';
 import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
-import { AdminuserComponent } from './adminuser/adminuser.component';
-import { MaleuserComponent } from './maleuser/maleuser.component';
+//import { MaleuserComponent } from './maleuser/maleuser.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -39,20 +38,18 @@ const routes: Routes =[
     { path: 'faqs',             component: FaqComponent },
     { path: 'donate',           component: DonateComponent },
     { path: 'contacts',         component: ContactComponent },
-    { path: 'user-profile',     component: ProfileComponent}, //canActivate : [AuthGuard] },
+    { path: 'user-profile/:g/:id',     component: ProfileComponent}, //canActivate : [AuthGuard] },
     { path: 'edit-profile/:g/:id',     component: EditProfileComponent },
     { path: 'message',          component: MessageComponent },
     { path: 'notification',     component: NotificationComponent },
     { path: 'top-matches',      component: TopMatchesComponent },
     { path: 'view-profile',     component: ViewProfileComponent },
-    { path: 'adminuser',        component: AdminuserComponent },
     { path: 'admin',            component: AdminloginComponent },
     { path: 'adminhome',        component: AdminComponent },
-    { path: 'adminuser',        component: AdminuserComponent },
-    { path: 'maleuser',         component: MaleuserComponent },
+    //{ path: 'maleuser',         component: MaleuserComponent },
     { path: 'signup',           component: SignupComponent },
     { path: 'login',            component: LoginComponent },
-    { path: 'password',         component: PasswordComponent },
+    { path: 'password/:g/:id',         component: PasswordComponent },
     { path: 'landing',          component: LandingComponent },
     { path: 'nucleoicons',      component: NucleoiconsComponent }
 ];

@@ -38,11 +38,11 @@
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-danger dropdown-menu-right">
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/view-profile']"
                           (mouseover)=viewSelfProfile()>View Profile</a>
-                          <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/user-profile']">Top Matches</a>
+                          <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/user-profile',usertype,userid]">Top Matches</a>
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/edit-profile',usertype,userid]">Edit Profile</a>
                           <a *ngIf=isAdmin() class="dropdown-item" [routerLink]="['/adminhome']">Dashboard</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" [routerLink]="['/password']">Change Passwords</a>
+                          <a class="dropdown-item" [routerLink]="['/password',usertype,userid]">Change Passwords</a>
                           <a class="dropdown-item" [routerLink]="['/user-profile']">Deactivate Account</a>
                           <a (click)="logout()" class="dropdown-item">Log Out</a>
                       </div>

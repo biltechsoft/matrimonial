@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedService} from 'app/shared.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 
 export class ProfileComponent implements OnInit {
 
-    constructor(private service:SharedService, private router : Router) { }
+    constructor(private service:SharedService, private router : Router,
+    private arout : ActivatedRoute) { }
 
     currentUser;
     userId;
@@ -26,9 +27,13 @@ export class ProfileComponent implements OnInit {
     PhotoUrl = this.service.PhotoUrl;
     pad=false;
     reqSentIndex;
+    userid; usertype;
 
     ngOnInit() {
-      this.getCurrentUser();
+      this.userid = Number(this.arout.snapshot.paramMap.get("id"));
+      this.usertype = this.arout.snapshot.paramMap.get("g");
+      this.service.loginauth(this.userid, this.usertype);
+      this.getCurrentUser(this.userid, this.usertype);
     }
 
     requestInfo(user,i) {
@@ -127,9 +132,9 @@ export class ProfileComponent implements OnInit {
       return this.users.filter(user => user.userId.toString()==Id);
     }
 
-    getCurrentUser() {
-        if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
-          this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    getCurrentUser(userid,usertype) {
+        if(usertype=='1') {
+          this.service.getMaleUserList(userid).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
             this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
@@ -142,8 +147,8 @@ export class ProfileComponent implements OnInit {
             this.users = data;
           });
       }
-      else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
-          this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+      else if(usertype=='2') {
+          this.service.getFemaleUserList(userid).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
             this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
@@ -157,15 +162,15 @@ export class ProfileComponent implements OnInit {
           });
       }
     }
-    getU() {
+    /*getU() {
       if(localStorage.getItem('usertype')=='0') {
         if(localStorage.getItem('userid') != this.gotid) {
-          this.getCurrentUser();
+          this.getCurrentUser(this.userid, this.usertype);
           this.gotid=localStorage.getItem('userid');
         }
       }
       return true;
-    }
+    }*/
     islogin() {
       if (this.userId == localStorage.getItem('userid')) {
         return true;

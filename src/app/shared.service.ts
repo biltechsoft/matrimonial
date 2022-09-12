@@ -237,7 +237,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     }
   }
 
-  loginauth(userid=77,usertype='1') {
+  loginauth(userid,usertype) {
     if(localStorage.getItem('isLoggedOut') == 'True') {
       this.returnPage();
       return true;

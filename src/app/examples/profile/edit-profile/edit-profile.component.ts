@@ -52,7 +52,7 @@ export class EditProfileComponent implements OnInit {
     return (gender=='Male' ? '1' : '2');
   }
   getCurrentUser(userid,usertype) {
-    if(usertype=='1' || (localStorage.getItem('usertype')=='0' && usertype=='1')) {
+    if(usertype=='1') {
         this.service.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.WEARS[this.WEARS.length-1].prop = 'No Preference';
@@ -84,7 +84,7 @@ export class EditProfileComponent implements OnInit {
           this.prevCV = this.currentUser.cv;
         });
     }
-    else if(usertype=='2' || (localStorage.getItem('usertype')=='0' && usertype=='2')) {
+    else if(usertype=='2') {
         this.service.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.getWear(true);

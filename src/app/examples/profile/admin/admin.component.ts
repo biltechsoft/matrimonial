@@ -87,7 +87,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.ptype = this.postTypes[0];
-    this.service.loginauth();
+    this.service.loginauth(0,'0');
     this.refreshList();
     this.getCurrentAdmin();
     //this.activeMenu(localStorage.getItem('menuadmin'));
@@ -678,7 +678,7 @@ export class AdminComponent implements OnInit {
     });
   }
   genderMap(gender) {
-    return (gender=='Male' ? 1 : 2);
+    return (gender=='Male' ? '1' : '2');
   }
 
   FilterFn(){

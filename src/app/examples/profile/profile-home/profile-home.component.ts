@@ -24,7 +24,7 @@ export class ProfileHomeComponent implements OnInit {
     this.gotid = localStorage.getItem('userid');
     this.userGender = this.getGender();
     //this.userEmail = this.currentUser.email;
-    this.service.loginauth();
+    this.service.loginauth(0,'0');
     //this.man = Number(this.userAge == this.userAge);
     this.getCurrentUser();
   }

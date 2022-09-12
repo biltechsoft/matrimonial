@@ -145,7 +145,7 @@
                   <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
                       <td style="vertical-align: middle;"> {{user.userId}}</td>
                       <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile',user.userId]" target="_blank"
+                        <a [routerLink]="['/edit-profile',genderMap(user.gender),user.userId]" target="_blank"
                         (mouseover)="editUser(user,requestIndex(user)==2)">
                         {{user.fullName}}</a>    </td>
                       <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}}    </td>
@@ -159,7 +159,7 @@
                             class="btn btn-outline-default btn-sm" (click)=changePP(user,i)>Accept</button>
                           <button *ngIf="requestIndex(user)==2" type="button"
                             class="btn btn-outline-default btn-sm" (click)=rejectPP(user,i)>Reject</button>
-                          <a [routerLink]="['/user-profile']" target="_blank"><button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
+                          <a [routerLink]="['/user-profile',genderMap(user.gender),user.userId]" target="_blank"><button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
                             (mouseover)=editUser(user)>View Requests</button></a>
                       </td>
                       <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
@@ -250,7 +250,7 @@
                       </div>
                     </td>
                     <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile']" target="_blank"> <button
+                        <a [routerLink]="['/edit-profile','1',user.userId]" target="_blank"> <button
                         type=button class="btn btn-light mr-1"
                         (mouseover)=editUser(user)
                         >
@@ -294,7 +294,7 @@
                       </div>
                     </td>
                     <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile']" target="_blank"><button
+                        <a [routerLink]="['/edit-profile','2',user.userId]" target="_blank"><button
                         type=button class="btn btn-light mr-1"
                         (mouseover)=editUser(user)
                         >
