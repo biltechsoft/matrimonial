@@ -40,7 +40,7 @@ const routes: Routes =[
     { path: 'donate',           component: DonateComponent },
     { path: 'contacts',         component: ContactComponent },
     { path: 'user-profile',     component: ProfileComponent}, //canActivate : [AuthGuard] },
-    { path: 'edit-profile',     component: EditProfileComponent },
+    { path: 'edit-profile/:g/:id',     component: EditProfileComponent },
     { path: 'message',          component: MessageComponent },
     { path: 'notification',     component: NotificationComponent },
     { path: 'top-matches',      component: TopMatchesComponent },

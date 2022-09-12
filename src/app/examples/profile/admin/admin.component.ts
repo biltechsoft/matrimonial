@@ -677,6 +677,9 @@ export class AdminComponent implements OnInit {
       //this.NewPhotoUploaded=true;
     });
   }
+  genderMap(gender) {
+    return (gender=='Male' ? 1 : 2);
+  }
 
   FilterFn(){
     var PostTypeFilter = this.PostTypeFilter;

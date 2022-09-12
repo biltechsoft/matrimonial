@@ -237,7 +237,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     }
   }
 
-  loginauth() {
+  loginauth(userid=77,usertype='1') {
     if(localStorage.getItem('isLoggedOut') == 'True') {
       this.returnPage();
       return true;
@@ -263,8 +263,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
         });
         return true;
     }
-    else if(localStorage.getItem('usertype')=='1') {
-        this.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if(usertype=='1') {
+        this.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           var token = this.currentUser.userToken;
           if(token == localStorage.getItem('usertoken')) {
@@ -279,8 +279,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
         });
         return true;
     }
-    else if (localStorage.getItem('usertype')=='2') {
-        this.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if (usertype=='2') {
+        this.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           var token = this.currentUser.userToken;
           if(token == localStorage.getItem('usertoken')) {
@@ -296,6 +296,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
         return true;
     }
     this.returnPage();
+  }
+  genderMap(gender) {
+    return (gender=='Male' ? '1' : '2');
   }
   loggedin() {
     if(localStorage.getItem('isLoggedOut') == 'False') {

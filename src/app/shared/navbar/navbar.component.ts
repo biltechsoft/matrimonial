@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
     }
 
     userName=localStorage.getItem('username');
+    userid=0; usertype='1';
 
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
@@ -96,6 +97,8 @@ export class NavbarComponent implements OnInit {
       var ret = this.service.loggedin();
       if(ret) {
         this.userName = localStorage.getItem('username').split(' ')[0];
+        this.userid = Number(localStorage.getItem('userid'));
+        this.usertype = localStorage.getItem('usertype');
       }
       return ret;
       /*var titlee = this.location.prepareExternalUrl(this.location.path());

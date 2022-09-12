@@ -145,7 +145,7 @@
                   <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
                       <td style="vertical-align: middle;"> {{user.userId}}</td>
                       <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile']" target="_blank"
+                        <a [routerLink]="['/edit-profile',user.userId]" target="_blank"
                         (mouseover)="editUser(user,requestIndex(user)==2)">
                         {{user.fullName}}</a>    </td>
                       <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}}    </td>

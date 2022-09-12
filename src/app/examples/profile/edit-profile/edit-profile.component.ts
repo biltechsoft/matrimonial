@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {SharedService} from 'app/shared.service';
 
 @Component({
@@ -10,7 +10,8 @@ import {SharedService} from 'app/shared.service';
 export class EditProfileComponent implements OnInit {
 
   constructor(private service:SharedService,
-              private router : Router) { }
+              private router : Router,
+              private arout : ActivatedRoute) { }
   focus;
   focus1;
   model;
@@ -27,23 +28,18 @@ export class EditProfileComponent implements OnInit {
   pad; pct;
   dum;
   profileNo;
+  userid; usertype;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
 
   ngOnInit(): void {
-    this.service.loginauth();
-    this.getCurrentUser(Number(localStorage.getItem('userid')));
-    this.gotid=localStorage.getItem('userid');
-    if(localStorage.getItem('profileno')==null) {
-      this.profileNo = 0;
-    }
-    else {
-      this.profileNo = (Number(localStorage.getItem('profileno'))+1)%10;
-    }
-    localStorage.setItem('profileno',this.profileNo.toString());
+    this.userid = Number(this.arout.snapshot.paramMap.get("id"));
+    this.usertype = this.arout.snapshot.paramMap.get("g");
+    this.service.loginauth(this.userid, this.usertype);
+    this.getCurrentUser(this.userid, this.usertype);
   }
-  getU() {
+  /*getU() {
     if(localStorage.getItem('usertype')=='0') {
       if(localStorage.getItem('userid') != this.gotid) {
         this.getCurrentUser(this.currentUser.userId);
@@ -51,9 +47,12 @@ export class EditProfileComponent implements OnInit {
       }
     }
     return true;
+  }*/
+  genderMap(gender) {
+    return (gender=='Male' ? '1' : '2');
   }
-  getCurrentUser(userid) {
-    if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
+  getCurrentUser(userid,usertype) {
+    if(usertype=='1' || (localStorage.getItem('usertype')=='0' && usertype=='1')) {
         this.service.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.WEARS[this.WEARS.length-1].prop = 'No Preference';
@@ -85,7 +84,7 @@ export class EditProfileComponent implements OnInit {
           this.prevCV = this.currentUser.cv;
         });
     }
-    else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
+    else if(usertype=='2' || (localStorage.getItem('usertype')=='0' && usertype=='2')) {
         this.service.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.getWear(true);
@@ -290,7 +289,7 @@ export class EditProfileComponent implements OnInit {
         else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
         else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
-        this.getCurrentUser(this.currentUser.userId);
+        this.getCurrentUser(this.currentUser.userId, '1');
       });
     }
     else if (this.currentUser.gender == 'Female') {
@@ -305,7 +304,7 @@ export class EditProfileComponent implements OnInit {
         else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
         else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
         if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
-        this.getCurrentUser(this.currentUser.userId);
+        this.getCurrentUser(this.currentUser.userId, '2');
       });
     }
   }
