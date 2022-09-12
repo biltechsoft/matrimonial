@@ -151,7 +151,7 @@ export class AdminComponent implements OnInit {
         this.adminUser = data;
         if(this.adminUser.adminLevel == "TOP") {
           this.menu[0].status=true;
-          this.menu[6].status=false;
+          this.menu[1].status=false;
           this.superadmin=0;
         }
       });
@@ -702,7 +702,7 @@ export class AdminComponent implements OnInit {
       id: 1,
       name: "Dashboard",
       submenu: ['Run Matching'],
-      status: false,
+      status: true,
       sub: false
     },
     {
@@ -737,7 +737,7 @@ export class AdminComponent implements OnInit {
       id: 6,
       name: "Site Management",
       submenu: ['Add Post'],
-      status: true,
+      status: false,
       sub: false
     },
   ];
