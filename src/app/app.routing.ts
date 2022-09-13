@@ -31,7 +31,8 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes =[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home',             component: ComponentsComponent },
+    { path: 'home',             component: ComponentsComponent }];
+const routes2: Routes =[
     { path: 'servicess',        component: ServicesComponent },
     { path: 'events',           component: EventsComponent },
     { path: 'abouts',           component: AboutComponent },
@@ -53,14 +54,14 @@ const routes: Routes =[
     { path: 'landing',          component: LandingComponent },
     { path: 'nucleoicons',      component: NucleoiconsComponent }
 ];
+const s=true;
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-      useHash: true
-    })
+    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes2,{useHash: true})
   ],
   exports: [
   ],
