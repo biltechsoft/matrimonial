@@ -31,8 +31,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes =[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home',             component: ComponentsComponent }];
-const routes2: Routes =[
+    { path: 'home',             component: ComponentsComponent },
     { path: 'servicess',        component: ServicesComponent },
     { path: 'events',           component: EventsComponent },
     { path: 'abouts',           component: AboutComponent },
@@ -44,7 +43,7 @@ const routes2: Routes =[
     { path: 'message',          component: MessageComponent },
     { path: 'notification',     component: NotificationComponent },
     { path: 'top-matches',      component: TopMatchesComponent },
-    { path: 'view-profile',     component: ViewProfileComponent },
+    { path: 'view-profile/:g/:id/:xid',     component: ViewProfileComponent },
     { path: 'admin',            component: AdminloginComponent },
     { path: 'adminhome',        component: AdminComponent },
     //{ path: 'maleuser',         component: MaleuserComponent },
@@ -54,14 +53,14 @@ const routes2: Routes =[
     { path: 'landing',          component: LandingComponent },
     { path: 'nucleoicons',      component: NucleoiconsComponent }
 ];
-const s=true;
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes),
-    RouterModule.forRoot(routes2,{useHash: true})
+    RouterModule.forRoot(routes,{
+      useHash: true
+    })
   ],
   exports: [
   ],

@@ -36,7 +36,7 @@
                   <a  id="dropdownBasic1" class="nav-link"  ngbDropdownToggle>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{userName}}</a>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-danger dropdown-menu-right">
-                          <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/view-profile']"
+                          <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/view-profile',usertype,userid,'0']"  <!-- 0 for self id, number for other id-->
                           (mouseover)=viewSelfProfile()>View Profile</a>
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/user-profile',usertype,userid]">Top Matches</a>
                           <a *ngIf=!isAdmin() class="dropdown-item" [routerLink]="['/edit-profile',usertype,userid]">Edit Profile</a>

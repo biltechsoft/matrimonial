@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {SharedService} from 'app/shared.service';
 
 @Component({
@@ -10,7 +10,8 @@ import {SharedService} from 'app/shared.service';
 export class ViewProfileComponent implements OnInit {
 
   constructor(private service:SharedService,
-              private router : Router) { }
+              private router : Router,
+              private arout : ActivatedRoute) { }
   focus;
   currentUser;
   user;
@@ -19,8 +20,13 @@ export class ViewProfileComponent implements OnInit {
   PhotoUrl = this.service.PhotoUrl;
   gallery;
   pad=false;
+  userid; usertype;
   STATES = this.service.STATES;
   ngOnInit(): void {
+    this.userid = Number(this.arout.snapshot.paramMap.get("id"));
+    this.usertype = this.arout.snapshot.paramMap.get("g");
+    this.service.loginauth(this.userid, this.usertype);
+    this.getCurrentUser(this.userid, this.usertype);
     this.getCurrentUser();
   }
   getCurrentUser() {
