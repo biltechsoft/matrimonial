@@ -112,7 +112,7 @@
                                                 <span class="form-check-sign">Profile Rejected</span>
                                               </label>
                                             </div>
-                                            <a [routerLink]="['/view-profile']" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
                                             (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
                                             <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
@@ -180,7 +180,7 @@
                                                 <span class="form-check-sign">Profile Rejected</span>
                                               </label>
                                             </div>
-                                            <a [routerLink]="['/view-profile']" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
+                                            <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
                                             (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
                                             <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"

@@ -35,7 +35,9 @@ export class ProfileComponent implements OnInit {
       this.service.loginauth(this.userid, this.usertype);
       this.getCurrentUser(this.userid, this.usertype);
     }
-
+    genderMap(gender) {
+      return (gender=='Male' ? '1' : '2');
+    }
     requestInfo(user,i) {
       if(this.currentUser.reqSent == null) { this.currentUser.reqSent = ""; }
       else { this.currentUser.reqSent += ","; }

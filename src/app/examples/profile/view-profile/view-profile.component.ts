@@ -20,43 +20,44 @@ export class ViewProfileComponent implements OnInit {
   PhotoUrl = this.service.PhotoUrl;
   gallery;
   pad=false;
-  userid; usertype;
+  userid; usertype; xuser;
   STATES = this.service.STATES;
   ngOnInit(): void {
     this.userid = Number(this.arout.snapshot.paramMap.get("id"));
     this.usertype = this.arout.snapshot.paramMap.get("g");
+    this.xuser = this.arout.snapshot.paramMap.get("xid");
     this.service.loginauth(this.userid, this.usertype);
     this.getCurrentUser(this.userid, this.usertype);
-    this.getCurrentUser();
+    //this.getCurrentUser();
   }
-  getCurrentUser() {
-    if(localStorage.getItem('xuser') != '0') {
-      if(localStorage.getItem('usertype')=='1') {
-          this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+  getCurrentUser(userid, usertype) {
+    if(this.xuser != '0') {
+      if(usertype=='1') {
+          this.service.getMaleUserList(userid).subscribe(data=>{
             this.user = data;
-            if(this.user.reqAccepted.split(',').includes(localStorage.getItem('xuser'))) {
-              this.service.getFemaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
+            if(this.user.reqAccepted.split(',').includes(this.xuser)) {
+              this.service.getFemaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
-                if(this.currentUser.status!='Active') {
+                /*if(this.currentUser.status!='Active') {
                   alert(this.currentUser.fullName+'\'s profile is '+this.currentUser.status+'. You cannot view this profile at this moment.');
                   this.router.navigate(['/user-profile']);
-                }
+                }*/
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
                 this.gallery=this.currentUser.gallery.split(',');
               });
             }
           });
       }
-      else if(localStorage.getItem('usertype')=='2') {
-          this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+      else if(usertype=='2') {
+          this.service.getFemaleUserList(userid).subscribe(data=>{
             this.user = data;
-            if(this.user.reqAccepted.split(',').includes(localStorage.getItem('xuser'))) {
-              this.service.getMaleUserList(Number(localStorage.getItem('xuser'))).subscribe(xuser=>{
+            if(this.user.reqAccepted.split(',').includes(this.xuser)) {
+              this.service.getMaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
-                if(this.currentUser.status!='Active') {
+                /*if(this.currentUser.status!='Active') {
                   alert(this.currentUser.fullName+'\'s profile is '+this.currentUser.status+'. You cannot view this profile at this moment.');
                   this.router.navigate(['/user-profile']);
-                }
+                }*/
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
                 this.gallery=this.currentUser.gallery.split(',');
               });
@@ -64,22 +65,22 @@ export class ViewProfileComponent implements OnInit {
           });
       }
     }
-    else if(localStorage.getItem('usertype')=='1' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Male')) {
-        this.service.getMaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if(usertype=='1') {
+        this.service.getMaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.gallery=this.currentUser.gallery.split(',');
         });
     }
-    else if(localStorage.getItem('usertype')=='2' || (localStorage.getItem('usertype')=='0' && localStorage.getItem('gender')=='Female')) {
-        this.service.getFemaleUserList(Number(localStorage.getItem('userid'))).subscribe(data=>{
+    else if(usertype=='2') {
+        this.service.getFemaleUserList(userid).subscribe(data=>{
           this.currentUser = data;
           this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
           this.gallery=this.currentUser.gallery.split(',');
         });
     }
   }
-  getU() {
+  /*getU() {
     if(localStorage.getItem('usertype')=='0') {
       if(localStorage.getItem('userid') != this.gotid) {
         this.getCurrentUser();
@@ -93,7 +94,7 @@ export class ViewProfileComponent implements OnInit {
       }
     }
     return true;
-  }
+  }*/
   imStatusOther() {
     if(this.currentUser.immigrationStatus == null) { return false; }
     if(this.currentUser.immigrationStatus == "US Citizen" || this.currentUser.immigrationStatus == "Permanent Resident") { return false; }
