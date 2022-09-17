@@ -134,7 +134,7 @@ export class SignupComponent implements OnInit {
         };
 
         this.service.addTempUser(val).subscribe(res=>{
-          alert(res.toString());
+          //alert(res.toString());
         });
 
         var emailVal={

@@ -165,10 +165,15 @@ export class LoginComponent implements OnInit {
       return this.code == this.veriCode;
     }
     else {
-      this.currentUser = this.TempList.find(e => e.tempEmail == localStorage.getItem('userid'))
-      if(this.currentUser == null) { return false; }
-      else if(this.currentUser.tempVeriCode == this.veriCode) { this.wrongCode=false; return true; }
-      else { return false; }
+      var cuser = this.TempList.filter(temp => temp.tempEmail==localStorage.getItem('userid'));
+
+      //this.currentUser = this.TempList.find(e => e.tempEmail == localStorage.getItem('userid'))
+      if(cuser == null) { return false; }
+      else {
+        this.currentUser = cuser[cuser.length-1];
+        if(this.currentUser.tempVeriCode == this.veriCode) { this.wrongCode=false; return true; }
+        else { return false; }
+      }
     }
   }
   clickVerify() {
@@ -205,7 +210,7 @@ export class LoginComponent implements OnInit {
         });
       }
       this.service.deleteTempUser(this.currentUser.tempId).subscribe(res=>{
-        alert(res.toString());
+        //alert(res.toString());
       });
       localStorage.setItem('isSignedUp', "True");
       localStorage.removeItem('userid');
