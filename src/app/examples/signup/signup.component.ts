@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit {
 
     fullNameValidate() {
       if(this.FullName == "") { return false; }
-      else { return true; }
+      else { return this.service.validateName(this.FullName); }
     }
     emailValidate() {
       if(this.Email == "") { return false; }

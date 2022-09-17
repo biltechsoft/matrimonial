@@ -11,15 +11,20 @@ export class ContactComponent implements OnInit {
   allpost;
   contactHeading=""; contact;
   PhotoUrl = this.service.PhotoUrl;
-  Name=null; Email=null; Message=null;
+  Name=null; Email=null; Message=null; Captcha=null;
   UserType=3;  //by default anonymous user
   currentUser;
+
+  CAPTCHA = this.service.CAPTCHA;
+  CAPTCHA_CODE = this.service.CAPTCHA_CODE;
+  cid;
 
   constructor(private service:SharedService) { }
 
   ngOnInit(): void {
     this.refreshPost();
     this.getCurrentUser();
+    this.getCaptcha();
   }
 
   isAdmin() {
@@ -33,11 +38,42 @@ export class ContactComponent implements OnInit {
       this.contact = this.allpost.filter(contact => contact.postType=='Contact')[0];
     });
   }
+  validateName(str) {
+    return this.service.validateName(str);
+  }
+  validateMessage(msg){
+    return msg.length > 14; //at least 15 characters
+  }
+  validateCaptcha(str,code) {
+    return str==code;
+  }
+  getCaptcha() {
+    this.cid = this.service.getRandomInt(0,this.CAPTCHA.length-1);  //random captcha index
+  }
 
   sendMessage() {
     if(this.Name==null || this.Name=='' || this.Email==null || this.Email=='' ||
         this.Message==null || this.Message=='') {
           alert("Fields cannot be empty!");
+          /*const field = document.getElementById('name');
+          field.style.display = 'block';
+          field.focus();*/
+          return false;
+        }
+    if(!this.validateName(this.Name)) {
+          alert("Spell your name correctly!");
+          return false;
+        }
+    if(!this.validateEmail(this.Email)) {
+          alert("Please enter valid email address!");
+          return false;
+        }
+    if(!this.validateMessage(this.Message)) {
+          alert("Message should be of at least 15 characters length!");
+          return false;
+        }
+    if(!this.validateCaptcha(this.Captcha, this.CAPTCHA_CODE[this.cid])) {
+          alert("Type captcha correctly!");
           return false;
         }
     var val={
@@ -51,9 +87,22 @@ export class ContactComponent implements OnInit {
     this.service.addMessage(val).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
         alert("Your message is sent! Admin will reply through your email ASAP!");
-        this.Name=null; this.Email=null; this.Message=null;
+        this.Name=null; this.Email=null; this.Message=null; this.Captcha=null;
+        this.getCaptcha();
       }
       //alert(res.toString());
+    });
+  }
+
+  sendEmail() {
+    var emailVal={
+      subject: "Greetings from MUNA Matrimonial",
+      message: this.Message,
+      toEmail: [this.Email]
+    }
+
+    this.service.sendEmail(emailVal).subscribe(res=>{
+      alert(res.toString());
     });
   }
 

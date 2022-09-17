@@ -260,6 +260,10 @@ export class EditProfileComponent implements OnInit {
         }
 
     else if(!this.validateEmail(this.currentUser.guarEmail)) { alert('Please enter valid email address!'); return false; }
+    else if(!(this.validateName(this.currentUser.fullName) && this.validateName(this.currentUser.guarName) &&
+              this.validateName(this.currentUser.refName1) && this.validateName(this.currentUser.refName2) &&
+              this.validateName(this.currentUser.refName3))) { alert('Please spell name correctly!'); return false; }
+    else if(!this.validateZIP(this.currentUser.zip)) { alert('Please enter valid ZIP code!'); return false; }
     this.currentUser.userToken = localStorage.getItem('usertoken');
     this.currentUser.lastEdit = this.service.getDateTime();
     //this.currentUser.matchId = String(this.matchedId);
@@ -331,6 +335,12 @@ export class EditProfileComponent implements OnInit {
   }
   validateEmail(email) {
     return this.service.validateEmail(email);
+  }
+  validateName(str) {
+    return this.service.validateName(str);
+  }
+  validateZIP(str) {
+    return this.service.validateZIP(str);
   }
 
   getWear(female) {

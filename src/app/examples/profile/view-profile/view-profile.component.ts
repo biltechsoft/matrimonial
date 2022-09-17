@@ -38,10 +38,6 @@ export class ViewProfileComponent implements OnInit {
             if(this.user.reqAccepted.split(',').includes(this.xuser)) {
               this.service.getFemaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
-                /*if(this.currentUser.status!='Active') {
-                  alert(this.currentUser.fullName+'\'s profile is '+this.currentUser.status+'. You cannot view this profile at this moment.');
-                  this.router.navigate(['/user-profile']);
-                }*/
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
                 this.gallery=this.currentUser.gallery.split(',');
               });
@@ -54,10 +50,6 @@ export class ViewProfileComponent implements OnInit {
             if(this.user.reqAccepted.split(',').includes(this.xuser)) {
               this.service.getMaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
-                /*if(this.currentUser.status!='Active') {
-                  alert(this.currentUser.fullName+'\'s profile is '+this.currentUser.status+'. You cannot view this profile at this moment.');
-                  this.router.navigate(['/user-profile']);
-                }*/
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
                 this.gallery=this.currentUser.gallery.split(',');
               });

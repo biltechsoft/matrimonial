@@ -7,3 +7,11 @@ ng build --aot --output-path dist --base-href https://munamatrimonial.com/adminm
 at index.html ----
 <title>MUNA Matrimoni</title>
     <base href="http://tcarebd.xyz/matrimonial/">
+
+new libraries:
+
+npm install ng-recaptcha --force
+
+ibarqnprkujzzcgb
+
+lnyopmddfanqnjua

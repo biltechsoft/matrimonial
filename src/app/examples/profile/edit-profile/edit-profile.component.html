@@ -165,7 +165,9 @@ GENERAL INFORMATION
           <div class="col-sm-5">
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.fullName" class="form-control required" placeholder="Enter Your Full Name" id="fullName">
-                <label for="fullName">Full Name</label>
+                <label for="fullName">Full Name
+                  <span class="errortext" *ngIf=!validateName(currentUser.fullName)>Spell your name correctly</span>
+                </label>
             </div>
           </div>
             <div class="col-sm-3">
@@ -227,7 +229,9 @@ GENERAL INFORMATION
             <div class="col-sm-4">
                 <div class="form-group form-floating">
                     <input type="text" [(ngModel)]="currentUser.zip" class="form-control" placeholder="Enter ZIP Code" id="zip">
-                    <label for="zip">ZIP Code</label>
+                    <label for="zip">ZIP Code
+                      <span class="errortext" *ngIf=!validateZIP(currentUser.zip)>Type ZIP code correctly</span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -533,7 +537,9 @@ Parent/Guardian's Information
           <div class="col-sm-12">
             <div class="form-group form-floating">
                 <input type="text" [(ngModel)]="currentUser.guarName" class="form-control required" placeholder="Names and Relationships" id="guarName">
-                <label for="guarName">Names and Relationships</label>
+                <label for="guarName">Guardian Name
+                  <span class="errortext" *ngIf=!validateName(currentUser.guarName)>Spell name correctly</span>
+                </label>
             </div>
           </div>
         </div>
@@ -996,7 +1002,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.refName1" class="form-control required" placeholder="Name1" id="name1">
-              <label for="name1">Name</label>
+              <label for="name1">Name
+                <span class="errortext" *ngIf=!validateName(currentUser.refName1)>Spell name correctly</span>
+              </label>
           </div>
         </div>
         <div class="col-sm-4">
@@ -1019,7 +1027,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.refName2" class="form-control" placeholder="Name2" id="name2">
-              <label for="name2">Name</label>
+              <label for="name2">Name
+                <span class="errortext" *ngIf=!validateName(currentUser.refName2)>Spell name correctly</span>
+              </label>
           </div>
         </div>
         <div class="col-sm-4">
@@ -1041,7 +1051,9 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.refName3" class="form-control" placeholder="Name3" id="name3">
-              <label for="name3">Name</label>
+              <label for="name3">Name
+                <span class="errortext" *ngIf=!validateName(currentUser.refName3)>Spell name correctly</span>
+              </label>
           </div>
         </div>
         <div class="col-sm-4">
