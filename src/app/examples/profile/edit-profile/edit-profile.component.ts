@@ -25,7 +25,7 @@ export class EditProfileComponent implements OnInit {
   gallery; tempGallery;
   prevPhoto; prevAlbum;
   uploading=false;
-  pad; pct;
+  pad; pct=0;
   dum;
   profileNo;
   userid; usertype;
