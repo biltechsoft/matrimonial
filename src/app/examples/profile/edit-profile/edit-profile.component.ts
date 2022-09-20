@@ -346,9 +346,11 @@ export class EditProfileComponent implements OnInit {
   getWear(female) {
     for(var i=0; i<this.WEARS.length; i++) {
       if(female) {
-        if (this.currentUser.wear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
+        if(this.currentUser.wear != null) {
+          if (this.currentUser.wear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
+        }
       }
-      else {
+      else if(this.currentUser.prewear != null) {
         if (this.currentUser.preWear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
       }
     }
@@ -383,8 +385,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   getImstat() {
-    for(var i=0; i<this.IMSTATS.length; i++) {
-      if (this.currentUser.preImmigrationStatus.includes(this.IMSTATS[i].prop)) { this.IMSTATS[i].checked = true; }
+    if(this.currentUser.preImmigrationStatus != null) {
+      for(var i=0; i<this.IMSTATS.length; i++) {
+        if (this.currentUser.preImmigrationStatus.includes(this.IMSTATS[i].prop)) { this.IMSTATS[i].checked = true; }
+      }
     }
   }
   setImstat() {
@@ -410,8 +414,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   getMarstat() {
-    for(var i=0; i<this.MARSTATS.length; i++) {
-      if (this.currentUser.preMaritalStatus.includes(this.MARSTATS[i].prop)) { this.MARSTATS[i].checked = true; }
+    if (this.currentUser.preMaritalStatus != null) {
+      for(var i=0; i<this.MARSTATS.length; i++) {
+        if (this.currentUser.preMaritalStatus.includes(this.MARSTATS[i].prop)) { this.MARSTATS[i].checked = true; }
+      }
     }
   }
   setMarstat() {
