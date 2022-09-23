@@ -495,7 +495,8 @@ Academic & Professional Background
             </div>
             <div class="form-check-radio col-sm-3 radio-check-padded">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" [(ngModel)]="currentUser.employed" name="employed" id="no" value="No" >
+                <input class="form-check-input" type="radio" [(ngModel)]="currentUser.employed" 
+                name="employed" id="no" value="No" (click)="currentUser.income=1">
                 No
                 <span class="form-check-sign"></span>
               </label>
@@ -952,14 +953,16 @@ SPOUSAL PREFERENCES
 
                 <div class="form-check-radio col-sm-3 radio-check-padded">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="notEmployed" value="No" >
+                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" 
+                    name="preEmployment" id="notEmployed" value="No" (click)="currentUser.preIncome=1">
                     Not Employed
                     <span class="form-check-sign"></span>
                   </label>
                 </div>
                 <div class="form-check-radio col-sm-3 radio-check-padded">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" name="preEmployment" id="noPreference" value="No Preference" >
+                    <input class="form-check-input" type="radio" [(ngModel)]="currentUser.preEmployment" 
+                    name="preEmployment" id="noPreference" value="No Preference" (click)="currentUser.preIncome=1">
                     No Preference
                     <span class="form-check-sign"></span>
                   </label>
@@ -968,7 +971,7 @@ SPOUSAL PREFERENCES
                 </div>
                 <div class="col-sm-6" *ngIf=preEmployed()>
                   <div class="form-group form-floating">
-                      <input type="number" min="0" [(ngModel)]="currentUser.preIncome" class="form-control required" placeholder="Preferred minimum yearly Income" id="preIncome">
+                      <input type="number" min="1" [(ngModel)]="currentUser.preIncome" class="form-control required" placeholder="Preferred minimum yearly Income" id="preIncome">
                       <label for="preIncome">Preferred minimum yearly Income of future spouse (USD)</label>
                   </div>
                 </div>
@@ -1129,7 +1132,8 @@ Agreement
           <div class="col-md">
             <div class="form-floating">
             <label class="form-label" for="customFile"></label>
-              <img *ngIf="currentUser.signature!=null" [src]="signPath" alt="" class="img-rounded img-padding img-responsive">
+              <img *ngIf="currentUser.signature!=null" [src]="signPath" alt="" 
+              class="img-rounded img-padding img-responsive" height="50" width="150"><br>
               <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,13)" class="mt-2" />
               <img *ngIf=uploading src="./assets/img/preloaders.gif">
             </div>

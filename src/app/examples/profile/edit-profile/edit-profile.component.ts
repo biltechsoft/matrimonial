@@ -442,6 +442,9 @@ export class EditProfileComponent implements OnInit {
       this.MARSTATS[this.MARSTATS.length-1].checked = false;
     }
   }
+  setPreIncome() {
+    this.currentUser.preIncome=0;
+  }
 
   IMSTATS = [{prop:'US Citizen', checked:false},
               {prop:'Permanent Resident', checked:false},
