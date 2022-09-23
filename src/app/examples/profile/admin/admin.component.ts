@@ -101,6 +101,9 @@ export class AdminComponent implements OnInit {
     this.refreshMatchingTable();
     this.refreshMessage();
     this.refreshPost();
+    
+    this.acceptedIndex=[];
+    this.rejectedIndex=[];
   }
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data=>{

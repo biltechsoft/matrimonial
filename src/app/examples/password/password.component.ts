@@ -73,7 +73,7 @@ export class PasswordComponent implements OnInit {
     if(localStorage.getItem('usertype')=='0') {
         if(this.adminUser.adminPass == this.password) {
           this.service.updateAdminUser({adminId: this.adminUser.adminId, adminPass: this.pass1}).subscribe();
-          rout = '/admin';
+          rout = '/adminhome';
         }
         else {changed=false;}
     }
@@ -94,7 +94,10 @@ export class PasswordComponent implements OnInit {
       return false;
     }
     alert("Password Changed Successfully");
-    this.router.navigate([rout]);
+    if(this.usertype=='0') {
+      this.router.navigate([rout]);
+    }
+    this.router.navigate([rout,this.usertype,this.currentUser.userId]);
   }
 
 

@@ -65,7 +65,7 @@ export class AdminloginComponent implements OnInit {
       localStorage.setItem('username',this.adminUser.adminFullName);
       if(localStorage.getItem('forgot')=='True') {
         localStorage.removeItem('forgot');
-        this.router.navigate(['/password']);
+        this.router.navigate(['/password','0','0']);
       }
       else {
         this.router.navigate(['/adminhome']);
