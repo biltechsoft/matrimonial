@@ -30,6 +30,8 @@ export class EditProfileComponent implements OnInit {
   profileNo;
   userid; usertype;
   thPercent=90;
+  MAX_SIZE=2100000;  //maximum photo size = 2.1 MB
+  maxSize='2 MB';
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -121,13 +123,18 @@ export class EditProfileComponent implements OnInit {
   uploadPhoto(event:any){
     this.uploading = true;
     if(this.currentUser.status == "Active") {
-      if(this.currentUser.prevAlbum != null && !this.service.constPhoto.includes(this.currentUser.prevAlbum)) {
-        this.service.deletePhoto({id:1,filetodel:this.currentUser.prevAlbum }).subscribe();
-      }
       var file=event.target.files[0];
       //file.name='mariuf';
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
+      if(file.size > this.MAX_SIZE) {
+        alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        return false;
+      }
+
+      if(this.currentUser.prevAlbum != null && !this.service.constPhoto.includes(this.currentUser.prevAlbum)) {
+        this.service.deletePhoto({id:1,filetodel:this.currentUser.prevAlbum }).subscribe();
+      }      
 
       this.service.UploadPhoto(formData).subscribe((data:any)=>{
         this.PhotoFileName=data.toString();
@@ -139,13 +146,19 @@ export class EditProfileComponent implements OnInit {
       });
     }
     else {
-      if(this.prevPhoto != null && !this.service.constPhoto.includes(this.prevPhoto)) {
-        this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
-      }
       var file=event.target.files[0];
       //file.name='mariuf';
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
+      if(file.size > this.MAX_SIZE) {
+        alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        return false;
+      }
+
+      if(this.prevPhoto != null && !this.service.constPhoto.includes(this.prevPhoto)) {
+        this.service.deletePhoto({id:1,filetodel:this.prevPhoto}).subscribe();
+      }
+      
 
       this.service.UploadPhoto(formData).subscribe((data:any)=>{
         this.PhotoFileName=data.toString();
@@ -164,6 +177,15 @@ export class EditProfileComponent implements OnInit {
     this.uploading = true;
     var delFile='';
 
+    var file=event.target.files[0];
+    //file.name='mariuf';
+    const formData:FormData=new FormData();
+    formData.append('uploadedFile',file,file.name);
+    if(file.size > this.MAX_SIZE) {
+      alert("You cannot upload file of size more than " + this.maxSize + "!");
+      return false;
+    }
+
     if(type==11 && this.prevGovId != null) { delFile = this.prevGovId; }
     else if (type==12 && this.prevCV != null) { delFile = this.prevCV; }
     else if (type==13 && this.prevSign != null) { delFile = this.prevSign; }
@@ -177,12 +199,7 @@ export class EditProfileComponent implements OnInit {
     }
     if(delFile != '' && !this.service.constPhoto.includes(delFile)) {
       this.service.deletePhoto({id:1,filetodel:delFile}).subscribe();
-    }
-
-    var file=event.target.files[0];
-    //file.name='mariuf';
-    const formData:FormData=new FormData();
-    formData.append('uploadedFile',file,file.name);
+    }  
 
     this.service.UploadPhoto(formData).subscribe((data:any)=>{
       var iFileName =data.toString();

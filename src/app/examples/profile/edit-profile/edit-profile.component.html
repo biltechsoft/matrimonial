@@ -39,6 +39,7 @@
         <div class="ml-3 bd-highlight" style="width: 40%;">
           <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
           <img *ngIf=uploading src="./assets/img/preloaders.gif">
+          <p>Maximum Photo Size: {{maxSize}}</p>
         </div>
     </div>
 
