@@ -29,6 +29,7 @@ export class EditProfileComponent implements OnInit {
   dum;
   profileNo;
   userid; usertype;
+  thPercent=90;
 
   YEARS = this.service.getYEARS();
   STATES = this.service.STATES;
@@ -284,7 +285,7 @@ export class EditProfileComponent implements OnInit {
     if(this.currentUser.gender == 'Male') {
       if(this.wearClicked) { this.setWear(false); }
       //this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, true);
-      if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
+      if(this.currentUser.status == 'Inactive' && this.pct >= this.thPercent) {
         activateRequest = true;
         this.currentUser.status = 'Pending';
       }
@@ -299,7 +300,7 @@ export class EditProfileComponent implements OnInit {
     else if (this.currentUser.gender == 'Female') {
       if(this.wearClicked) { this.setWear(true); }
       //this.currentUser.profileCompleteness = this.service.profilePercentage(this.currentUser, false);
-      if(this.currentUser.status == 'Inactive' && this.currentUser.profileCompleteness >= 80) {
+      if(this.currentUser.status == 'Inactive' && this.pct >= this.thPercent) {
         activateRequest = true;
         this.currentUser.status = 'Pending';
       }
@@ -350,7 +351,7 @@ export class EditProfileComponent implements OnInit {
           if (this.currentUser.wear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
         }
       }
-      else if(this.currentUser.prewear != null) {
+      else if(this.currentUser.preWear != null) {
         if (this.currentUser.preWear.includes(this.WEARS[i].prop)) { this.WEARS[i].checked = true; }
       }
     }
