@@ -155,6 +155,24 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     return this.http.delete (this.APIUrl + '/message/' + val);
   }
 
+  getAdminLogList(id=0): Observable<any[]> {
+    if(id==0) {
+      return this.http.get<any[]> (this.APIUrl + '/adminlog');
+    }
+    else {
+      return this.http.get<any[]> (this.APIUrl + '/adminlog/' + id);
+    }
+  }
+  addAdminLog(val:any) {
+    return this.http.post (this.APIUrl + '/adminlog', val);
+  }
+  updateAdminLog(val:any) {
+    return this.http.put (this.APIUrl + '/adminlog', val);
+  }
+  deleteAdminLog(val:any) {
+    return this.http.delete (this.APIUrl + '/adminlog/' + val);
+  }
+
   getTempList(): Observable<any[]> {
     return this.http.get<any[]> (this.APIUrl + '/tempuser');
   }
@@ -381,6 +399,14 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   'preSmoking','preEthnicSpecific','preImmigrationStatus','preMaritalStatus',
   'preChildren','preEducation','preEmployment','preIncome','preAgeGap','guarName',
   'guarPhone','guarEmail','refName1','refRelation1','refPhone1'];
+
+  //for admin activity log
+  actionType = ["Activate Profile", //0
+                "Reject Profile",   //1
+                "Accept Picture",   //2
+                "Reject Picture",   //3
+                "Accept Profile Request",  //4
+                "Reject Profile Request"];  //5
 
   STATES = [
     {

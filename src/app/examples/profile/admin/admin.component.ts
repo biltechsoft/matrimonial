@@ -624,6 +624,15 @@ export class AdminComponent implements OnInit {
         if(res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
+    //add admin activity
+    var logval = {
+      adminId: this.adminUser.adminId,
+      userId: user.userId,
+      userType: Number(this.genderMap(user.gender)),
+      action: 
+      description=models.CharField(max_length=1000,null=True)
+      actionTime
+    }
   }
   rejectPP(user,i) {
     this.delTempPhoto(user, false);
