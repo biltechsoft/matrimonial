@@ -629,10 +629,12 @@ export class AdminComponent implements OnInit {
       adminId: this.adminUser.adminId,
       userId: user.userId,
       userType: Number(this.genderMap(user.gender)),
-      action: 
-      description=models.CharField(max_length=1000,null=True)
-      actionTime
+      action: 2,
+      description: 'accepted profile/gallery picture',
+      note: null,
+      actionTime: this.service.getDateTime()
     }
+    this.service.addAdminLog(logval).subscribe();
   }
   rejectPP(user,i) {
     this.delTempPhoto(user, false);
@@ -647,6 +649,17 @@ export class AdminComponent implements OnInit {
         if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
       });
     }
+    //add admin activity
+    var logval = {
+      adminId: this.adminUser.adminId,
+      userId: user.userId,
+      userType: Number(this.genderMap(user.gender)),
+      action: 3,
+      description: 'rejected profile/gallery picture',
+      note: null,
+      actionTime: this.service.getDateTime()
+    }
+    this.service.addAdminLog(logval).subscribe();
   }
   delTempPhoto(user, accept=true) {
     var del = (user.album!=null ? (accept?user.photo:user.album) : '');
