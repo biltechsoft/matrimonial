@@ -2,24 +2,27 @@
   About Section
 ============================-->
 <section id="about" class="wow fadeInUp">
-  <div >
+  <div>
 
     <div class="row">
       <!-- sidebar
       ======================-->
       <div class="col-lg-2">
-        <button type="button" class="btn btn-success sidebar" (click)="refreshList()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
-          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
-        </svg> Refresh</button>
-          <div *ngFor="let item of menu | slice:superadmin">
-            <button type="button" class="btn btn-success sidebar" (click)=activeMenu(item.id)>{{item.name}}</button>
-            <div *ngFor="let subitem of menu[item.id].submenu; let i=index">
-              <button type="button" class="btn btn-success sidebar-sub" *ngIf=item.sub
-              data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addClick(i)">{{subitem}}
-              </button>
-            </div>
+        <button type="button" class="btn btn-success sidebar" (click)="refreshList()"><svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+            <path
+              d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+          </svg> Refresh</button>
+        <div *ngFor="let item of menu | slice:superadmin">
+          <button type="button" class="btn btn-success sidebar" (click)=activeMenu(item.id)>{{item.name}}</button>
+          <div *ngFor="let subitem of menu[item.id].submenu; let i=index">
+            <button type="button" class="btn btn-success sidebar-sub" *ngIf=item.sub data-bs-toggle="modal"
+              data-bs-target="#exampleModal" (click)="addClick(i)">{{subitem}}
+            </button>
           </div>
+        </div>
       </div>
 
       <!-- Content
@@ -28,106 +31,102 @@
         <!-- Admin Panel
         ======================-->
         <div *ngIf=menu[0].status>
-        <table class="table table-striped">
+          <table class="table table-striped">
             <thead>
-                <tr>
-                    <th> Admin ID </th>
-                    <th> Admin User Name </th>
-                    <th> Admin Full Name</th>
-                    <th> Admin Level </th>
-                    <th> Admin Status</th>
-                    <th> Options </th>
-                </tr>
+              <tr>
+                <th> Admin ID </th>
+                <th> Admin User Name </th>
+                <th> Admin Full Name</th>
+                <th> Admin Level </th>
+                <th> Admin Status</th>
+                <th> Options </th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let admin of adminusers">
-                    <td style="vertical-align: middle;"> {{admin.adminId}}</td>
-                    <td style="vertical-align: middle;">{{admin.adminUserName}}    </td>
-                    <td style="vertical-align: middle;">{{admin.adminFullName}}    </td>
-                    <td style="vertical-align: middle;">{{admin.adminLevel}}    </td>
-                    <td style="vertical-align: middle;">{{admin.adminStatus}}    </td>
-                    <td style="vertical-align: middle;">
-                        <button
-                        type=button class="btn btn-light mr-1" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        (click)="editClick(admin)"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                          </svg>
-                        </button>
-                        <button
-                        type=button class="btn btn-light mr-1"
-                        (click)="deleteClick(admin.adminId)"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                          </svg>
-                        </button>
-                    </td>
-                </tr>
+              <tr *ngFor="let admin of adminusers">
+                <td style="vertical-align: middle;"> {{admin.adminId}}</td>
+                <td style="vertical-align: middle;">{{admin.adminUserName}} </td>
+                <td style="vertical-align: middle;">{{admin.adminFullName}} </td>
+                <td style="vertical-align: middle;">{{admin.adminLevel}} </td>
+                <td style="vertical-align: middle;">{{admin.adminStatus}} </td>
+                <td style="vertical-align: middle;">
+                  <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    (click)="editClick(admin)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </button>
+                  <button type=button class="btn btn-light mr-1" (click)="deleteClick(admin.adminId)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
             </tbody>
-        </table>
+          </table>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
-                <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="d-flex flex-row bd-highlight">
-                <div class="p-4 w-100 bd-highlight">
-                    <div class="form-group form-floating">
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+                      <div class="form-group form-floating">
                         <input type="text" class="form-control" [(ngModel)]="AdminUserName" id="AdminUserName">
                         <label for="AdminUserName">Admin User Name</label>
-                    </div>
+                      </div>
 
-                    <div class="form-group form-floating">
+                      <div class="form-group form-floating">
                         <input type="text" class="form-control" [(ngModel)]="AdminPass" id="AdminPass">
                         <label for="AdminUserName">Admin Password</label>
-                    </div>
+                      </div>
 
-                    <div class="form-group form-floating">
+                      <div class="form-group form-floating">
                         <input type="text" class="form-control" [(ngModel)]="AdminFullName" id="AdminFullName">
                         <label for="AdminUserName">Admin Full Name</label>
-                    </div>
+                      </div>
 
-                    <div class="form-group form-floating">
+                      <div class="form-group form-floating">
                         <select [(ngModel)]="AdminLevel" class="form-select" id="AdminLevel">
                           <option *ngFor="let adminLevel of adminLevels" value={{adminLevel}}>{{adminLevel}}</option>
                         </select>
                         <label for="AdminLevel">Admin Level</label>
-                    </div>
-                    <div class="form-group form-floating">
+                      </div>
+                      <div class="form-group form-floating">
                         <select [(ngModel)]="AdminStatus" class="form-select" id="AdminStatus">
                           <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
                         </select>
                         <label for="AdminStatus">Admin Status</label>
+                      </div>
+
                     </div>
+                  </div>
+
+                  <button type="button" (click)="createClick()" *ngIf="AdminId==0" class="btn btn-primary float-end">
+                    Create Admin
+                  </button>
+
+                  <button type="button" (click)="updateClick()" *ngIf="AdminId!=0" class="btn btn-primary float-end">
+                    Update
+                  </button>
 
                 </div>
+
+              </div>
             </div>
-
-                <button type="button" (click)="createClick()"
-                *ngIf="AdminId==0" class="btn btn-primary float-end">
-                Create Admin
-                </button>
-
-                <button type="button" (click)="updateClick()"
-                *ngIf="AdminId!=0" class="btn btn-primary float-end">
-                Update
-                </button>
-
-            </div>
-
-        </div>
-        </div>
-        </div>
+          </div>
         </div>
         <!-- ========= end Admin Panel -->
 
@@ -136,64 +135,110 @@
         <div *ngIf=menu[1].status class="ml-auto mr-auto">
           <h5 style="text-align:center;">Welcome {{adminUser.adminFullName}}</h5>
           <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th> ID </th>
-                      <th> User Name </th>
-                      <th> Request Type</th>
-                      <th> Matching ID </th>
-                      <th> Options </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index"><ng-container *ngIf=anyRequest(user)>
-                      <td style="vertical-align: middle;"> {{user.userId}}</td>
-                      <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile',genderMap(user.gender),user.userId]" target="_blank"
-                        (mouseover)="editUser(user,requestIndex(user)==2)">
-                        {{user.fullName}}</a>    </td>
-                      <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}}    </td>
-                      <td style="vertical-align: middle;">{{user.reqSent}}    </td>
-                      <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
-                          <button *ngIf="requestIndex(user)==0" type="button"
-                            class="btn btn-outline-default btn-sm" (click)=profileActivate(user,i)>Accept</button>
-                          <button *ngIf="requestIndex(user)==0" type="button"
-                            class="btn btn-outline-default btn-sm" (click)=profileReject(user,i)>Reject</button>
-                          <button *ngIf="requestIndex(user)==2" type="button"
-                            class="btn btn-outline-default btn-sm" (click)=changePP(user,i)>Accept</button>
-                          <button *ngIf="requestIndex(user)==2" type="button"
-                            class="btn btn-outline-default btn-sm" (click)=rejectPP(user,i)>Reject</button>
-                          <a [routerLink]="['/user-profile',genderMap(user.gender),user.userId]" target="_blank"><button *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
-                            (mouseover)=editUser(user)>View Requests</button></a>
-                      </td>
-                      <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
-                    </ng-container>
-                  </tr>
-              </tbody>
+            <thead>
+              <tr>
+                <th> ID </th>
+                <th> User Name </th>
+                <th> Request Type</th>
+                <th> Matching ID </th>
+                <th> Options </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index">
+                <ng-container *ngIf=anyRequest(user)>
+                  <td style="vertical-align: middle;"> {{user.userId}}</td>
+                  <td style="vertical-align: middle;">
+                    <a [routerLink]="['/edit-profile',genderMap(user.gender),user.userId]" target="_blank"
+                      (mouseover)="editUser(user,requestIndex(user)==2)">
+                      {{user.fullName}}</a>
+                  </td>
+                  <td style="vertical-align: middle;">{{requestType[requestIndex(user)]}} </td>
+                  <td style="vertical-align: middle;">{{user.reqSent}} </td>
+                  <td style="vertical-align: middle;" *ngIf="actionPerformed(i)==''">
+                    <button *ngIf="requestIndex(user)==0" type="button" class="btn btn-outline-default btn-sm"
+                      (click)=profileActivate(user,i)>Accept</button>
+                    <button *ngIf="requestIndex(user)==0" type="button" class="btn btn-outline-default btn-sm"
+                      (click)=clickReject(user,i,0) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                    <button *ngIf="requestIndex(user)==2" type="button" class="btn btn-outline-default btn-sm"
+                      (click)=changePP(user,i)>Accept</button>
+                    <button *ngIf="requestIndex(user)==2" type="button" class="btn btn-outline-default btn-sm"
+                      (click)=clickReject(user,i,1) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                    <a [routerLink]="['/user-profile',genderMap(user.gender),user.userId]" target="_blank"><button
+                        *ngIf="requestIndex(user)==1" type="button" class="btn btn-outline-default btn-sm"
+                        (mouseover)=editUser(user)>View Requests</button></a>
+                  </td>
+                  <td style="vertical-align: middle;">{{actionPerformed(i)}}</td>
+                </ng-container>
+              </tr>
+            </tbody>
           </table>
           <!-- Modal for Run Matching
           =======-->
-          <div class="modal fade" id="exampleModal" tabindex="-1"
-              aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">{{matchingVar}}</h5>
-                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
                   <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">
-                  OK
+                    OK
                   </button>
 
-              </div>
+                </div>
 
-          </div>
-          </div>
+              </div>
+            </div>
           </div>
           <!-- ==== end Modal for Run Matching -->
+
+          <!-- Modal for Rejection Note
+          =======-->
+          <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to reject?</h5>
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+                      <!--div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
+                      <p>Are you Sure?</p>
+                  </div-->
+                      <div class="form-group form-floating">
+                        <select [(ngModel)]="rejectNote" class="form-select" id="rejectNote">
+                          <option *ngFor="let note of rejectionNote; let i=index" value={{i}}>
+                              {{note}}
+                          </option>
+                        </select>
+                        <label for="rejectNote">Why do you want to reject this? {{rejectNote}}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+                    >Cancel
+                  </button>
+                  <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+                    *ngIf="rtype==0" (click)=profileReject(ruser,ri)>OK
+                  </button>
+                  <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+                    *ngIf="rtype==1" (click)=rejectPP(ruser,ri)>OK
+                  </button>
+                  
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- ==== end Modal for Rejection Note -->
 
           <!--div class="modal fade" id="viewModaledit" tabindex="-1"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -217,147 +262,147 @@
         <!-- Male and Female User
         ======================-->
         <div *ngIf="menu[2].status||menu[3].status">
-        <table class="table table-striped">
+          <table class="table table-striped">
             <thead>
-                <tr>
-                    <th> ID </th>
-                    <th> Name </th>
-                    <th> Email</th>
-                    <th> Cell Phone </th>
-                    <th> Top Match Limit </th>
-                    <th> Profile Status </th>
-                    <th> Options </th>
-                </tr>
+              <tr>
+                <th> ID </th>
+                <th> Name </th>
+                <th> Email</th>
+                <th> Cell Phone </th>
+                <th> Top Match Limit </th>
+                <th> Profile Status </th>
+                <th> Options </th>
+              </tr>
             </thead>
             <tbody *ngIf="menu[2].status">
-                <!--tr *ngFor="let user of (menu[2].status ? maleusers : femaleusers)"><ng-container> -->
-                <tr *ngFor="let user of maleusers">
-                    <td style="vertical-align: middle;">{{user.userId}}</td>
-                    <td style="vertical-align: middle;">{{user.fullName}}</td>
-                    <td style="vertical-align: middle;">{{user.email}}</td>
-                    <td style="vertical-align: middle;">{{user.cellPhone}}</td>
-                    <td style="vertical-align: middle;">
-                      <div class="form-group" style="padding-top:15px;">
-                          <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
-                            <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
-                          </select>
-                      </div>
-                    </td>
-                    <td style="vertical-align: middle;" >
-                      <div class="form-group" style="padding-top:15px;"
-                      placement="bottom" ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
-                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
-                            <option *ngFor="let status of profileStatus" value={{status}}>
-                              {{status}}
-                            </option>
-                          </select>
-                      </div>
-                    </td>
-                    <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile','1',user.userId]" target="_blank"> <button
-                        type=button class="btn btn-light mr-1"
-                        (mouseover)=editUser(user)
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                          </svg>
-                        </button></a>
-                        <button
-                        type=button class="btn btn-light mr-1"
-                        (click)="deleteUser(user)"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                          </svg>
-                        </button>
-                    </td><!--/ng-container-->
-                </tr>
+              <!--tr *ngFor="let user of (menu[2].status ? maleusers : femaleusers)"><ng-container> -->
+              <tr *ngFor="let user of maleusers">
+                <td style="vertical-align: middle;">{{user.userId}}</td>
+                <td style="vertical-align: middle;">{{user.fullName}}</td>
+                <td style="vertical-align: middle;">{{user.email}}</td>
+                <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                <td style="vertical-align: middle;">
+                  <div class="form-group" style="padding-top:15px;">
+                    <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
+                      <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td style="vertical-align: middle;">
+                  <div class="form-group" style="padding-top:15px;" placement="bottom"
+                    ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
+                    <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                      <option *ngFor="let status of profileStatus" value={{status}}>
+                        {{status}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td style="vertical-align: middle;">
+                  <a [routerLink]="['/edit-profile','1',user.userId]" target="_blank"> <button type=button
+                      class="btn btn-light mr-1" (mouseover)=editUser(user)>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                      </svg>
+                    </button></a>
+                  <button type=button class="btn btn-light mr-1" (click)="deleteUser(user)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </button>
+                </td>
+                <!--/ng-container-->
+              </tr>
             </tbody>
             <tbody *ngIf="menu[3].status">
-                <tr *ngFor="let user of femaleusers">
-                    <td style="vertical-align: middle;">{{user.userId}}</td>
-                    <td style="vertical-align: middle;">{{user.fullName}}</td>
-                    <td style="vertical-align: middle;">{{user.email}}</td>
-                    <td style="vertical-align: middle;">{{user.cellPhone}}</td>
-                    <td style="vertical-align: middle;">
-                      <div class="form-group" style="padding-top:15px;">
-                          <select (change)=changeStatus(user) [(ngModel)]="user.matchShowLimit" class="form-select" id="state">
-                            <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
-                          </select>
-                      </div>
-                    </td>
-                    <td style="vertical-align: middle;">
-                      <div class="form-group" style="padding-top:15px;"
-                      placement="bottom" ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
-                          <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
-                            <option *ngFor="let status of profileStatus" value={{status}}>
-                              {{status}}
-                            </option>
-                          </select>
-                      </div>
-                    </td>
-                    <td style="vertical-align: middle;">
-                        <a [routerLink]="['/edit-profile','2',user.userId]" target="_blank"><button
-                        type=button class="btn btn-light mr-1"
-                        (mouseover)=editUser(user)
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                          </svg>
-                        </button></a>
-                        <button
-                        type=button class="btn btn-light mr-1"
-                        (click)="deleteUser(user)"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                          </svg>
-                        </button>
-                    </td>
-                </tr>
+              <tr *ngFor="let user of femaleusers">
+                <td style="vertical-align: middle;">{{user.userId}}</td>
+                <td style="vertical-align: middle;">{{user.fullName}}</td>
+                <td style="vertical-align: middle;">{{user.email}}</td>
+                <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                <td style="vertical-align: middle;">
+                  <div class="form-group" style="padding-top:15px;">
+                    <select (change)=changeStatus(user) [(ngModel)]="user.matchShowLimit" class="form-select"
+                      id="state">
+                      <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td style="vertical-align: middle;">
+                  <div class="form-group" style="padding-top:15px;" placement="bottom"
+                    ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
+                    <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                      <option *ngFor="let status of profileStatus" value={{status}}>
+                        {{status}}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td style="vertical-align: middle;">
+                  <a [routerLink]="['/edit-profile','2',user.userId]" target="_blank"><button type=button
+                      class="btn btn-light mr-1" (mouseover)=editUser(user)>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                      </svg>
+                    </button></a>
+                  <button type=button class="btn btn-light mr-1" (click)="deleteUser(user)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
             </tbody>
-        </table>
+          </table>
 
-        <div class="modal fade" id="statusModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Profile {{cuser.status}}!</h5>
-                <button type="button" class="btn-close float-end" data-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="d-flex flex-row bd-highlight">
-                <div class="p-4 w-100 bd-highlight">
-                  <!--div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
+          <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Profile {{cuser.status}}!</h5>
+                  <button type="button" class="btn-close float-end" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+                      <!--div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
                       <p>Are you Sure?</p>
                   </div-->
-                    <div class="form-group form-floating">
+                      <div class="form-group form-floating">
                         <select [(ngModel)]="cuser.lockedId" class="form-select" id="lockedId">
                           <ng-container *ngFor="let id of topMatches">
-                          <option *ngIf=!isLocked(id,cuser.gender) value={{id}}>
-                            {{id}} - {{getName(id,cuser.gender)}}
-                          </option>
+                            <option *ngIf=!isLocked(id,cuser.gender) value={{id}}>
+                              {{id}} - {{getName(id,cuser.gender)}}
+                            </option>
                           </ng-container>
                         </select>
                         <label for="lockedId">To Whom {{cuser.fullName}} is LOCKED?</label>
+                      </div>
                     </div>
+                  </div>
+
+                  <button type="button" class="btn btn-primary float-end" data-dismiss="modal"
+                    (click)=updateUser(cuser)>OK</button>
+
                 </div>
+
+              </div>
             </div>
+          </div>
 
-                <button type="button" class="btn btn-primary float-end"
-                data-dismiss="modal" (click)=updateUser(cuser)>OK</button>
-
-            </div>
-
-        </div>
-        </div>
-        </div>
-
-        <!--div class="modal fade" id="editModal" tabindex="-1"
+          <!--div class="modal fade" id="editModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -366,55 +411,55 @@
         </div>
         </div-->
 
-        <!-- Create User Modal
+          <!-- Create User Modal
         ======================-->
-        <div class="modal fade" id="exampleModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-                <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="d-flex flex-row bd-highlight">
-                <div class="p-4 w-100 bd-highlight">
-                  <div class="form-group form-floating">
-                      <input type="text" [(ngModel)]="FullName" class="form-control" placeholder="Enter Your Full Name" id="fullName">
-                      <label for="FullName">Full Name</label>
-                  </div>
-
-                  <div class="form-group form-floating">
-                      <input type="text" [(ngModel)]="CellPhone" class="form-control" placeholder="Cell Phone Number" id="cellPhone">
-                      <label for="CellPhone">Cell Phone</label>
-                  </div>
-
-                  <div class="form-group form-floating">
-                      <input type="text" [(ngModel)]="Email" class="form-control" placeholder="Enter Your Email" id="email">
-                      <label for="Email">Email</label>
-                  </div>
-
-                  <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
-                      <input  class="form-control" [(ngModel)]="DateOfBirth"
-                           name="dp" id="dateOfBirth" type="date" />
-                      <label for="DateOfBirth">Date of Birth</label>
-                  </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+                      <div class="form-group form-floating">
+                        <input type="text" [(ngModel)]="FullName" class="form-control"
+                          placeholder="Enter Your Full Name" id="fullName">
+                        <label for="FullName">Full Name</label>
+                      </div>
+
+                      <div class="form-group form-floating">
+                        <input type="text" [(ngModel)]="CellPhone" class="form-control" placeholder="Cell Phone Number"
+                          id="cellPhone">
+                        <label for="CellPhone">Cell Phone</label>
+                      </div>
+
+                      <div class="form-group form-floating">
+                        <input type="text" [(ngModel)]="Email" class="form-control" placeholder="Enter Your Email"
+                          id="email">
+                        <label for="Email">Email</label>
+                      </div>
+
+                      <div class="form-group form-floating" [ngClass]="{'input-group-focus':focus===true}">
+                        <input class="form-control" [(ngModel)]="DateOfBirth" name="dp" id="dateOfBirth" type="date" />
+                        <label for="DateOfBirth">Date of Birth</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" (click)="createUser()" class="btn btn-primary float-end">
+                    Create User
+                  </button>
+
+                </div>
+
+
+              </div>
             </div>
-
-                <button type="button" (click)="createUser()"
-                class="btn btn-primary float-end">
-                Create User
-                </button>
-
-            </div>
-
-
-        </div>
-        </div>
-        </div>
-        <!-- ========= end Create User Modal -->
+          </div>
+          <!-- ========= end Create User Modal -->
 
 
 
@@ -426,75 +471,72 @@
         ======================-->
         <div *ngIf=menu[4].status>
           <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>Matching ID</th>
-                      <th>Matching Details</th>
-                      <th>Point For Male</th>
-                      <th>Point For Female</th>
-                      <th>Options</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let matching of matchingtables">
-                      <td> {{matching.matchingId}} </td>
-                      <td> {{matching.matchingDetails}} </td>
-                      <td> {{matching.malePoint}} </td>
-                      <td> {{matching.femalePoint}} </td>
-                      <td>
-                          <button
-                          type=button class="btn btn-light mr-1"
-                          data-bs-toggle="modal"
-                          data-bs-target="#matchingTableModal"
-                          (click)="editMatchingClick(matching)"
-                          >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                          </button>
-                        </td>
-                  </tr>
-                </tbody>
+            <thead>
+              <tr>
+                <th>Matching ID</th>
+                <th>Matching Details</th>
+                <th>Point For Male</th>
+                <th>Point For Female</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let matching of matchingtables">
+                <td> {{matching.matchingId}} </td>
+                <td> {{matching.matchingDetails}} </td>
+                <td> {{matching.malePoint}} </td>
+                <td> {{matching.femalePoint}} </td>
+                <td>
+                  <button type=button class="btn btn-light mr-1" data-bs-toggle="modal"
+                    data-bs-target="#matchingTableModal" (click)="editMatchingClick(matching)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
-          <div class="modal fade" id="matchingTableModal" tabindex="-1"
-              aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
+          <div class="modal fade" id="matchingTableModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Edit Matching Point</h5>
-                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              <div class="d-flex flex-row bd-highlight">
-                  <div class="p-4 w-100 bd-highlight">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="MatchingDetails" id="MatchingDetails">
-                          <label for="MatchingDetails">Matching Details</label>
+                        <input type="text" class="form-control" [(ngModel)]="MatchingDetails" id="MatchingDetails">
+                        <label for="MatchingDetails">Matching Details</label>
                       </div>
 
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="MalePoint" id="MalePoint">
-                          <label for="MalePoint">Male Point</label>
+                        <input type="text" class="form-control" [(ngModel)]="MalePoint" id="MalePoint">
+                        <label for="MalePoint">Male Point</label>
                       </div>
 
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="FemalePoint" id="FemalePoint">
-                          <label for="FemalePoint">Female Point</label>
+                        <input type="text" class="form-control" [(ngModel)]="FemalePoint" id="FemalePoint">
+                        <label for="FemalePoint">Female Point</label>
                       </div>
+                    </div>
                   </div>
-              </div>
 
-                  <button type="button" (click)="updateMatchingClick()"
-                   class="btn btn-primary float-end">
-                  Update
+                  <button type="button" (click)="updateMatchingClick()" class="btn btn-primary float-end">
+                    Update
                   </button>
 
-              </div>
+                </div>
 
-          </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- ========= end Matching Criteria -->
@@ -502,81 +544,87 @@
         <!-- Message
         ======================-->
         <div *ngIf=menu[5].status>
-          
+
           <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Message</th>
-                      <th>Reply</th>
-                      <th>Options</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let message of messages">
-                      <td> {{message.senderId}} </td>
-                      <td> {{message.senderEmail}} </td>
-                      <td> {{message.messageDetail.substring(0,30)}}
-                        <ng-container *ngIf="message.messageDetail.length>30">...</ng-container>
-                        <br>{{message.dateTime}}
-                      </td>
-                      <td *ngIf="message.messageReply!=null">
-                        {{message.messageReply.substring(0,30)}}
-                        <ng-container *ngIf="message.messageReply.length>30">...</ng-container>
-                        <br>{{message.replyDateTime}}
-                      </td>
-                      <td *ngIf="message.messageReply==null">No reply yet.</td>
-                      <td>
-                          <button
-                          type=button class="btn btn-light mr-1"
-                          data-bs-toggle="modal"
-                          data-bs-target="#messageModal"
-                          (click)="replyMessage(message)"
-                          >
-                          <svg *ngIf="message.messageReply==null" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
-                            <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"/>
-                          </svg>
-                          <svg *ngIf="message.messageReply!=null" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
-                          </svg>
-                          </button>
-                          <button
-                          type=button class="btn btn-light mr-1"
-                          (click)="deleteMessage(message)"
-                          >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                            </svg>
-                          </button>
-                        </td>
-                  </tr>
-                </tbody>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Reply</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let message of messages">
+                <td> {{message.senderId}} </td>
+                <td> {{message.senderEmail}} </td>
+                <td> {{message.messageDetail.substring(0,30)}}
+                  <ng-container *ngIf="message.messageDetail.length>30">...</ng-container>
+                  <br>{{message.dateTime}}
+                </td>
+                <td *ngIf="message.messageReply!=null">
+                  {{message.messageReply.substring(0,30)}}
+                  <ng-container *ngIf="message.messageReply.length>30">...</ng-container>
+                  <br>{{message.replyDateTime}}
+                </td>
+                <td *ngIf="message.messageReply==null">No reply yet.</td>
+                <td>
+                  <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#messageModal"
+                    (click)="replyMessage(message)">
+                    <svg *ngIf="message.messageReply==null" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                      fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+                      <path
+                        d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                    <svg *ngIf="message.messageReply!=null" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                      fill="currentColor" class="bi bi-shield-fill-check" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                        d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z" />
+                    </svg>
+                  </button>
+                  <button type=button class="btn btn-light mr-1" (click)="deleteMessage(message)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
 
 
-          <div class="modal fade" id="messageModal" tabindex="-1"
-              aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
+          <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">{{SenderName}}</h5>
-                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              <div class="d-flex flex-row bd-highlight">
-                  <div class="p-4 w-100 bd-highlight">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
                       <div class="form-group form-floating">
-                          <table>
-                            <tr><td>{{currentMessage.dateTime}}</td></tr>
-                            <tr><td><strong>{{currentMessage.messageDetail}}</strong></td></tr>
-                          </table>
-                            <br>
-                          <table *ngIf="currentMessage.messageReply!=null">
-                            <tr><td>Replied: {{currentMessage.replyDateTime}}</td></tr>
-                            <tr><td><strong>{{currentMessage.messageReply}}</strong></td></tr>
-                          </table>
+                        <table>
+                          <tr>
+                            <td>{{currentMessage.dateTime}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>{{currentMessage.messageDetail}}</strong></td>
+                          </tr>
+                        </table>
+                        <br>
+                        <table *ngIf="currentMessage.messageReply!=null">
+                          <tr>
+                            <td>Replied: {{currentMessage.replyDateTime}}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>{{currentMessage.messageReply}}</strong></td>
+                          </tr>
+                        </table>
                       </div>
 
                       <div *ngIf="currentMessage.messageReply==null" class="form-group form-floating">
@@ -585,214 +633,249 @@
                         <label for="reply">Write a reply</label>
                       </div>
 
+                    </div>
                   </div>
-              </div>
 
-                  <button *ngIf="currentMessage.messageReply==null"
-                  type="button" (click)="sendReply()" class="btn btn-primary float-end">
+                  <button *ngIf="currentMessage.messageReply==null" type="button" (click)="sendReply()"
+                    class="btn btn-primary float-end">
                     Send Reply
                   </button>
 
-              </div>
+                </div>
 
-          </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- ========= end Dashboard -->
+        <!-- ========= end Message -->
 
         <!-- Site Management
         ======================-->
         <div *ngIf=menu[6].status>
           <div class="row">
-          <div class="form-group form-floating col-lg-3">
-              <select class="form-select" id="PostType"
-              [(ngModel)]="PostTypeFilter" style="width:200px;"
-              (change)="FilterFn()" placeholder="Filter">
+            <div class="form-group form-floating col-lg-3">
+              <select class="form-select" id="PostType" [(ngModel)]="PostTypeFilter" style="width:200px;"
+                (change)="FilterFn()" placeholder="Filter">
                 <option value="">All Types</option>
                 <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
               </select>
               <label for="PostType">Search by Post Type</label>
-          </div>
-          <div *ngIf=false class="form-group form-floating col-lg-3">
-              <select class="form-select" id="pageTitle"
-              [(ngModel)]="PageTitleFilter" style="width:200px;"
-              (change)="FilterFn()" placeholder="Filter">
+            </div>
+            <div *ngIf=false class="form-group form-floating col-lg-3">
+              <select class="form-select" id="pageTitle" [(ngModel)]="PageTitleFilter" style="width:200px;"
+                (change)="FilterFn()" placeholder="Filter">
                 <option value="">All Pages</option>
                 <option *ngFor="let pageTitle of pageTitles" value={{pageTitle}}>{{pageTitle}}</option>
               </select>
               <label for="pageTitle">Search by Page Title</label>
-          </div>
+            </div>
           </div>
           <table class="table table-striped">
 
-              <thead>
-                  <tr>
-                      <th>Code</th>
-                      <th>Page</th>
-                      <th>PostType</th>
-                      <th>Details</th>
-                      <th>Photo</th>
-                      <th>Status</th>
-                      <th>Options</th>
-                      <th></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let post of allpost">
-                      <td> {{post.postCode}} </td>
-                      <td> {{post.pageTitle}} </td>
-                      <td> {{post.postType}} </td>
-                      <ng-container *ngIf="post.param1==null"><td></td></ng-container>
-                      <ng-container *ngIf="post.param1!=null">
-                      <td *ngIf="post.param1.length<=maxPostDetailLen"> {{post.param1}}</td>
-                      <td *ngIf="post.param1.length>maxPostDetailLen"> {{post.param1.substring(0,maxPostDetailLen)}}
-                        <button type="button" class="btn btn-link" (click)=viewMore(post.param1)
-                        data-bs-toggle="modal" data-bs-target="#viewMoreModal"
-                        style="padding-left:0px; padding-right:0px;">....</button> </td>
-                      </ng-container>
-                      <ng-container *ngIf="post.postPhoto==null"><td></td></ng-container>
-                      <ng-container *ngIf="post.postPhoto!=null">
-                        <td *ngIf="post.postPhoto.length<=maxPhotoNameLen"> {{post.postPhoto}} </td>
-                        <td *ngIf="post.postPhoto.length>maxPhotoNameLen"> {{post.postPhoto.substring(0,maxPhotoNameLen)}} </td>
-                      </ng-container>
-                      <td> {{post.postStatus}} </td>
-                      <td>
-                          <button
-                          type=button class="btn btn-light mr-1"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                          (click)="editClick(post)"
-                          >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                          type=button class="btn btn-light mr-1"
-                          (click)="deletePost(post)"
-                          >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                            </svg>
-                          </button>
-                        </td>
-                  </tr>
-                </tbody>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Page</th>
+                <th>PostType</th>
+                <th>Details</th>
+                <th>Photo</th>
+                <th>Status</th>
+                <th>Options</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let post of allpost">
+                <td> {{post.postCode}} </td>
+                <td> {{post.pageTitle}} </td>
+                <td> {{post.postType}} </td>
+                <ng-container *ngIf="post.param1==null">
+                  <td></td>
+                </ng-container>
+                <ng-container *ngIf="post.param1!=null">
+                  <td *ngIf="post.param1.length<=maxPostDetailLen"> {{post.param1}}</td>
+                  <td *ngIf="post.param1.length>maxPostDetailLen"> {{post.param1.substring(0,maxPostDetailLen)}}
+                    <button type="button" class="btn btn-link" (click)=viewMore(post.param1) data-bs-toggle="modal"
+                      data-bs-target="#viewMoreModal" style="padding-left:0px; padding-right:0px;">....</button>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="post.postPhoto==null">
+                  <td></td>
+                </ng-container>
+                <ng-container *ngIf="post.postPhoto!=null">
+                  <td *ngIf="post.postPhoto.length<=maxPhotoNameLen"> {{post.postPhoto}} </td>
+                  <td *ngIf="post.postPhoto.length>maxPhotoNameLen"> {{post.postPhoto.substring(0,maxPhotoNameLen)}}
+                  </td>
+                </ng-container>
+                <td> {{post.postStatus}} </td>
+                <td>
+                  <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    (click)="editClick(post)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </button>
+                </td>
+                <td>
+                  <button type=button class="btn btn-light mr-1" (click)="deletePost(post)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
 
-          <div class="modal fade" id="exampleModal" tabindex="-1"
-              aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-xl modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
-                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              <div class="d-flex flex-row bd-highlight">
-                  <div class="p-4 w-100 bd-highlight">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
 
-                    <div class="form-group form-floating">
+                      <div class="form-group form-floating">
                         <select [(ngModel)]="PageTitle" class="form-select" id="PageTitle">
                           <option *ngFor="let pageTitle of pageTitles" value={{pageTitle}}>{{pageTitle}}</option>
                         </select>
                         <label for="PageTitle">Page Title <req>*</req></label>
-                    </div>
+                      </div>
 
                       <div class="form-group form-floating">
-                          <select [(ngModel)]="PostType" class="form-select" id="PostType" (change)=ptypechange()>
-                            <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
-                          </select>
-                          <label for="PostType">Post Type <req>*</req></label>
+                        <select [(ngModel)]="PostType" class="form-select" id="PostType" (change)=ptypechange()>
+                          <option *ngFor="let postType of postTypes" value={{postType.name}}>{{postType.name}}</option>
+                        </select>
+                        <label for="PostType">Post Type <req>*</req></label>
                       </div>
 
                       <!-- div *ngIf="PostId==0" class="form-group form-floating"-->
                       <div class="form-group form-floating">
-                          <input type="text" class="form-control" [(ngModel)]="PostCode" id="PostCode">
-                          <label for="PostCode">Post Code <req>*</req></label>
+                        <input type="text" class="form-control" [(ngModel)]="PostCode" id="PostCode">
+                        <label for="PostCode">Post Code <req>*</req></label>
                       </div>
 
 
 
                       <div class="form-group form-floating">
-                          <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
-                            <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
-                          </select>
-                          <label for="PostStatus">Post Status <ng-container class="req">*</ng-container></label>
+                        <select [(ngModel)]="PostStatus" class="form-select" id="PostStatus">
+                          <option *ngFor="let postStatus of postSTATUS" value={{postStatus}}>{{postStatus}}</option>
+                        </select>
+                        <label for="PostStatus">Post Status <ng-container class="req">*</ng-container></label>
                       </div>
 
 
-                </div>
+                    </div>
 
-                <div *ngIf="!(PostType=='' || PostType==null)" class="p-4 w-50 bd-highlight">
-                  <img [src]=PhotoFilePath height="200px;" width="300px;">
-                  <input type="file" (change)="uploadPhoto($event,ptype.id)" class="mt-2"/>
-                </div>
-              </div>
-
-              <div class="d-flex flex-row bd-highlight">
-                <div class="p-4 w-100 bd-highlight">
-
-                        <div *ngFor="let par of ptype.param; let i=index" class="form-group form-floating">
-                            <textarea *ngIf="!(ptype.name=='Service' && i==1)" class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
-      overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
-                            <select *ngIf="(ptype.name=='Service' && i==1)" [(ngModel)]="Params[i]" class="form-select" id="PostDetails">
-                              <option *ngFor="let serviceIcon of serviceIcons" value={{serviceIcon}}>{{serviceIcon}}</option>
-                            </select>
-                            <label for="PostDetails">{{par}}  <req *ngIf=ptype.required[i]>*</req></label>
-                        </div>
-
-                </div>
-              </div>
-
-                  <button type="button" (click)="addPostClick(ptype.id)"
-                  *ngIf="PostId==0" class="btn btn-primary float-end">
-                  Add Post
-                  </button>
-
-                  <button type="button" (click)="updatePost(ptype.id)"
-                  *ngIf="PostId!=0" class="btn btn-primary float-end">
-                  Update Post
-                  </button>
-
-              </div>
-
-          </div>
-          </div>
-          </div>
-
-          <div class="modal fade" id="viewMoreModal" tabindex="-1"
-              aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              <div class="d-flex flex-row bd-highlight">
-                  <div class="p-4 w-100 bd-highlight">
-                    {{viewMoreString}}
+                    <div *ngIf="!(PostType=='' || PostType==null)" class="p-4 w-50 bd-highlight">
+                      <img [src]=PhotoFilePath height="200px;" width="300px;">
+                      <input type="file" (change)="uploadPhoto($event,ptype.id)" class="mt-2" />
+                    </div>
                   </div>
-              </div>
 
-                  <button type="button" class="btn btn-primary float-end"
-                  data-bs-dismiss="modal">
-                  OK
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+
+                      <div *ngFor="let par of ptype.param; let i=index" class="form-group form-floating">
+                        <textarea *ngIf="!(ptype.name=='Service' && i==1)" class="form-control" style="min-height: {{ptype.paramlen[i]}}em;
+      overflow: auto;" [(ngModel)]="Params[i]" id="PostDetails" contentEditable></textarea>
+                        <select *ngIf="(ptype.name=='Service' && i==1)" [(ngModel)]="Params[i]" class="form-select"
+                          id="PostDetails">
+                          <option *ngFor="let serviceIcon of serviceIcons" value={{serviceIcon}}>{{serviceIcon}}
+                          </option>
+                        </select>
+                        <label for="PostDetails">{{par}} <req *ngIf=ptype.required[i]>*</req></label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <button type="button" (click)="addPostClick(ptype.id)" *ngIf="PostId==0"
+                    class="btn btn-primary float-end">
+                    Add Post
                   </button>
 
-              </div>
+                  <button type="button" (click)="updatePost(ptype.id)" *ngIf="PostId!=0"
+                    class="btn btn-primary float-end">
+                    Update Post
+                  </button>
 
+                </div>
+
+              </div>
+            </div>
           </div>
-          </div>
+
+          <div class="modal fade" id="viewMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex flex-row bd-highlight">
+                    <div class="p-4 w-100 bd-highlight">
+                      {{viewMoreString}}
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">
+                    OK
+                  </button>
+
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
-        <!-- ========= end Dashboard -->
+        <!-- ========= end Site Management -->
+
+        <!-- Activity
+        ======================-->
+        <div *ngIf=menu[7].status>
+          <table class="table table-striped">
+            <!--thead>
+              <tr>
+                <th>Matching ID</th>
+                <th>Matching Details</th>
+                <th>Point For Male</th>
+                <th>Point For Female</th>
+                <th>Options</th>
+              </tr>
+            </thead-->
+            <tbody>
+              <tr *ngFor="let log of adminLog">
+                <td>{{log.actionTime}}</td>
+                <td> {{getAdminName(log.adminId) + ' ' + log.description + ' of '}} 
+                  <a [routerLink]="['/edit-profile',log.userType,log.userId]" target="_blank">
+                    {{getName(log.userId,log.userType.toString())}} 
+                  </a>
+                  <ng-container *ngIf="log.xuserId!=null"> for 
+                    <a [routerLink]="['/edit-profile',reverseGender(log.userType),log.xuserId]" target="_blank">
+                      {{getName(log.xuserId,reverseGender(log.userType).toString())}} 
+                    </a>
+                  </ng-container>
+                  <ng-container *ngIf="log.note!=null"> due to 
+                    <strong>{{rejectionNote[log.note]}}</strong>
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- ========= end Activity -->
 
         <!-- Dashboard
         ======================-->

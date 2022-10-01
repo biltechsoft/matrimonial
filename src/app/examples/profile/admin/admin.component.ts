@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   matchingtables: any=[];
   messages: any=[];
   allpost: any=[];
+  adminLog: any=[];
   cuser=''; topMatches='';
   firstTime=true;
 
@@ -79,6 +80,9 @@ export class AdminComponent implements OnInit {
   acceptedIndex: any=[];
   rejectedIndex: any=[];
   matchingVar = "Matching is being Processed...";
+  rejectNote=0;
+  rejectionNote = this.service.rejectionNote;
+  ruser; ri; rtype //for rejectPP / profileReject (user, i) rtype (i.e PP/profile)
 
   viewMoreString;
   maxPostDetailLen=40;
@@ -101,6 +105,7 @@ export class AdminComponent implements OnInit {
     this.refreshMatchingTable();
     this.refreshMessage();
     this.refreshPost();
+    this.refreshAdminLog();
     
     this.acceptedIndex=[];
     this.rejectedIndex=[];
@@ -139,6 +144,12 @@ export class AdminComponent implements OnInit {
       //this.postTypes[1].newcode = this.allpost.filter(slider => slider.postCode.startsWith('0'))
     });
   }
+  refreshAdminLog() {
+    this.service.getAdminLogList().subscribe(data=>{
+      var a = data;
+      this.adminLog = a.sort((item2, item1) => item1.logId - item2.logId);
+    });
+  }
 
   getNewPostCode() {
     for (var i=0; i<this.postTypes.length; i++) {
@@ -158,6 +169,10 @@ export class AdminComponent implements OnInit {
           this.superadmin=0;
         }
       });
+  }
+
+  getAdminName(Id) {
+    return this.adminusers.filter(admin => admin.adminId==Id)[0].adminFullName;
   }
 
   activeMenu(item) {
@@ -433,7 +448,7 @@ export class AdminComponent implements OnInit {
     });
   }
   getName(Id,gender) {
-    if(gender=='Female') {
+    if(gender=='Female' || gender=='1') {  //Female for getting matching gender and 1 for getting own gender
       return this.maleusers.filter(user => user.userId.toString()==Id)[0].fullName;
     }
     return this.femaleusers.filter(user => user.userId.toString()==Id)[0].fullName;
@@ -586,24 +601,34 @@ export class AdminComponent implements OnInit {
     }
   }
   profileReject(user,i) {
-    if(confirm('Are you sure you want to reject the request?')){
-      if(user.gender == 'Male') {
-        var val = { userId: user.userId, status: 'Inactive' };
-        this.service.updateMaleUser(val).subscribe(res=>{
-          //alert(res.toString());
-          //this.refreshMaleList();
-          if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
-        });
-      }
-      else if(user.gender == 'Female') {
-        var val = { userId: user.userId, status: 'Inactive' };
-        this.service.updateFemaleUser(val).subscribe(res=>{
-          //alert(res.toString());
-          //this.refreshFemaleList();
-          if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
-        });
-      }
+    if(user.gender == 'Male') {
+      var val = { userId: user.userId, status: 'Inactive' };
+      this.service.updateMaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshMaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
     }
+    else if(user.gender == 'Female') {
+      var val = { userId: user.userId, status: 'Inactive' };
+      this.service.updateFemaleUser(val).subscribe(res=>{
+        //alert(res.toString());
+        //this.refreshFemaleList();
+        if(res.toString() == 'Updated Successfully') { this.rejectedIndex.push(i); }
+      });
+    }
+    //add admin activity
+    var logval = {
+      adminId: this.adminUser.adminId,
+      userId: user.userId,
+      userType: Number(this.genderMap(user.gender)),
+      action: 1,  //from this.service.actionType
+      description: 'rejected profile',
+      note: this.rejectNote,
+      actionTime: this.service.getDateTime()
+    }
+    this.service.addAdminLog(logval).subscribe();
+    
   }
   changePP(user,i) {
     this.delTempPhoto(user);
@@ -629,12 +654,18 @@ export class AdminComponent implements OnInit {
       adminId: this.adminUser.adminId,
       userId: user.userId,
       userType: Number(this.genderMap(user.gender)),
-      action: 2,
+      action: 2,  //from this.service.actionType
       description: 'accepted profile/gallery picture',
       note: null,
       actionTime: this.service.getDateTime()
     }
     this.service.addAdminLog(logval).subscribe();
+  }
+  //ruser; ri; rtype //for rejectPP / profileReject (user, i) rtype (i.e PP/profile)
+  clickReject(user,i,type) {
+    this.ruser = user;
+    this.ri = i;
+    this.rtype = type; //type=0 for profileReject, type=1 for rejectPP
   }
   rejectPP(user,i) {
     this.delTempPhoto(user, false);
@@ -654,9 +685,9 @@ export class AdminComponent implements OnInit {
       adminId: this.adminUser.adminId,
       userId: user.userId,
       userType: Number(this.genderMap(user.gender)),
-      action: 3,
+      action: 3,  //from this.service.actionType
       description: 'rejected profile/gallery picture',
-      note: null,
+      note: this.rejectNote,
       actionTime: this.service.getDateTime()
     }
     this.service.addAdminLog(logval).subscribe();
@@ -704,6 +735,9 @@ export class AdminComponent implements OnInit {
   }
   genderMap(gender) {
     return (gender=='Male' ? '1' : '2');
+  }
+  reverseGender(usertype) {
+    return (usertype=='1' ? '2' : '1');
   }
 
   FilterFn(){
@@ -765,6 +799,13 @@ export class AdminComponent implements OnInit {
       id: 6,
       name: "Site Management",
       submenu: ['Add Post'],
+      status: false,
+      sub: false
+    },
+    {
+      id: 7,
+      name: "Activity",
+      submenu: [],
       status: false,
       sub: false
     },

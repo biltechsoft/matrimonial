@@ -1,215 +1,264 @@
 <div>
   <div class="wrapper">
-      <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/furkan-cover-photo.jpg');">
-          <div class="filter"></div>
-      </div>
+    <div class="page-header page-header-xs" data-parallax="true"
+      style="background-image: url('./assets/img/furkan-cover-photo.jpg');">
+      <div class="filter"></div>
+    </div>
 
-      <div class="section-low-padding profile-content">
-          <div class="container">
-              <div class="owner">
-                <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal" data-bs-target="#photoModal"  placement="top" ngbTooltip="View Picture">
-                    <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive" height="150px;" width="200px;">
-                    <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive" height="150px;" width="200px;">
-                </div>
-                  <div class="name">
-                      <h4 class="title">{{currentUser.fullName}}</h4>
-                      <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
-                  </div>
+    <div class="section-low-padding profile-content">
+      <div class="container">
+        <div class="owner">
+          <div class="avatar" (mouseover)="pad=true" (mouseout)="pad=false" data-bs-toggle="modal"
+            data-bs-target="#photoModal" placement="top" ngbTooltip="View Picture">
+            <img *ngIf="!pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-no-padding img-responsive"
+              height="150px;" width="200px;">
+            <img *ngIf="pad" [src]="PhotoFilePath" alt="Circle Image" class="img-circle img-padding img-responsive"
+              height="150px;" width="200px;">
+          </div>
+          <div class="name">
+            <h4 class="title">{{currentUser.fullName}}</h4>
+            <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img [src]="PhotoFilePath" alt="{{PhotoFilePath}}" class="img-rounded img-padding img-responsive">
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+      <p>Short Bio: "Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example
+        for the righteous." </p>
+
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+      <h6 class="description">Profile Completeness</h6>
+      <ngb-progressbar type="success" class="mt-0" [value]=pct [striped]="true" [animated]="true"><i>{{pct}}%</i>
+      </ngb-progressbar><br>
+      <div *ngIf="currentUser.status == 'Inactive'">
+        <p>Your profile is not complete yet. To see who best matches you, please complete your profile.</p>
+        <button [routerLink]="['/edit-profile',usertype,userid]" type="button"
+          class="btn btn-outline-danger btn-round">Complete Profile</button>
+      </div>
+      <div *ngIf="currentUser.status == 'Pending'">
+        <p>Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to
+          see your best matches after admin approval. It may take 72 hours to 1 week to review your request.</p>
+        <button [routerLink]="['/edit-profile',usertype,userid]" type="button"
+          class="btn btn-outline-danger btn-round">Edit Profile</button>
+      </div>
+      <div>
+        <p>Your profile is {{currentUser.status}}.</p>
+      </div>
+      <br>
+      <div *ngIf=profileComplete()>
+        <button type="button" class="btn btn-outline-danger btn-round">TOP MATCHES</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="nav-tabs-navigation col-lg-10 col-md-6 ml-auto mr-auto" *ngIf=profileComplete()>
+    <div class="nav-tabs-wrapper">
+      <ngb-tabset [justify]="'center'">
+        <ngb-tab title="Matches">
+          <ng-template ngbTabContent>
+            <div class="row following" id="follows">
+              <div class="col-lg-9 col-md-6 ml-auto mr-auto">
+                <ul class="list-unstyled follows">
+                  <ng-container *ngFor="let Id of topMatches; let i=index">
+                    <li *ngFor="let user of getTopMatches(Id)">
+                      <div class="row">
+                        <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
+                          <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
+                            class="img-circle img-no-padding img-responsive" height="70px;">
+                        </div>
+                        <div class="col-md-3 col-sm-4 ml-auto">
+                          <h6>{{user.fullName}}<br /><small>Age {{user.age}}, {{user.highestEducation}}</small></h6>
+                        </div>
+                        <div class="col-md-3 col-sm-4 ml-auto">
+                          <h6>{{topMatchPct[i]}}% Matching<br /><small>State: {{user.state}}</small></h6>
+                        </div>
+                        <div *ngIf="user.status!='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
+                          style="padding-top:15px;">
+                          <div>
+                            <label class="form-check-label">
+                              <i style="color:yellow;" class="fa fa-question-circle" aria-hidden="true"></i>
+                              <span class="form-check-sign">Profile {{user.status}}</span>
+                            </label>
+                          </div>
+                        </div>
+                        <div *ngIf="user.status=='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
+                          style="padding-top:15px;">
+                          <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
+                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request
+                            Info</button>
+                          <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked="" disabled>
+                              <span class="form-check-sign">Request Sent</span>
+                            </label>
+                          </div>
+                          <div *ngIf="isReqRejected(user)">
+                            <label class="form-check-label">
+                              <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                              <span class="form-check-sign">Profile Rejected</span>
+                            </label>
+                          </div>
+                          <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
+                            target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button"
+                              class="btn btn-success btn-sm" (mouseover)=setXuser(user.userId)>View Profile</button></a>
+
+                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
+                            (click)=giveAccess(user,i)>Give Access</button>
+                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
+                            (click)=clickReject(user,i) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                          <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked="" disabled>
+                              <span class="form-check-sign">Access Given</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </li>
+                  </ng-container>
+                </ul>
               </div>
             </div>
-  </div>
-  </div>
+          </ng-template>
+        </ngb-tab>
 
-  <div class="modal fade" id="photoModal" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md modal-dialog-centered">
-  <div class="modal-content">
-      <div class="modal-header">
-          <img [src]="PhotoFilePath" alt="{{PhotoFilePath}}" class="img-rounded img-padding img-responsive">
-          <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-      </div>
-
-  </div>
-  </div>
-  </div>
-
-<div class="row">
-    <div class="col-md-6 ml-auto mr-auto text-center">
-        <p>Short Bio: "Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous." </p>
-
-    </div>
-</div>
-<br/>
-
-<div class="row">
-    <div class="col-md-6 ml-auto mr-auto text-center">
-        <h6 class="description">Profile Completeness</h6>
-        <ngb-progressbar type="success" class="mt-0" [value]=pct [striped]="true" [animated]="true"><i>{{pct}}%</i></ngb-progressbar><br>
-        <div *ngIf="currentUser.status == 'Inactive'">
-          <p>Your profile is not complete yet. To see who best matches you, please complete your profile.</p>
-          <button [routerLink]="['/edit-profile',usertype,userid]" type="button" class="btn btn-outline-danger btn-round">Complete Profile</button>
-        </div>
-        <div *ngIf="currentUser.status == 'Pending'">
-          <p>Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to see your best matches after admin approval. It may take 72 hours to 1 week to review your request.</p>
-          <button [routerLink]="['/edit-profile',usertype,userid]" type="button" class="btn btn-outline-danger btn-round">Edit Profile</button>
-        </div>
-        <div>
-          <p>Your profile is {{currentUser.status}}.</p>
-        </div>
-        <br>
-        <div *ngIf=profileComplete()>
-          <button type="button" class="btn btn-outline-danger btn-round">TOP MATCHES</button>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="nav-tabs-navigation col-lg-10 col-md-6 ml-auto mr-auto" *ngIf=profileComplete()>
-    <div class="nav-tabs-wrapper">
-        <ngb-tabset [justify]="'center'">
-            <ngb-tab title="Matches">
-                <ng-template ngbTabContent >
-                    <div class="row following" id="follows">
-                        <div class="col-lg-9 col-md-6 ml-auto mr-auto">
-                            <ul class="list-unstyled follows">
-                                <ng-container *ngFor="let Id of topMatches; let i=index">
-                                <li *ngFor="let user of getTopMatches(Id)">
-                                    <div class="row">
-                                        <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
-                                            <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
-                                            class="img-circle img-no-padding img-responsive" height="70px;">
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 ml-auto">
-                                            <h6>{{user.fullName}}<br/><small>Age {{user.age}}, {{user.highestEducation}}</small></h6>
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 ml-auto">
-                                            <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
-                                        </div>
-                                        <div *ngIf="user.status!='Active'"
-                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <div>
-                                              <label class="form-check-label">
-                                                <i style="color:yellow;" class="fa fa-question-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Profile {{user.status}}</span>
-                                              </label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="user.status=='Active'"
-                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
-                                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
-                                            <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                                                <span class="form-check-sign">Request Sent</span>
-                                              </label>
-                                            </div>
-                                            <div *ngIf="isReqRejected(user)">
-                                              <label class="form-check-label">
-                                                <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Profile Rejected</span>
-                                              </label>
-                                            </div>
-                                            <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (mouseover)=setXuser(user.userId)>View Profile</button></a>
-
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (click)=giveAccess(user,i)>Give Access</button>
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
-                                            (click)=rejectAccess(user,i)>Reject</button>
-                                            <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                                                <span class="form-check-sign">Access Given</span>
-                                              </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                </li>
-                                </ng-container>
-                            </ul>
+        <ngb-tab title="Requested">
+          <ng-template ngbTabContent>
+            <div class="row following" id="follows">
+              <div class="col-lg-9 col-md-6 ml-auto mr-auto">
+                <ul class="list-unstyled follows">
+                  <ng-container *ngFor="let Id of requested; let i=index">
+                    <li *ngFor="let user of getTopMatches(Id)">
+                      <div class="row">
+                        <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
+                          <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
+                            class="img-circle img-no-padding img-responsive" height="70px;">
                         </div>
-                    </div>
-                </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="Requested">
-                <ng-template ngbTabContent >
-                    <div class="row following" id="follows">
-                        <div class="col-lg-9 col-md-6 ml-auto mr-auto">
-                            <ul class="list-unstyled follows">
-                                <ng-container *ngFor="let Id of requested; let i=index">
-                                <li *ngFor="let user of getTopMatches(Id)">
-                                    <div class="row">
-                                        <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
-                                            <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
-                                            class="img-circle img-no-padding img-responsive" height="70px;">
-                                        </div>
-                                        <div class="col-md-3 col-sm-4 ml-auto">
-                                            <h6>{{user.fullName}}<br/><small>Age {{user.age}}, {{user.highestEducation}}
-                                            <br/>State: {{user.state}}</small></h6>
-                                        </div>
-                                        <!--div class="col-md-3 col-sm-4 ml-auto">
+                        <div class="col-md-3 col-sm-4 ml-auto">
+                          <h6>{{user.fullName}}<br /><small>Age {{user.age}}, {{user.highestEducation}}
+                              <br />State: {{user.state}}</small></h6>
+                        </div>
+                        <!--div class="col-md-3 col-sm-4 ml-auto">
                                             <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
                                         </div-->
-                                        <div *ngIf="user.status!='Active'"
-                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <div>
-                                              <label class="form-check-label">
-                                                <i style="color:yellow;" class="fa fa-question-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Profile {{user.status}}</span>
-                                              </label>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="user.status=='Active'"
-                                        class="col-md-4 col-sm-2 ml-auto mr-auto" style="padding-top:15px;">
-                                            <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
-                                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request Info</button>
-                                            <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                                                <span class="form-check-sign">Request Sent</span>
-                                              </label>
-                                            </div>
-                                            <div *ngIf="isReqRejected(user)">
-                                              <label class="form-check-label">
-                                                <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                                <span class="form-check-sign">Profile Rejected</span>
-                                              </label>
-                                            </div>
-                                            <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]" target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (mouseover)=setXuser(user.userId)>View Profile</button></a>
-
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
-                                            (click)=giveAccess(user,i)>Give Access</button>
-                                            <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
-                                            (click)=rejectAccess(user,i)>Reject</button>
-                                            <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
-                                              <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                                                <span class="form-check-sign">Access Given</span>
-                                              </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                </li>
-                                </ng-container>
-                            </ul>
+                        <div *ngIf="user.status!='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
+                          style="padding-top:15px;">
+                          <div>
+                            <label class="form-check-label">
+                              <i style="color:yellow;" class="fa fa-question-circle" aria-hidden="true"></i>
+                              <span class="form-check-sign">Profile {{user.status}}</span>
+                            </label>
+                          </div>
                         </div>
-                    </div>
-                </ng-template>
-            </ngb-tab>
+                        <div *ngIf="user.status=='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
+                          style="padding-top:15px;">
+                          <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
+                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request
+                            Info</button>
+                          <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked="" disabled>
+                              <span class="form-check-sign">Request Sent</span>
+                            </label>
+                          </div>
+                          <div *ngIf="isReqRejected(user)">
+                            <label class="form-check-label">
+                              <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                              <span class="form-check-sign">Profile Rejected</span>
+                            </label>
+                          </div>
+                          <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
+                            target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button"
+                              class="btn btn-success btn-sm" (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
-        </ngb-tabset>
+                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
+                            (click)=giveAccess(user,i)>Give Access</button>
+                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
+                            (click)=clickReject(user,i) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                          <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked="" disabled>
+                              <span class="form-check-sign">Access Given</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+      </ngb-tabset>
     </div>
-</div>
+  </div>
 
+  <!-- Modal for Rejection Note
+          =======-->
+  <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to reject?</h5>
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row bd-highlight">
+            <div class="p-4 w-100 bd-highlight">
+              <!--div *ngIf="cuser.status!='Locked'" class="form-group form-floating">
+                      <p>Are you Sure?</p>
+                  </div-->
+              <div class="form-group form-floating">
+                <select [(ngModel)]="rejectNote" class="form-select" id="rejectNote">
+                  <option *ngFor="let note of rejectionNote; let i=index" value={{i}}>
+                    {{note}}
+                  </option>
+                </select>
+                <label for="rejectNote">Why do you want to reject this? {{rejectNote}}</label>
+              </div>
+            </div>
+          </div>
 
-<!--div class="modal fade" id="viewProfileModal" tabindex="-1"
+          <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal">Cancel
+          </button>
+          <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+            (click)=rejectAccess(ruser,ri)>OK
+          </button>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- ==== end Modal for Rejection Note -->
+
+  <!--div class="modal fade" id="viewProfileModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">

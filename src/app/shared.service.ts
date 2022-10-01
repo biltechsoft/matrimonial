@@ -408,6 +408,13 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
                 "Accept Profile Request",  //4
                 "Reject Profile Request"];  //5
 
+  rejectionNote = ["Bad Picture", //0
+                    "Irrelevant Picture", //1
+                    "Irrelevant/Wrong Information Provided", //2
+                    "Not living in US", //3
+                    "Not Proper Matching"  //4
+                  ];
+
   STATES = [
     {
       "State": "Alabama",

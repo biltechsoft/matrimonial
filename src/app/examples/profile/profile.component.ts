@@ -28,6 +28,9 @@ export class ProfileComponent implements OnInit {
     pad=false;
     reqSentIndex;
     userid; usertype;
+    ruser; ri; //for rejectAccess (user, i)
+    rejectNote=0;
+    rejectionNote = this.service.rejectionNote;
 
     ngOnInit() {
       this.userid = Number(this.arout.snapshot.paramMap.get("id"));
@@ -82,6 +85,18 @@ export class ProfileComponent implements OnInit {
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
         });
       }
+      //add admin activity
+      var logval = {
+        adminId: Number(localStorage.getItem('adminid')),
+        userId: this.userid,
+        userType: this.usertype,
+        xuserId: user.userId,
+        action: 4,  //from this.service.actionType
+        description: 'accepted profile request',
+        note: null,
+        actionTime: this.service.getDateTime()
+      }
+      this.service.addAdminLog(logval).subscribe();
     }
     isReqAccepted(user) {
       if(this.currentUser.reqAccepted == null) { return false; }
@@ -91,8 +106,13 @@ export class ProfileComponent implements OnInit {
       if(this.currentUser.reqRejected == null) { return false; }
       else { return this.currentUser.reqRejected.split(',').includes(user.userId.toString()); }
     }
+    //ruser; ri; //for rejectPP / profileReject (user, i)
+    clickReject(user,i) {
+      this.ruser = user;
+      this.ri = i;
+    }
     rejectAccess(user,i) {
-      if(confirm('Are you sure you want to reject the request?')) {
+      //if(confirm('Are you sure you want to reject the request?')) {
         //delete reqSent and add it to reqRejected
         if(this.currentUser.reqSent == user.userId.toString()) { this.currentUser.reqSent = null; }
         else {
@@ -117,7 +137,19 @@ export class ProfileComponent implements OnInit {
             //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
           });
         }
-      }
+        //add admin activity
+        var logval = {
+          adminId: localStorage.getItem('adminid'),
+          userId: this.userid,
+          userType: this.usertype,
+          xuserId: user.userId,
+          action: 5,  //from this.service.actionType
+          description: 'rejected profile request',
+          note: this.rejectNote,
+          actionTime: this.service.getDateTime()
+        }
+        this.service.addAdminLog(logval).subscribe();
+      //}
     }
     setXuser(id) {
       localStorage.setItem('xuser',id.toString());
