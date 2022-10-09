@@ -151,7 +151,7 @@ export class AdminloginComponent implements OnInit {
         });
       }
       this.service.deleteTempUser(this.currentUser.tempId).subscribe(res=>{
-        alert(res.toString());
+        //alert(res.toString());
       });
       localStorage.setItem('isSignedUp', "True");
       localStorage.removeItem('userid');

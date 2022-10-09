@@ -5,6 +5,7 @@ import { ILogin } from 'app/interfaces/login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {SharedService} from 'app/shared.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-password',
@@ -93,7 +94,8 @@ export class PasswordComponent implements OnInit {
       this.errorMessage = "Password Wrong!";
       return false;
     }
-    alert("Password Changed Successfully");
+    //alert("Password Changed Successfully");
+    Swal.fire('Password Changed!', 'Password Changed Successfully','success');
     if(this.usertype=='0') {
       this.router.navigate([rout]);
     }

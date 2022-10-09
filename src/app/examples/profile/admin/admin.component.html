@@ -146,7 +146,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index">
-                <ng-container *ngIf=anyRequest(user)>
+                <ng-container *ngIf="anyRequest(user) && user.status=='Active'">
                   <td style="vertical-align: middle;"> {{user.userId}}</td>
                   <td style="vertical-align: middle;">
                     <a [routerLink]="['/edit-profile',genderMap(user.gender),user.userId]" target="_blank"
@@ -328,7 +328,7 @@
                 <td style="vertical-align: middle;">{{user.cellPhone}}</td>
                 <td style="vertical-align: middle;">
                   <div class="form-group" style="padding-top:15px;">
-                    <select (change)=changeStatus(user) [(ngModel)]="user.matchShowLimit" class="form-select"
+                    <select (change)=updateUser(user) [(ngModel)]="user.matchShowLimit" class="form-select"
                       id="state">
                       <option *ngFor="let limit of topMatchLimits" value={{limit}}>{{limit}}</option>
                     </select>
@@ -382,13 +382,13 @@
                   </div-->
                       <div class="form-group form-floating">
                         <select [(ngModel)]="cuser.lockedId" class="form-select" id="lockedId">
-                          <ng-container *ngFor="let id of topMatches">
+                          <ng-container *ngFor="let id of reqAccepted">
                             <option *ngIf=!isLocked(id,cuser.gender) value={{id}}>
                               {{id}} - {{getName(id,cuser.gender)}}
                             </option>
                           </ng-container>
                         </select>
-                        <label for="lockedId">To Whom {{cuser.fullName}} is LOCKED?</label>
+                        <label for="lockedId">To Whom {{cuser.fullName}} is {{profileStatus[3]}}?</label>
                       </div>
                     </div>
                   </div>

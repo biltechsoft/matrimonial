@@ -5,6 +5,7 @@ import {SharedService} from 'app/shared.service';
 import { ILogin } from 'app/interfaces/login';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-signup',
@@ -144,7 +145,8 @@ export class SignupComponent implements OnInit {
         }
 
         this.service.sendEmail(emailVal).subscribe(res=>{
-          alert(res.toString());
+          //alert(res.toString());
+          Swal.fire('Verification Code Sent!', res.toString(),'success');
         });
 
         localStorage.setItem('userid', this.Email);

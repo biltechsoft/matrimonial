@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
     ruser; ri; //for rejectAccess (user, i)
     rejectNote=0;
     rejectionNote = this.service.rejectionNote;
+    profileStatus = this.service.profileStatus;
 
     ngOnInit() {
       this.userid = Number(this.arout.snapshot.paramMap.get("id"));
@@ -72,17 +73,33 @@ export class ProfileComponent implements OnInit {
       }
       if(this.currentUser.reqAccepted == null) { this.currentUser.reqAccepted = ""; }
       else { this.currentUser.reqAccepted += ","; }
+      //for giving requested id access too
+      if(user.reqSent == null || user.reqSent == this.currentUser.userId.toString()) { user.reqSent = null; }
+      else {
+        var newReqSent2 = user.reqSent.split(',').filter(x => x !== this.currentUser.userId.toString());
+        user.reqSent = newReqSent2[0];
+        for(var r=1; r<newReqSent2.length; r++) {
+          user.reqSent += ',' + newReqSent2[r];
+        }
+      }
+      if(user.reqAccepted == null) { user.reqAccepted = ""; }
+      else { user.reqAccepted += ","; }
       var val = { userId: this.currentUser.userId,
                   reqSent: this.currentUser.reqSent,
                   reqAccepted: this.currentUser.reqAccepted += user.userId };
+      var val2 = { userId: user.userId,
+                  reqSent: user.reqSent,
+                  reqAccepted: user.reqAccepted += this.currentUser.userId };
       if(this.currentUser.gender == 'Male') {
         this.service.updateMaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+          this.service.updateFemaleUser(val2).subscribe(); //for giving requested id access too
         });
       }
       else if(this.currentUser.gender == 'Female') {
         this.service.updateFemaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+          this.service.updateMaleUser(val2).subscribe();  //for giving requested id access too
         });
       }
       //add admin activity
@@ -124,9 +141,23 @@ export class ProfileComponent implements OnInit {
         }
         if(this.currentUser.reqRejected == null) { this.currentUser.reqRejected = ""; }
         else { this.currentUser.reqRejected += ","; }
+        //create rejection for both id
+        if(user.reqSent == null || user.reqSent == this.currentUser.userId.toString()) { user.reqSent = null; }
+        else {
+          var newReqSent2 = user.reqSent.split(',').filter(x => x !== this.currentUser.userId.toString());
+          user.reqSent = newReqSent2[0];
+          for(var r=1; r<newReqSent2.length; r++) {
+            user.reqSent += ',' + newReqSent[r];
+          }
+        }
+        if(user.reqRejected == null) { user.reqRejected = ""; }
+        else { user.reqRejected += ","; }
         var val = { userId: this.currentUser.userId,
                     reqSent: this.currentUser.reqSent,
                     reqRejected: this.currentUser.reqRejected += user.userId };
+        var val = { userId: user.userId,
+                    reqSent: user.reqSent,
+                    reqRejected: user.reqRejected += this.currentUser.userId };
         if(this.currentUser.gender == 'Male') {
           this.service.updateMaleUser(val).subscribe(res=>{
             //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }

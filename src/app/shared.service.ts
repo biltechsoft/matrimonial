@@ -118,6 +118,13 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     }
     return re;
   }
+  validatePass(str) {
+    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/im.test(str);
+    if(str=='' || str==null) {
+      return true;
+    }
+    return re;
+  }
 
   getAdminList(id=0): Observable<any[]> {
     if(id==0) {
@@ -414,6 +421,8 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
                     "Not living in US", //3
                     "Not Proper Matching"  //4
                   ];
+
+  profileStatus = ['Inactive', 'Pending', 'Active', 'In Progress', 'Deactivated'];
 
   STATES = [
     {

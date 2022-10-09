@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {SharedService} from 'app/shared.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-profile',
@@ -128,7 +129,8 @@ export class EditProfileComponent implements OnInit {
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
       if(file.size > this.MAX_SIZE) {
-        alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        //alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
         return false;
       }
 
@@ -151,7 +153,8 @@ export class EditProfileComponent implements OnInit {
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
       if(file.size > this.MAX_SIZE) {
-        alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        //alert("You cannot upload photo of size more than " + this.maxSize + "!");
+        Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
         return false;
       }
 
@@ -182,7 +185,8 @@ export class EditProfileComponent implements OnInit {
     const formData:FormData=new FormData();
     formData.append('uploadedFile',file,file.name);
     if(file.size > this.MAX_SIZE) {
-      alert("You cannot upload file of size more than " + this.maxSize + "!");
+      //alert("You cannot upload file of size more than " + this.maxSize + "!");
+      Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
       return false;
     }
 
@@ -273,15 +277,28 @@ export class EditProfileComponent implements OnInit {
         this.telephoneCheck(this.currentUser.homePhone) && this.telephoneCheck(this.currentUser.guarPhone) &&
         this.telephoneCheck(this.currentUser.phone1) &&
         this.telephoneCheck(this.currentUser.phone2) && this.telephoneCheck(this.currentUser.phone3))) {
-          alert('Please enter valid phone number!');
+          //alert('Please enter valid phone number!');
+          Swal.fire('Invalid Field!', 'Please enter valid phone number!','warning');
           return false;
         }
 
-    else if(!this.validateEmail(this.currentUser.guarEmail)) { alert('Please enter valid email address!'); return false; }
+    else if(!this.validateEmail(this.currentUser.guarEmail)) { 
+      //alert('Please enter valid email address!'); 
+      Swal.fire('Invalid Field!', 'Please enter valid email address!','warning');
+      return false; 
+    }
     else if(!(this.validateName(this.currentUser.fullName) && this.validateName(this.currentUser.guarName) &&
               this.validateName(this.currentUser.refName1) && this.validateName(this.currentUser.refName2) &&
-              this.validateName(this.currentUser.refName3))) { alert('Please spell name correctly!'); return false; }
-    else if(!this.validateZIP(this.currentUser.zip)) { alert('Please enter valid ZIP code!'); return false; }
+              this.validateName(this.currentUser.refName3))) { 
+                //alert('Please spell name correctly!'); 
+                Swal.fire('Invalid Field!', 'Please spell name correctly!','warning');
+                return false; 
+              }
+    else if(!this.validateZIP(this.currentUser.zip)) { 
+      //alert('Please enter valid ZIP code!'); 
+      Swal.fire('Invalid Field!', 'Please enter valid ZIP code!','warning');
+      return false; 
+    }
     this.currentUser.userToken = localStorage.getItem('usertoken');
     this.currentUser.lastEdit = this.service.getDateTime();
     //this.currentUser.matchId = String(this.matchedId);
@@ -307,10 +324,25 @@ export class EditProfileComponent implements OnInit {
         this.currentUser.status = 'Pending';
       }
       this.service.updateMaleUser(this.currentUser).subscribe(res=>{
-        if(photo=='none') { alert(res.toString()); }
-        else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
-        else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
-        if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
+        if(photo=='none') { Swal.fire('Updated!', res.toString(),'success');} //alert(res.toString()); }
+        else if(photo=='changepp') { 
+          //alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.');
+          Swal.fire('Approval Required!',
+                    'Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.',
+                    'info');
+        }
+        else if(photo=='changeGallery') { 
+          //alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); 
+          Swal.fire('Approval Required!',
+                    'Your picture will be reviewed by Admin. Your gallery will be updated after admin approval.',
+                    'info');
+        }
+        if(activateRequest) { 
+          //alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')
+          Swal.fire('Profile Activation Request!',
+                    'Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.',
+                    'info');
+        }
         this.getCurrentUser(this.currentUser.userId, '1');
       });
     }
@@ -322,10 +354,25 @@ export class EditProfileComponent implements OnInit {
         this.currentUser.status = 'Pending';
       }
       this.service.updateFemaleUser(this.currentUser).subscribe(res=>{
-        if(photo=='none') { alert(res.toString()); }
-        else if(photo=='changepp') { alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.'); }
-        else if(photo=='changeGallery') { alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); }
-        if(activateRequest) { alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')}
+        if(photo=='none') { Swal.fire('Updated!', res.toString(),'success');} //alert(res.toString()); }
+        else if(photo=='changepp') { 
+          //alert('Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.');
+          Swal.fire('Approval Required!',
+                    'Your picture will be reviewed by Admin. Your profile picture will be visible after admin approval.',
+                    'info');
+        }
+        else if(photo=='changeGallery') { 
+          //alert('Your pictures will be reviewed by Admin. Your gallery will be updated after admin approval.'); 
+          Swal.fire('Approval Required!',
+                    'Your picture will be reviewed by Admin. Your gallery will be updated after admin approval.',
+                    'info');
+        }
+        if(activateRequest) { 
+          //alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')
+          Swal.fire('Profile Activation Request!',
+                    'Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.',
+                    'info');
+        }
         this.getCurrentUser(this.currentUser.userId, '2');
       });
     }

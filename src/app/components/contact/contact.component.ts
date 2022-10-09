@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedService} from 'app/shared.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact',
@@ -54,26 +55,31 @@ export class ContactComponent implements OnInit {
   sendMessage() {
     if(this.Name==null || this.Name=='' || this.Email==null || this.Email=='' ||
         this.Message==null || this.Message=='') {
-          alert("Fields cannot be empty!");
+          //alert("Fields cannot be empty!");
+          Swal.fire('Field Empty!', 'Fields cannot be empty!','warning');
           /*const field = document.getElementById('name');
           field.style.display = 'block';
           field.focus();*/
           return false;
         }
     if(!this.validateName(this.Name)) {
-          alert("Spell your name correctly!");
+          //alert("Spell your name correctly!");
+          Swal.fire('Invalid Field!', 'Spell your name correctly!','warning');
           return false;
         }
     if(!this.validateEmail(this.Email)) {
-          alert("Please enter valid email address!");
+          //alert("Please enter valid email address!");
+          Swal.fire('Invalid Field!', 'Please enter valid email address!','warning');
           return false;
         }
     if(!this.validateMessage(this.Message)) {
-          alert("Message should be of at least 15 characters length!");
+          //alert("Message should be of at least 15 characters length!");
+          Swal.fire('Invalid Field!', 'Message should be of at least 15 characters length!','warning');
           return false;
         }
     if(!this.validateCaptcha(this.Captcha, this.CAPTCHA_CODE[this.cid])) {
-          alert("Type captcha correctly!");
+          //alert("Type captcha correctly!");
+          Swal.fire('Invalid Field!', 'Type captcha correctly!','warning');
           return false;
         }
     var val={
@@ -86,7 +92,8 @@ export class ContactComponent implements OnInit {
 
     this.service.addMessage(val).subscribe(res=>{
       if(res.toString().includes('Successfully')) {
-        alert("Your message is sent! Admin will reply through your email ASAP!");
+        //alert("Your message is sent! Admin will reply through your email ASAP!");
+        Swal.fire('Sent!', 'Your message is sent! Admin will reply through your email ASAP!','success');
         this.Name=null; this.Email=null; this.Message=null; this.Captcha=null;
         this.getCaptcha();
       }
@@ -102,7 +109,8 @@ export class ContactComponent implements OnInit {
     }
 
     this.service.sendEmail(emailVal).subscribe(res=>{
-      alert(res.toString());
+      //alert(res.toString());
+      Swal.fire('Sent!', res.toString(),'success');
     });
   }
 
