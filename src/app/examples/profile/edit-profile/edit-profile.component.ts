@@ -340,7 +340,7 @@ export class EditProfileComponent implements OnInit {
         if(activateRequest) { 
           //alert('Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.')
           Swal.fire('Profile Activation Request!',
-                    'Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID and after approval you will be able to see your top matches.',
+                    'Your Profile is ' + this.currentUser.profileCompleteness + '% complete. A request is sent to admin to approve your ID. We find your best matching within 24 hours after your profile being active.',
                     'info');
         }
         this.getCurrentUser(this.currentUser.userId, '1');

@@ -89,7 +89,7 @@ export class SignupComponent implements OnInit {
       else { return true; }
     }
     passwordValidate() {
-      if(this.pass1 == "") { return false; }
+      if(!this.service.validatePass(this.pass1)) { return false; }
       else { return true; }
     }
 
