@@ -18,13 +18,18 @@ export class AdminComponent implements OnInit {
   adminusers: any = [];
   maleusers: any = [];
   femaleusers: any = [];
+  maleusersFiltered: any = [];
+  femaleusersFiltered: any = [];
   users: any = [];
   matchingtables: any = [];
   messages: any = [];
   allpost: any = [];
   adminLog: any = [];
-  cuser = ''; topMatches = ''; reqAccepted='';
+  cuser=''; topMatches = ''; reqAccepted='';
   firstTime = true;
+
+  itemPerPage=10;
+  collectionSize=0;
 
   adminUser;
   modalTitle = "";
@@ -55,6 +60,8 @@ export class AdminComponent implements OnInit {
   PostTypeFilter: string = "";
   PageTitleFilter: string = "";
   allpostWithoutFilter: any = [];
+  userFilter: string = "";
+  page=0;
 
   MatchingId = 0;
   MatchingIndicator = null;
@@ -88,6 +95,9 @@ export class AdminComponent implements OnInit {
   viewMoreString;
   maxPostDetailLen = 40;
   maxPhotoNameLen = 15;
+  sortasc=false;
+  recom=false;
+  recuserid=0;
 
 
   ngOnInit(): void {
@@ -110,16 +120,19 @@ export class AdminComponent implements OnInit {
 
     this.acceptedIndex = [];
     this.rejectedIndex = [];
+    this.recuserid=0;
   }
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
       this.maleusers = data;
+      this.maleusersFiltered = data;
       this.users = data;
     });
   }
   refreshFemaleList() {
     this.service.getFemaleUserList().subscribe(data => {
       this.femaleusers = data;
+      this.femaleusersFiltered = data;
       this.users = data;
     });
   }
@@ -188,6 +201,46 @@ export class AdminComponent implements OnInit {
     }
     this.refreshList();
     //localStorage.setItem('menuadmin', item);
+  }
+  recommend(user,recid) {
+    if(user.reqAccepted.split(',').includes(recid.toString())) {
+      Swal.fire('Recommendation Exists!', 'This ID is already recommended for this user.','warning');
+    }
+    else {
+      var val = {
+        userId: user.userId,
+        reqAccepted: (user.reqAccepted==null ? recid : user.reqAccepted+','+recid),
+      }
+      var ruser = this.getUser(recid, user.gender);
+      var val2 = {
+        userId: recid,
+        reqAccepted: (ruser.reqAccepted==null ? user.userId : ruser.reqAccepted+','+user.userId),
+      }
+      if (user.gender == 'Male') {
+        this.service.updateMaleUser(val).subscribe(res => {
+          if(res.toString()=="Updated Successfully") {
+            this.service.updateFemaleUser(val2).subscribe(res => {
+              if(res.toString()=="Updated Successfully") {
+                this.refreshList();
+                Swal.fire('Recommendation Done!', 'Recommendation Successful!','success');
+              }
+            });
+          }
+        });
+      }
+      else {
+        this.service.updateFemaleUser(val).subscribe(res => {
+          if(res.toString()=="Updated Successfully") {
+            this.service.updateMaleUser(val2).subscribe(res => {
+              if(res.toString()=="Updated Successfully") {
+                this.refreshList();
+                Swal.fire('Recommendation Done!', 'Recommendation Successful!','success');
+              }
+            });
+          }
+        });
+      }
+    }
   }
   addClick(i) {
     if (this.menu[0].status) {
@@ -503,6 +556,7 @@ export class AdminComponent implements OnInit {
     });
   }
   getName(Id, gender) {
+    if(Id==0) { return ''; }
     if (gender == 'Female' || gender == '1') {  //Female for getting matching gender and 1 for getting own gender
       return this.maleusers.filter(user => user.userId.toString() == Id)[0].fullName;
     }
@@ -848,6 +902,40 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  userFilterFn() {
+    var UserFilter = this.userFilter;
+
+    this.maleusersFiltered = this.maleusers.filter(function (el: any) {
+      return el.fullName.toString().toLowerCase().includes(
+        UserFilter.toString().trim().toLowerCase()
+      )
+    });
+
+    this.femaleusersFiltered = this.femaleusers.filter(function (el: any) {
+      return el.fullName.toString().toLowerCase().includes(
+        UserFilter.toString().trim().toLowerCase()
+      )
+    });
+  }
+
+  sortResult(prop:any,asc:boolean){
+    this.maleusersFiltered = this.maleusersFiltered.sort(function(a:any,b:any){
+      if(asc){
+          return (a[prop].toString().toLowerCase()>b[prop].toString().toLowerCase())?1 : ((a[prop].toString().toLowerCase()<b[prop].toString().toLowerCase()) ?-1 :0);
+      }else{
+        return (b[prop].toString().toLowerCase()>a[prop].toString().toLowerCase())?1 : ((b[prop].toString().toLowerCase()<a[prop].toString().toLowerCase()) ?-1 :0);
+      }
+    })
+    this.femaleusersFiltered = this.femaleusersFiltered.sort(function(a:any,b:any){
+      if(asc){
+          return (a[prop].toString().toLowerCase()>b[prop].toString().toLowerCase())?1 : ((a[prop].toString().toLowerCase()<b[prop].toString().toLowerCase()) ?-1 :0);
+      }else{
+        return (b[prop].toString().toLowerCase()>a[prop].toString().toLowerCase())?1 : ((b[prop].toString().toLowerCase()<a[prop].toString().toLowerCase()) ?-1 :0);
+      }
+    })
+    this.sortasc = !this.sortasc;
+  }
+
 
   menu = [
     {
@@ -1017,7 +1105,7 @@ export class AdminComponent implements OnInit {
       status: false //for showing submenu
     },
     {
-      id: 90,
+      id: 9,
       name: "Contact",
       param: ['Address', 'Phone', 'Email', 'Social', 'Map'],
       paramlen: ['5', '1', '1', '5', '10'],
@@ -1026,7 +1114,7 @@ export class AdminComponent implements OnInit {
       status: false //for showing submenu
     },
     {
-      id: 91,
+      id: 10,
       name: "Privacy Policy",
       param: ['Privacy Policy'],
       paramlen: ['15'],

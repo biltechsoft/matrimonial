@@ -28,6 +28,7 @@ export class ViewProfileComponent implements OnInit {
     this.xuser = this.arout.snapshot.paramMap.get("xid");
     this.service.loginauth(this.userid, this.usertype);
     this.getCurrentUser(this.userid, this.usertype);
+    this.service.reloadOnce();
     //this.getCurrentUser();
   }
   getCurrentUser(userid, usertype) {

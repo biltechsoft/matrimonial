@@ -16,17 +16,17 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#body">Home</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" href="">Home</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#services">Services</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#services" (click)="sidebarToggle()">Services</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/servicess']">Services</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#portfolio">Events</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#portfolio" (click)="sidebarToggle()">Events</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/events']">Events</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#about">About Us</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#about" (click)="sidebarToggle()">About Us</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/abouts']">About Us</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#faq">FAQ</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#faq" (click)="sidebarToggle()">FAQ</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/faqs']">FAQ</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#call-to-action">Donate</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#call-to-action" (click)="sidebarToggle()">Donate</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/donate']">Donate</a></li>
-              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#contact">Contact</a></li>
+              <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#contact" (click)="sidebarToggle()">Contact</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/contacts']">Contact</a></li>
               <li class="nav-item" *ngIf="!isLogin() && !isLoggedin()"><a [routerLink]="['/login']" class="btn btn-danger btn-round">Login</a></li>
               <li class="nav-item" *ngIf="isLogin()"><a [routerLink]="['/signup']" class="btn btn-danger btn-round">SIGNUP</a></li>

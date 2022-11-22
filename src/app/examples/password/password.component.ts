@@ -64,9 +64,17 @@ export class PasswordComponent implements OnInit {
     }
     return false;
   }
+  passwordValidate() {
+    if(!this.service.validatePass(this.pass1)) { return false; }
+    else { return true; }
+  }
   changePassword() {
     if(!this.passMatched()) {
       this.errorMessage = "Please retype new password correctly.";
+      return false;
+    }
+    if(!this.passwordValidate()) {
+      this.errorMessage = "Password must contain uppercase, lowercase, number and special characcter!";
       return false;
     }
     var changed=true;

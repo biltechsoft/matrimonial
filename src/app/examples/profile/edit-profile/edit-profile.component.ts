@@ -42,6 +42,7 @@ export class EditProfileComponent implements OnInit {
     this.usertype = this.arout.snapshot.paramMap.get("g");
     this.service.loginauth(this.userid, this.usertype);
     this.getCurrentUser(this.userid, this.usertype);
+    this.service.reloadOnce();
   }
   /*getU() {
     if(localStorage.getItem('usertype')=='0') {
@@ -52,6 +53,7 @@ export class EditProfileComponent implements OnInit {
     }
     return true;
   }*/
+  
   genderMap(gender) {
     return (gender=='Male' ? '1' : '2');
   }

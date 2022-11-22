@@ -125,6 +125,19 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
     }
     return re;
   }
+  reloadOnce() {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }  
+      else
+        localStorage.removeItem('firstLoad');
+    }
+  }
+  
 
   getAdminList(id=0): Observable<any[]> {
     if(id==0) {

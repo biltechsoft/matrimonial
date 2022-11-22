@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+//import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app.routing';
+
 //import { NgxCaptchaModule } from 'ngx-captcha';
 
 import { AppComponent } from './app.component';

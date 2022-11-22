@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedService} from 'app/shared.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+//import { threadId } from 'worker_threads';
 
 @Component({
     selector: 'app-profile',
@@ -22,6 +24,8 @@ export class ProfileComponent implements OnInit {
     topMatches;
     topMatchPct;
     requested;
+    reqAccepted;
+    reqLock;
     users;
     matchUsers;
     PhotoUrl = this.service.PhotoUrl;
@@ -32,6 +36,7 @@ export class ProfileComponent implements OnInit {
     rejectNote=0;
     rejectionNote = this.service.rejectionNote;
     profileStatus = this.service.profileStatus;
+    unlockMsg = "I would like to request to UNLOCK my ID. I am not interested with the person anymore with whom my ID is temporarily LOCKED.";
 
     ngOnInit() {
       this.userid = Number(this.arout.snapshot.paramMap.get("id"));
@@ -49,11 +54,13 @@ export class ProfileComponent implements OnInit {
       if(this.currentUser.gender == 'Male') {
         this.service.updateMaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+          this.getCurrentUser(this.userid, this.usertype);
         });
       }
       else if(this.currentUser.gender == 'Female') {
         this.service.updateFemaleUser(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+          this.getCurrentUser(this.userid, this.usertype);
         });
       }
     }
@@ -206,6 +213,7 @@ export class ProfileComponent implements OnInit {
             this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
             this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
               +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
+            this.reqAccepted = this.currentUser.reqAccepted.split(',');
             //this.pct = this.profilePercentage(this.currentUser);
           });
           this.service.getFemaleUserList().subscribe(data=>{
@@ -220,13 +228,70 @@ export class ProfileComponent implements OnInit {
             this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
             this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
               +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
-            //this.pct = this.profilePercentage(this.currentUser,false);
+            this.reqAccepted = this.currentUser.reqAccepted.split(',');
+              //this.pct = this.profilePercentage(this.currentUser,false);
           });
           this.service.getMaleUserList().subscribe(data=>{
             this.users = data;
           });
       }
     }
+
+    getName(Id) {
+      return this.users.filter(user => user.userId.toString() == Id)[0].fullName;
+    }
+    toggleGender(gender) {
+      return (gender=='Male' ? 'Female' : 'Male');
+    }
+
+    isLocked(Id) {
+      return this.users.filter(user => user.userId.toString() == Id)[0].status == this.profileStatus[3];
+    }
+    requestLock() {   
+      var val = {
+        userId: this.currentUser.userId,
+        reqLock: this.reqLock
+      };
+
+      if (this.currentUser.gender == 'Male') {
+        this.service.updateMaleUser(val).subscribe(res => {
+          //this.getCurrentUser(this.userid, this.usertype);
+          alert(res.toString());
+        });
+      }
+      else {
+        this.service.updateFemaleUser(val).subscribe(res => {
+          //this.getCurrentUser(this.userid, this.usertype);
+        });
+      }
+    }
+
+    sendMessage(LOCK) {
+      var msg = this.unlockMsg;
+      if(LOCK) {
+        msg = 'I would like to request to LOCK my ID with the following ID: \n' +
+                this.toggleGender(this.currentUser.gender) + ' ID : ' + this.reqLock + ' - ' + this.getName(this.reqLock) + 
+                '\n\nMy Information:\n' +
+                this.currentUser.gender+ ' ID : ' + this.currentUser.userId + ' - ' + this.currentUser.fullName;
+      }
+      var val={
+        senderId:this.currentUser.fullName,
+        userType:this.usertype,
+        senderEmail:this.currentUser.email,
+        messageDetail:msg,
+        dateTime:this.service.getDateTime()
+      };
+  
+      this.service.addMessage(val).subscribe(res=>{
+        if(res.toString().includes('Successfully')) {
+          //alert("Your message is sent! Admin will reply through your email ASAP!");
+          Swal.fire('Sent!', 'Your request is sent! Admin will take step ASAP!','success');
+          
+        }
+        //alert(res.toString());
+      });
+    }
+    
     /*getU() {
       if(localStorage.getItem('usertype')=='0') {
         if(localStorage.getItem('userid') != this.gotid) {

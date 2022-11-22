@@ -112,7 +112,7 @@ export class SignupComponent implements OnInit {
          if(this.Gender==null) { this.Gender=""; this.status=false; }
          if(this.State==null) { this.State=""; this.status=false; }
          if(this.BirthYear==null) { this.BirthYear=""; this.status=false; }
-         if(this.pass1==null) { this.pass1=""; this.status=false; }
+         if(!this.passwordValidate()) { this.status=false; }
          if(!this.passMatched()) { this.passMisMatched = true; this.status=false; }
          if(this.preRegistered()) { this.userAlreadyExist = true; this.status=false;}
 

@@ -17,7 +17,7 @@
           </div>
           <div class="name">
             <h4 class="title">{{currentUser.fullName}}</h4>
-            <h6 class="description">{{currentUser.gender}} : Age {{currentUser.age}}</h6>
+            <h6 class="description">{{currentUser.gender}} ID : {{currentUser.userId}}</h6>
           </div>
         </div>
       </div>
@@ -38,12 +38,80 @@
 
   <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
-      <p>Short Bio: "Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example
-        for the righteous." </p>
-
+      <p>Your profile is {{currentUser.status}}.</p>
+      <p *ngIf="currentUser.status == 'Active'">Your profile is visible to anyone who has access to view your profile.
+        If you are communicating with someone, you may 
+        <a [routerLink]="['/user-profile',usertype,userid]" data-bs-toggle="modal" data-bs-target="#statusModal">Request Admin</a> 
+        to temporarily LOCK your profile.
+        You can change your mind later by requesting admin to unlock/Activate your profile again.</p>
+      <p *ngIf="currentUser.status == profileStatus[3]">Your profile is not visible to anyone except 
+        <a [routerLink]="['/view-profile',usertype, userid, currentUser.lockedId]" target="_blank">
+          {{getName(currentUser.lockedId)}}</a>.
+        If you feel you are not interested to communicate with this person anymore, you may 
+        <a [routerLink]="['/user-profile',usertype,userid]" data-bs-toggle="modal" data-bs-target="#unlockModal">Request Admin</a> 
+        to UNLOCK your profile.
+        </p>
     </div>
   </div>
   <br />
+
+  <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request Admin to LOCK!</h5>
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row bd-highlight">
+            <div class="p-4 w-100 bd-highlight">
+
+              <p>I would like to request to LOCK my ID with the following ID</p>
+              <div class="form-group form-floating">
+                <select [(ngModel)]="reqLock" class="form-select" id="reqLock">
+                  <ng-container *ngFor="let id of reqAccepted">
+                    <option *ngIf=!isLocked(id) value="{{id}}">
+                      {{id}} - {{getName(id)}}
+                    </option>
+                  </ng-container>
+                </select>
+                <label for="reqLock">To Whom you want to LOCK with?</label>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+            (click)=sendMessage(true)>OK</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="unlockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request Admin to LOCK!</h5>
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row bd-highlight">
+            <div class="p-4 w-100 bd-highlight">
+
+              <p>{{unlockMsg}}</p>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+            (click)=sendMessage(false)>OK</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
