@@ -1,9 +1,16 @@
 .required {
   border: 1px solid #F44336;
 }
+.reqfilled {
+  border: 1px solid green;
+}
 
 .req {
   color: #F44336;
+  font-size: 20px;
+}
+.filled {
+  color: green;
   font-size: 20px;
 }
 

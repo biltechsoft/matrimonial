@@ -126,7 +126,7 @@ export class SignupComponent implements OnInit {
         tempGender:this.Gender,
         tempState:this.State,
         tempCellPhone:this.CellPhone,
-        tempEmail:this.Email,
+        tempEmail:this.Email.trim(),
         //tempDateOfBirth:dateBirth,
         tempBirthYear:this.BirthYear,
         tempVeriCode:this.code,
@@ -141,7 +141,7 @@ export class SignupComponent implements OnInit {
         var emailVal={
           subject: "Greetings from MUNA Matrimonial",
           message: "Your verification code is " + this.code,
-          toEmail: [this.Email]
+          toEmail: [this.Email.trim()]
         }
 
         this.service.sendEmail(emailVal).subscribe(res=>{
@@ -149,7 +149,7 @@ export class SignupComponent implements OnInit {
           Swal.fire('Verification Code Sent!', res.toString(),'success');
         });
 
-        localStorage.setItem('userid', this.Email);
+        localStorage.setItem('userid', this.Email.trim());
         localStorage.setItem('gotVeriCode', "True");  //for first time registration
         localStorage.setItem('removeVeriCode', "False");
         this.router.navigate(['/login']);
@@ -157,9 +157,9 @@ export class SignupComponent implements OnInit {
 
 
     preRegistered() {
-      this.regedEmail = this.UserList1.find(e => e.email == this.Email)
+      this.regedEmail = this.UserList1.find(e => e.email == this.Email.trim())
       if(this.regedEmail == null) {
-        this.regedEmail = this.UserList2.find(e => e.email == this.Email)
+        this.regedEmail = this.UserList2.find(e => e.email == this.Email.trim())
         if(this.regedEmail == null) { return false; }
       }
       else {return true;}

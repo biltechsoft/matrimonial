@@ -25,7 +25,7 @@
                           </div> -->
                           <div class="register-form">
                             <div *ngIf=!gotVeriCode()>
-                              <label>Email</label>
+                              <label>Email <span *ngIf="!emailValidate()" class="errortxt">Enter valid email address</span></label>
                               <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus===true}">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">

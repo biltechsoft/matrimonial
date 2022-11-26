@@ -121,9 +121,9 @@ export class LoginComponent implements OnInit {
     }
   }
   loginValidate(passcheck=true) {
-    this.currentUser = this.MaleUserList.find(e => e.email == this.userEmail);
+    this.currentUser = this.MaleUserList.find(e => e.email == this.userEmail.trim());
     if(this.currentUser == null) {
-      this.currentUser = this.FemaleUserList.find(e => e.email == this.userEmail);
+      this.currentUser = this.FemaleUserList.find(e => e.email == this.userEmail.trim());
       if(this.currentUser == null) {
         this.errorMessage = "Your Email is not Registered. Please Sign Up First.";
         return false;
@@ -223,6 +223,9 @@ export class LoginComponent implements OnInit {
   }
   clickRemember() {
     localStorage.setItem('forgot','False');
+  }
+  emailValidate() {
+    return this.service.validateEmail(this.userEmail);
   }
   forgot() {
     if(localStorage.getItem('forgot')=='True') {return true;}

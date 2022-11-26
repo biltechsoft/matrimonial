@@ -49,12 +49,12 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
      var yyyy = Number(today.getFullYear());
      return yyyy;
    }
-   getYEARS() {
+   getYEARS(past=0) {
      var year = this.getYear();
      var YEARS = [];
      for(var i=0; i<=50; i++)
      {
-       YEARS[i] = year-18-i;  //Assuming minimum marriage age is 18
+       YEARS[i] = year-past-i;  //Assuming minimum marriage age is 18
      }
      return YEARS;
    }

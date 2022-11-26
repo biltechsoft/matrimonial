@@ -34,7 +34,13 @@ export class EditProfileComponent implements OnInit {
   MAX_SIZE=2100000;  //maximum photo size = 2.1 MB
   maxSize='2 MB';
 
-  YEARS = this.service.getYEARS();
+  maxHeight = 200;
+  maxWeight = 1000;
+  maxChildrenNo = 50;
+  maxAgeGap = 50;
+
+  YEARS = this.service.getYEARS(18);
+  EDUYEARS = this.service.getYEARS();
   STATES = this.service.STATES;
 
   ngOnInit(): void {
@@ -277,8 +283,8 @@ export class EditProfileComponent implements OnInit {
   clickSave(photo='none') {
     if(!(this.telephoneCheck(this.currentUser.cellPhone) && this.telephoneCheck(this.currentUser.workPhone) &&
         this.telephoneCheck(this.currentUser.homePhone) && this.telephoneCheck(this.currentUser.guarPhone) &&
-        this.telephoneCheck(this.currentUser.phone1) &&
-        this.telephoneCheck(this.currentUser.phone2) && this.telephoneCheck(this.currentUser.phone3))) {
+        this.telephoneCheck(this.currentUser.refPhone1) &&
+        this.telephoneCheck(this.currentUser.refPhone2) && this.telephoneCheck(this.currentUser.refPhone3))) {
           //alert('Please enter valid phone number!');
           Swal.fire('Invalid Field!', 'Please enter valid phone number!','warning');
           return false;
@@ -315,6 +321,7 @@ export class EditProfileComponent implements OnInit {
     for(var key in this.currentUser) {
       var value = this.currentUser[key];
       if(value=='') { this.currentUser[key] = null; }
+      //this.currentUser[key] = this.currentUser[key].trim();
     }
 
     this.profilePercentage();
@@ -385,6 +392,12 @@ export class EditProfileComponent implements OnInit {
     localStorage.setItem('userage',this.currentUser.age);
     return true;
   }
+  isNotSingle() {
+    if(this.currentUser.maritalStatus == this.MARSTATS[1].prop || this.currentUser.maritalStatus == this.MARSTATS[2].prop ) {
+      return true;
+    }
+    return false;
+  }
   hasChildren() {
     if (this.currentUser.children == 'Yes') { return true; }
     else { return false; }
@@ -392,6 +405,10 @@ export class EditProfileComponent implements OnInit {
   isEmployed() {
     if (this.currentUser.employed == 'Yes') { return true; }
     else { return false; }
+  }
+  isFilled(str) {
+    if(str == null || str == '') { return false; }
+    return true;
   }
   /*heightOK() {
     if (Number.isInteger(Number(this.currentUser.height))) { return true; }
@@ -408,6 +425,27 @@ export class EditProfileComponent implements OnInit {
   }
   validateZIP(str) {
     return this.service.validateZIP(str);
+  }
+
+  heightValidate() {
+    if(this.currentUser.height > this.maxHeight) {
+      this.currentUser.height = this.maxHeight;
+    }
+  }
+  weightValidate() {
+    if(this.currentUser.weight > this.maxWeight) {
+      this.currentUser.weight = this.maxWeight;
+    }
+  }
+  childrenNoValidate() {
+    if(this.currentUser.childrenNumber > this.maxChildrenNo) {
+      this.currentUser.childrenNumber = this.maxChildrenNo;
+    }
+  }
+  ageGapValidate() {
+    if(this.currentUser.preAgeGap > this.maxAgeGap) {
+      this.currentUser.preAgeGap = this.maxAgeGap;
+    }
   }
 
   getWear(female) {
@@ -470,7 +508,7 @@ export class EditProfileComponent implements OnInit {
   imstatClicked = false;
   imstatClick(id) {
     this.imstatClicked = true;
-    if(id == this.IMSTATS.length-1 && !this.IMSTATS[id].checked) {
+    if(id == this.IMSTATS.length-1 && !this.IMSTATS[id].checked) {     
       for(var i=0; i<this.IMSTATS.length-1; i++) {
         this.IMSTATS[i].checked = false;
       }

@@ -124,7 +124,7 @@
           class="btn btn-outline-danger btn-round">Complete Profile</button>
       </div>
       <div *ngIf="currentUser.status == 'Pending'">
-        <p>Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to
+        <p class="important">Your profile is {{pct}}% complete. A request to activate your account is sent to admin. You will be able to
           see your best matches after admin approval. It may take 72 hours to 1 week to review your request.</p>
         <button [routerLink]="['/edit-profile',usertype,userid]" type="button"
           class="btn btn-outline-danger btn-round">Edit Profile</button>
