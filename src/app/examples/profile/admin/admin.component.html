@@ -146,7 +146,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let user of maleusers.concat(femaleusers); let i = index">
-                <ng-container *ngIf="anyRequest(user) && user.status=='Active'">
+                <ng-container *ngIf="anyRequest(user) && (user.status=='Active' || user.status=='Pending')">
                   <td style="vertical-align: middle;"> {{user.userId}}</td>
                   <td style="vertical-align: middle;">
                     <a [routerLink]="['/edit-profile',genderMap(user.gender),user.userId]" target="_blank"
@@ -277,6 +277,7 @@
           </div>
           </div>
           <br>
+          (Click on Table Header button to Sort Ascending or Descending)
           <table class="table table-striped">
             <thead>
               <tr>

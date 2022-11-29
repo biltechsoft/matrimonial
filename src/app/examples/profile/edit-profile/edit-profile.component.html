@@ -1015,7 +1015,9 @@ SPOUSAL PREFERENCES
                 </div>
                 <div class="col-sm-6" *ngIf=preEmployed()>
                   <div class="form-group form-floating">
-                      <input type="number" min="1" [(ngModel)]="currentUser.preIncome" class="form-control required" placeholder="Preferred minimum yearly Income" id="preIncome">
+                      <input type="number" min="1" [(ngModel)]="currentUser.preIncome" class="form-control" 
+                      placeholder="Preferred minimum yearly Income" id="preIncome"
+                      [ngClass]="isFilled(currentUser.preIncome) ? 'reqfilled' : 'required'">
                       <label for="preIncome">Preferred minimum yearly Income of future spouse (USD)</label>
                   </div>
                 </div>

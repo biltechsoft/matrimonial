@@ -117,6 +117,7 @@ export class AdminComponent implements OnInit {
     this.refreshMessage();
     this.refreshPost();
     this.refreshAdminLog();
+    //this.sortResult('userId',this.sortasc);
 
     this.acceptedIndex = [];
     this.rejectedIndex = [];
@@ -125,14 +126,14 @@ export class AdminComponent implements OnInit {
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
       this.maleusers = data;
-      this.maleusersFiltered = data;
+      this.maleusersFiltered = data.sort((item1, item2) => item2.userId - item1.userId);
       this.users = data;
     });
   }
   refreshFemaleList() {
     this.service.getFemaleUserList().subscribe(data => {
       this.femaleusers = data;
-      this.femaleusersFiltered = data;
+      this.femaleusersFiltered = data.sort((item1, item2) => item2.userId - item1.userId);
       this.users = data;
     });
   }
