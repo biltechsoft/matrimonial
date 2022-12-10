@@ -10,6 +10,7 @@ import { AboutComponent } from './components/about/about.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { DonateComponent } from './components/donate/donate.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 import { EditProfileComponent } from './examples/profile/edit-profile/edit-profile.component';
 import { MessageComponent } from './examples/profile/message/message.component';
@@ -38,6 +39,7 @@ const routes: Routes =[
     { path: 'faqs',             component: FaqComponent },
     { path: 'donate',           component: DonateComponent },
     { path: 'contacts',         component: ContactComponent },
+    { path: 'privacy',          component: PrivacyComponent },
     { path: 'user-profile/:g/:id',     component: ProfileComponent}, //canActivate : [AuthGuard] },
     { path: 'edit-profile/:g/:id',     component: EditProfileComponent },
     { path: 'message',          component: MessageComponent },

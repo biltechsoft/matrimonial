@@ -32,8 +32,8 @@
                                       <i class="nc-icon nc-email-85"></i>
                                   </span>
                                 </div>
-
-                                  <input type="text" [(ngModel)]="userEmail" (click)="refreshUserList()" class="form-control" placeholder="Email" (focus)="focus=true" (blur)="focus=false" >
+                                  <input autofocus type="text" [(ngModel)]="userEmail" (click)="refreshUserList()" class="form-control" placeholder="Email" 
+                                  (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false" >
                               </div>
                               <div *ngIf=!forgot()>
                               <label>Password</label>
@@ -43,7 +43,8 @@
                                       <i class="nc-icon nc-key-25"></i>
                                   </span>
                                 </div>
-                                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" >
+                                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password" 
+                                  (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
                               </div>
                               </div>
 
@@ -64,7 +65,8 @@
                                     </span>
                                   </div>
 
-                                    <input type="text" (click)="refreshTempList()" class="form-control" [(ngModel)]="veriCode" placeholder="Six Digit Code" (focus)="focus=true" (blur)="focus=false" >
+                                    <input type="text" (click)="refreshTempList()" class="form-control" [(ngModel)]="veriCode" 
+                                    (keyup.enter)="enterPress()" placeholder="Six Digit Code" (focus)="focus=true" (blur)="focus=false" >
                                 </div>
                                 <button (click)="clickVerify()" class="btn btn-danger btn-block btn-round">Verify Email</button>
                                 <p *ngIf=wrongCode style="color:red; text-align:center; font-size:bold;">Wrong Verification Code!</p>

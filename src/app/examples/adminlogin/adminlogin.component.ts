@@ -52,6 +52,18 @@ export class AdminloginComponent implements OnInit {
     if (localStorage.getItem('gotVeriCode') == "True") {return true; }
     else {return false;}
   }
+  enterPress() {
+    if(this.gotVeriCode()) {
+      this.clickVerify();
+    }
+    else {
+      if(this.forgot()) {
+        this.sendCode();
+      } else {
+        this.clickLogin();
+      }
+    }
+  }
   clickLogin(passcheck=true) {
     if(this.adminloginValidate(passcheck)) {
       localStorage.removeItem('isSignedUp');

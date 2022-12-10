@@ -133,7 +133,8 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">  <i class="nc-icon nc-key-25"></i></span>
                                 </div>
-                                <input type="password" class="form-control" [(ngModel)]="pass2" placeholder="Retype Your Password" (focus)="focus1=true" (blur)="focus1=false" >
+                                <input type="password" class="form-control" [(ngModel)]="pass2" placeholder="Retype Your Password" 
+                                (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
                             </div>
                         </div>
 
@@ -165,7 +166,7 @@
                     <div class="row">
                         <div class="col-md-4 mr-auto ml-auto">
                           <button *ngIf="!agreed" disabled class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
-                          <button *ngIf="agreed" (click)="createClick()" class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
+                          <button autofocus *ngIf="agreed" (click)="createClick()" class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
                             <p *ngIf=userAlreadyExist style="color:red; text-align:center;">You have already registered!</p>
                             <!-- <p>{{YEARS[1]}}</p> -->
                         </div>

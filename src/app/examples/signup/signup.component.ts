@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import {SharedService} from 'app/shared.service';
@@ -63,7 +63,11 @@ export class SignupComponent implements OnInit {
         this.policy = this.allpost.filter(policy => policy.postCode=='9100')[0].param1.split('\n');
       });
     }
-
+    enterPress() {
+      if(this.agreed) {
+        this.createClick();
+      }
+    }
     fullNameValidate() {
       if(this.FullName == "") { return false; }
       else { return this.service.validateName(this.FullName); }
@@ -177,6 +181,9 @@ export class SignupComponent implements OnInit {
     }
     agreePrivacy() {
       this.agreed = !this.agreed;
+      //this.buttonRef.focus();
+      //this.button.focus();
+
     }
 
     isWeekend(date: NgbDateStruct) {

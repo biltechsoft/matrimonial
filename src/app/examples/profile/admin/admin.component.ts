@@ -168,7 +168,7 @@ export class AdminComponent implements OnInit {
 
   getNewPostCode() {
     for (var i = 0; i < this.postTypes.length; i++) {
-      var items = this.allpost.filter(item => item.postCode.startsWith(this.postTypes[i].id.toString()));
+      var items = this.allpost.filter(item => item.postCode.startsWith(this.postTypes[i].newcode.substring(0, 2)));
       if (items != '') {
         var lastCode = items[items.length - 1].postCode;
         this.postTypes[i].newcode = (Number(lastCode) + 1).toString();
@@ -1039,7 +1039,7 @@ export class AdminComponent implements OnInit {
       param: ['Caption'],
       paramlen: ['1'],
       required: [0, -1],  //for photo required, -1
-      newcode: '1111',
+      newcode: '1000',
       status: false //for showing submenu
     },
     {
@@ -1057,7 +1057,7 @@ export class AdminComponent implements OnInit {
       param: ['Service Name', 'Service Icon', 'Service Details'],
       paramlen: ['1', '1', '10'],
       required: [1, 1, 1],
-      newcode: '3333',
+      newcode: '3000',
       status: false //for showing submenu
     },
     {
@@ -1066,7 +1066,7 @@ export class AdminComponent implements OnInit {
       param: ['Caption', 'Date & Time', 'Event Venue', 'Event Details'],
       paramlen: ['1', '1', '1', '15'],
       required: [1, 1, 1, 1, -1],
-      newcode: '4444',
+      newcode: '4000',
       status: false //for showing submenu
     },
     {
@@ -1081,10 +1081,10 @@ export class AdminComponent implements OnInit {
     {
       id: 6,
       name: "Team",
-      param: ['Name', 'Designation', 'Links'],
-      paramlen: ['1', '1', '10'],
-      required: [1, 1, 1],
-      newcode: '6666',
+      param: ['Name', 'Designation', 'Phone', 'Links'],
+      paramlen: ['1', '1', '1', '10'],
+      required: [1, 1, 1, 1],
+      newcode: '6000',
       status: false //for showing submenu
     },
     {
@@ -1093,7 +1093,7 @@ export class AdminComponent implements OnInit {
       param: ['Question', 'Answer'],
       paramlen: ['5', '10'],
       required: [1, 1],
-      newcode: '7777',
+      newcode: '7000',
       status: false //for showing submenu
     },
     {
@@ -1102,7 +1102,7 @@ export class AdminComponent implements OnInit {
       param: ['Link'],
       paramlen: ['1'],
       required: [1],
-      newcode: '8888',
+      newcode: '8000',
       status: false //for showing submenu
     },
     {
@@ -1121,6 +1121,15 @@ export class AdminComponent implements OnInit {
       paramlen: ['15'],
       required: [1],
       newcode: '9100',
+      status: false //for showing submenu
+    },
+    {
+      id: 11,
+      name: "Important Link",
+      param: ['Link Name','Link'],
+      paramlen: ['5','5'],
+      required: [1,1],
+      newcode: '9200',
       status: false //for showing submenu
     }];
 
@@ -1144,7 +1153,8 @@ export class AdminComponent implements OnInit {
     '7003',
     '9000',
     '9001',
-    '9100'
+    '9100',
+    '9200'
   ];
 
 

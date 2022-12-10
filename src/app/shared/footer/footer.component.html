@@ -3,10 +3,10 @@
         <div class="row">
             <nav class="footer-nav">
                 <ul>
-                    <li><a href="#" style="color:#777777;">About</a></li>
-                    <li><a href="#" style="color:#777777;">Privacy Policy</a></li>
-                    <li><a href="#" style="color:#777777;">FAQ</a></li>
-                    <li><a href="#" style="color:#777777;">Important Links</a></li>
+                    <li><a [routerLink]="['/abouts']" style="color:#777777;">About</a></li>
+                    <li><a [routerLink]="['/privacy']" style="color:#777777;">Privacy Policy</a></li>
+                    <li><a [routerLink]="['/faqs']" style="color:#777777;">FAQ</a></li>
+                    <li  *ngFor="let link of links"><a href="{{link.param2}}" target="_blank" style="color:#777777;">{{link.param1}}</a></li>
                 </ul>
             </nav>
             <div class="credits ml-auto">

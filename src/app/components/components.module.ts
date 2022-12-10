@@ -20,6 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { DonateComponent } from './donate/donate.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { DonateComponent } from './donate/donate.component';
         AboutComponent,
         FaqComponent,
         ContactComponent,
-        DonateComponent
+        DonateComponent,
+        PrivacyComponent
     ],
     entryComponents: [NgbdModalContent],
     exports:[ ComponentsComponent ]

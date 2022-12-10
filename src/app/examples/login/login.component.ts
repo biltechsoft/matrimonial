@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     else {
       localStorage.removeItem('gotVeriCode');
     }
+    //document.getElementById(this.userEmail).focus();
   }
 
   isSignedUp() {
@@ -56,6 +57,18 @@ export class LoginComponent implements OnInit {
   gotVeriCode() {
     if (localStorage.getItem('gotVeriCode') == "True") {return true; }
     else {return false;}
+  }
+  enterPress() {
+    if(this.gotVeriCode()) {
+      this.clickVerify();
+    }
+    else {
+      if(this.forgot()) {
+        this.sendCode();
+      } else {
+        this.clickLogin();
+      }
+    }
   }
   clickLogin(passcheck=true) {
     //admin login part was here, now removed
