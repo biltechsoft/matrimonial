@@ -28,7 +28,8 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="nc-icon nc-single-02"></i></span>
                                 </div>
-                                <input type="text" class="form-control" [(ngModel)]="FullName" placeholder="Your Full Name" (focus)="focus=true" (blur)="focus=false" required>
+                                <input type="text" class="form-control" [(ngModel)]="FullName" placeholder="Your Full Name" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -39,7 +40,8 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">  <i class="nc-icon nc-email-85"></i></span>
                                 </div>
-                                <input type="text" class="form-control" [(ngModel)]="Email" placeholder="Email" (focus)="focus1=true" (blur)="focus1=false" >
+                                <input type="text" class="form-control" [(ngModel)]="Email" placeholder="Email" 
+                                (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
                             </div>
                         </div>
                     </div>
@@ -50,7 +52,8 @@
                             <span *ngIf=!genderValidate() style="color:red;">. *Please select gender</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
 
-                                <select [(ngModel)]="Gender" class="form-select" placeholder="Select Your Gender">
+                                <select [(ngModel)]="Gender" class="form-select" placeholder="Select Your Gender"
+                                (keyup.enter)="enterPress()">
                                   <option value="Female" selected>Female
                                   <option value="Male">Male
                                 </select>
@@ -77,7 +80,7 @@
                             <label>Birth Year</label>
                             <span *ngIf=!birthYearValidate() style="color:red;">. *Please select Birth Year</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
-                              <select [(ngModel)]="BirthYear" class="form-select" id="BirthYear">
+                              <select [(ngModel)]="BirthYear" class="form-select" id="BirthYear" (keyup.enter)="enterPress()">
                                 <option *ngFor="let year of YEARS" value={{year}}>{{year}}</option>
                               </select>
 
@@ -92,14 +95,15 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">  <i class="nc-icon nc-mobile"></i></span>
                                 </div>
-                                <input type="text" class="form-control" [(ngModel)]="CellPhone" placeholder="Cell Phone" (focus)="focus1=true" (blur)="focus1=false" >
+                                <input type="text" class="form-control" [(ngModel)]="CellPhone" placeholder="Cell Phone" 
+                                (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label>State</label>
                             <span *ngIf=!stateValidate() style="color:red;">. *Please select State</span>
                             <div class="form-group" [ngClass]="{'input-group-focus':focus===true}">
-                              <select [(ngModel)]="State" class="form-select" id="state">
+                              <select [(ngModel)]="State" class="form-select" id="state" (keyup.enter)="enterPress()">
                                 <option *ngFor="let state of STATES" value={{state.State}}>{{state.State}}</option>
                               </select>
 
@@ -119,7 +123,8 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="nc-icon nc-key-25"></i></span>
                                 </div>
-                                <input type="password" class="form-control" [(ngModel)]="pass1" placeholder="Set a Password" (focus)="focus=true" (blur)="focus=false">
+                                <input type="password" class="form-control" [(ngModel)]="pass1" placeholder="Set a Password" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -144,7 +149,8 @@
                         <div class="col-md-12 ml-auto mr-auto">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" [(ngModel)]="agreed" (click)=agreePrivacy() checked="">
+                              <input class="form-check-input" type="checkbox" [(ngModel)]="agreed" (click)=agreePrivacy()
+                              (mouseover.enter)="enterPress()" checked="">
                               I agree to the PRIVACY POLICY of MUNA matrimonial.
                               <span class="form-check-sign"></span>
                             </label>
