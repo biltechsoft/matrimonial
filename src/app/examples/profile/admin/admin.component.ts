@@ -125,16 +125,18 @@ export class AdminComponent implements OnInit {
   }
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
-      this.maleusers = data;
-      this.maleusersFiltered = data.sort((item1, item2) => item2.userId - item1.userId);
-      this.users = data;
+      var a = data.filter(user => user.userId > 98); //dummy profile upto 98
+      this.maleusers = a;
+      this.maleusersFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.users = a;
     });
   }
   refreshFemaleList() {
     this.service.getFemaleUserList().subscribe(data => {
-      this.femaleusers = data;
-      this.femaleusersFiltered = data.sort((item1, item2) => item2.userId - item1.userId);
-      this.users = data;
+      var a = data.filter(user => user.userId > 32);
+      this.femaleusers = a;
+      this.femaleusersFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.users = a;
     });
   }
   refreshMatchingTable() {
@@ -161,7 +163,7 @@ export class AdminComponent implements OnInit {
   }
   refreshAdminLog() {
     this.service.getAdminLogList().subscribe(data => {
-      var a = data;
+      var a = data.filter(log => log.logId > 11);
       this.adminLog = a.sort((item2, item1) => item1.logId - item2.logId);
     });
   }

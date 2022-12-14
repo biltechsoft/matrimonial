@@ -43,19 +43,21 @@
       <h2>Our Team</h2>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 ml-auto mr-auto" *ngFor="let mb of team">
+      <div class="col-lg-6 col-md-6 ml-auto mr-auto" *ngFor="let mb of team">
         <div class="member">
           <!--div class="pic"><img src="assets/img/team1.jpg" alt=""></div-->
           <div class="details">
             <h4>{{mb.param1}}</h4>
-            <span>{{mb.param2}}</span>
+            <h6></h6>
+            <h6>{{mb.param2}}</h6>
             <span>{{mb.param3}}</span>
-            <div class="social">
+            <!--div class="social">
               <a href="{{mb.param4.split('\n')[0]}}" target="_blank"><i class="fa fa-twitter"></i></a>
               <a href="{{mb.param4.split('\n')[1]}}" target="_blank"><i class="fa fa-facebook"></i></a>
               <a href="{{mb.param4.split('\n')[2]}}" target="_blank"><i class="fa fa-google-plus"></i></a>
               <a href="{{mb.param4.split('\n')[3]}}" target="_blank"><i class="fa fa-linkedin"></i></a>
-            </div>
+            </div-->
+            <br>
           </div>
         </div>
       </div>

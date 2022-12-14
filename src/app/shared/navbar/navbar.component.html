@@ -28,9 +28,9 @@
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/donate']">Donate</a></li>
               <li class="nav-item" *ngIf="isHome()"><a class="nav-link" href="#contact" (click)="sidebarToggle()">Contact</a></li>
               <li class="nav-item" *ngIf="!isHome()"><a class="nav-link" [routerLink]="['/contacts']">Contact</a></li>
-              <li class="nav-item"><div ngbDropdown class="dropdown" placement="bottom-left">
+              <!--li class="nav-item"><div ngbDropdown class="dropdown" placement="bottom-left">
                 <a id="dropdownBasic1" class="nav-link" ngbDropdownToggle>
-                  <i class="fa fa-user-circle-o" aria-hidden="true"></i></a></div></li>
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i></a></div></li-->
               <li class="nav-item" *ngIf="!isLogin() && !isLoggedin()"><a [routerLink]="['/login']" class="btn btn-danger btn-round">Login</a></li>
               <li class="nav-item" *ngIf="isLogin()"><a [routerLink]="['/signup']" class="btn btn-danger btn-round">SIGNUP</a></li>
 
