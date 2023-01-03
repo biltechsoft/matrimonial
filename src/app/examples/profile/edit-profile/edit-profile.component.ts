@@ -38,6 +38,10 @@ export class EditProfileComponent implements OnInit {
   maxWeight = 1000;
   maxChildrenNo = 50;
   maxAgeGap = 50;
+  maxIncome = 999999999;
+
+  max100 = 10;
+  max500 = 500;
 
   YEARS = this.service.getYEARS(18);
   EDUYEARS = this.service.getYEARS();
@@ -136,6 +140,10 @@ export class EditProfileComponent implements OnInit {
       //file.name='mariuf';
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
+      if(file['type'].split('/')[0] != 'image') {
+        Swal.fire('Not an Image File!', 'Please upload an image file!','warning');
+        return false;
+      }
       if(file.size > this.MAX_SIZE) {
         //alert("You cannot upload photo of size more than " + this.maxSize + "!");
         Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
@@ -160,6 +168,10 @@ export class EditProfileComponent implements OnInit {
       //file.name='mariuf';
       const formData:FormData=new FormData();
       formData.append('uploadedFile',file,file.name);
+      if(file['type'].split('/')[0] != 'image') {
+        Swal.fire('Not an Image File!', 'Please upload an image file!','warning');
+        return false;
+      }
       if(file.size > this.MAX_SIZE) {
         //alert("You cannot upload photo of size more than " + this.maxSize + "!");
         Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
@@ -192,6 +204,27 @@ export class EditProfileComponent implements OnInit {
     //file.name='mariuf';
     const formData:FormData=new FormData();
     formData.append('uploadedFile',file,file.name);
+    
+    //check if file is of correct type extension
+    if(type<11 || type==13) {
+      if(file['type'].split('/')[0] != 'image') {
+        Swal.fire('Not an Image File!', 'Please upload an image file!','warning');
+        return false;
+      }
+    }
+    else if (type==11) {
+      if(!(file.name.endsWith('.pdf') || file['type'].split('/')[0] == 'image')) {
+        Swal.fire('Invalid File!', 'Please upload a .pdf or image file!','warning');
+        return false;
+      }
+    }
+    else if (type==12) {
+      if(!(file.name.endsWith('.pdf') || file.name.endsWith('.docx') || file.name.endsWith('.doc'))) {
+        Swal.fire('Invalid File!', 'Please upload a .pdf or .doc/docx file!','warning');
+        return false;
+      }
+    }
+
     if(file.size > this.MAX_SIZE) {
       //alert("You cannot upload file of size more than " + this.maxSize + "!");
       Swal.fire('Size Limit!', 'You cannot upload photo of size more than ' + this.maxSize + '!','warning');
@@ -428,21 +461,37 @@ export class EditProfileComponent implements OnInit {
   }
 
   heightValidate() {
+    this.currentUser.height = Math.round(this.currentUser.height);
     if(this.currentUser.height > this.maxHeight) {
       this.currentUser.height = this.maxHeight;
     }
   }
   weightValidate() {
+    this.currentUser.weight = Math.round(this.currentUser.weight);
     if(this.currentUser.weight > this.maxWeight) {
       this.currentUser.weight = this.maxWeight;
     }
   }
+  incomeValidate() {
+    this.currentUser.income = Math.round(this.currentUser.income);
+    if(this.currentUser.income > this.maxIncome) {
+      this.currentUser.income = this.maxIncome;
+    }
+  }
+  preIncomeValidate() {
+    this.currentUser.preIncome = Math.round(this.currentUser.preIncome);
+    if(this.currentUser.preIncome > this.maxIncome) {
+      this.currentUser.preIncome = this.maxIncome;
+    }
+  }
   childrenNoValidate() {
+    this.currentUser.childrenNumber = Math.round(this.currentUser.childrenNumber);
     if(this.currentUser.childrenNumber > this.maxChildrenNo) {
       this.currentUser.childrenNumber = this.maxChildrenNo;
     }
   }
   ageGapValidate() {
+    this.currentUser.preAgeGap = Math.round(this.currentUser.preAgeGap);
     if(this.currentUser.preAgeGap > this.maxAgeGap) {
       this.currentUser.preAgeGap = this.maxAgeGap;
     }

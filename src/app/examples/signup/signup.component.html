@@ -40,7 +40,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">  <i class="nc-icon nc-email-85"></i></span>
                                 </div>
-                                <input type="text" class="form-control" [(ngModel)]="Email" placeholder="Email" 
+                                <input type="text" class="form-control" [(ngModel)]="Email" placeholder="Email" maxlength="100"
                                 (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                         <div class="col-md-6">
                             <label>Password</label><span *ngIf=!passwordValidate() style="color:red;">. *Enter a valid password
                               <i style="color:yellowgreen;" class="fa fa-question-circle" aria-hidden="true"
-                              placement="top" ngbTooltip="Password must contain at least one uppercase letter, one lowercase letter, a number, and a special character."></i>
+                              placement="top" ngbTooltip="Password should be minimum 8 characters and must contain at least one uppercase letter, one lowercase letter, a number, and a special character."></i>
                               </span>
                             <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
                                 <div class="input-group-prepend">
@@ -126,7 +126,7 @@
                                 <input type="password" class="form-control" [(ngModel)]="pass1" placeholder="Set a Password" 
                                 (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false">
                             </div>
-                            <label *ngIf=!passwordValidate() style="color: crimson;">Password must contain at least one uppercase letter, one lowercase letter, a number, and a special character.</label>
+                            <label *ngIf=!passwordValidate() style="color: crimson;">Password should be minimum 8 characters and must contain at least one uppercase letter, one lowercase letter, a number, and a special character.</label>
                         </div>
                         <div class="col-md-6">
                             <label>Retype Password .</label>

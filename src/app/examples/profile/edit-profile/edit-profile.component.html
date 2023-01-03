@@ -38,7 +38,7 @@
     </div>
     <div class="modal-body">
         <div class="ml-3 bd-highlight" style="width: 40%;">
-          <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+          <input type="file" accept="image/*" (change)="uploadPhoto($event)" class="mt-2"/>
           <img *ngIf=uploading src="./assets/img/preloaders.gif">
           <p>Maximum Photo Size: {{maxSize}}</p>
         </div>
@@ -143,7 +143,7 @@
                   style="width:100%; height:200px;">
                   <div class="row form-group files">
                       <label for="file-input">Change Photo</label>
-                      <input type="file" title="image" id="file-input"
+                      <input type="file" title="image" id="file-input" accept="image/*"
                       (change)="uploadFile($event,i)" class="mt-2 col-md-8"/>
                   </div>
                 </div>
@@ -174,7 +174,9 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-5">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.fullName" class="form-control" [ngClass]="isFilled(currentUser.fullName) ? 'reqfilled' : 'required'"  placeholder="Enter Your Full Name" id="fullName">
+                <input type="text" [(ngModel)]="currentUser.fullName" class="form-control" 
+                [ngClass]="isFilled(currentUser.fullName) ? 'reqfilled' : 'required'"  
+                placeholder="Enter Your Full Name" id="fullName" maxlength="{{max100}}">
                 <label for="fullName">Full Name
                   <span class="errortext" *ngIf=!validateName(currentUser.fullName)>Spell your name correctly</span>
                 </label>
@@ -183,7 +185,7 @@ GENERAL INFORMATION
             <div class="col-sm-3">
                 <div class="form-group form-floating">
                     <input type="text" [(ngModel)]="currentUser.nickName" class="form-control"
-                    placeholder="Enter Your Nickname(s)" id="nickname">
+                    placeholder="Enter Your Nickname(s)" id="nickname" maxlength="{{max100}}">
                     <label for="nickname">Nickname(s)</label>
                 </div>
             </div>
@@ -215,7 +217,8 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group form-floating">
-                <textarea [(ngModel)]="currentUser.address" class="form-control" placeholder="Enter Your Full Address" id="address"></textarea>
+                <textarea [(ngModel)]="currentUser.address" class="form-control" placeholder="Enter Your Full Address" 
+                id="address" maxlength="{{max500}}"></textarea>
                 <label for="address">Address</label>
             </div>
           </div>
@@ -224,7 +227,8 @@ GENERAL INFORMATION
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.city" class="form-control" [ngClass]="isFilled(currentUser.city) ? 'reqfilled' : 'required'" placeholder="Enter City You Live in" id="city">
+                <input type="text" [(ngModel)]="currentUser.city" class="form-control" maxlength="{{max100}}"
+                [ngClass]="isFilled(currentUser.city) ? 'reqfilled' : 'required'" placeholder="Enter City You Live in" id="city">
                 <label for="city">City</label>
             </div>
           </div>
@@ -335,14 +339,16 @@ GENERAL INFORMATION
           <div class="col-sm-6">
             <p>Place of Birth (State, Province, District, Country)</p>
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.placeOfBirth" class="form-control" placeholder="Place of Birth" id="placeOfBirth">
+                <input type="text" [(ngModel)]="currentUser.placeOfBirth" class="form-control" placeholder="Place of Birth" 
+                id="placeOfBirth" maxlength="{{max100}}">
                 <label for="placeOfBirth">Place of Birth</label>
             </div>
           </div>
           <div class="col-sm-6">
             <p>Please disclose any health conditions, allergies, or disabilities, if any</p>
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.health" class="form-control" placeholder="health conditions" id="health">
+                <input type="text" [(ngModel)]="currentUser.health" class="form-control" 
+                placeholder="health conditions" id="health" maxlength="{{max500}}">
                 <label for="health">Health Conditions</label>
             </div>
           </div>
@@ -388,7 +394,8 @@ GENERAL INFORMATION
           </div>
             <div *ngIf="isNotSingle() && hasChildren()" class="col-sm-3">
                 <div class="form-group form-floating">
-                    <input type="text" [(ngModel)]="currentUser.childrenAges" class="form-control" placeholder="What are their Ages?" id="childrenAges">
+                    <input type="text" [(ngModel)]="currentUser.childrenAges" class="form-control" 
+                    placeholder="What are their Ages?" id="childrenAges" maxlength="{{max100}}">
                     <label for="childrenAges">What are their Ages?</label>
                 </div>
                 <p>Write their ages separated by comma (if more than one children)</p>
@@ -408,7 +415,8 @@ GENERAL INFORMATION
 
             <div class="col-sm-6">
                 <div class="form-group form-floating" *ngIf=imStatusOther()>
-                    <input type="text" [(ngModel)]="currentUser.immigrationStatusOther" class="form-control" placeholder="What are their Ages?" id="immigrationStatusOther">
+                    <input type="text" [(ngModel)]="currentUser.immigrationStatusOther" class="form-control" maxlength="{{max100}}"
+                    placeholder="What are their Ages?" id="immigrationStatusOther">
                     <label for="immigrationStatusOther">If Other, please specify</label>
                 </div>
             </div>
@@ -428,7 +436,8 @@ Academic & Professional Background
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.highSchool" class="form-control" placeholder="High School" id="highSchool"
+              <input type="text" [(ngModel)]="currentUser.highSchool" class="form-control" maxlength="{{max100}}"
+              placeholder="High School" id="highSchool"
               [ngClass]="isFilled(currentUser.highSchool) ? 'reqfilled' : 'required'">
               <label for="highSchool">High School</label>
           </div>
@@ -444,7 +453,7 @@ Academic & Professional Background
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.bachelors" class="form-control" placeholder="Bachelors" id="bachelors"
-              [ngClass]="isFilled(currentUser.bachelors) ? 'reqfilled' : 'required'">
+              [ngClass]="isFilled(currentUser.bachelors) ? 'reqfilled' : 'required'" maxlength="{{max100}}">
               <label for="bachelors">Bachelors</label>
           </div>
         </div>
@@ -460,7 +469,8 @@ Academic & Professional Background
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.masters" class="form-control" placeholder="Masters in" id="masters">
+              <input type="text" [(ngModel)]="currentUser.masters" class="form-control" 
+              maxlength="{{max100}}" placeholder="Masters in" id="masters">
               <label for="masters">Masters in</label>
           </div>
         </div>
@@ -474,7 +484,8 @@ Academic & Professional Background
         </div>
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.doctorate" class="form-control" placeholder="Doctorate in" id="doctorate">
+              <input type="text" [(ngModel)]="currentUser.doctorate" class="form-control" 
+              maxlength="{{max100}}" placeholder="Doctorate in" id="doctorate">
               <label for="doctorate">Doctorate in</label>
           </div>
         </div>
@@ -490,7 +501,8 @@ Academic & Professional Background
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.otherDegree" class="form-control" placeholder="Other Degree(s)" id="otherDegree">
+              <input type="text" [(ngModel)]="currentUser.otherDegree" class="form-control" 
+              maxlength="{{max100*2}}" placeholder="Other Degree(s)" id="otherDegree">
               <label for="otherDegree">Other Degree(s)</label>
           </div>
         </div>
@@ -538,20 +550,22 @@ Academic & Professional Background
           </div>
         <div class="col-sm-3" *ngIf=isEmployed()>
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.employment" class="form-control" placeholder="Where do you work?" id="employment">
+              <input type="text" [(ngModel)]="currentUser.employment" class="form-control" maxlength="{{max100}}"
+              placeholder="Where do you work?" id="employment">
               <label for="employment">Where do you work?</label>
           </div>
         </div>
         <div class="col-sm-3" *ngIf=isEmployed()>
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.position" class="form-control" placeholder="Position" id="position">
+                <input type="text" [(ngModel)]="currentUser.position" class="form-control" 
+                maxlength="{{max100}}" placeholder="Position" id="position">
                 <label for="position">Position</label>
             </div>
         </div>
         <div class="col-sm-3" *ngIf=isEmployed()>
           <div class="form-group form-floating">
               <input type="number" min="0" [(ngModel)]="currentUser.income" class="form-control" placeholder="Income (yearly)" id="income"
-              [ngClass]="isFilled(currentUser.income) ? 'reqfilled' : 'required'">
+              (keyup)="incomeValidate()" [ngClass]="isFilled(currentUser.income) ? 'reqfilled' : 'required'">
               <label for="income">Yearly Income ($)</label>
           </div>
         </div>
@@ -571,7 +585,8 @@ Parent/Guardian's Information
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.guarName" class="form-control" placeholder="Names and Relationships" id="guarName"
+                <input type="text" [(ngModel)]="currentUser.guarName" class="form-control" 
+                maxlength="{{max100}}" placeholder="Names and Relationships" id="guarName"
                 [ngClass]="isFilled(currentUser.guarName) ? 'reqfilled' : 'required'">
                 <label for="guarName">Guardian Name
                   <span class="errortext" *ngIf=!validateName(currentUser.guarName)>Spell name correctly</span>
@@ -582,13 +597,15 @@ Parent/Guardian's Information
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group form-floating">
-                <textarea [(ngModel)]="currentUser.guarAddress" class="form-control" placeholder="Guardian's Full Address" id="guarAddress"></textarea>
+                <textarea [(ngModel)]="currentUser.guarAddress" class="form-control" maxlength="{{max500}}"
+                placeholder="Guardian's Full Address" id="guarAddress"></textarea>
                 <label for="guarAddress">Address</label>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.guarCity" class="form-control" placeholder="Guardian's City" id="guarCity">
+                <input type="text" [(ngModel)]="currentUser.guarCity" class="form-control" 
+                maxlength="{{max100}}" placeholder="Guardian's City" id="guarCity">
                 <label for="guarCity">City</label>
             </div>
           </div>
@@ -604,7 +621,8 @@ Parent/Guardian's Information
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.guarCountry" class="form-control" placeholder="Guardian's Country" id="guarCountry">
+                <input type="text" [(ngModel)]="currentUser.guarCountry" class="form-control" 
+                maxlength="{{max100}}" placeholder="Guardian's Country" id="guarCountry">
                 <label for="guarCountry">Country</label>
             </div>
           </div>
@@ -619,7 +637,8 @@ Parent/Guardian's Information
           </div>
           <div class="col-sm-4">
               <div class="form-group form-floating">
-                  <input type="text" [(ngModel)]="currentUser.guarEmail" class="form-control" placeholder="Guardian's Email" id="guarEmail"
+                  <input type="text" [(ngModel)]="currentUser.guarEmail" class="form-control" 
+                  maxlength="{{max100}}" placeholder="Guardian's Email" id="guarEmail"
                   [ngClass]="isFilled(currentUser.guarEmail) ? 'reqfilled' : 'required'">
                   <label for="guarEmail">Email
                     <span class="errortext" *ngIf=!validateEmail(currentUser.guarEmail)>Enter Valid Email Address</span>
@@ -630,7 +649,8 @@ Parent/Guardian's Information
         <div class="row">
           <div class="col-sm-12">
               <div class="form-group form-floating">
-                  <input type="text" [(ngModel)]="currentUser.guarProfession" class="form-control" placeholder="Guardian's Profession" id="guarProfession">
+                  <input type="text" [(ngModel)]="currentUser.guarProfession" class="form-control" maxlength="{{max100}}"
+                  placeholder="Guardian's Profession" id="guarProfession">
                   <label for="guarProfession">Profession</label>
               </div>
           </div>
@@ -639,7 +659,8 @@ Parent/Guardian's Information
           <div class="col-sm-12">
             <p>Please enter any additional information about your family that you would like to share</p>
             <div class="form-group form-floating">
-                <textarea [(ngModel)]="currentUser.familyBrief" class="form-control" placeholder="Family Brief" id="familyBrief"></textarea>
+                <textarea [(ngModel)]="currentUser.familyBrief" class="form-control" maxlength="{{max500}}"
+                placeholder="Family Brief" id="familyBrief"></textarea>
                 <label for="familyBrief">Additional information</label>
             </div>
           </div>
@@ -670,7 +691,8 @@ Personal Information
 
           <div class="col-sm-6" >
             <div class="form-group form-floating" *ngIf=relPracticeOther()>
-                <input type="text" [(ngModel)]="currentUser.religiousPracticeOther" class="form-control" placeholder="if Other, Please Specify" id="religiousPracticeOther">
+                <input type="text" [(ngModel)]="currentUser.religiousPracticeOther" class="form-control" 
+                maxlength="{{max100}}" placeholder="if Other, Please Specify" id="religiousPracticeOther">
                 <label for="religiousPracticeOther">if Other, Please Specify</label>
             </div>
           </div>
@@ -679,7 +701,8 @@ Personal Information
           <div class="col-sm-12">
             <p>Please write about your religious practices, in brief (ex: daily prayers, fasting, attending halaqas, visiting the masjid, etc.)</p>
             <div class="form-group form-floating">
-                <textarea [(ngModel)]="currentUser.religiousPracticeBrief" class="form-control" placeholder="Religious Practice Brief" id="religiousPracticeBrief"></textarea>
+                <textarea [(ngModel)]="currentUser.religiousPracticeBrief" class="form-control" maxlength="{{max500}}"
+                placeholder="Religious Practice Brief" id="religiousPracticeBrief"></textarea>
                 <label for="religiousPracticeBrief">Religious Brief</label>
             </div>
           </div>
@@ -688,7 +711,8 @@ Personal Information
           <div class="col-sm-12">
               <p>If you are a revert, please tell us, when did you accept Islam?</p>
               <div class="form-group form-floating">
-                  <input type="text" [(ngModel)]="currentUser.revertTime" class="form-control" placeholder="Revert Time" id="revertTime">
+                  <input type="text" [(ngModel)]="currentUser.revertTime" class="form-control" 
+                  maxlength="{{max100}}" placeholder="Revert Time" id="revertTime">
                   <label for="revertTime">Revert Time</label>
               </div>
           </div>
@@ -767,7 +791,8 @@ SPOUSAL PREFERENCES
 
           <div class="col-sm-6" *ngIf=preReligiousOther()>
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.preReligiousOther" class="form-control" placeholder="if Other, Please Specify" id="preReligiousOther">
+                <input type="text" [(ngModel)]="currentUser.preReligiousOther" class="form-control" maxlength="{{max100}}"
+                placeholder="if Other, Please Specify" id="preReligiousOther">
                 <label for="preReligiousOther">if Other, Please Specify</label>
             </div>
           </div>
@@ -776,7 +801,8 @@ SPOUSAL PREFERENCES
           <div class="col-sm-12">
             <p>Please write any religious practice preferences, in brief</p>
             <div class="form-group form-floating">
-                <textarea [(ngModel)]="currentUser.preReligiousBrief" class="form-control" placeholder="Religious Practice Preferences in Brief" id="preReligiousBrief"></textarea>
+                <textarea [(ngModel)]="currentUser.preReligiousBrief" class="form-control" maxlength="{{max500}}"
+                placeholder="Religious Practice Preferences in Brief" id="preReligiousBrief"></textarea>
                 <label for="preReligiousBrief">Religious Preference Brief</label>
             </div>
           </div>
@@ -914,7 +940,8 @@ SPOUSAL PREFERENCES
             </div>
           <div class="col-sm-5" *ngIf=false>
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.preImmigrationStatusOther" class="form-control" placeholder="if Other, Please Specify" id="preImmigrationStatusOther">
+                <input type="text" [(ngModel)]="currentUser.preImmigrationStatusOther" class="form-control" 
+                maxlength="{{max100}}" placeholder="if Other, Please Specify" id="preImmigrationStatusOther">
                 <label for="preImmigrationStatusOther">if Other, Please Specify</label>
             </div>
           </div>
@@ -1016,7 +1043,7 @@ SPOUSAL PREFERENCES
                 <div class="col-sm-6" *ngIf=preEmployed()>
                   <div class="form-group form-floating">
                       <input type="number" min="1" [(ngModel)]="currentUser.preIncome" class="form-control" 
-                      placeholder="Preferred minimum yearly Income" id="preIncome"
+                      placeholder="Preferred minimum yearly Income" id="preIncome" (keyup)="preIncomeValidate()"
                       [ngClass]="isFilled(currentUser.preIncome) ? 'reqfilled' : 'required'">
                       <label for="preIncome">Preferred minimum yearly Income of future spouse (USD)</label>
                   </div>
@@ -1053,7 +1080,7 @@ SPOUSAL PREFERENCES
         <div class="col-sm-4">
           <div class="form-group form-floating">
               <input type="text" [(ngModel)]="currentUser.refName1" class="form-control" placeholder="Name1" id="name1"
-              [ngClass]="isFilled(currentUser.refName1) ? 'reqfilled' : 'required'">
+              [ngClass]="isFilled(currentUser.refName1) ? 'reqfilled' : 'required'" maxlength="{{max100}}">
               <label for="name1">Name
                 <span class="errortext" *ngIf=!validateName(currentUser.refName1)>Spell name correctly</span>
               </label>
@@ -1061,7 +1088,8 @@ SPOUSAL PREFERENCES
         </div>
         <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.refRelation1" class="form-control" placeholder="Relationship1" id="relationship1"
+                <input type="text" [(ngModel)]="currentUser.refRelation1" class="form-control" maxlength="{{max100}}"
+                placeholder="Relationship1" id="relationship1"
                 [ngClass]="isFilled(currentUser.refRelation1) ? 'reqfilled' : 'required'">
                 <label for="relationship1">Relationship</label>
             </div>
@@ -1080,7 +1108,8 @@ SPOUSAL PREFERENCES
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.refName2" class="form-control" placeholder="Name2" id="name2">
+              <input type="text" [(ngModel)]="currentUser.refName2" class="form-control" 
+              maxlength="{{max100}}" placeholder="Name2" id="name2">
               <label for="name2">Name
                 <span class="errortext" *ngIf=!validateName(currentUser.refName2)>Spell name correctly</span>
               </label>
@@ -1088,7 +1117,8 @@ SPOUSAL PREFERENCES
         </div>
         <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.refRelation2" class="form-control" placeholder="Relationship2" id="relationship2">
+                <input type="text" [(ngModel)]="currentUser.refRelation2" class="form-control" 
+                maxlength="{{max100}}" placeholder="Relationship2" id="relationship2">
                 <label for="relationship2">Relationship</label>
             </div>
         </div>
@@ -1104,7 +1134,8 @@ SPOUSAL PREFERENCES
          <div class="row">
         <div class="col-sm-4">
           <div class="form-group form-floating">
-              <input type="text" [(ngModel)]="currentUser.refName3" class="form-control" placeholder="Name3" id="name3">
+              <input type="text" [(ngModel)]="currentUser.refName3" class="form-control" 
+              maxlength="{{max100}}" placeholder="Name3" id="name3">
               <label for="name3">Name
                 <span class="errortext" *ngIf=!validateName(currentUser.refName3)>Spell name correctly</span>
               </label>
@@ -1112,7 +1143,8 @@ SPOUSAL PREFERENCES
         </div>
         <div class="col-sm-4">
             <div class="form-group form-floating">
-                <input type="text" [(ngModel)]="currentUser.refRelation3" class="form-control" placeholder="Relationship3" id="relationship3">
+                <input type="text" [(ngModel)]="currentUser.refRelation3" class="form-control" 
+                maxlength="{{max100}}" placeholder="Relationship3" id="relationship3">
                 <label for="relationship3">Relationship</label>
             </div>
         </div>
@@ -1131,7 +1163,7 @@ SPOUSAL PREFERENCES
 
         <label for="formFileMultiple" class="form-label">  </label>
         <a href="{{govIdPath}}" target="blank">View ID</a><br>
-        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,11)" class="mt-2" />
+        <input class="form-control" type="file" accept=".pdf, image/*" id="formFileMultiple" (change)="uploadFile($event,11)" class="mt-2" />
         <img *ngIf=uploading src="./assets/img/preloaders.gif">
       </div>
       <div class="col-sm-6">
@@ -1139,7 +1171,7 @@ SPOUSAL PREFERENCES
 
         <label for="formFileMultiple" class="form-label">  </label>
         <a href="{{cvPath}}" target="blank">View CV</a><br>
-        <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,12)" class="mt-2" />
+        <input class="form-control" type="file" id="formFileMultiple" accept=".pdf, .doc, .docx" (change)="uploadFile($event,12)" class="mt-2" />
         <img *ngIf=uploading src="./assets/img/preloaders.gif">
       </div>
       </div>
@@ -1185,7 +1217,7 @@ Agreement
             <label class="form-label" for="customFile"></label>
               <img *ngIf="currentUser.signature!=null" [src]="signPath" alt="" 
               class="img-rounded img-padding img-responsive" height="50" width="150"><br>
-              <input class="form-control" type="file" id="formFileMultiple" (change)="uploadFile($event,13)" class="mt-2" />
+              <input class="form-control" type="file" id="formFileMultiple" accept="image/*" (change)="uploadFile($event,13)" class="mt-2" />
               <img *ngIf=uploading src="./assets/img/preloaders.gif">
             </div>
           </div>
