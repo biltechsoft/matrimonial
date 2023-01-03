@@ -126,6 +126,7 @@
                                 <input type="password" class="form-control" [(ngModel)]="pass1" placeholder="Set a Password" 
                                 (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false">
                             </div>
+                            <label *ngIf=!passwordValidate() style="color: crimson;">Password must contain at least one uppercase letter, one lowercase letter, a number, and a special character.</label>
                         </div>
                         <div class="col-md-6">
                             <label>Retype Password .</label>

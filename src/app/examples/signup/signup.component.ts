@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
     code = this.service.getRandomInt(123456,987654);
     regedEmail;
     userAlreadyExist = false;
-    YEARS = this.service.getYEARS();
+    YEARS = this.service.getYEARS(18);
     STATES = this.service.STATES;
 
     ngOnInit() {
