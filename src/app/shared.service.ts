@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Observable } from 'rxjs';
 import { ILogin } from './interfaces/login';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -304,11 +305,14 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           var token = this.adminUser.adminToken;
           if(token == localStorage.getItem('usertoken')) {
             var UserToken = this.getRandomInt(12345678,87654321);
-            localStorage.setItem('usertoken', UserToken);
-            this.updateAdminUser({adminId: this.adminUser.adminId, adminToken: UserToken}).subscribe();
+            //localStorage.setItem('usertoken', UserToken);
+            this.updateAdminUser({adminId: this.adminUser.adminId, adminToken: UserToken}).subscribe(data=>{
+              localStorage.setItem('usertoken', UserToken);
+            });
             this.isadmin=true;
           }
           else {
+            Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');
             this.logout();
             this.router.navigate(['/admin']);
           }
@@ -321,10 +325,13 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           var token = this.currentUser.userToken;
           if(token == localStorage.getItem('usertoken')) {
             var UserToken = this.getRandomInt(12345678,87654321);
-            localStorage.setItem('usertoken', UserToken);
-            this.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
+            //localStorage.setItem('usertoken', UserToken);
+            this.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe(data=>{
+              localStorage.setItem('usertoken', UserToken);
+            });
           }
           else {
+            Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');
             this.logout();
             this.router.navigate(['/login']);
           }
@@ -336,11 +343,13 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           this.currentUser = data;
           var token = this.currentUser.userToken;
           if(token == localStorage.getItem('usertoken')) {
-            var UserToken = this.getRandomInt(12345678,87654321);
-            localStorage.setItem('usertoken', UserToken);
-            this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
+            var UserToken = this.getRandomInt(12345678,87654321);           
+            this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe(data=>{
+              localStorage.setItem('usertoken', UserToken);
+            });
           }
           else {
+            Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');
             this.logout();
             this.router.navigate(['/login']);
           }
