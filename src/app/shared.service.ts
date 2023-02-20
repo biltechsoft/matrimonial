@@ -306,9 +306,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           if(token == localStorage.getItem('usertoken')) {
             var UserToken = this.getRandomInt(12345678,87654321);
             //localStorage.setItem('usertoken', UserToken);
-            this.updateAdminUser({adminId: this.adminUser.adminId, adminToken: UserToken}).subscribe(data=>{
-              localStorage.setItem('usertoken', UserToken);
-            });
+            //this.updateAdminUser({adminId: this.adminUser.adminId, adminToken: UserToken}).subscribe();
             this.isadmin=true;
           }
           else {
@@ -326,9 +324,7 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           if(token == localStorage.getItem('usertoken')) {
             var UserToken = this.getRandomInt(12345678,87654321);
             //localStorage.setItem('usertoken', UserToken);
-            this.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe(data=>{
-              localStorage.setItem('usertoken', UserToken);
-            });
+            //this.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
           }
           else {
             Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');
@@ -343,10 +339,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
           this.currentUser = data;
           var token = this.currentUser.userToken;
           if(token == localStorage.getItem('usertoken')) {
-            var UserToken = this.getRandomInt(12345678,87654321);           
-            this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe(data=>{
-              localStorage.setItem('usertoken', UserToken);
-            });
+            var UserToken = this.getRandomInt(12345678,87654321);   
+            //localStorage.setItem('usertoken', UserToken);        
+            //this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
           }
           else {
             Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');

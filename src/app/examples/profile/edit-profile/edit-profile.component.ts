@@ -40,7 +40,7 @@ export class EditProfileComponent implements OnInit {
   maxAgeGap = 50;
   maxIncome = 999999999;
 
-  max100 = 10;
+  max100 = 100;
   max500 = 500;
 
   YEARS = this.service.getYEARS(18);

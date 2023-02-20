@@ -78,6 +78,11 @@ export class AdminComponent implements OnInit {
   ReplyDateTime;
   currentMessage;
 
+  emailUserName;
+  emailUserEmail;
+  emailSubject;
+  emailBody;
+
   FullName = null;
   CellPhone = null;
   Email = null;
@@ -535,6 +540,28 @@ export class AdminComponent implements OnInit {
         this.refreshList();
       });
     }*/
+  }
+
+  emailUser(user) {
+    this.emailUserName = user.fullName;
+    this.emailUserEmail = user.email;
+    //this.emailUserEmail = 'abdulbari.bec@gmail.com';
+  }
+  sendEmail() {
+    var emailVal = {
+      subject: this.emailSubject,
+      message: this.emailBody,
+      toEmail: [this.emailUserEmail]
+    };
+
+    this.service.sendEmail(emailVal).subscribe(res => {
+      if(res.toString().includes('email has been sent')) {
+        Swal.fire('Email Sent!', 'Email sent to user.','success');
+      }
+      else {
+        Swal.fire('Failed!', res.toString(),'error');
+      }
+    });
   }
 
   editUser(currentUser, ppchange = false) {

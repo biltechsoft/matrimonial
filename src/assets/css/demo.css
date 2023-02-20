@@ -155,7 +155,7 @@
 .footer {
     background-attachment: fixed;
     position: relative;
-    line-height: 20px;
+    line-height: 0px;
 }
 
 .footer nav>ul {
@@ -188,7 +188,7 @@
     padding: 10px 15px;
     font-size: 14px;
     margin: 15px 3px;
-    line-height: 20px;
+    line-height: 0px;
     text-align: center;
 }
 
