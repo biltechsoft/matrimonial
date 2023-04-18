@@ -13,6 +13,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 import { EditProfileComponent } from './examples/profile/edit-profile/edit-profile.component';
+import { DeactivateProfileComponent } from './examples/profile/deactivate-profile/deactivate-profile.component';
 import { MessageComponent } from './examples/profile/message/message.component';
 import { NotificationComponent } from './examples/profile/notification/notification.component';
 import { TopMatchesComponent } from './examples/profile/top-matches/top-matches.component';
@@ -42,6 +43,7 @@ const routes: Routes =[
     { path: 'privacy',          component: PrivacyComponent },
     { path: 'user-profile/:g/:id',     component: ProfileComponent}, //canActivate : [AuthGuard] },
     { path: 'edit-profile/:g/:id',     component: EditProfileComponent },
+    { path: 'deactivate-profile/:g/:id',     component: DeactivateProfileComponent},
     { path: 'message',          component: MessageComponent },
     { path: 'notification',     component: NotificationComponent },
     { path: 'top-matches',      component: TopMatchesComponent },

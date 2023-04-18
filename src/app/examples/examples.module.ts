@@ -17,6 +17,7 @@ import { ProfileHomeComponent } from './profile/profile-home/profile-home.compon
 import { AdminComponent } from './profile/admin/admin.component';
 import { PasswordComponent } from './password/password.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { DeactivateProfileComponent } from './profile/deactivate-profile/deactivate-profile.component';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
         AdminComponent,
         PasswordComponent,
         AdminloginComponent,
+        DeactivateProfileComponent,
     ]
 })
 export class ExamplesModule { }
