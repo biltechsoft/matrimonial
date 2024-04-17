@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem('gotVeriCode');
     }
     //document.getElementById(this.userEmail).focus();
+    this.refreshUserList();
   }
 
   isSignedUp() {
@@ -144,6 +145,7 @@ export class LoginComponent implements OnInit {
     }
     if(passcheck) {  //passcheck is false when forgot password, want to recover it
       if(this.currentUser.userPass == this.service.mEncrypt(this.password)) { return true; }
+      //if(this.currentUser.userPass == this.password) { return true; }
       else {
         this.errorMessage = "Invalid Email or Password or Both";
         return false;

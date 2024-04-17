@@ -17,15 +17,16 @@ export class DeactivateProfileComponent implements OnInit {
   currentUser; PhotoFilePath;
   profileStatus = this.service.profileStatus;
   msg = "blank";
-  maleusers; femaleusers;
+  maleusers; femaleusers; users;
+  dummy="initial";
 
   ngOnInit(): void {
     this.userid = Number(this.arout.snapshot.paramMap.get("id"));
     this.usertype = this.arout.snapshot.paramMap.get("g");
     this.service.loginauth(this.userid, this.usertype);
     this.getCurrentUser(this.userid, this.usertype);
-    //this.refreshFemaleList();
-    //this.refreshMaleList();
+    this.refreshFemaleList();
+    this.refreshMaleList();
   }
 
   getCurrentUser(userid,usertype) {
@@ -47,7 +48,7 @@ export class DeactivateProfileComponent implements OnInit {
 
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
-      var a = data.filter(user => user.userId > 98); //dummy profile upto 98
+      var a = data.filter(user => user.userId > 98);  //dummy profile upto 98
       this.maleusers = a;
     });
   }
@@ -58,8 +59,42 @@ export class DeactivateProfileComponent implements OnInit {
     });
   }
 
-  deleteRequest() {
+  deleteRequest(user) {
+    /*
+        matchId
+        matchPercentage
+        reqSent
+        reqAccepted
+        lockedId
+        cuMatchId
+        reqLock
+    */
+          user.reqSent = this.deleteReq(user, 'reqSent');
+          var val = { userId: user.userId,
+                      reqSent: user.reqSent };
 
+          if(user.gender == 'Male') {
+            this.service.updateMaleUser(val).subscribe(res=>{
+              //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            });
+          }
+          else {
+            this.service.updateFemaleUser(val).subscribe(res=>{
+              //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            });
+          }
+  }
+
+  deleteReq(user, field) {
+    if(user[field] == this.currentUser.userId.toString()) { user[field] = null; }
+    else {
+      var newReqSent = user[field].split(',').filter(x => x !== this.currentUser.userId.toString());
+      user[field] = newReqSent[0];
+      for(var r=1; r<newReqSent.length; r++) {
+        user[field] += ',' + newReqSent[r];
+      }
+    }
+    return user[field];        
   }
 
   deactivate_user() {
@@ -83,7 +118,10 @@ export class DeactivateProfileComponent implements OnInit {
             if(res.toString() == 'Updated Successfully') { 
               Swal.fire('Profile Deactivated!', 'Your profile is deactivated and will not be visible to others, nor will be considered for further matching. You can contact admin to activate you profile again.','warning');
             }
-            this.deleteRequest();
+            this.users = this.femaleusers.filter(user => user.reqSent==null ? false: user.reqSent.split(',').includes(this.currentUser.userId.toString()));
+            this.users.forEach(user => {
+              this.deleteRequest(user);
+            }); 
           });
         }
         else if(this.currentUser.gender == 'Female') {
@@ -91,6 +129,10 @@ export class DeactivateProfileComponent implements OnInit {
             if(res.toString() == 'Updated Successfully') { 
               Swal.fire('Profile Deactivated!', 'Your profile is deactivated and will not be visible to others, nor will be considered for further matching. You can contact admin to activate you profile again.','warning');
             }
+            this.users = this.maleusers.filter(user => user.reqSent==null ? false: user.reqSent.split(',').includes(this.currentUser.userId.toString()));
+            this.users.forEach(user => {
+              this.deleteRequest(user);
+            }); 
           });
         }
       }

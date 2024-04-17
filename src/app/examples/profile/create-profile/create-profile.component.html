@@ -1,0 +1,267 @@
+<!--==========================
+  Call To Action Section
+============================--
+<section id="call-to-action" class="wow fadeInUp">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center mr-auto ml-auto">
+        <h3 class="cta-title">SIGN UP FOR FREE!</h3>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- #call-to-action -->
+
+<div class="container-fluid" style="height:50px; background-color: #F44336;"></div>
+
+<div class="section landing-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mr-auto ml-auto">
+                <h3 class="text-center">Create Your Profile in MUNA Matrimonial {{extra}}</h3>
+                <div class="contact-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label><span *ngIf=!fullNameValidate() style="color:red;">. *Please insert your name correctly</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="nc-icon nc-single-02"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="FullName" placeholder="Your Full Name" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                            <span *ngIf=!genderValidate() style="color:red;">. *Please select gender</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">  <i class="nc-icon nc-favourite-28"></i></span>
+                                  </div>
+                                <select [(ngModel)]="Gender" class="form-select" placeholder="Select Your Gender"
+                                (keyup.enter)="enterPress()">
+                                  <option value="Female" selected>Female
+                                  <option value="Male">Male
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Cell Phone</label>
+                            <span *ngIf=!telephoneCheck() style="color:red;">. *Please insert valid Phone Number.</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">  <i class="nc-icon nc-mobile"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="CellPhone" placeholder="Cell Phone" 
+                                (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <span *ngIf=!emailValidate() style="color:red;">. *Please insert valid email address.</span>
+
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">  <i class="nc-icon nc-email-85"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="Email" placeholder="Email" maxlength="100"
+                                (keyup.enter)="enterPress()" (focus)="focus1=true" (blur)="focus1=false" >
+                            </div>
+                        </div>
+                        
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Address</label>
+                            <span *ngIf=!addressValidate() style="color:red;">. *Please write Address</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="nc-icon nc-badge"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="Address" placeholder="Your Address" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>State</label>
+                            <span *ngIf=!stateValidate() style="color:red;">. *Please select State</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="nc-icon nc-pin-3"></i></span>
+                                  </div>
+                              <select [(ngModel)]="State" class="form-select" id="state" (keyup.enter)="enterPress()">
+                                <option *ngFor="let state of STATES" value={{state.State}}>{{state.State}}</option>
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Birth Year</label>
+                            <span *ngIf=!birthYearValidate() style="color:red;">. *Please select Birth Year</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="nc-icon nc-time-alarm"></i></span>
+                                  </div>
+                              <select [(ngModel)]="BirthYear" class="form-select" id="BirthYear" (keyup.enter)="enterPress()">
+                                <option *ngFor="let year of YEARS" value={{year}}>{{year}}</option>
+                              </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Educational Qualification</label>
+                            <span *ngIf=!educationValidate() style="color:red;">. *Required</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="nc-icon nc-hat-3"></i></span>
+                                  </div>
+                              <select [(ngModel)]="Education" class="form-select" id="Education" (keyup.enter)="enterPress()">
+                                <option *ngFor="let edu of EDUCATION_LEVEL" value={{edu}}>{{edu}}</option>
+                              </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Immigration Status</label>
+                            <span *ngIf=!immigrationValidate() style="color:red;">. *Required</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="nc-icon nc-world-2"></i></span>
+                                  </div>
+                              <select [(ngModel)]="ImmigrationStatus" class="form-select" id="ImmigrationStatus" (keyup.enter)="enterPress()">
+                                <option *ngFor="let imstat of IMSTATS" value={{imstat.prop}}>{{imstat.prop}}</option>
+                              </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Employment Status</label>
+                            <span *ngIf=!employedValidate() style="color:red;">. *Required </span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">  <i class="nc-icon nc-briefcase-24"></i></span>
+                                  </div>
+                                <select [(ngModel)]="Employed" class="form-select" placeholder="Select Employment Status"
+                                (keyup.enter)="enterPress()">
+                                  <option value="Yes" selected>Employed
+                                  <option value="No">Not Employed
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="Employed=='Yes'" class="col-md-6">
+                            <label>Employment Organization</label>
+                            <span *ngIf=!employmentValidate() style="color:red;">. *Required</span>
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="nc-icon nc-bank"></i></span>
+                                </div>
+                                <input type="text" class="form-control" [(ngModel)]="Employment" placeholder="Where do you work?" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false" required>
+                            </div>
+                        </div>
+                        <div *ngIf="Employed=='Yes'" class="col-md-6">
+                            <label>Yearly Income ($)</label>
+                            <!--span *ngIf=!employmentValidate() style="color:red;">. *Required</span-->
+                            <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="nc-icon nc-money-coins"></i></span>
+                                </div>
+                                <input type="number" min="0" class="form-control" [(ngModel)]="Income" placeholder="Income in USD" 
+                                (keyup.enter)="enterPress()" (keyup)="incomeValidate()" (focus)="focus=true" (blur)="focus=false">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Additional Information / Comments (if any)</label>
+                            <!--span *ngIf=!employmentValidate() style="color:red;">. *Required</span-->
+                            <div>
+                                <textarea class="form-control" [(ngModel)]="Comment" placeholder="Write any information that will be helpful to introduce yourself" 
+                                (keyup.enter)="enterPress()" (focus)="focus=true" (blur)="focus=false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12 ml-auto mr-auto">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" [(ngModel)]="agreed" (click)=agreePrivacy()
+                              (mouseover.enter)="enterPress()" checked="">
+                              I agree to the PRIVACY POLICY of MUNA matrimonial.
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                          <a href='' data-bs-toggle="modal" data-bs-target="#policyModal">Click here</a> to view the PRIVACY POLICY.
+                        </div>
+
+
+                    </div>
+
+                    <!-- big message box
+                    -------------------
+                    <label>Message</label>
+                    <textarea class="form-control" rows="4" placeholder="Tell us your thoughts and feelings..."></textarea>
+                    <!-- big message box end
+                    -------------------->
+
+
+                    <div class="row">
+                        <div class="col-md-4 mr-auto ml-auto">
+                          <button *ngIf="!agreed" disabled class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
+                          <button autofocus *ngIf="agreed" (click)="createClick()" class="btn btn-danger btn-lg btn-fill">Confirm Registration</button>
+                            <p *ngIf=userAlreadyExist style="color:red; text-align:center;">You have already registered!</p>
+                            <!-- <p>{{YEARS[1]}}</p> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mr-auto ml-auto" >
+                            <a [routerLink]="['/login']" class="btn btn-link" style="color:#F44336;">Already Registered? Click to Login!</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="policyModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+    <div class="modal-header">
+      <h4 class="title"><a>MUNA Matrimonial Privacy Policy</a></h4>
+        <!--button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+        aria-label="Close"></button-->
+    </div>
+    <div class="modal-body">
+    <div class="d-flex flex-row bd-highlight">
+        <div class="p-4 w-100 bd-highlight">
+          <p *ngFor="let para of policy">{{para}}<br></p>
+
+        </div>
+    </div>
+
+        <button type="button" class="btn btn-danger float-end"
+        data-bs-dismiss="modal">
+        OK
+        </button>
+
+    </div>
+
+</div>
+</div>
+</div>

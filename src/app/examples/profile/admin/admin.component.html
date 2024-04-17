@@ -133,7 +133,49 @@
         <!-- Dashboard
         ======================-->
         <div *ngIf=menu[1].status class="ml-auto mr-auto">
-          <h5 style="text-align:center;">Welcome {{adminUser.adminFullName}}</h5>
+          
+          
+    <!--==========================
+      Our Team Section
+    ============================-->
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <h2>Welcome {{adminUser.adminFullName}}</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div>
+              <span class="mycard-heading">Male Users</span>
+              <div class="pic mycard-item" style="background-color: rgb(22, 28, 141); ">{{numOfMale}}</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div>
+              <span class="mycard-heading">Female Users</span>
+              <div class="pic mycard-item" style="background-color: rgb(104, 3, 107); ">{{numOfFemale}}</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div>
+              <span class="mycard-heading">Active Users</span>
+              <div class="pic mycard-item" style="background-color: rgb(21, 118, 11); ">{{numOfMaleActive+numOfFemaleActive}}</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div>
+              <span class="mycard-heading">Users In Progress</span>
+              <div class="pic mycard-item" style="background-color: rgb(131, 44, 12); ">{{numOfMaleProgress+numOfFemaleProgress}}</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #team -->
+        
+    <br><br>
+        
           <table class="table table-striped">
             <thead>
               <tr>
@@ -309,17 +351,30 @@
           </div>
           </div>
           <br>
-          (Click on Table Header button to Sort Ascending or Descending)
+          (Click on Table Header button to Sort Ascending or Descending) {{extra}}
           <table class="table table-striped">
             <thead>
               <tr>
-                <th> <button type="button" class="btn btn-warning" (click)="sortResult('userId',sortasc)">ID</button> </th>
-                <th> <button type="button" class="btn btn-warning" (click)="sortResult('fullName',sortasc)">Name </button></th>
-                <th> <button type="button" class="btn btn-warning" (click)="sortResult('email',sortasc)">Email</button></th>
-                <th> <button type="button" class="btn btn-warning" (click)="sortResult('cellPhone',sortasc)">Cell Phone</button> </th>
-                <th> <button type="button" class="btn btn-warning">Top Match Limit </button></th>
-                <th> <button type="button" class="btn btn-warning" (click)="sortResult('status',sortasc)">Profile Status </button></th>
-                <th> <button type="button" class="btn btn-warning">Options</button> </th>
+                <th (click)="sortResult('userId',sortasc)" style="cursor:pointer;">ID
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                </th>
+                <th (click)="sortResult('fullName',sortasc)" style="cursor:pointer;">Name 
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                </th>
+                <th (click)="sortResult('email',sortasc)" style="cursor:pointer;">Email
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                </th>
+                <th (click)="sortResult('cellPhone',sortasc)" style="cursor:pointer;">Phone
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                 </th>
+                <th>Match Limit</th>
+                <th (click)="sortResult('status',sortasc)" style="cursor:pointer;">Status 
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                </th>
+                <th (click)="sortResult('lastEdit',sortasc)" style="cursor:pointer;">Last Activity
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                </th>
+                <th>Options</th>
               </tr>
             </thead>
             <tbody *ngIf="menu[2].status">
@@ -331,7 +386,7 @@
                     <a [routerLink]="['/user-profile',genderMap(user.gender),user.userId]" target="_blank" title="View Matches">
                       {{user.fullName}}</a></td>
                   <td style="vertical-align: middle; cursor:pointer; color:blueviolet" data-bs-toggle="modal" data-bs-target="#emailModal" (click)="emailUser(user)"
-                  title="Email User">{{user.email}}</td>
+                  title="Email User">{{user.email.substring(0, user.email.indexOf('@'))+'\n'+user.email.substring(user.email.indexOf('@'))}}</td>
                   <td style="vertical-align: middle;">{{user.cellPhone}}</td>
                   <td style="vertical-align: middle;">
                     <div class="form-group" style="padding-top:15px;">
@@ -349,6 +404,9 @@
                         </option>
                       </select>
                     </div>
+                  </td>
+                  <td style="vertical-align: middle;">
+                    {{user.lastEdit.substring(0,10)+' '+user.lastEdit.substring(11,19)}}
                   </td>
                   <td style="vertical-align: middle;">
                     <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#recommendModal" (click)="cuser=user" title="Recommend Soulmate">
@@ -387,7 +445,7 @@
                     <a [routerLink]="['/user-profile',genderMap(user.gender),user.userId]" target="_blank" title="View Matches">
                     {{user.fullName}}</a></td>
                   <td style="vertical-align: middle; cursor:pointer; color:blueviolet" data-bs-toggle="modal" data-bs-target="#emailModal" (click)="emailUser(user)"
-                    title="Email User">{{user.email}}</td>
+                    title="Email User">{{user.email.substring(0, user.email.indexOf('@'))+'\n'+user.email.substring(user.email.indexOf('@'))}}</td>
                   <td style="vertical-align: middle;">{{user.cellPhone}}</td>
                   <td style="vertical-align: middle;">
                     <div class="form-group" style="padding-top:15px;">
@@ -400,12 +458,15 @@
                   <td style="vertical-align: middle;">
                     <div class="form-group" style="padding-top:15px;" placement="bottom"
                       ngbTooltip="{{user.lockedId}}{{(user.lockedId==null? '' : ' '+getName(user.lockedId.toString(),user.gender))}}">
-                      <select (change)=updateUser(user) [(ngModel)]="user.status" class="form-select" id="state">
+                      <select (change)="updateUser(user)" [(ngModel)]="user.status" class="form-select" id="state">
                         <option *ngFor="let status of profileStatus" value={{status}}>
                           {{status}}
                         </option>
                       </select>
                     </div>
+                  </td>
+                  <td style="vertical-align: middle;">
+                    {{user.lastEdit.substring(0,10)+' '+user.lastEdit.substring(11,19)}}
                   </td>
                   <td style="vertical-align: middle;">
                     <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#recommendModal" (click)="cuser=user" title="Recommend Soulmate">
@@ -977,9 +1038,217 @@
         </div>
         <!-- ========= end Activity -->
 
-        <!-- Dashboard
+        <!-- Convention User Profile
         ======================-->
-        <div *ngIf=menu[1].status>
+        <div *ngIf=menu[8].status>
+          <div class="row">
+            <div class="col-sm-3 col-md-6 ml-auto">
+              <ngb-pagination [collectionSize]="(conventionuser? convfemalesFiltered.length : convmalesFiltered.length)" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+            </div>
+            <div class="col-sm-3 mr-auto">
+              <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                  <input type="text" [(ngModel)]="userFilter" class="form-control" placeholder="Search by Name" aria-describedby="basic-addon1"
+                  (focus)="focus=true" (blur)="focus=false" (keyup)="userFilterFn1()" >
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <br>
+            (Click on Table Header button to Sort Ascending or Descending)
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th (click)="sortResult1('userId',sortasc)" style="cursor:pointer;"> ID 
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                  </th>
+                  <th (click)="sortResult1('fullName',sortasc)" style="cursor:pointer;">Name 
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                  </th>
+                  <th (click)="sortResult1('email',sortasc)" style="cursor:pointer;">Email
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                  </th>
+                  <th (click)="sortResult1('cellPhone',sortasc)" style="cursor:pointer;">Cell Phone
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+                  </th>
+                  <th>Age </th>
+                  <th>Address </th>
+                  <th>Options</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="!conventionuser">
+                <!--tr *ngFor="let user of (menu[2].status ? maleusers : femaleusers)"><ng-container> -->
+                <tr *ngFor="let user of convmalesFiltered; let i=index">
+                  <ng-container *ngIf="i>=(page-1)*itemPerPage && i<page*itemPerPage">
+                    <td style="vertical-align: middle;">{{user.userId}}</td>
+                    <td style="vertical-align: middle;">
+                      <a [routerLink]="['#']" title="View Details">
+                        {{user.fullName}}</a></td>
+                    <td style="vertical-align: middle; cursor:pointer; color:blueviolet" data-bs-toggle="modal" data-bs-target="#emailModal" (click)="emailUser(user)"
+                    title="Email User">{{user.email.substring(0, user.email.indexOf('@'))+'\n'+user.email.substring(user.email.indexOf('@'))}}</td>
+                    <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                    <td style="vertical-align: middle;">{{getAge(user.birthYear)}}</td>
+                    <td style="vertical-align: middle;">{{user.address+", "+user.state}}</td>
+                    
+                    <td style="vertical-align: middle;">
+                      <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#viewUserModal" (click)="viewUser(user.userId, user.gender)" title="View/Edit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-hearts" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M11.5 1.246c.832-.855 2.913.642 0 2.566-2.913-1.924-.832-3.421 0-2.566ZM9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276ZM15 2.165c.555-.57 1.942.428 0 1.711-1.942-1.283-.555-2.281 0-1.71Z"/>
+                        </svg>
+                      </button>
+                      
+                      <button type=button class="btn btn-light mr-1" (click)="deleteUser(user)" title="Delete USer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                      </button>
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+              <tbody *ngIf="conventionuser">
+                <!--tr *ngFor="let user of (menu[2].status ? maleusers : femaleusers)"><ng-container> -->
+                <tr *ngFor="let user of convfemalesFiltered; let i=index">
+                  <ng-container *ngIf="i>=(page-1)*itemPerPage && i<page*itemPerPage">
+                    <td style="vertical-align: middle;">{{user.userId}}</td>
+                    <td style="vertical-align: middle;">
+                      <a [routerLink]="['#']" title="View Details">
+                        {{user.fullName}}</a></td>
+                    <td style="vertical-align: middle; cursor:pointer; color:blueviolet" data-bs-toggle="modal" data-bs-target="#emailModal" (click)="emailUser(user)"
+                    title="Email User">{{user.email.substring(0, user.email.indexOf('@'))+'\n'+user.email.substring(user.email.indexOf('@'))}}</td>
+                    <td style="vertical-align: middle;">{{user.cellPhone}}</td>
+                    <td style="vertical-align: middle;">{{getAge(user.birthYear)}}</td>
+                    <td style="vertical-align: middle;">{{user.address+", "+user.state}}</td>
+                    
+                    <td style="vertical-align: middle;">
+                      <button type=button class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#viewUserModal" (click)="viewUser(user.userId, user.gender)" title="View/Edit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-hearts" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M11.5 1.246c.832-.855 2.913.642 0 2.566-2.913-1.924-.832-3.421 0-2.566ZM9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276ZM15 2.165c.555-.57 1.942.428 0 1.711-1.942-1.283-.555-2.281 0-1.71Z"/>
+                        </svg>
+                      </button>
+                      
+                      <button type=button class="btn btn-light mr-1" (click)="deleteUser(user)" title="Delete USer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                      </button>
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- View User Modal
+        ======================-->
+          <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View User</h5>
+                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="d-flex flex-row bd-highlight">
+                  <div class="p-4 w-100 bd-highlight">
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.fullName" class="form-control"
+                        placeholder="Full Name" id="fullName" disabled>
+                      <label for="FullName">Full Name</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.cellPhone" class="form-control" placeholder="Cell Phone Number"
+                        id="cellPhone" disabled>
+                      <label for="CellPhone">Cell Phone</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.email" class="form-control" placeholder="Email"
+                        id="email" disabled>
+                      <label for="Email">Email</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.birthYear" class="form-control" placeholder="Birth Year"
+                         disabled>
+                      <label for="Email">Birth Year</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.address" class="form-control" placeholder="Birth Year"
+                        id="address" disabled>
+                      <label for="address">Address</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.state" class="form-control" placeholder="State"
+                        id="state" disabled>
+                      <label for="state">State</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.highestEducation" class="form-control" placeholder="Educational Qualification"
+                        id="highestEducation" disabled>
+                      <label for="highestEducation">Educational Qualification</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.immigrationStatus" class="form-control" placeholder="Immigration Status"
+                        id="immigrationStatus" disabled>
+                      <label for="immigrationStatus">Immigration Status</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.employed" class="form-control" placeholder="Yes/No"
+                        id="employed" disabled>
+                      <label for="employed">Employed?</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.employment" class="form-control" placeholder="Employment Organization"
+                        id="employment" disabled>
+                      <label for="employment">Employment Organization</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.income" class="form-control" placeholder="Yearly Income ($)"
+                        id="income" disabled>
+                      <label for="income">Yearly Income ($)</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <input type="text" [(ngModel)]="convuser.familyBrief" class="form-control" placeholder="Additional Information"
+                        id="familyBrief" disabled>
+                      <label for="familyBrief">Additional Information</label>
+                    </div>
+
+                    <div class="form-group form-floating">
+                      <textarea [(ngModel)]="convuser.cv" class="form-control" placeholder="Admin Comment"
+                        id="cv"></textarea>
+                      <label for="cv">Admin Comment</label>
+                    </div>
+
+                    
+                  </div>
+                </div>
+
+                <button type="button" (click)="saveAdminComment(convuser.gender)" class="btn btn-primary float-end">
+                  Save
+                </button>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
         </div>
         <!-- ========= end Dashboard -->
 

@@ -325,6 +325,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
             var UserToken = this.getRandomInt(12345678,87654321);
             //localStorage.setItem('usertoken', UserToken);
             //this.updateMaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
+            
+            //lastEdit used for Last activity time
+            this.updateMaleUser({userId: this.currentUser.userId, lastEdit: this.getDateTime()}).subscribe();
           }
           else {
             Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');
@@ -342,6 +345,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
             var UserToken = this.getRandomInt(12345678,87654321);   
             //localStorage.setItem('usertoken', UserToken);        
             //this.updateFemaleUser({userId: this.currentUser.userId, userToken: UserToken}).subscribe();
+
+            //lastEdit used for Last activity time
+            this.updateFemaleUser({userId: this.currentUser.userId, lastEdit: this.getDateTime()}).subscribe();
           }
           else {
             Swal.fire('Login Again!', 'Security Token Expired. Please login again to continue.','warning');

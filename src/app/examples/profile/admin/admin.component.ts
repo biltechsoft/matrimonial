@@ -21,12 +21,20 @@ export class AdminComponent implements OnInit {
   maleusersFiltered: any = [];
   femaleusersFiltered: any = [];
   users: any = [];
+  deusers; tmpStatus="";
   matchingtables: any = [];
   messages: any = [];
   allpost: any = [];
   adminLog: any = [];
   cuser=''; topMatches = ''; reqAccepted='';
   firstTime = true;
+
+  convmales: any = [];
+  convfemales: any = [];
+  convmalesFiltered: any = [];
+  convfemalesFiltered: any = [];
+  convusers: any = [];
+  convuser='';
 
   itemPerPage=10;
   collectionSize=0;
@@ -104,6 +112,17 @@ export class AdminComponent implements OnInit {
   recom=false;
   recuserid=0;
 
+  conventionuser=0;  //0 for Male, 1 for Female
+
+  numOfMale=0;
+  numOfFemale=0;
+  numOfMaleActive=0;
+  numOfFemaleActive=0;
+  numOfMaleProgress=0;
+  numOfFemaleProgress=0;
+
+  extra="start";
+
 
   ngOnInit(): void {
     this.ptype = this.postTypes[0];
@@ -111,6 +130,7 @@ export class AdminComponent implements OnInit {
     this.refreshList();
     this.getCurrentAdmin();
     //this.activeMenu(localStorage.getItem('menuadmin'));
+
   }
   refreshList() {
     this.service.getAdminList().subscribe(data => {
@@ -118,6 +138,8 @@ export class AdminComponent implements OnInit {
     });
     this.refreshMaleList();
     this.refreshFemaleList();
+    this.refreshMaleConv();
+    this.refreshFemaleConv();
     this.refreshMatchingTable();
     this.refreshMessage();
     this.refreshPost();
@@ -131,17 +153,39 @@ export class AdminComponent implements OnInit {
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
       var a = data.filter(user => user.userId > 98); //dummy profile upto 98
-      this.maleusers = a;
-      this.maleusersFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.maleusers = a.filter(user => user.status!='Convention');
+      this.numOfMale=a.length;
+      this.numOfMaleActive= a.filter(user => user.status=='Active').length;
+      this.numOfMaleProgress= a.filter(user => user.lockedId!=null).length;
+      this.maleusersFiltered = this.maleusers.sort((item1, item2) => item2.userId - item1.userId);
       this.users = a;
     });
   }
   refreshFemaleList() {
     this.service.getFemaleUserList().subscribe(data => {
       var a = data.filter(user => user.userId > 32);
-      this.femaleusers = a;
-      this.femaleusersFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.femaleusers = a.filter(user => user.status!='Convention');;
+      this.numOfFemale=a.length;
+      this.numOfFemaleActive= a.filter(user => user.status=='Active').length;
+      this.numOfFemaleProgress= a.filter(user => user.lockedId!=null).length;
+      this.femaleusersFiltered = this.femaleusers.sort((item1, item2) => item2.userId - item1.userId);
       this.users = a;
+    });
+  }
+  refreshMaleConv() {
+    this.service.getMaleUserList().subscribe(data => {
+      var a = data.filter(user => user.userId > 98 && user.status=='Convention'); //dummy profile upto 98
+      this.convmales = a;
+      this.convmalesFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.convusers = a;
+    });
+  }
+  refreshFemaleConv() {
+    this.service.getFemaleUserList().subscribe(data => {
+      var a = data.filter(user => user.userId > 32 && user.status=='Convention'); //dummy profile upto 32
+      this.convfemales = a;
+      this.convfemalesFiltered = a.sort((item1, item2) => item2.userId - item1.userId);
+      this.convusers = a;
     });
   }
   refreshMatchingTable() {
@@ -272,7 +316,9 @@ export class AdminComponent implements OnInit {
       this.PhotoFilePath = "";
       this.NewPhotoUploaded = false;
     }
-
+    else if (this.menu[8].status) {  //for showing convention users
+      this.conventionuser=i;
+    }
 
     this.matchingVar = "Matching is being Processed...";
     if (this.menu[1].status && i == 0) {  //i=0 for submenu 'Run Matching'
@@ -323,6 +369,9 @@ export class AdminComponent implements OnInit {
       this.refreshList();
     });
   }
+  getAge(birthYear) {
+    return this.service.getAge(birthYear);
+  }
   createUser() {
     var val = {
       fullName: this.FullName,
@@ -352,6 +401,27 @@ export class AdminComponent implements OnInit {
         this.refreshList();
       });
     }
+  }
+
+  viewUser(Id, gender) {
+    if (gender == 'Female') {
+      this.convuser = this.convfemales.filter(user => user.userId.toString() == Id)[0];
+    } else {
+      this.convuser = this.convmales.filter(user => user.userId.toString() == Id)[0];
+    }
+    
+  }
+  saveAdminComment(gender) {
+    if(gender == "Male") {
+      this.service.updateMaleUser(this.convuser).subscribe(res=>{
+        Swal.fire('Admin Comment Added!', res.toString(),'success');
+      });
+    } else {
+      this.service.updateFemaleUser(this.convuser).subscribe(res=>{
+        Swal.fire('Admin Comment Added!', res.toString(),'success');
+      });
+    }
+    
   }
 
   addPostClick(id) {
@@ -628,35 +698,114 @@ export class AdminComponent implements OnInit {
         //reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
       }
 
-      if (user.gender == 'Male') {
-        this.service.updateMaleUser(val).subscribe(res => {
-          this.refreshList();
-        });
-        if (user.lockedId != null) {
-          /*var nuser = this.getUser(user.lockedId,user.gender);
-          var val2 = {
-            userId: Number(user.lockedId),
-            status: (user.status=='Locked' ? 'Locked' : 'Active'),
-            lockedId: (user.status=='Locked' ? user.userId : null),
-            reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
-          }*/
-          this.service.updateFemaleUser(val2).subscribe(res => {
-            this.refreshList();
-          });
-        }
+      if(user.status == this.profileStatus[4]) {
+        var vals = { userId: user.userId,
+              status: this.profileStatus[4] 
+        };
+        
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "The profile request sent by this user will be deleted. This action cannot be reverted! ",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Deactivate!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if(user.gender == 'Male') {
+              this.service.updateMaleUser(vals).subscribe(res=>{
+                this.deusers = this.femaleusers.filter(duser => duser.reqSent==null ? false: duser.reqSent.split(',').includes(user.userId.toString()));
+                this.deusers.forEach(duser => {
+                  this.deleteRequest(user, duser);
+                }); 
+              });
+            }
+            else {
+              this.service.updateFemaleUser(vals).subscribe(res=>{
+                this.deusers = this.maleusers.filter(duser => duser.reqSent==null ? false: duser.reqSent.split(',').includes(user.userId.toString()));
+                this.deusers.forEach(duser => {
+                  this.deleteRequest(user, duser);
+                }); 
+              });
+            }
+          } else {
+              user.status = "Active";
+          }
+          //this.router.navigate(['/user-profile',this.usertype,this.currentUser.userId]);
+        })
       }
+
       else {
-        this.service.updateFemaleUser(val).subscribe(res => {
-          this.refreshList();
-        });
-        if (user.lockedId != null) {
-          this.service.updateMaleUser(val2).subscribe(res => {
+        if (user.gender == 'Male') {
+          this.service.updateMaleUser(val).subscribe(res => {
             this.refreshList();
           });
+          if (user.lockedId != null) {
+            /*var nuser = this.getUser(user.lockedId,user.gender);
+            var val2 = {
+              userId: Number(user.lockedId),
+              status: (user.status=='Locked' ? 'Locked' : 'Active'),
+              lockedId: (user.status=='Locked' ? user.userId : null),
+              reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
+            }*/
+            this.service.updateFemaleUser(val2).subscribe(res => {
+              this.refreshList();
+            });
+          }
+        }
+        else {
+          this.service.updateFemaleUser(val).subscribe(res => {
+            this.refreshList();
+          });
+          if (user.lockedId != null) {
+            this.service.updateMaleUser(val2).subscribe(res => {
+              this.refreshList();
+            });
+          }
         }
       }
     }
   }
+  deleteRequest(duser, user) {
+    //here, duser & user are reverted their places intentionally than where it is called
+    /*
+        matchId
+        matchPercentage
+        reqSent
+        reqAccepted
+        lockedId
+        cuMatchId
+        reqLock
+    */
+          user.reqSent = this.deleteReq(user, 'reqSent', duser);
+          var val = { userId: user.userId,
+                      reqSent: user.reqSent };
+
+          if(user.gender == 'Male') {
+            this.service.updateMaleUser(val).subscribe(res=>{
+              //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            });
+          }
+          else {
+            this.service.updateFemaleUser(val).subscribe(res=>{
+              //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            });
+          }
+  }
+
+  deleteReq(user, field, duser) {
+    if(user[field] == duser.userId.toString()) { user[field] = null; }
+    else {
+      var newReqSent = user[field].split(',').filter(x => x !== duser.userId.toString());
+      user[field] = newReqSent[0];
+      for(var r=1; r<newReqSent.length; r++) {
+        user[field] += ',' + newReqSent[r];
+      }
+    }
+    return user[field];        
+  }
+  
   deleteClick(id: any) {
     Swal.fire({
       title: 'Are you sure?',
@@ -692,7 +841,8 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        if (usr.gender == 'Female') {
+        Swal.fire('Oops!', "You cannot delete this. Please contact website deeveloper to delete this.", 'warning');
+        /*if (usr.gender == 'Female') {
           this.service.deleteFemaleUser(usr.userId).subscribe(res => {
             Swal.fire('Deleted!', res.toString(), 'success');
             this.refreshFemaleList();
@@ -702,8 +852,12 @@ export class AdminComponent implements OnInit {
           this.service.deleteMaleUser(usr.userId).subscribe(res => {
             Swal.fire('Deleted!', res.toString(), 'success');
             this.refreshMaleList();
+            var todel = this.femaleusers.filter(user => user.matchId.includes(usr.userId.toString()) || 
+                  user.reqAccepted.includes(usr.userId.toString()) || user.reqRejected.includes(usr.userId.toString()) ||
+                  user.reqSent.includes(usr.userId.toString()) || user.lockedId.includes(usr.userId.toString()) ||
+                  user.cuMatchId.includes(usr.userId.toString()) || user.reqLock.includes(usr.userId.toString()));
           });
-        }
+        }*/
       }
     })
     /*if (confirm('Are you sure?')) {
@@ -934,14 +1088,30 @@ export class AdminComponent implements OnInit {
 
   userFilterFn() {
     var UserFilter = this.userFilter;
-
+    
     this.maleusersFiltered = this.maleusers.filter(function (el: any) {
+      return el.fullName.toString().toLowerCase().includes(
+        UserFilter.toString().trim().toLowerCase()
+      );
+    });
+
+    this.femaleusersFiltered = this.femaleusers.filter(function (el: any) {
       return el.fullName.toString().toLowerCase().includes(
         UserFilter.toString().trim().toLowerCase()
       )
     });
+  }
 
-    this.femaleusersFiltered = this.femaleusers.filter(function (el: any) {
+  userFilterFn1() {
+    var UserFilter = this.userFilter;
+    
+    this.convmalesFiltered = this.convmales.filter(function (el: any) {
+      return el.fullName.toString().toLowerCase().includes(
+        UserFilter.toString().trim().toLowerCase()
+      );
+    });
+
+    this.convfemalesFiltered = this.convfemales.filter(function (el: any) {
       return el.fullName.toString().toLowerCase().includes(
         UserFilter.toString().trim().toLowerCase()
       )
@@ -957,6 +1127,24 @@ export class AdminComponent implements OnInit {
       }
     })
     this.femaleusersFiltered = this.femaleusersFiltered.sort(function(a:any,b:any){
+      if(asc){
+          return (a[prop].toString().toLowerCase()>b[prop].toString().toLowerCase())?1 : ((a[prop].toString().toLowerCase()<b[prop].toString().toLowerCase()) ?-1 :0);
+      }else{
+        return (b[prop].toString().toLowerCase()>a[prop].toString().toLowerCase())?1 : ((b[prop].toString().toLowerCase()<a[prop].toString().toLowerCase()) ?-1 :0);
+      }
+    })
+    this.sortasc = !this.sortasc;
+  }
+
+  sortResult1(prop:any,asc:boolean){
+    this.convmalesFiltered = this.convmalesFiltered.sort(function(a:any,b:any){
+      if(asc){
+          return (a[prop].toString().toLowerCase()>b[prop].toString().toLowerCase())?1 : ((a[prop].toString().toLowerCase()<b[prop].toString().toLowerCase()) ?-1 :0);
+      }else{
+        return (b[prop].toString().toLowerCase()>a[prop].toString().toLowerCase())?1 : ((b[prop].toString().toLowerCase()<a[prop].toString().toLowerCase()) ?-1 :0);
+      }
+    })
+    this.convfemalesFiltered = this.convfemalesFiltered.sort(function(a:any,b:any){
       if(asc){
           return (a[prop].toString().toLowerCase()>b[prop].toString().toLowerCase())?1 : ((a[prop].toString().toLowerCase()<b[prop].toString().toLowerCase()) ?-1 :0);
       }else{
@@ -1021,6 +1209,13 @@ export class AdminComponent implements OnInit {
       id: 7,
       name: "Activity",
       submenu: [],
+      status: false,
+      sub: false
+    },
+    {
+      id: 8,
+      name: "Convention User",
+      submenu: ['Male','Female'],
       status: false,
       sub: false
     },

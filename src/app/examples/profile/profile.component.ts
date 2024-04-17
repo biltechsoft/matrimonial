@@ -21,9 +21,9 @@ export class ProfileComponent implements OnInit {
     gotid;
     PhotoFilePath;
     pct;  //percentage of profile completeness
-    topMatches;
+    topMatches; topMatcheUsers;
     topMatchPct;
-    requested;
+    requested; requestedUsers;
     reqAccepted;
     reqLock;
     users;
@@ -201,7 +201,13 @@ export class ProfileComponent implements OnInit {
       }
     }
     getTopMatches(Id) {
-      return this.users.filter(user => user.userId.toString()==Id);
+      var iduser = this.users.filter(user => user.userId.toString()==Id);
+      if(iduser.length>0) {
+        return iduser;
+      } else {
+        return 0;
+      }
+      
     }
 
     getCurrentUser(userid,usertype) {
@@ -213,12 +219,15 @@ export class ProfileComponent implements OnInit {
             this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
             this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
               +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
-            this.reqAccepted = this.currentUser.reqAccepted.split(',');
+            this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
             //this.pct = this.profilePercentage(this.currentUser);
+            this.service.getFemaleUserList().subscribe(dat=>{
+              this.users = dat;
+              this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
+              this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+            });
           });
-          this.service.getFemaleUserList().subscribe(data=>{
-            this.users = data;
-          });
+          
       }
       else if(usertype=='2') {
           this.service.getFemaleUserList(userid).subscribe(data=>{
@@ -228,12 +237,15 @@ export class ProfileComponent implements OnInit {
             this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
             this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
               +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
-            this.reqAccepted = this.currentUser.reqAccepted.split(',');
+            this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
               //this.pct = this.profilePercentage(this.currentUser,false);
+              this.service.getMaleUserList().subscribe(dat=>{
+                this.users = dat;
+                this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
+                this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+              });
           });
-          this.service.getMaleUserList().subscribe(data=>{
-            this.users = data;
-          });
+          
       }
     }
 

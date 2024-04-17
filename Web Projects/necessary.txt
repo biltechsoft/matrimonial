@@ -1,0 +1,10 @@
+matrimonial admin
+id: innovationbd21
+pass: innovation24434
+
+cpanel
+id: matrimonial
+pass: S_hx>D[F5M
+
+for datatable
+https://www.ngdevelop.tech/best-angular-tables/

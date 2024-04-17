@@ -97,6 +97,15 @@ export class SignupComponent implements OnInit {
       else { return true; }
     }
 
+    validateFields() {
+      if(!this.fullNameValidate() || !this.emailValidate() || !this.telephoneCheck()) {
+        Swal.fire('Invalid Field!', 'Please enter valid text!','warning');
+          return false;
+      } else {
+        return true;
+      }
+    }
+
     refreshUserList() {
       this.service.getMaleUserList().subscribe(data=>{
         this.UserList1 = data;
@@ -110,16 +119,17 @@ export class SignupComponent implements OnInit {
 
          this.userAlreadyExist = false;
          this.status = true;
-         if(this.FullName==null) { this.FullName=""; this.status=false; }
-         if(this.Email==null) { this.Email=""; this.status=false; }
-         if(this.CellPhone==null) { this.CellPhone=""; this.status=false; }
-         if(this.Gender==null) { this.Gender=""; this.status=false; }
-         if(this.State==null) { this.State=""; this.status=false; }
-         if(this.BirthYear==null) { this.BirthYear=""; this.status=false; }
+         if(this.FullName==null || this.FullName=="") { this.FullName=""; this.status=false; }
+         if(this.Email==null || this.Email=="") { this.Email=""; this.status=false; }
+         if(this.CellPhone==null || this.CellPhone=="") { this.CellPhone=""; this.status=false; }
+         if(this.Gender==null || this.Gender=="") { this.Gender=""; this.status=false; }
+         if(this.State==null || this.State=="") { this.State=""; this.status=false; }
+         if(this.BirthYear==null || this.BirthYear=="") { this.BirthYear=""; this.status=false; }
          if(!this.passwordValidate()) { this.status=false; }
          if(!this.passMatched()) { this.passMisMatched = true; this.status=false; }
          if(this.preRegistered()) { this.userAlreadyExist = true; this.status=false;}
 
+         this.status = this.validateFields();
          if(!this.status) { return false; }
 
         //var dateBirth=null;
