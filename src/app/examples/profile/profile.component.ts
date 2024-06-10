@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
     PhotoFilePath;
     pct;  //percentage of profile completeness
     topMatches; topMatcheUsers;
+    locked = false;
+    anyidAccepted = false;
+    acceptedIds;
+    lockedProfile;
     topMatchPct;
     requested; requestedUsers;
     reqAccepted;
@@ -37,6 +41,7 @@ export class ProfileComponent implements OnInit {
     rejectionNote = this.service.rejectionNote;
     profileStatus = this.service.profileStatus;
     unlockMsg = "I would like to request to UNLOCK my ID. I am not interested with the person anymore with whom my ID is temporarily LOCKED.";
+    
 
     ngOnInit() {
       this.userid = Number(this.arout.snapshot.paramMap.get("id"));
@@ -47,68 +52,38 @@ export class ProfileComponent implements OnInit {
     genderMap(gender) {
       return (gender=='Male' ? '1' : '2');
     }
-    requestInfo(user,i) {
-      if(this.currentUser.reqSent == null) { this.currentUser.reqSent = ""; }
-      else { this.currentUser.reqSent += ","; }
-      var val = { userId: this.currentUser.userId, reqSent: this.currentUser.reqSent+=user.userId };
-      if(this.currentUser.gender == 'Male') {
-        this.service.updateMaleUser(val).subscribe(res=>{
+    reverseGenderMap(gender) {
+      return (gender=='Male' ? '2' : '1');
+    }
+    
+    requestInfo(user) {
+      if(this.currentUser.gender == "Male") {
+        var val = { id: user.matchingId, statusReq: 1 };
+        this.service.updateMatching(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
           this.getCurrentUser(this.userid, this.usertype);
         });
       }
-      else if(this.currentUser.gender == 'Female') {
-        this.service.updateFemaleUser(val).subscribe(res=>{
+      else { 
+        var val = { id: user.matchingId, statusReq: 2 };
+        this.service.updateMatching(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
           this.getCurrentUser(this.userid, this.usertype);
         });
-      }
+      }  
     }
     isReqSent(user) {
       if(this.currentUser.reqSent == null) { return false; }
       else { return this.currentUser.reqSent.split(',').includes(user.userId.toString()); }
     }
-    giveAccess(user,i) {
-      //delete reqSent and add it to reqAccepted
-      if(this.currentUser.reqSent == user.userId.toString()) { this.currentUser.reqSent = null; }
-      else {
-        var newReqSent = this.currentUser.reqSent.split(',').filter(x => x !== user.userId.toString());
-        this.currentUser.reqSent = newReqSent[0];
-        for(var r=1; r<newReqSent.length; r++) {
-          this.currentUser.reqSent += ',' + newReqSent[r];
-        }
-      }
-      if(this.currentUser.reqAccepted == null) { this.currentUser.reqAccepted = ""; }
-      else { this.currentUser.reqAccepted += ","; }
-      //for giving requested id access too
-      if(user.reqSent == null || user.reqSent == this.currentUser.userId.toString()) { user.reqSent = null; }
-      else {
-        var newReqSent2 = user.reqSent.split(',').filter(x => x !== this.currentUser.userId.toString());
-        user.reqSent = newReqSent2[0];
-        for(var r=1; r<newReqSent2.length; r++) {
-          user.reqSent += ',' + newReqSent2[r];
-        }
-      }
-      if(user.reqAccepted == null) { user.reqAccepted = ""; }
-      else { user.reqAccepted += ","; }
-      var val = { userId: this.currentUser.userId,
-                  reqSent: this.currentUser.reqSent,
-                  reqAccepted: this.currentUser.reqAccepted += user.userId };
-      var val2 = { userId: user.userId,
-                  reqSent: user.reqSent,
-                  reqAccepted: user.reqAccepted += this.currentUser.userId };
-      if(this.currentUser.gender == 'Male') {
-        this.service.updateMaleUser(val).subscribe(res=>{
+    giveAccess(user) {
+      var val = { id: user.matchingId, statusReq: 3 };
+        this.service.updateMatching(val).subscribe(res=>{
           //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
-          this.service.updateFemaleUser(val2).subscribe(); //for giving requested id access too
+          this.getCurrentUser(this.userid, this.usertype);
         });
-      }
-      else if(this.currentUser.gender == 'Female') {
-        this.service.updateFemaleUser(val).subscribe(res=>{
-          //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
-          this.service.updateMaleUser(val2).subscribe();  //for giving requested id access too
-        });
-      }
+      
+      
       //add admin activity
       var logval = {
         adminId: Number(localStorage.getItem('adminid')),
@@ -122,6 +97,59 @@ export class ProfileComponent implements OnInit {
       }
       this.service.addAdminLog(logval).subscribe();
     }
+    lockRequest(reqLock){
+      Swal.fire({
+        title: 'Surely, You want to send LOCK request?',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Sure!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var val = { id: reqLock, statusReq: this.currentUser.gender=='Male' ? 5 : 6};
+          this.service.updateMatching(val).subscribe(res=>{
+            //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            this.getCurrentUser(this.userid, this.usertype);
+          });
+        }
+      })
+    }
+    cancelLockRequest() {
+      var val = { id: this.lockedProfile[0].matchingId, statusReq: 3};
+      this.service.updateMatching(val).subscribe(res=>{
+        //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+        this.getCurrentUser(this.userid, this.usertype);
+        this.locked=false;
+        Swal.fire({
+          title: 'LOCK Request Cancelled',
+          text: "",
+          icon: 'success',
+          confirmButtonColor: '#3085d6'
+        })
+      });
+    }
+    unlockRequest() {
+      Swal.fire({
+        title: 'Surely, You want to reject this ID and send UNLOCK request?',
+        text: "",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Sure!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var val = { id: this.lockedProfile[0].matchingId, statusReq: this.currentUser.gender=='Male' ? 8 : 9};
+          this.service.updateMatching(val).subscribe(res=>{
+            //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+            this.getCurrentUser(this.userid, this.usertype);
+          });
+        }
+      })
+    }
+    
     isReqAccepted(user) {
       if(this.currentUser.reqAccepted == null) { return false; }
       else { return this.currentUser.reqAccepted.split(',').includes(user.userId.toString()); }
@@ -136,45 +164,12 @@ export class ProfileComponent implements OnInit {
       this.ri = i;
     }
     rejectAccess(user,i) {
-      //if(confirm('Are you sure you want to reject the request?')) {
-        //delete reqSent and add it to reqRejected
-        if(this.currentUser.reqSent == user.userId.toString()) { this.currentUser.reqSent = null; }
-        else {
-          var newReqSent = this.currentUser.reqSent.split(',').filter(x => x !== user.userId.toString());
-          this.currentUser.reqSent = newReqSent[0];
-          for(var r=1; r<newReqSent.length; r++) {
-            this.currentUser.reqSent += ',' + newReqSent[r];
-          }
-        }
-        if(this.currentUser.reqRejected == null) { this.currentUser.reqRejected = ""; }
-        else { this.currentUser.reqRejected += ","; }
-        //create rejection for both id
-        if(user.reqSent == null || user.reqSent == this.currentUser.userId.toString()) { user.reqSent = null; }
-        else {
-          var newReqSent2 = user.reqSent.split(',').filter(x => x !== this.currentUser.userId.toString());
-          user.reqSent = newReqSent2[0];
-          for(var r=1; r<newReqSent2.length; r++) {
-            user.reqSent += ',' + newReqSent[r];
-          }
-        }
-        if(user.reqRejected == null) { user.reqRejected = ""; }
-        else { user.reqRejected += ","; }
-        var val = { userId: this.currentUser.userId,
-                    reqSent: this.currentUser.reqSent,
-                    reqRejected: this.currentUser.reqRejected += user.userId };
-        var val = { userId: user.userId,
-                    reqSent: user.reqSent,
-                    reqRejected: user.reqRejected += this.currentUser.userId };
-        if(this.currentUser.gender == 'Male') {
-          this.service.updateMaleUser(val).subscribe(res=>{
-            //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
-          });
-        }
-        else if(this.currentUser.gender == 'Female') {
-          this.service.updateFemaleUser(val).subscribe(res=>{
-            //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
-          });
-        }
+      var val = { id: user.matchingId, statusReq: 4 };
+      this.service.updateMatching(val).subscribe(res=>{
+        //if(res.toString() == 'Updated Successfully') { this.reqSentIndex.push(i); }
+        this.getCurrentUser(this.userid, this.usertype);
+      });
+        
         //add admin activity
         var logval = {
           adminId: localStorage.getItem('adminid'),
@@ -210,21 +205,37 @@ export class ProfileComponent implements OnInit {
       
     }
 
+    clickConsole() {
+      var pas = this.service.mDecrypt('VFZSSmVrNUJQVDA9');
+      console.log(pas);
+    }
+
     getCurrentUser(userid,usertype) {
         if(usertype=='1') {
           this.service.getMaleUserList(userid).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
-            this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
-            this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
-            this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
-              +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
-            this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
-            //this.pct = this.profilePercentage(this.currentUser);
-            this.service.getFemaleUserList().subscribe(dat=>{
-              this.users = dat;
-              this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
-              this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+            // this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+            // this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
+            // this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
+            //   +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
+            // this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
+            // //this.pct = this.profilePercentage(this.currentUser);
+            // this.service.getFemaleUserList().subscribe(dat=>{
+            //   this.users = dat;
+            //   this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
+            //   this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+            // });
+            this.service.getTopMatchFemales(this.currentUser.userId).subscribe(dat=>{
+
+              this.topMatcheUsers = dat["Matching"];
+              this.acceptedIds = this.topMatcheUsers.filter(x => (x.statusReq==3||x.statusReq>4) && x.status==this.profileStatus[2]);
+              this.anyidAccepted = this.acceptedIds.length > 0;
+              this.lockedProfile = this.topMatcheUsers.filter(x => x.statusReq == 5||x.statusReq == 7 ||x.statusReq == 8);
+              if(this.lockedProfile.length>0){
+                this.locked=true;
+              
+              }
             });
           });
           
@@ -233,17 +244,45 @@ export class ProfileComponent implements OnInit {
           this.service.getFemaleUserList(userid).subscribe(data=>{
             this.currentUser = data;
             this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
-            this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
-            this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
-            this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
-              +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
-            this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
-              //this.pct = this.profilePercentage(this.currentUser,false);
+            //this.topMatchPct = this.currentUser.matchPercentage.split(',',this.currentUser.matchShowLimit);
+            // this.requested = (this.currentUser.reqAccepted+','+this.currentUser.reqSent
+            //   +','+this.currentUser.reqRejected).split(',').filter(x => x !== null);
+            // this.reqAccepted = this.currentUser.reqAccepted ? this.currentUser.reqAccepted.split(',') : this.currentUser.reqAccepted;
+            
+            this.service.getTopMatchMales(this.currentUser.userId).subscribe(dat=>{
+              this.topMatcheUsers = dat["Matching"];
+              this.acceptedIds = this.topMatcheUsers.filter(x => (x.statusReq==3 ||x.statusReq>4) && x.status==this.profileStatus[2]);
+              this.anyidAccepted = this.acceptedIds.length > 0;
+              this.lockedProfile = this.topMatcheUsers.filter(x => x.statusReq == 6||x.statusReq == 7 ||x.statusReq == 9);
+              if(this.lockedProfile.length>0){
+                this.locked=true;
+              
+              }
+            });
+
+            /*this.service.getMatchingList().subscribe(dat=>{
+              var matches = dat.filter(user => user.femaleId==this.currentUser.userId);
+              var sortedMatches = matches.sort((a,b) => b.percentage - a.percentage);
+              for(let i=0; i<this.currentUser.matchShowLimit; i++) {
+                this.topMatches[i] = sortedMatches[i].maleId;
+                this.topMatchPct[i] = sortedMatches[i].percentage;
+              }
+              this.topMatches = sortedMatches;
               this.service.getMaleUserList().subscribe(dat=>{
                 this.users = dat;
-                this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
+                this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId));
                 this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
               });
+              //this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+            });*/
+
+            //this.topMatches = this.currentUser.matchId.split(',',this.currentUser.matchShowLimit);
+            //this.pct = this.profilePercentage(this.currentUser,false);
+              /*this.service.getMaleUserList().subscribe(dat=>{
+                this.users = dat;
+                //this.topMatcheUsers = dat.filter(user => this.topMatches.includes(user.userId.toString()));
+                this.requestedUsers = dat.filter(user => this.requested.includes(user.userId.toString()));
+              });*/
           });
           
       }

@@ -1,0 +1,2 @@
+1. Profile create, save, proper error not showing
+2. User experience not well

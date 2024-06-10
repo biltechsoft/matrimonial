@@ -96,6 +96,10 @@ export class AdminComponent implements OnInit {
   Email = null;
   DateOfBirth = null;
 
+  maleRequest: any = [];
+  femaleRequest: any = [];
+  maleRequestLock: any=[];
+  femaleRequestLock: any=[];
   requestId = [0];
   //alerts = this.notify.alerts;
   acceptedIndex: any = [];
@@ -144,6 +148,8 @@ export class AdminComponent implements OnInit {
     this.refreshMessage();
     this.refreshPost();
     this.refreshAdminLog();
+    this.refreshProfileRequest();
+    this.refreshLockRequest();
     //this.sortResult('userId',this.sortasc);
 
     this.acceptedIndex = [];
@@ -152,7 +158,7 @@ export class AdminComponent implements OnInit {
   }
   refreshMaleList() {
     this.service.getMaleUserList().subscribe(data => {
-      var a = data.filter(user => user.userId > 98); //dummy profile upto 98
+      var a = data.filter(user => user.userId > 8); //dummy profile upto 98
       this.maleusers = a.filter(user => user.status!='Convention');
       this.numOfMale=a.length;
       this.numOfMaleActive= a.filter(user => user.status=='Active').length;
@@ -163,13 +169,33 @@ export class AdminComponent implements OnInit {
   }
   refreshFemaleList() {
     this.service.getFemaleUserList().subscribe(data => {
-      var a = data.filter(user => user.userId > 32);
+      var a = data.filter(user => user.userId > 2);
       this.femaleusers = a.filter(user => user.status!='Convention');;
       this.numOfFemale=a.length;
       this.numOfFemaleActive= a.filter(user => user.status=='Active').length;
       this.numOfFemaleProgress= a.filter(user => user.lockedId!=null).length;
       this.femaleusersFiltered = this.femaleusers.sort((item1, item2) => item2.userId - item1.userId);
       this.users = a;
+    });
+  }
+  refreshProfileRequest() {
+    this.service.getReqMales().subscribe(data => {
+      this.maleRequest = data["Matching"];
+      //this.requestUsers = a;
+    });
+    this.service.getReqFemales().subscribe(data => {
+      this.femaleRequest = data["Matching"];
+      //this.requestUsers = a;
+    });
+  }
+  refreshLockRequest() {
+    this.service.getReqLockMales().subscribe(data => {
+      this.maleRequestLock = data["Matching"];
+      //this.requestUsers = a;
+    });
+    this.service.getReqLockFemales().subscribe(data => {
+      this.femaleRequestLock = data["Matching"];
+      //this.requestUsers = a;
     });
   }
   refreshMaleConv() {
@@ -617,6 +643,7 @@ export class AdminComponent implements OnInit {
     this.emailUserEmail = user.email;
     //this.emailUserEmail = 'abdulbari.bec@gmail.com';
   }
+  
   sendEmail() {
     var emailVal = {
       subject: this.emailSubject,
@@ -662,6 +689,14 @@ export class AdminComponent implements OnInit {
     }
     return this.femaleusers.filter(user => user.userId.toString() == Id)[0].fullName;
   }
+  getStatus(Id, gender) {
+    if(Id==0) { return ''; }
+    if (gender == 'Female' || gender == '2') {  //Female for getting matching gender and 1 for getting own gender
+      return this.femaleusers.filter(user => user.userId.toString() == Id)[0].status;
+    }
+    return this.maleusers.filter(user => user.userId.toString() == Id)[0].status;
+  }
+
   getUser(Id, gender) {
     if (gender == 'Female') {
       return this.maleusers.filter(user => user.userId.toString() == Id)[0];
@@ -677,11 +712,26 @@ export class AdminComponent implements OnInit {
   updateUser(user) {
     if (user.status == this.profileStatus[3] && user.lockedId == null) {
       this.cuser = user;
-      this.topMatches = user.matchId.split(',');
-      this.reqAccepted = user.reqAccepted.split(',');
-      const element = document.getElementById('statusModal') as HTMLElement;
-      const myModal = new Modal(element);
-      myModal.show();
+      if (user.gender == 'Male') {
+        this.service.getTopMatchFemales(user.userId).subscribe(data => {
+          this.topMatches = data["Matching"];
+          const element = document.getElementById('statusModal') as HTMLElement;
+          const myModal = new Modal(element);
+          myModal.show();
+          //this.requestUsers = a;
+        });
+      } else {
+        this.service.getTopMatchMales(user.userId).subscribe(data => {
+          this.topMatches = data["Matching"];
+          const element = document.getElementById('statusModal') as HTMLElement;
+          const myModal = new Modal(element);
+          myModal.show();
+          //this.requestUsers = a;
+        });
+      }
+      
+      //this.reqAccepted = user.reqAccepted.split(',');
+      
     }
     else {
       var val = {
@@ -742,13 +792,6 @@ export class AdminComponent implements OnInit {
             this.refreshList();
           });
           if (user.lockedId != null) {
-            /*var nuser = this.getUser(user.lockedId,user.gender);
-            var val2 = {
-              userId: Number(user.lockedId),
-              status: (user.status=='Locked' ? 'Locked' : 'Active'),
-              lockedId: (user.status=='Locked' ? user.userId : null),
-              reqRejected: (user.status=='Active' ? (nuser.reqRejected==null ? user.userId : nuser.reqRejected+','+user.userId) : nuser.reqRejected)
-            }*/
             this.service.updateFemaleUser(val2).subscribe(res => {
               this.refreshList();
             });
@@ -841,8 +884,8 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Oops!', "You cannot delete this. Please contact website deeveloper to delete this.", 'warning');
-        /*if (usr.gender == 'Female') {
+        //Swal.fire('Oops!', "You cannot delete this. Please contact website deeveloper to delete this.", 'warning');
+        if (usr.gender == 'Female') {
           this.service.deleteFemaleUser(usr.userId).subscribe(res => {
             Swal.fire('Deleted!', res.toString(), 'success');
             this.refreshFemaleList();
@@ -852,12 +895,12 @@ export class AdminComponent implements OnInit {
           this.service.deleteMaleUser(usr.userId).subscribe(res => {
             Swal.fire('Deleted!', res.toString(), 'success');
             this.refreshMaleList();
-            var todel = this.femaleusers.filter(user => user.matchId.includes(usr.userId.toString()) || 
+            /*var todel = this.femaleusers.filter(user => user.matchId.includes(usr.userId.toString()) || 
                   user.reqAccepted.includes(usr.userId.toString()) || user.reqRejected.includes(usr.userId.toString()) ||
                   user.reqSent.includes(usr.userId.toString()) || user.lockedId.includes(usr.userId.toString()) ||
-                  user.cuMatchId.includes(usr.userId.toString()) || user.reqLock.includes(usr.userId.toString()));
+                  user.cuMatchId.includes(usr.userId.toString()) || user.reqLock.includes(usr.userId.toString()));*/
           });
-        }*/
+        }
       }
     })
     /*if (confirm('Are you sure?')) {
@@ -903,9 +946,9 @@ export class AdminComponent implements OnInit {
     if (user.status == 'Pending' || user.album != null || user.tempGallery != null) {
       return true;
     }
-    else if (user.reqSent != null) {
+    /*else if (user.reqSent != null) {
       return true;
-    }
+    }*/
   }
   requestIndex(user) {
     if (user.status == 'Pending' || user.album != null || user.tempGallery != null) {
@@ -934,6 +977,60 @@ export class AdminComponent implements OnInit {
         if (res.toString() == 'Updated Successfully') { this.acceptedIndex.push(i); }
       });
     }
+  }
+  acceptLockRequest(request,i,gend) {
+    if(request.statusReq < 7) {
+      var val = { userId: request.maleId, status: this.profileStatus[3] };
+      this.service.updateMaleUser(val).subscribe();
+      var val1 = { id: request.matchingId, statusReq: 7};
+      this.service.updateMatching(val1).subscribe(res => {
+        if(gend==1) {
+          this.maleRequestLock[i].statusReq=11;
+        } else {
+          this.femaleRequestLock[i].statusReq=11;
+        }
+      });
+      var val = { userId: request.femaleId, status: this.profileStatus[3] };
+      this.service.updateFemaleUser(val).subscribe();
+    } else {
+      var val = { userId: request.maleId, status: this.profileStatus[2] }; //Make Active
+      this.service.updateMaleUser(val).subscribe();
+      var val1 = { id: request.matchingId, statusReq: 4}; //rejected forever
+      this.service.updateMatching(val1).subscribe(res => {
+        if(gend==1) {
+          this.maleRequestLock[i].statusReq=12;
+        } else {
+          this.femaleRequestLock[i].statusReq=12;
+        }
+      });
+      var val = { userId: request.femaleId, status: this.profileStatus[2] };
+      this.service.updateFemaleUser(val).subscribe();
+    }
+      
+
+  }
+  rejectLockRequest(request,i,gend) {
+    if(request.statusReq < 7) {
+      var val1 = { id: request.matchingId, statusReq: 3};
+      this.service.updateMatching(val1).subscribe(res => {
+        if(gend==1) {
+          this.maleRequestLock[i].statusReq=13;
+        } else {
+          this.femaleRequestLock[i].statusReq=13;
+        }
+      });
+    } else {
+      var val1 = { id: request.matchingId, statusReq: 7};
+      this.service.updateMatching(val1).subscribe(res => {
+        if(gend==1) {
+          this.maleRequestLock[i].statusReq=14;
+        } else {
+          this.femaleRequestLock[i].statusReq=14;
+        }
+      });
+    }
+      
+
   }
   profileReject(user, i) {
     if (user.gender == 'Male') {
@@ -1048,6 +1145,11 @@ export class AdminComponent implements OnInit {
     else if (this.rejectedIndex.includes(i)) { return 'Rejected'; }
     else { return ''; }
   }
+  // acceptLockRequest(i) {
+  //   if (this.acceptedIndex.includes(i)) { return 'Accepted'; }
+  //   else if (this.rejectedIndex.includes(i)) { return 'Rejected'; }
+  //   else { return ''; }
+  // }
 
   viewMore(string) {
     this.viewMoreString = string;
@@ -1067,6 +1169,9 @@ export class AdminComponent implements OnInit {
       //else { this.updatePost(id); }
       //this.NewPhotoUploaded=true;
     });
+  }
+  clickConsole() {
+    console.log('demo');
   }
   genderMap(gender) {
     return (gender == 'Male' ? '1' : '2');

@@ -1,0 +1,5111 @@
+
+ 
+ maleId :100
+ points :50
+ femaleId :42
+ 
+ maleId :100
+ points :50
+ femaleId :46
+ 
+ maleId :100
+ points :50
+ femaleId :63
+ 
+ maleId :100
+ points :60
+ femaleId :70
+ 
+ maleId :100
+ points :60
+ femaleId :77
+ 
+ maleId :100
+ points :50
+ femaleId :84
+ 
+ maleId :100
+ points :50
+ femaleId :93
+ 
+ maleId :100
+ points :50
+ femaleId :151
+ 
+ maleId :100
+ points :50
+ femaleId :157
+ 
+ maleId :100
+ points :60
+ femaleId :158
+ 
+ maleId :100
+ points :50
+ femaleId :160
+ 
+ maleId :100
+ points :50
+ femaleId :173
+ 
+ maleId :100
+ points :60
+ femaleId :180
+ 
+ maleId :100
+ points :50
+ femaleId :185
+ 
+ maleId :100
+ points :50
+ femaleId :196
+ 
+ maleId :100
+ points :50
+ femaleId :201
+ 
+ maleId :100
+ points :50
+ femaleId :204
+ 
+ maleId :100
+ points :50
+ femaleId :207
+ 
+ maleId :100
+ points :50
+ femaleId :208
+ 
+ maleId :100
+ points :50
+ femaleId :209
+ 
+ maleId :100
+ points :50
+ femaleId :213
+ 
+ maleId :100
+ points :40
+ femaleId :215
+ 
+ maleId :101
+ points :30
+ femaleId :42
+ 
+ maleId :101
+ points :30
+ femaleId :46
+ 
+ maleId :101
+ points :40
+ femaleId :63
+ 
+ maleId :101
+ points :30
+ femaleId :70
+ 
+ maleId :101
+ points :30
+ femaleId :77
+ 
+ maleId :101
+ points :50
+ femaleId :84
+ 
+ maleId :101
+ points :40
+ femaleId :93
+ 
+ maleId :101
+ points :30
+ femaleId :151
+ 
+ maleId :101
+ points :30
+ femaleId :157
+ 
+ maleId :101
+ points :50
+ femaleId :158
+ 
+ maleId :101
+ points :60
+ femaleId :160
+ 
+ maleId :101
+ points :50
+ femaleId :173
+ 
+ maleId :101
+ points :40
+ femaleId :180
+ 
+ maleId :101
+ points :40
+ femaleId :185
+ 
+ maleId :101
+ points :40
+ femaleId :196
+ 
+ maleId :101
+ points :50
+ femaleId :201
+ 
+ maleId :101
+ points :50
+ femaleId :204
+ 
+ maleId :101
+ points :40
+ femaleId :207
+ 
+ maleId :101
+ points :50
+ femaleId :208
+ 
+ maleId :101
+ points :30
+ femaleId :209
+ 
+ maleId :101
+ points :40
+ femaleId :213
+ 
+ maleId :101
+ points :20
+ femaleId :215
+ 
+ maleId :102
+ points :60
+ femaleId :42
+ 
+ maleId :102
+ points :40
+ femaleId :46
+ 
+ maleId :102
+ points :60
+ femaleId :63
+ 
+ maleId :102
+ points :60
+ femaleId :70
+ 
+ maleId :102
+ points :50
+ femaleId :77
+ 
+ maleId :102
+ points :50
+ femaleId :84
+ 
+ maleId :102
+ points :60
+ femaleId :93
+ 
+ maleId :102
+ points :50
+ femaleId :151
+ 
+ maleId :102
+ points :50
+ femaleId :157
+ 
+ maleId :102
+ points :70
+ femaleId :158
+ 
+ maleId :102
+ points :70
+ femaleId :160
+ 
+ maleId :102
+ points :70
+ femaleId :173
+ 
+ maleId :102
+ points :60
+ femaleId :180
+ 
+ maleId :102
+ points :70
+ femaleId :185
+ 
+ maleId :102
+ points :50
+ femaleId :196
+ 
+ maleId :102
+ points :60
+ femaleId :201
+ 
+ maleId :102
+ points :60
+ femaleId :204
+ 
+ maleId :102
+ points :50
+ femaleId :207
+ 
+ maleId :102
+ points :60
+ femaleId :208
+ 
+ maleId :102
+ points :60
+ femaleId :209
+ 
+ maleId :102
+ points :60
+ femaleId :213
+ 
+ maleId :102
+ points :50
+ femaleId :215
+ 
+ maleId :115
+ points :60
+ femaleId :42
+ 
+ maleId :115
+ points :70
+ femaleId :46
+ 
+ maleId :115
+ points :70
+ femaleId :63
+ 
+ maleId :115
+ points :60
+ femaleId :70
+ 
+ maleId :115
+ points :60
+ femaleId :77
+ 
+ maleId :115
+ points :60
+ femaleId :84
+ 
+ maleId :115
+ points :60
+ femaleId :93
+ 
+ maleId :115
+ points :70
+ femaleId :151
+ 
+ maleId :115
+ points :60
+ femaleId :157
+ 
+ maleId :115
+ points :60
+ femaleId :158
+ 
+ maleId :115
+ points :60
+ femaleId :160
+ 
+ maleId :115
+ points :60
+ femaleId :173
+ 
+ maleId :115
+ points :60
+ femaleId :180
+ 
+ maleId :115
+ points :60
+ femaleId :185
+ 
+ maleId :115
+ points :70
+ femaleId :196
+ 
+ maleId :115
+ points :70
+ femaleId :201
+ 
+ maleId :115
+ points :60
+ femaleId :204
+ 
+ maleId :115
+ points :70
+ femaleId :207
+ 
+ maleId :115
+ points :70
+ femaleId :208
+ 
+ maleId :115
+ points :60
+ femaleId :209
+ 
+ maleId :115
+ points :60
+ femaleId :213
+ 
+ maleId :115
+ points :50
+ femaleId :215
+ 
+ maleId :124
+ points :50
+ femaleId :42
+ 
+ maleId :124
+ points :40
+ femaleId :46
+ 
+ maleId :124
+ points :70
+ femaleId :63
+ 
+ maleId :124
+ points :40
+ femaleId :70
+ 
+ maleId :124
+ points :40
+ femaleId :77
+ 
+ maleId :124
+ points :40
+ femaleId :84
+ 
+ maleId :124
+ points :50
+ femaleId :93
+ 
+ maleId :124
+ points :60
+ femaleId :151
+ 
+ maleId :124
+ points :50
+ femaleId :157
+ 
+ maleId :124
+ points :50
+ femaleId :158
+ 
+ maleId :124
+ points :60
+ femaleId :160
+ 
+ maleId :124
+ points :60
+ femaleId :173
+ 
+ maleId :124
+ points :50
+ femaleId :180
+ 
+ maleId :124
+ points :60
+ femaleId :185
+ 
+ maleId :124
+ points :60
+ femaleId :196
+ 
+ maleId :124
+ points :70
+ femaleId :201
+ 
+ maleId :124
+ points :50
+ femaleId :204
+ 
+ maleId :124
+ points :60
+ femaleId :207
+ 
+ maleId :124
+ points :60
+ femaleId :208
+ 
+ maleId :124
+ points :50
+ femaleId :209
+ 
+ maleId :124
+ points :50
+ femaleId :213
+ 
+ maleId :124
+ points :40
+ femaleId :215
+ 
+ maleId :143
+ points :60
+ femaleId :42
+ 
+ maleId :143
+ points :50
+ femaleId :46
+ 
+ maleId :143
+ points :70
+ femaleId :63
+ 
+ maleId :143
+ points :60
+ femaleId :70
+ 
+ maleId :143
+ points :60
+ femaleId :77
+ 
+ maleId :143
+ points :50
+ femaleId :84
+ 
+ maleId :143
+ points :60
+ femaleId :93
+ 
+ maleId :143
+ points :60
+ femaleId :151
+ 
+ maleId :143
+ points :50
+ femaleId :157
+ 
+ maleId :143
+ points :60
+ femaleId :158
+ 
+ maleId :143
+ points :70
+ femaleId :160
+ 
+ maleId :143
+ points :60
+ femaleId :173
+ 
+ maleId :143
+ points :60
+ femaleId :180
+ 
+ maleId :143
+ points :60
+ femaleId :185
+ 
+ maleId :143
+ points :60
+ femaleId :196
+ 
+ maleId :143
+ points :60
+ femaleId :201
+ 
+ maleId :143
+ points :60
+ femaleId :204
+ 
+ maleId :143
+ points :60
+ femaleId :207
+ 
+ maleId :143
+ points :70
+ femaleId :208
+ 
+ maleId :143
+ points :60
+ femaleId :209
+ 
+ maleId :143
+ points :60
+ femaleId :213
+ 
+ maleId :143
+ points :50
+ femaleId :215
+ 
+ maleId :148
+ points :60
+ femaleId :42
+ 
+ maleId :148
+ points :50
+ femaleId :46
+ 
+ maleId :148
+ points :70
+ femaleId :63
+ 
+ maleId :148
+ points :60
+ femaleId :70
+ 
+ maleId :148
+ points :60
+ femaleId :77
+ 
+ maleId :148
+ points :60
+ femaleId :84
+ 
+ maleId :148
+ points :60
+ femaleId :93
+ 
+ maleId :148
+ points :60
+ femaleId :151
+ 
+ maleId :148
+ points :50
+ femaleId :157
+ 
+ maleId :148
+ points :60
+ femaleId :158
+ 
+ maleId :148
+ points :70
+ femaleId :160
+ 
+ maleId :148
+ points :60
+ femaleId :173
+ 
+ maleId :148
+ points :70
+ femaleId :180
+ 
+ maleId :148
+ points :60
+ femaleId :185
+ 
+ maleId :148
+ points :60
+ femaleId :196
+ 
+ maleId :148
+ points :60
+ femaleId :201
+ 
+ maleId :148
+ points :60
+ femaleId :204
+ 
+ maleId :148
+ points :60
+ femaleId :207
+ 
+ maleId :148
+ points :70
+ femaleId :208
+ 
+ maleId :148
+ points :60
+ femaleId :209
+ 
+ maleId :148
+ points :60
+ femaleId :213
+ 
+ maleId :148
+ points :50
+ femaleId :215
+ 
+ maleId :160
+ points :30
+ femaleId :42
+ 
+ maleId :160
+ points :40
+ femaleId :46
+ 
+ maleId :160
+ points :50
+ femaleId :63
+ 
+ maleId :160
+ points :30
+ femaleId :70
+ 
+ maleId :160
+ points :30
+ femaleId :77
+ 
+ maleId :160
+ points :20
+ femaleId :84
+ 
+ maleId :160
+ points :20
+ femaleId :93
+ 
+ maleId :160
+ points :40
+ femaleId :151
+ 
+ maleId :160
+ points :40
+ femaleId :157
+ 
+ maleId :160
+ points :20
+ femaleId :158
+ 
+ maleId :160
+ points :40
+ femaleId :160
+ 
+ maleId :160
+ points :20
+ femaleId :173
+ 
+ maleId :160
+ points :30
+ femaleId :180
+ 
+ maleId :160
+ points :30
+ femaleId :185
+ 
+ maleId :160
+ points :30
+ femaleId :196
+ 
+ maleId :160
+ points :30
+ femaleId :201
+ 
+ maleId :160
+ points :30
+ femaleId :204
+ 
+ maleId :160
+ points :40
+ femaleId :207
+ 
+ maleId :160
+ points :50
+ femaleId :208
+ 
+ maleId :160
+ points :30
+ femaleId :209
+ 
+ maleId :160
+ points :30
+ femaleId :213
+ 
+ maleId :160
+ points :30
+ femaleId :215
+ 
+ maleId :166
+ points :50
+ femaleId :42
+ 
+ maleId :166
+ points :30
+ femaleId :46
+ 
+ maleId :166
+ points :60
+ femaleId :63
+ 
+ maleId :166
+ points :60
+ femaleId :70
+ 
+ maleId :166
+ points :40
+ femaleId :77
+ 
+ maleId :166
+ points :50
+ femaleId :84
+ 
+ maleId :166
+ points :50
+ femaleId :93
+ 
+ maleId :166
+ points :50
+ femaleId :151
+ 
+ maleId :166
+ points :50
+ femaleId :157
+ 
+ maleId :166
+ points :70
+ femaleId :158
+ 
+ maleId :166
+ points :60
+ femaleId :160
+ 
+ maleId :166
+ points :70
+ femaleId :173
+ 
+ maleId :166
+ points :60
+ femaleId :180
+ 
+ maleId :166
+ points :70
+ femaleId :185
+ 
+ maleId :166
+ points :50
+ femaleId :196
+ 
+ maleId :166
+ points :60
+ femaleId :201
+ 
+ maleId :166
+ points :50
+ femaleId :204
+ 
+ maleId :166
+ points :40
+ femaleId :207
+ 
+ maleId :166
+ points :50
+ femaleId :208
+ 
+ maleId :166
+ points :60
+ femaleId :209
+ 
+ maleId :166
+ points :50
+ femaleId :213
+ 
+ maleId :166
+ points :50
+ femaleId :215
+ 
+ maleId :168
+ points :50
+ femaleId :42
+ 
+ maleId :168
+ points :40
+ femaleId :46
+ 
+ maleId :168
+ points :70
+ femaleId :63
+ 
+ maleId :168
+ points :60
+ femaleId :70
+ 
+ maleId :168
+ points :70
+ femaleId :77
+ 
+ maleId :168
+ points :50
+ femaleId :84
+ 
+ maleId :168
+ points :50
+ femaleId :93
+ 
+ maleId :168
+ points :60
+ femaleId :151
+ 
+ maleId :168
+ points :50
+ femaleId :157
+ 
+ maleId :168
+ points :60
+ femaleId :158
+ 
+ maleId :168
+ points :60
+ femaleId :160
+ 
+ maleId :168
+ points :60
+ femaleId :173
+ 
+ maleId :168
+ points :70
+ femaleId :180
+ 
+ maleId :168
+ points :60
+ femaleId :185
+ 
+ maleId :168
+ points :50
+ femaleId :196
+ 
+ maleId :168
+ points :50
+ femaleId :201
+ 
+ maleId :168
+ points :50
+ femaleId :204
+ 
+ maleId :168
+ points :50
+ femaleId :207
+ 
+ maleId :168
+ points :60
+ femaleId :208
+ 
+ maleId :168
+ points :50
+ femaleId :209
+ 
+ maleId :168
+ points :50
+ femaleId :213
+ 
+ maleId :168
+ points :50
+ femaleId :215
+ 
+ maleId :173
+ points :60
+ femaleId :42
+ 
+ maleId :173
+ points :40
+ femaleId :46
+ 
+ maleId :173
+ points :60
+ femaleId :63
+ 
+ maleId :173
+ points :60
+ femaleId :70
+ 
+ maleId :173
+ points :40
+ femaleId :77
+ 
+ maleId :173
+ points :60
+ femaleId :84
+ 
+ maleId :173
+ points :60
+ femaleId :93
+ 
+ maleId :173
+ points :50
+ femaleId :151
+ 
+ maleId :173
+ points :50
+ femaleId :157
+ 
+ maleId :173
+ points :70
+ femaleId :158
+ 
+ maleId :173
+ points :70
+ femaleId :160
+ 
+ maleId :173
+ points :70
+ femaleId :173
+ 
+ maleId :173
+ points :60
+ femaleId :180
+ 
+ maleId :173
+ points :70
+ femaleId :185
+ 
+ maleId :173
+ points :50
+ femaleId :196
+ 
+ maleId :173
+ points :60
+ femaleId :201
+ 
+ maleId :173
+ points :60
+ femaleId :204
+ 
+ maleId :173
+ points :50
+ femaleId :207
+ 
+ maleId :173
+ points :60
+ femaleId :208
+ 
+ maleId :173
+ points :60
+ femaleId :209
+ 
+ maleId :173
+ points :60
+ femaleId :213
+ 
+ maleId :173
+ points :50
+ femaleId :215
+ 
+ maleId :232
+ points :60
+ femaleId :42
+ 
+ maleId :232
+ points :60
+ femaleId :46
+ 
+ maleId :232
+ points :50
+ femaleId :63
+ 
+ maleId :232
+ points :50
+ femaleId :70
+ 
+ maleId :232
+ points :60
+ femaleId :77
+ 
+ maleId :232
+ points :60
+ femaleId :84
+ 
+ maleId :232
+ points :60
+ femaleId :93
+ 
+ maleId :232
+ points :50
+ femaleId :151
+ 
+ maleId :232
+ points :40
+ femaleId :157
+ 
+ maleId :232
+ points :50
+ femaleId :158
+ 
+ maleId :232
+ points :60
+ femaleId :160
+ 
+ maleId :232
+ points :50
+ femaleId :173
+ 
+ maleId :232
+ points :60
+ femaleId :180
+ 
+ maleId :232
+ points :50
+ femaleId :185
+ 
+ maleId :232
+ points :60
+ femaleId :196
+ 
+ maleId :232
+ points :60
+ femaleId :201
+ 
+ maleId :232
+ points :60
+ femaleId :204
+ 
+ maleId :232
+ points :60
+ femaleId :207
+ 
+ maleId :232
+ points :60
+ femaleId :208
+ 
+ maleId :232
+ points :60
+ femaleId :209
+ 
+ maleId :232
+ points :60
+ femaleId :213
+ 
+ maleId :232
+ points :40
+ femaleId :215
+ 
+ maleId :246
+ points :50
+ femaleId :42
+ 
+ maleId :246
+ points :40
+ femaleId :46
+ 
+ maleId :246
+ points :60
+ femaleId :63
+ 
+ maleId :246
+ points :50
+ femaleId :70
+ 
+ maleId :246
+ points :40
+ femaleId :77
+ 
+ maleId :246
+ points :50
+ femaleId :84
+ 
+ maleId :246
+ points :50
+ femaleId :93
+ 
+ maleId :246
+ points :50
+ femaleId :151
+ 
+ maleId :246
+ points :40
+ femaleId :157
+ 
+ maleId :246
+ points :60
+ femaleId :158
+ 
+ maleId :246
+ points :70
+ femaleId :160
+ 
+ maleId :246
+ points :60
+ femaleId :173
+ 
+ maleId :246
+ points :60
+ femaleId :180
+ 
+ maleId :246
+ points :60
+ femaleId :185
+ 
+ maleId :246
+ points :50
+ femaleId :196
+ 
+ maleId :246
+ points :60
+ femaleId :201
+ 
+ maleId :246
+ points :60
+ femaleId :204
+ 
+ maleId :246
+ points :50
+ femaleId :207
+ 
+ maleId :246
+ points :60
+ femaleId :208
+ 
+ maleId :246
+ points :50
+ femaleId :209
+ 
+ maleId :246
+ points :50
+ femaleId :213
+ 
+ maleId :246
+ points :40
+ femaleId :215
+ 
+ maleId :253
+ points :60
+ femaleId :42
+ 
+ maleId :253
+ points :40
+ femaleId :46
+ 
+ maleId :253
+ points :70
+ femaleId :63
+ 
+ maleId :253
+ points :60
+ femaleId :70
+ 
+ maleId :253
+ points :60
+ femaleId :77
+ 
+ maleId :253
+ points :50
+ femaleId :84
+ 
+ maleId :253
+ points :60
+ femaleId :93
+ 
+ maleId :253
+ points :60
+ femaleId :151
+ 
+ maleId :253
+ points :50
+ femaleId :157
+ 
+ maleId :253
+ points :60
+ femaleId :158
+ 
+ maleId :253
+ points :60
+ femaleId :160
+ 
+ maleId :253
+ points :60
+ femaleId :173
+ 
+ maleId :253
+ points :70
+ femaleId :180
+ 
+ maleId :253
+ points :60
+ femaleId :185
+ 
+ maleId :253
+ points :60
+ femaleId :196
+ 
+ maleId :253
+ points :60
+ femaleId :201
+ 
+ maleId :253
+ points :50
+ femaleId :204
+ 
+ maleId :253
+ points :60
+ femaleId :207
+ 
+ maleId :253
+ points :60
+ femaleId :208
+ 
+ maleId :253
+ points :60
+ femaleId :209
+ 
+ maleId :253
+ points :60
+ femaleId :213
+ 
+ maleId :253
+ points :50
+ femaleId :215
+ 
+ maleId :256
+ points :60
+ femaleId :42
+ 
+ maleId :256
+ points :50
+ femaleId :46
+ 
+ maleId :256
+ points :70
+ femaleId :63
+ 
+ maleId :256
+ points :60
+ femaleId :70
+ 
+ maleId :256
+ points :50
+ femaleId :77
+ 
+ maleId :256
+ points :50
+ femaleId :84
+ 
+ maleId :256
+ points :60
+ femaleId :93
+ 
+ maleId :256
+ points :60
+ femaleId :151
+ 
+ maleId :256
+ points :50
+ femaleId :157
+ 
+ maleId :256
+ points :60
+ femaleId :158
+ 
+ maleId :256
+ points :70
+ femaleId :160
+ 
+ maleId :256
+ points :60
+ femaleId :173
+ 
+ maleId :256
+ points :60
+ femaleId :180
+ 
+ maleId :256
+ points :60
+ femaleId :185
+ 
+ maleId :256
+ points :60
+ femaleId :196
+ 
+ maleId :256
+ points :60
+ femaleId :201
+ 
+ maleId :256
+ points :60
+ femaleId :204
+ 
+ maleId :256
+ points :60
+ femaleId :207
+ 
+ maleId :256
+ points :70
+ femaleId :208
+ 
+ maleId :256
+ points :60
+ femaleId :209
+ 
+ maleId :256
+ points :60
+ femaleId :213
+ 
+ maleId :256
+ points :50
+ femaleId :215
+ 
+ maleId :264
+ points :60
+ femaleId :42
+ 
+ maleId :264
+ points :40
+ femaleId :46
+ 
+ maleId :264
+ points :70
+ femaleId :63
+ 
+ maleId :264
+ points :60
+ femaleId :70
+ 
+ maleId :264
+ points :50
+ femaleId :77
+ 
+ maleId :264
+ points :50
+ femaleId :84
+ 
+ maleId :264
+ points :60
+ femaleId :93
+ 
+ maleId :264
+ points :60
+ femaleId :151
+ 
+ maleId :264
+ points :50
+ femaleId :157
+ 
+ maleId :264
+ points :60
+ femaleId :158
+ 
+ maleId :264
+ points :60
+ femaleId :160
+ 
+ maleId :264
+ points :60
+ femaleId :173
+ 
+ maleId :264
+ points :60
+ femaleId :180
+ 
+ maleId :264
+ points :60
+ femaleId :185
+ 
+ maleId :264
+ points :60
+ femaleId :196
+ 
+ maleId :264
+ points :60
+ femaleId :201
+ 
+ maleId :264
+ points :60
+ femaleId :204
+ 
+ maleId :264
+ points :60
+ femaleId :207
+ 
+ maleId :264
+ points :60
+ femaleId :208
+ 
+ maleId :264
+ points :60
+ femaleId :209
+ 
+ maleId :264
+ points :60
+ femaleId :213
+ 
+ maleId :264
+ points :50
+ femaleId :215
+ 
+ maleId :271
+ points :40
+ femaleId :42
+ 
+ maleId :271
+ points :30
+ femaleId :46
+ 
+ maleId :271
+ points :60
+ femaleId :63
+ 
+ maleId :271
+ points :50
+ femaleId :70
+ 
+ maleId :271
+ points :50
+ femaleId :77
+ 
+ maleId :271
+ points :40
+ femaleId :84
+ 
+ maleId :271
+ points :40
+ femaleId :93
+ 
+ maleId :271
+ points :50
+ femaleId :151
+ 
+ maleId :271
+ points :40
+ femaleId :157
+ 
+ maleId :271
+ points :60
+ femaleId :158
+ 
+ maleId :271
+ points :60
+ femaleId :160
+ 
+ maleId :271
+ points :60
+ femaleId :173
+ 
+ maleId :271
+ points :70
+ femaleId :180
+ 
+ maleId :271
+ points :60
+ femaleId :185
+ 
+ maleId :271
+ points :50
+ femaleId :196
+ 
+ maleId :271
+ points :60
+ femaleId :201
+ 
+ maleId :271
+ points :50
+ femaleId :204
+ 
+ maleId :271
+ points :40
+ femaleId :207
+ 
+ maleId :271
+ points :50
+ femaleId :208
+ 
+ maleId :271
+ points :50
+ femaleId :209
+ 
+ maleId :271
+ points :40
+ femaleId :213
+ 
+ maleId :271
+ points :40
+ femaleId :215
+ 
+ maleId :274
+ points :50
+ femaleId :42
+ 
+ maleId :274
+ points :40
+ femaleId :46
+ 
+ maleId :274
+ points :60
+ femaleId :63
+ 
+ maleId :274
+ points :50
+ femaleId :70
+ 
+ maleId :274
+ points :40
+ femaleId :77
+ 
+ maleId :274
+ points :50
+ femaleId :84
+ 
+ maleId :274
+ points :50
+ femaleId :93
+ 
+ maleId :274
+ points :50
+ femaleId :151
+ 
+ maleId :274
+ points :40
+ femaleId :157
+ 
+ maleId :274
+ points :60
+ femaleId :158
+ 
+ maleId :274
+ points :70
+ femaleId :160
+ 
+ maleId :274
+ points :60
+ femaleId :173
+ 
+ maleId :274
+ points :60
+ femaleId :180
+ 
+ maleId :274
+ points :60
+ femaleId :185
+ 
+ maleId :274
+ points :50
+ femaleId :196
+ 
+ maleId :274
+ points :60
+ femaleId :201
+ 
+ maleId :274
+ points :60
+ femaleId :204
+ 
+ maleId :274
+ points :50
+ femaleId :207
+ 
+ maleId :274
+ points :60
+ femaleId :208
+ 
+ maleId :274
+ points :50
+ femaleId :209
+ 
+ maleId :274
+ points :50
+ femaleId :213
+ 
+ maleId :274
+ points :40
+ femaleId :215
+ 
+ maleId :282
+ points :70
+ femaleId :42
+ 
+ maleId :282
+ points :50
+ femaleId :46
+ 
+ maleId :282
+ points :70
+ femaleId :63
+ 
+ maleId :282
+ points :70
+ femaleId :70
+ 
+ maleId :282
+ points :50
+ femaleId :77
+ 
+ maleId :282
+ points :70
+ femaleId :84
+ 
+ maleId :282
+ points :70
+ femaleId :93
+ 
+ maleId :282
+ points :60
+ femaleId :151
+ 
+ maleId :282
+ points :40
+ femaleId :157
+ 
+ maleId :282
+ points :70
+ femaleId :158
+ 
+ maleId :282
+ points :70
+ femaleId :160
+ 
+ maleId :282
+ points :70
+ femaleId :173
+ 
+ maleId :282
+ points :60
+ femaleId :180
+ 
+ maleId :282
+ points :70
+ femaleId :185
+ 
+ maleId :282
+ points :60
+ femaleId :196
+ 
+ maleId :282
+ points :60
+ femaleId :201
+ 
+ maleId :282
+ points :60
+ femaleId :204
+ 
+ maleId :282
+ points :60
+ femaleId :207
+ 
+ maleId :282
+ points :70
+ femaleId :208
+ 
+ maleId :282
+ points :70
+ femaleId :209
+ 
+ maleId :282
+ points :70
+ femaleId :213
+ 
+ maleId :282
+ points :60
+ femaleId :215
+ 
+ maleId :283
+ points :60
+ femaleId :42
+ 
+ maleId :283
+ points :50
+ femaleId :46
+ 
+ maleId :283
+ points :70
+ femaleId :63
+ 
+ maleId :283
+ points :60
+ femaleId :70
+ 
+ maleId :283
+ points :50
+ femaleId :77
+ 
+ maleId :283
+ points :60
+ femaleId :84
+ 
+ maleId :283
+ points :60
+ femaleId :93
+ 
+ maleId :283
+ points :60
+ femaleId :151
+ 
+ maleId :283
+ points :50
+ femaleId :157
+ 
+ maleId :283
+ points :60
+ femaleId :158
+ 
+ maleId :283
+ points :70
+ femaleId :160
+ 
+ maleId :283
+ points :60
+ femaleId :173
+ 
+ maleId :283
+ points :60
+ femaleId :180
+ 
+ maleId :283
+ points :60
+ femaleId :185
+ 
+ maleId :283
+ points :60
+ femaleId :196
+ 
+ maleId :283
+ points :60
+ femaleId :201
+ 
+ maleId :283
+ points :60
+ femaleId :204
+ 
+ maleId :283
+ points :60
+ femaleId :207
+ 
+ maleId :283
+ points :70
+ femaleId :208
+ 
+ maleId :283
+ points :60
+ femaleId :209
+ 
+ maleId :283
+ points :60
+ femaleId :213
+ 
+ maleId :283
+ points :50
+ femaleId :215
+ 
+ maleId :286
+ points :40
+ femaleId :42
+ 
+ maleId :286
+ points :30
+ femaleId :46
+ 
+ maleId :286
+ points :60
+ femaleId :63
+ 
+ maleId :286
+ points :50
+ femaleId :70
+ 
+ maleId :286
+ points :50
+ femaleId :77
+ 
+ maleId :286
+ points :40
+ femaleId :84
+ 
+ maleId :286
+ points :40
+ femaleId :93
+ 
+ maleId :286
+ points :50
+ femaleId :151
+ 
+ maleId :286
+ points :40
+ femaleId :157
+ 
+ maleId :286
+ points :60
+ femaleId :158
+ 
+ maleId :286
+ points :60
+ femaleId :160
+ 
+ maleId :286
+ points :60
+ femaleId :173
+ 
+ maleId :286
+ points :70
+ femaleId :180
+ 
+ maleId :286
+ points :60
+ femaleId :185
+ 
+ maleId :286
+ points :40
+ femaleId :196
+ 
+ maleId :286
+ points :50
+ femaleId :201
+ 
+ maleId :286
+ points :50
+ femaleId :204
+ 
+ maleId :286
+ points :40
+ femaleId :207
+ 
+ maleId :286
+ points :50
+ femaleId :208
+ 
+ maleId :286
+ points :40
+ femaleId :209
+ 
+ maleId :286
+ points :40
+ femaleId :213
+ 
+ maleId :286
+ points :40
+ femaleId :215
+ 
+ maleId :290
+ points :40
+ femaleId :42
+ 
+ maleId :290
+ points :30
+ femaleId :46
+ 
+ maleId :290
+ points :50
+ femaleId :63
+ 
+ maleId :290
+ points :40
+ femaleId :70
+ 
+ maleId :290
+ points :40
+ femaleId :77
+ 
+ maleId :290
+ points :40
+ femaleId :84
+ 
+ maleId :290
+ points :40
+ femaleId :93
+ 
+ maleId :290
+ points :40
+ femaleId :151
+ 
+ maleId :290
+ points :40
+ femaleId :157
+ 
+ maleId :290
+ points :50
+ femaleId :158
+ 
+ maleId :290
+ points :60
+ femaleId :160
+ 
+ maleId :290
+ points :50
+ femaleId :173
+ 
+ maleId :290
+ points :50
+ femaleId :180
+ 
+ maleId :290
+ points :50
+ femaleId :185
+ 
+ maleId :290
+ points :40
+ femaleId :196
+ 
+ maleId :290
+ points :50
+ femaleId :201
+ 
+ maleId :290
+ points :50
+ femaleId :204
+ 
+ maleId :290
+ points :40
+ femaleId :207
+ 
+ maleId :290
+ points :50
+ femaleId :208
+ 
+ maleId :290
+ points :40
+ femaleId :209
+ 
+ maleId :290
+ points :40
+ femaleId :213
+ 
+ maleId :290
+ points :30
+ femaleId :215
+ 
+ maleId :292
+ points :60
+ femaleId :42
+ 
+ maleId :292
+ points :40
+ femaleId :46
+ 
+ maleId :292
+ points :70
+ femaleId :63
+ 
+ maleId :292
+ points :60
+ femaleId :70
+ 
+ maleId :292
+ points :60
+ femaleId :77
+ 
+ maleId :292
+ points :50
+ femaleId :84
+ 
+ maleId :292
+ points :60
+ femaleId :93
+ 
+ maleId :292
+ points :60
+ femaleId :151
+ 
+ maleId :292
+ points :50
+ femaleId :157
+ 
+ maleId :292
+ points :60
+ femaleId :158
+ 
+ maleId :292
+ points :60
+ femaleId :160
+ 
+ maleId :292
+ points :60
+ femaleId :173
+ 
+ maleId :292
+ points :60
+ femaleId :180
+ 
+ maleId :292
+ points :60
+ femaleId :185
+ 
+ maleId :292
+ points :60
+ femaleId :196
+ 
+ maleId :292
+ points :60
+ femaleId :201
+ 
+ maleId :292
+ points :50
+ femaleId :204
+ 
+ maleId :292
+ points :50
+ femaleId :207
+ 
+ maleId :292
+ points :60
+ femaleId :208
+ 
+ maleId :292
+ points :60
+ femaleId :209
+ 
+ maleId :292
+ points :50
+ femaleId :213
+ 
+ maleId :292
+ points :50
+ femaleId :215
+ 
+ maleId :293
+ points :60
+ femaleId :42
+ 
+ maleId :293
+ points :40
+ femaleId :46
+ 
+ maleId :293
+ points :70
+ femaleId :63
+ 
+ maleId :293
+ points :60
+ femaleId :70
+ 
+ maleId :293
+ points :60
+ femaleId :77
+ 
+ maleId :293
+ points :50
+ femaleId :84
+ 
+ maleId :293
+ points :60
+ femaleId :93
+ 
+ maleId :293
+ points :60
+ femaleId :151
+ 
+ maleId :293
+ points :50
+ femaleId :157
+ 
+ maleId :293
+ points :60
+ femaleId :158
+ 
+ maleId :293
+ points :60
+ femaleId :160
+ 
+ maleId :293
+ points :60
+ femaleId :173
+ 
+ maleId :293
+ points :70
+ femaleId :180
+ 
+ maleId :293
+ points :60
+ femaleId :185
+ 
+ maleId :293
+ points :60
+ femaleId :196
+ 
+ maleId :293
+ points :60
+ femaleId :201
+ 
+ maleId :293
+ points :50
+ femaleId :204
+ 
+ maleId :293
+ points :60
+ femaleId :207
+ 
+ maleId :293
+ points :60
+ femaleId :208
+ 
+ maleId :293
+ points :60
+ femaleId :209
+ 
+ maleId :293
+ points :60
+ femaleId :213
+ 
+ maleId :293
+ points :50
+ femaleId :215
+ 
+ maleId :299
+ points :50
+ femaleId :42
+ 
+ maleId :299
+ points :40
+ femaleId :46
+ 
+ maleId :299
+ points :70
+ femaleId :63
+ 
+ maleId :299
+ points :60
+ femaleId :70
+ 
+ maleId :299
+ points :70
+ femaleId :77
+ 
+ maleId :299
+ points :50
+ femaleId :84
+ 
+ maleId :299
+ points :50
+ femaleId :93
+ 
+ maleId :299
+ points :60
+ femaleId :151
+ 
+ maleId :299
+ points :50
+ femaleId :157
+ 
+ maleId :299
+ points :60
+ femaleId :158
+ 
+ maleId :299
+ points :60
+ femaleId :160
+ 
+ maleId :299
+ points :60
+ femaleId :173
+ 
+ maleId :299
+ points :70
+ femaleId :180
+ 
+ maleId :299
+ points :60
+ femaleId :185
+ 
+ maleId :299
+ points :60
+ femaleId :196
+ 
+ maleId :299
+ points :60
+ femaleId :201
+ 
+ maleId :299
+ points :50
+ femaleId :204
+ 
+ maleId :299
+ points :50
+ femaleId :207
+ 
+ maleId :299
+ points :60
+ femaleId :208
+ 
+ maleId :299
+ points :60
+ femaleId :209
+ 
+ maleId :299
+ points :50
+ femaleId :213
+ 
+ maleId :299
+ points :50
+ femaleId :215
+ 
+ maleId :311
+ points :50
+ femaleId :42
+ 
+ maleId :311
+ points :40
+ femaleId :46
+ 
+ maleId :311
+ points :60
+ femaleId :63
+ 
+ maleId :311
+ points :50
+ femaleId :70
+ 
+ maleId :311
+ points :50
+ femaleId :77
+ 
+ maleId :311
+ points :50
+ femaleId :84
+ 
+ maleId :311
+ points :60
+ femaleId :93
+ 
+ maleId :311
+ points :50
+ femaleId :151
+ 
+ maleId :311
+ points :30
+ femaleId :157
+ 
+ maleId :311
+ points :60
+ femaleId :158
+ 
+ maleId :311
+ points :60
+ femaleId :160
+ 
+ maleId :311
+ points :60
+ femaleId :173
+ 
+ maleId :311
+ points :60
+ femaleId :180
+ 
+ maleId :311
+ points :50
+ femaleId :185
+ 
+ maleId :311
+ points :60
+ femaleId :196
+ 
+ maleId :311
+ points :60
+ femaleId :201
+ 
+ maleId :311
+ points :50
+ femaleId :204
+ 
+ maleId :311
+ points :50
+ femaleId :207
+ 
+ maleId :311
+ points :60
+ femaleId :208
+ 
+ maleId :311
+ points :50
+ femaleId :209
+ 
+ maleId :311
+ points :50
+ femaleId :213
+ 
+ maleId :311
+ points :40
+ femaleId :215
+ 
+ maleId :312
+ points :60
+ femaleId :42
+ 
+ maleId :312
+ points :60
+ femaleId :46
+ 
+ maleId :312
+ points :60
+ femaleId :63
+ 
+ maleId :312
+ points :60
+ femaleId :70
+ 
+ maleId :312
+ points :60
+ femaleId :77
+ 
+ maleId :312
+ points :60
+ femaleId :84
+ 
+ maleId :312
+ points :60
+ femaleId :93
+ 
+ maleId :312
+ points :60
+ femaleId :151
+ 
+ maleId :312
+ points :50
+ femaleId :157
+ 
+ maleId :312
+ points :60
+ femaleId :158
+ 
+ maleId :312
+ points :60
+ femaleId :160
+ 
+ maleId :312
+ points :60
+ femaleId :173
+ 
+ maleId :312
+ points :60
+ femaleId :180
+ 
+ maleId :312
+ points :60
+ femaleId :185
+ 
+ maleId :312
+ points :60
+ femaleId :196
+ 
+ maleId :312
+ points :60
+ femaleId :201
+ 
+ maleId :312
+ points :60
+ femaleId :204
+ 
+ maleId :312
+ points :60
+ femaleId :207
+ 
+ maleId :312
+ points :60
+ femaleId :208
+ 
+ maleId :312
+ points :60
+ femaleId :209
+ 
+ maleId :312
+ points :60
+ femaleId :213
+ 
+ maleId :312
+ points :50
+ femaleId :215
+ 
+ maleId :314
+ points :60
+ femaleId :42
+ 
+ maleId :314
+ points :50
+ femaleId :46
+ 
+ maleId :314
+ points :70
+ femaleId :63
+ 
+ maleId :314
+ points :60
+ femaleId :70
+ 
+ maleId :314
+ points :50
+ femaleId :77
+ 
+ maleId :314
+ points :60
+ femaleId :84
+ 
+ maleId :314
+ points :60
+ femaleId :93
+ 
+ maleId :314
+ points :60
+ femaleId :151
+ 
+ maleId :314
+ points :50
+ femaleId :157
+ 
+ maleId :314
+ points :60
+ femaleId :158
+ 
+ maleId :314
+ points :70
+ femaleId :160
+ 
+ maleId :314
+ points :60
+ femaleId :173
+ 
+ maleId :314
+ points :60
+ femaleId :180
+ 
+ maleId :314
+ points :60
+ femaleId :185
+ 
+ maleId :314
+ points :60
+ femaleId :196
+ 
+ maleId :314
+ points :60
+ femaleId :201
+ 
+ maleId :314
+ points :60
+ femaleId :204
+ 
+ maleId :314
+ points :60
+ femaleId :207
+ 
+ maleId :314
+ points :70
+ femaleId :208
+ 
+ maleId :314
+ points :60
+ femaleId :209
+ 
+ maleId :314
+ points :60
+ femaleId :213
+ 
+ maleId :314
+ points :50
+ femaleId :215
+ 
+ maleId :315
+ points :60
+ femaleId :42
+ 
+ maleId :315
+ points :50
+ femaleId :46
+ 
+ maleId :315
+ points :70
+ femaleId :63
+ 
+ maleId :315
+ points :60
+ femaleId :70
+ 
+ maleId :315
+ points :50
+ femaleId :77
+ 
+ maleId :315
+ points :50
+ femaleId :84
+ 
+ maleId :315
+ points :60
+ femaleId :93
+ 
+ maleId :315
+ points :60
+ femaleId :151
+ 
+ maleId :315
+ points :50
+ femaleId :157
+ 
+ maleId :315
+ points :60
+ femaleId :158
+ 
+ maleId :315
+ points :70
+ femaleId :160
+ 
+ maleId :315
+ points :60
+ femaleId :173
+ 
+ maleId :315
+ points :60
+ femaleId :180
+ 
+ maleId :315
+ points :60
+ femaleId :185
+ 
+ maleId :315
+ points :60
+ femaleId :196
+ 
+ maleId :315
+ points :60
+ femaleId :201
+ 
+ maleId :315
+ points :60
+ femaleId :204
+ 
+ maleId :315
+ points :60
+ femaleId :207
+ 
+ maleId :315
+ points :70
+ femaleId :208
+ 
+ maleId :315
+ points :60
+ femaleId :209
+ 
+ maleId :315
+ points :60
+ femaleId :213
+ 
+ maleId :315
+ points :50
+ femaleId :215
+
+
+
+ femaleOLD
+
+
+ 
+ maleId :100
+ points :30
+ femaleId :42
+ 
+ maleId :101
+ points :20
+ femaleId :42
+ 
+ maleId :102
+ points :30
+ femaleId :42
+ 
+ maleId :115
+ points :40
+ femaleId :42
+ 
+ maleId :124
+ points :40
+ femaleId :42
+ 
+ maleId :143
+ points :20
+ femaleId :42
+ 
+ maleId :148
+ points :30
+ femaleId :42
+ 
+ maleId :160
+ points :20
+ femaleId :42
+ 
+ maleId :166
+ points :30
+ femaleId :42
+ 
+ maleId :168
+ points :30
+ femaleId :42
+ 
+ maleId :173
+ points :40
+ femaleId :42
+ 
+ maleId :232
+ points :30
+ femaleId :42
+ 
+ maleId :246
+ points :30
+ femaleId :42
+ 
+ maleId :253
+ points :30
+ femaleId :42
+ 
+ maleId :256
+ points :40
+ femaleId :42
+ 
+ maleId :264
+ points :30
+ femaleId :42
+ 
+ maleId :271
+ points :20
+ femaleId :42
+ 
+ maleId :274
+ points :40
+ femaleId :42
+ 
+ maleId :282
+ points :30
+ femaleId :42
+ 
+ maleId :283
+ points :20
+ femaleId :42
+ 
+ maleId :286
+ points :30
+ femaleId :42
+ 
+ maleId :290
+ points :30
+ femaleId :42
+ 
+ maleId :292
+ points :30
+ femaleId :42
+ 
+ maleId :293
+ points :30
+ femaleId :42
+ 
+ maleId :299
+ points :30
+ femaleId :42
+ 
+ maleId :311
+ points :50
+ femaleId :42
+ 
+ maleId :312
+ points :40
+ femaleId :42
+ 
+ maleId :314
+ points :40
+ femaleId :42
+ 
+ maleId :315
+ points :30
+ femaleId :42
+ 
+ maleId :100
+ points :40
+ femaleId :46
+ 
+ maleId :101
+ points :40
+ femaleId :46
+ 
+ maleId :102
+ points :40
+ femaleId :46
+ 
+ maleId :115
+ points :50
+ femaleId :46
+ 
+ maleId :124
+ points :40
+ femaleId :46
+ 
+ maleId :143
+ points :40
+ femaleId :46
+ 
+ maleId :148
+ points :40
+ femaleId :46
+ 
+ maleId :160
+ points :20
+ femaleId :46
+ 
+ maleId :166
+ points :40
+ femaleId :46
+ 
+ maleId :168
+ points :40
+ femaleId :46
+ 
+ maleId :173
+ points :40
+ femaleId :46
+ 
+ maleId :232
+ points :50
+ femaleId :46
+ 
+ maleId :246
+ points :40
+ femaleId :46
+ 
+ maleId :253
+ points :30
+ femaleId :46
+ 
+ maleId :256
+ points :40
+ femaleId :46
+ 
+ maleId :264
+ points :40
+ femaleId :46
+ 
+ maleId :271
+ points :50
+ femaleId :46
+ 
+ maleId :274
+ points :40
+ femaleId :46
+ 
+ maleId :282
+ points :40
+ femaleId :46
+ 
+ maleId :283
+ points :40
+ femaleId :46
+ 
+ maleId :286
+ points :40
+ femaleId :46
+ 
+ maleId :290
+ points :40
+ femaleId :46
+ 
+ maleId :292
+ points :30
+ femaleId :46
+ 
+ maleId :293
+ points :40
+ femaleId :46
+ 
+ maleId :299
+ points :40
+ femaleId :46
+ 
+ maleId :311
+ points :50
+ femaleId :46
+ 
+ maleId :312
+ points :40
+ femaleId :46
+ 
+ maleId :314
+ points :40
+ femaleId :46
+ 
+ maleId :315
+ points :50
+ femaleId :46
+ 
+ maleId :100
+ points :50
+ femaleId :63
+ 
+ maleId :101
+ points :30
+ femaleId :63
+ 
+ maleId :102
+ points :50
+ femaleId :63
+ 
+ maleId :115
+ points :50
+ femaleId :63
+ 
+ maleId :124
+ points :40
+ femaleId :63
+ 
+ maleId :143
+ points :50
+ femaleId :63
+ 
+ maleId :148
+ points :30
+ femaleId :63
+ 
+ maleId :160
+ points :40
+ femaleId :63
+ 
+ maleId :166
+ points :40
+ femaleId :63
+ 
+ maleId :168
+ points :40
+ femaleId :63
+ 
+ maleId :173
+ points :50
+ femaleId :63
+ 
+ maleId :232
+ points :50
+ femaleId :63
+ 
+ maleId :246
+ points :40
+ femaleId :63
+ 
+ maleId :253
+ points :30
+ femaleId :63
+ 
+ maleId :256
+ points :50
+ femaleId :63
+ 
+ maleId :264
+ points :50
+ femaleId :63
+ 
+ maleId :271
+ points :40
+ femaleId :63
+ 
+ maleId :274
+ points :50
+ femaleId :63
+ 
+ maleId :282
+ points :50
+ femaleId :63
+ 
+ maleId :283
+ points :50
+ femaleId :63
+ 
+ maleId :286
+ points :40
+ femaleId :63
+ 
+ maleId :290
+ points :50
+ femaleId :63
+ 
+ maleId :292
+ points :30
+ femaleId :63
+ 
+ maleId :293
+ points :40
+ femaleId :63
+ 
+ maleId :299
+ points :50
+ femaleId :63
+ 
+ maleId :311
+ points :50
+ femaleId :63
+ 
+ maleId :312
+ points :50
+ femaleId :63
+ 
+ maleId :314
+ points :50
+ femaleId :63
+ 
+ maleId :315
+ points :50
+ femaleId :63
+ 
+ maleId :100
+ points :70
+ femaleId :70
+ 
+ maleId :101
+ points :30
+ femaleId :70
+ 
+ maleId :102
+ points :60
+ femaleId :70
+ 
+ maleId :115
+ points :70
+ femaleId :70
+ 
+ maleId :124
+ points :50
+ femaleId :70
+ 
+ maleId :143
+ points :50
+ femaleId :70
+ 
+ maleId :148
+ points :40
+ femaleId :70
+ 
+ maleId :160
+ points :40
+ femaleId :70
+ 
+ maleId :166
+ points :50
+ femaleId :70
+ 
+ maleId :168
+ points :60
+ femaleId :70
+ 
+ maleId :173
+ points :60
+ femaleId :70
+ 
+ maleId :232
+ points :40
+ femaleId :70
+ 
+ maleId :246
+ points :40
+ femaleId :70
+ 
+ maleId :253
+ points :40
+ femaleId :70
+ 
+ maleId :256
+ points :50
+ femaleId :70
+ 
+ maleId :264
+ points :50
+ femaleId :70
+ 
+ maleId :271
+ points :50
+ femaleId :70
+ 
+ maleId :274
+ points :50
+ femaleId :70
+ 
+ maleId :282
+ points :50
+ femaleId :70
+ 
+ maleId :283
+ points :40
+ femaleId :70
+ 
+ maleId :286
+ points :60
+ femaleId :70
+ 
+ maleId :290
+ points :50
+ femaleId :70
+ 
+ maleId :292
+ points :50
+ femaleId :70
+ 
+ maleId :293
+ points :50
+ femaleId :70
+ 
+ maleId :299
+ points :60
+ femaleId :70
+ 
+ maleId :311
+ points :70
+ femaleId :70
+ 
+ maleId :312
+ points :50
+ femaleId :70
+ 
+ maleId :314
+ points :50
+ femaleId :70
+ 
+ maleId :315
+ points :70
+ femaleId :70
+ 
+ maleId :100
+ points :70
+ femaleId :77
+ 
+ maleId :101
+ points :30
+ femaleId :77
+ 
+ maleId :102
+ points :50
+ femaleId :77
+ 
+ maleId :115
+ points :60
+ femaleId :77
+ 
+ maleId :124
+ points :40
+ femaleId :77
+ 
+ maleId :143
+ points :40
+ femaleId :77
+ 
+ maleId :148
+ points :30
+ femaleId :77
+ 
+ maleId :160
+ points :40
+ femaleId :77
+ 
+ maleId :166
+ points :40
+ femaleId :77
+ 
+ maleId :168
+ points :60
+ femaleId :77
+ 
+ maleId :173
+ points :50
+ femaleId :77
+ 
+ maleId :232
+ points :40
+ femaleId :77
+ 
+ maleId :246
+ points :30
+ femaleId :77
+ 
+ maleId :253
+ points :30
+ femaleId :77
+ 
+ maleId :256
+ points :40
+ femaleId :77
+ 
+ maleId :264
+ points :40
+ femaleId :77
+ 
+ maleId :271
+ points :40
+ femaleId :77
+ 
+ maleId :274
+ points :40
+ femaleId :77
+ 
+ maleId :282
+ points :40
+ femaleId :77
+ 
+ maleId :283
+ points :40
+ femaleId :77
+ 
+ maleId :286
+ points :50
+ femaleId :77
+ 
+ maleId :290
+ points :50
+ femaleId :77
+ 
+ maleId :292
+ points :50
+ femaleId :77
+ 
+ maleId :293
+ points :40
+ femaleId :77
+ 
+ maleId :299
+ points :60
+ femaleId :77
+ 
+ maleId :311
+ points :60
+ femaleId :77
+ 
+ maleId :312
+ points :40
+ femaleId :77
+ 
+ maleId :314
+ points :40
+ femaleId :77
+ 
+ maleId :315
+ points :60
+ femaleId :77
+ 
+ maleId :100
+ points :30
+ femaleId :84
+ 
+ maleId :101
+ points :30
+ femaleId :84
+ 
+ maleId :102
+ points :40
+ femaleId :84
+ 
+ maleId :115
+ points :40
+ femaleId :84
+ 
+ maleId :124
+ points :40
+ femaleId :84
+ 
+ maleId :143
+ points :40
+ femaleId :84
+ 
+ maleId :148
+ points :20
+ femaleId :84
+ 
+ maleId :160
+ points :30
+ femaleId :84
+ 
+ maleId :166
+ points :40
+ femaleId :84
+ 
+ maleId :168
+ points :30
+ femaleId :84
+ 
+ maleId :173
+ points :50
+ femaleId :84
+ 
+ maleId :232
+ points :50
+ femaleId :84
+ 
+ maleId :246
+ points :50
+ femaleId :84
+ 
+ maleId :253
+ points :20
+ femaleId :84
+ 
+ maleId :256
+ points :40
+ femaleId :84
+ 
+ maleId :264
+ points :40
+ femaleId :84
+ 
+ maleId :271
+ points :30
+ femaleId :84
+ 
+ maleId :274
+ points :40
+ femaleId :84
+ 
+ maleId :282
+ points :50
+ femaleId :84
+ 
+ maleId :283
+ points :60
+ femaleId :84
+ 
+ maleId :286
+ points :30
+ femaleId :84
+ 
+ maleId :290
+ points :60
+ femaleId :84
+ 
+ maleId :292
+ points :20
+ femaleId :84
+ 
+ maleId :293
+ points :40
+ femaleId :84
+ 
+ maleId :299
+ points :30
+ femaleId :84
+ 
+ maleId :311
+ points :40
+ femaleId :84
+ 
+ maleId :312
+ points :40
+ femaleId :84
+ 
+ maleId :314
+ points :40
+ femaleId :84
+ 
+ maleId :315
+ points :40
+ femaleId :84
+ 
+ maleId :100
+ points :40
+ femaleId :93
+ 
+ maleId :101
+ points :30
+ femaleId :93
+ 
+ maleId :102
+ points :40
+ femaleId :93
+ 
+ maleId :115
+ points :50
+ femaleId :93
+ 
+ maleId :124
+ points :30
+ femaleId :93
+ 
+ maleId :143
+ points :40
+ femaleId :93
+ 
+ maleId :148
+ points :30
+ femaleId :93
+ 
+ maleId :160
+ points :30
+ femaleId :93
+ 
+ maleId :166
+ points :30
+ femaleId :93
+ 
+ maleId :168
+ points :30
+ femaleId :93
+ 
+ maleId :173
+ points :40
+ femaleId :93
+ 
+ maleId :232
+ points :20
+ femaleId :93
+ 
+ maleId :246
+ points :30
+ femaleId :93
+ 
+ maleId :253
+ points :20
+ femaleId :93
+ 
+ maleId :256
+ points :40
+ femaleId :93
+ 
+ maleId :264
+ points :30
+ femaleId :93
+ 
+ maleId :271
+ points :40
+ femaleId :93
+ 
+ maleId :274
+ points :50
+ femaleId :93
+ 
+ maleId :282
+ points :40
+ femaleId :93
+ 
+ maleId :283
+ points :40
+ femaleId :93
+ 
+ maleId :286
+ points :40
+ femaleId :93
+ 
+ maleId :290
+ points :40
+ femaleId :93
+ 
+ maleId :292
+ points :30
+ femaleId :93
+ 
+ maleId :293
+ points :30
+ femaleId :93
+ 
+ maleId :299
+ points :50
+ femaleId :93
+ 
+ maleId :311
+ points :50
+ femaleId :93
+ 
+ maleId :312
+ points :30
+ femaleId :93
+ 
+ maleId :314
+ points :40
+ femaleId :93
+ 
+ maleId :315
+ points :50
+ femaleId :93
+ 
+ maleId :100
+ points :60
+ femaleId :151
+ 
+ maleId :101
+ points :30
+ femaleId :151
+ 
+ maleId :102
+ points :60
+ femaleId :151
+ 
+ maleId :115
+ points :70
+ femaleId :151
+ 
+ maleId :124
+ points :50
+ femaleId :151
+ 
+ maleId :143
+ points :50
+ femaleId :151
+ 
+ maleId :148
+ points :40
+ femaleId :151
+ 
+ maleId :160
+ points :40
+ femaleId :151
+ 
+ maleId :166
+ points :50
+ femaleId :151
+ 
+ maleId :168
+ points :60
+ femaleId :151
+ 
+ maleId :173
+ points :60
+ femaleId :151
+ 
+ maleId :232
+ points :40
+ femaleId :151
+ 
+ maleId :246
+ points :40
+ femaleId :151
+ 
+ maleId :253
+ points :40
+ femaleId :151
+ 
+ maleId :256
+ points :60
+ femaleId :151
+ 
+ maleId :264
+ points :50
+ femaleId :151
+ 
+ maleId :271
+ points :50
+ femaleId :151
+ 
+ maleId :274
+ points :60
+ femaleId :151
+ 
+ maleId :282
+ points :50
+ femaleId :151
+ 
+ maleId :283
+ points :40
+ femaleId :151
+ 
+ maleId :286
+ points :60
+ femaleId :151
+ 
+ maleId :290
+ points :50
+ femaleId :151
+ 
+ maleId :292
+ points :50
+ femaleId :151
+ 
+ maleId :293
+ points :50
+ femaleId :151
+ 
+ maleId :299
+ points :70
+ femaleId :151
+ 
+ maleId :311
+ points :70
+ femaleId :151
+ 
+ maleId :312
+ points :50
+ femaleId :151
+ 
+ maleId :314
+ points :60
+ femaleId :151
+ 
+ maleId :315
+ points :70
+ femaleId :151
+ 
+ maleId :100
+ points :50
+ femaleId :157
+ 
+ maleId :101
+ points :40
+ femaleId :157
+ 
+ maleId :102
+ points :40
+ femaleId :157
+ 
+ maleId :115
+ points :40
+ femaleId :157
+ 
+ maleId :124
+ points :30
+ femaleId :157
+ 
+ maleId :143
+ points :40
+ femaleId :157
+ 
+ maleId :148
+ points :40
+ femaleId :157
+ 
+ maleId :160
+ points :20
+ femaleId :157
+ 
+ maleId :166
+ points :40
+ femaleId :157
+ 
+ maleId :168
+ points :50
+ femaleId :157
+ 
+ maleId :173
+ points :30
+ femaleId :157
+ 
+ maleId :232
+ points :30
+ femaleId :157
+ 
+ maleId :246
+ points :30
+ femaleId :157
+ 
+ maleId :253
+ points :40
+ femaleId :157
+ 
+ maleId :256
+ points :30
+ femaleId :157
+ 
+ maleId :264
+ points :40
+ femaleId :157
+ 
+ maleId :271
+ points :50
+ femaleId :157
+ 
+ maleId :274
+ points :40
+ femaleId :157
+ 
+ maleId :282
+ points :30
+ femaleId :157
+ 
+ maleId :283
+ points :30
+ femaleId :157
+ 
+ maleId :286
+ points :40
+ femaleId :157
+ 
+ maleId :290
+ points :40
+ femaleId :157
+ 
+ maleId :292
+ points :50
+ femaleId :157
+ 
+ maleId :293
+ points :40
+ femaleId :157
+ 
+ maleId :299
+ points :50
+ femaleId :157
+ 
+ maleId :311
+ points :50
+ femaleId :157
+ 
+ maleId :312
+ points :30
+ femaleId :157
+ 
+ maleId :314
+ points :30
+ femaleId :157
+ 
+ maleId :315
+ points :50
+ femaleId :157
+ 
+ maleId :100
+ points :40
+ femaleId :158
+ 
+ maleId :101
+ points :30
+ femaleId :158
+ 
+ maleId :102
+ points :40
+ femaleId :158
+ 
+ maleId :115
+ points :40
+ femaleId :158
+ 
+ maleId :124
+ points :40
+ femaleId :158
+ 
+ maleId :143
+ points :40
+ femaleId :158
+ 
+ maleId :148
+ points :40
+ femaleId :158
+ 
+ maleId :160
+ points :20
+ femaleId :158
+ 
+ maleId :166
+ points :40
+ femaleId :158
+ 
+ maleId :168
+ points :40
+ femaleId :158
+ 
+ maleId :173
+ points :40
+ femaleId :158
+ 
+ maleId :232
+ points :30
+ femaleId :158
+ 
+ maleId :246
+ points :40
+ femaleId :158
+ 
+ maleId :253
+ points :40
+ femaleId :158
+ 
+ maleId :256
+ points :40
+ femaleId :158
+ 
+ maleId :264
+ points :40
+ femaleId :158
+ 
+ maleId :271
+ points :40
+ femaleId :158
+ 
+ maleId :274
+ points :50
+ femaleId :158
+ 
+ maleId :282
+ points :40
+ femaleId :158
+ 
+ maleId :283
+ points :30
+ femaleId :158
+ 
+ maleId :286
+ points :30
+ femaleId :158
+ 
+ maleId :290
+ points :40
+ femaleId :158
+ 
+ maleId :292
+ points :40
+ femaleId :158
+ 
+ maleId :293
+ points :40
+ femaleId :158
+ 
+ maleId :299
+ points :40
+ femaleId :158
+ 
+ maleId :311
+ points :50
+ femaleId :158
+ 
+ maleId :312
+ points :40
+ femaleId :158
+ 
+ maleId :314
+ points :40
+ femaleId :158
+ 
+ maleId :315
+ points :40
+ femaleId :158
+ 
+ maleId :100
+ points :50
+ femaleId :160
+ 
+ maleId :101
+ points :40
+ femaleId :160
+ 
+ maleId :102
+ points :40
+ femaleId :160
+ 
+ maleId :115
+ points :60
+ femaleId :160
+ 
+ maleId :124
+ points :30
+ femaleId :160
+ 
+ maleId :143
+ points :40
+ femaleId :160
+ 
+ maleId :148
+ points :40
+ femaleId :160
+ 
+ maleId :160
+ points :30
+ femaleId :160
+ 
+ maleId :166
+ points :30
+ femaleId :160
+ 
+ maleId :168
+ points :40
+ femaleId :160
+ 
+ maleId :173
+ points :50
+ femaleId :160
+ 
+ maleId :232
+ points :30
+ femaleId :160
+ 
+ maleId :246
+ points :40
+ femaleId :160
+ 
+ maleId :253
+ points :20
+ femaleId :160
+ 
+ maleId :256
+ points :40
+ femaleId :160
+ 
+ maleId :264
+ points :30
+ femaleId :160
+ 
+ maleId :271
+ points :40
+ femaleId :160
+ 
+ maleId :274
+ points :50
+ femaleId :160
+ 
+ maleId :282
+ points :40
+ femaleId :160
+ 
+ maleId :283
+ points :50
+ femaleId :160
+ 
+ maleId :286
+ points :40
+ femaleId :160
+ 
+ maleId :290
+ points :50
+ femaleId :160
+ 
+ maleId :292
+ points :30
+ femaleId :160
+ 
+ maleId :293
+ points :30
+ femaleId :160
+ 
+ maleId :299
+ points :40
+ femaleId :160
+ 
+ maleId :311
+ points :60
+ femaleId :160
+ 
+ maleId :312
+ points :30
+ femaleId :160
+ 
+ maleId :314
+ points :40
+ femaleId :160
+ 
+ maleId :315
+ points :50
+ femaleId :160
+ 
+ maleId :100
+ points :50
+ femaleId :173
+ 
+ maleId :101
+ points :30
+ femaleId :173
+ 
+ maleId :102
+ points :50
+ femaleId :173
+ 
+ maleId :115
+ points :60
+ femaleId :173
+ 
+ maleId :124
+ points :40
+ femaleId :173
+ 
+ maleId :143
+ points :50
+ femaleId :173
+ 
+ maleId :148
+ points :40
+ femaleId :173
+ 
+ maleId :160
+ points :30
+ femaleId :173
+ 
+ maleId :166
+ points :40
+ femaleId :173
+ 
+ maleId :168
+ points :50
+ femaleId :173
+ 
+ maleId :173
+ points :50
+ femaleId :173
+ 
+ maleId :232
+ points :30
+ femaleId :173
+ 
+ maleId :246
+ points :30
+ femaleId :173
+ 
+ maleId :253
+ points :30
+ femaleId :173
+ 
+ maleId :256
+ points :50
+ femaleId :173
+ 
+ maleId :264
+ points :40
+ femaleId :173
+ 
+ maleId :271
+ points :50
+ femaleId :173
+ 
+ maleId :274
+ points :60
+ femaleId :173
+ 
+ maleId :282
+ points :40
+ femaleId :173
+ 
+ maleId :283
+ points :40
+ femaleId :173
+ 
+ maleId :286
+ points :50
+ femaleId :173
+ 
+ maleId :290
+ points :50
+ femaleId :173
+ 
+ maleId :292
+ points :40
+ femaleId :173
+ 
+ maleId :293
+ points :40
+ femaleId :173
+ 
+ maleId :299
+ points :60
+ femaleId :173
+ 
+ maleId :311
+ points :60
+ femaleId :173
+ 
+ maleId :312
+ points :50
+ femaleId :173
+ 
+ maleId :314
+ points :50
+ femaleId :173
+ 
+ maleId :315
+ points :60
+ femaleId :173
+ 
+ maleId :100
+ points :60
+ femaleId :180
+ 
+ maleId :101
+ points :30
+ femaleId :180
+ 
+ maleId :102
+ points :60
+ femaleId :180
+ 
+ maleId :115
+ points :60
+ femaleId :180
+ 
+ maleId :124
+ points :50
+ femaleId :180
+ 
+ maleId :143
+ points :50
+ femaleId :180
+ 
+ maleId :148
+ points :30
+ femaleId :180
+ 
+ maleId :160
+ points :40
+ femaleId :180
+ 
+ maleId :166
+ points :50
+ femaleId :180
+ 
+ maleId :168
+ points :60
+ femaleId :180
+ 
+ maleId :173
+ points :50
+ femaleId :180
+ 
+ maleId :232
+ points :40
+ femaleId :180
+ 
+ maleId :246
+ points :30
+ femaleId :180
+ 
+ maleId :253
+ points :40
+ femaleId :180
+ 
+ maleId :256
+ points :50
+ femaleId :180
+ 
+ maleId :264
+ points :50
+ femaleId :180
+ 
+ maleId :271
+ points :50
+ femaleId :180
+ 
+ maleId :274
+ points :50
+ femaleId :180
+ 
+ maleId :282
+ points :50
+ femaleId :180
+ 
+ maleId :283
+ points :40
+ femaleId :180
+ 
+ maleId :286
+ points :60
+ femaleId :180
+ 
+ maleId :290
+ points :50
+ femaleId :180
+ 
+ maleId :292
+ points :50
+ femaleId :180
+ 
+ maleId :293
+ points :50
+ femaleId :180
+ 
+ maleId :299
+ points :70
+ femaleId :180
+ 
+ maleId :311
+ points :60
+ femaleId :180
+ 
+ maleId :312
+ points :50
+ femaleId :180
+ 
+ maleId :314
+ points :50
+ femaleId :180
+ 
+ maleId :315
+ points :70
+ femaleId :180
+ 
+ maleId :100
+ points :40
+ femaleId :185
+ 
+ maleId :101
+ points :30
+ femaleId :185
+ 
+ maleId :102
+ points :40
+ femaleId :185
+ 
+ maleId :115
+ points :50
+ femaleId :185
+ 
+ maleId :124
+ points :40
+ femaleId :185
+ 
+ maleId :143
+ points :40
+ femaleId :185
+ 
+ maleId :148
+ points :30
+ femaleId :185
+ 
+ maleId :160
+ points :20
+ femaleId :185
+ 
+ maleId :166
+ points :40
+ femaleId :185
+ 
+ maleId :168
+ points :50
+ femaleId :185
+ 
+ maleId :173
+ points :40
+ femaleId :185
+ 
+ maleId :232
+ points :30
+ femaleId :185
+ 
+ maleId :246
+ points :30
+ femaleId :185
+ 
+ maleId :253
+ points :30
+ femaleId :185
+ 
+ maleId :256
+ points :40
+ femaleId :185
+ 
+ maleId :264
+ points :40
+ femaleId :185
+ 
+ maleId :271
+ points :50
+ femaleId :185
+ 
+ maleId :274
+ points :40
+ femaleId :185
+ 
+ maleId :282
+ points :30
+ femaleId :185
+ 
+ maleId :283
+ points :40
+ femaleId :185
+ 
+ maleId :286
+ points :50
+ femaleId :185
+ 
+ maleId :290
+ points :50
+ femaleId :185
+ 
+ maleId :292
+ points :40
+ femaleId :185
+ 
+ maleId :293
+ points :40
+ femaleId :185
+ 
+ maleId :299
+ points :50
+ femaleId :185
+ 
+ maleId :311
+ points :50
+ femaleId :185
+ 
+ maleId :312
+ points :40
+ femaleId :185
+ 
+ maleId :314
+ points :30
+ femaleId :185
+ 
+ maleId :315
+ points :60
+ femaleId :185
+ 
+ maleId :100
+ points :50
+ femaleId :196
+ 
+ maleId :101
+ points :40
+ femaleId :196
+ 
+ maleId :102
+ points :60
+ femaleId :196
+ 
+ maleId :115
+ points :50
+ femaleId :196
+ 
+ maleId :124
+ points :60
+ femaleId :196
+ 
+ maleId :143
+ points :50
+ femaleId :196
+ 
+ maleId :148
+ points :40
+ femaleId :196
+ 
+ maleId :160
+ points :40
+ femaleId :196
+ 
+ maleId :166
+ points :60
+ femaleId :196
+ 
+ maleId :168
+ points :50
+ femaleId :196
+ 
+ maleId :173
+ points :60
+ femaleId :196
+ 
+ maleId :232
+ points :60
+ femaleId :196
+ 
+ maleId :246
+ points :50
+ femaleId :196
+ 
+ maleId :253
+ points :50
+ femaleId :196
+ 
+ maleId :256
+ points :60
+ femaleId :196
+ 
+ maleId :264
+ points :60
+ femaleId :196
+ 
+ maleId :271
+ points :40
+ femaleId :196
+ 
+ maleId :274
+ points :50
+ femaleId :196
+ 
+ maleId :282
+ points :60
+ femaleId :196
+ 
+ maleId :283
+ points :50
+ femaleId :196
+ 
+ maleId :286
+ points :40
+ femaleId :196
+ 
+ maleId :290
+ points :40
+ femaleId :196
+ 
+ maleId :292
+ points :50
+ femaleId :196
+ 
+ maleId :293
+ points :60
+ femaleId :196
+ 
+ maleId :299
+ points :50
+ femaleId :196
+ 
+ maleId :311
+ points :60
+ femaleId :196
+ 
+ maleId :312
+ points :60
+ femaleId :196
+ 
+ maleId :314
+ points :60
+ femaleId :196
+ 
+ maleId :315
+ points :50
+ femaleId :196
+ 
+ maleId :100
+ points :40
+ femaleId :201
+ 
+ maleId :101
+ points :30
+ femaleId :201
+ 
+ maleId :102
+ points :50
+ femaleId :201
+ 
+ maleId :115
+ points :50
+ femaleId :201
+ 
+ maleId :124
+ points :40
+ femaleId :201
+ 
+ maleId :143
+ points :50
+ femaleId :201
+ 
+ maleId :148
+ points :30
+ femaleId :201
+ 
+ maleId :160
+ points :30
+ femaleId :201
+ 
+ maleId :166
+ points :40
+ femaleId :201
+ 
+ maleId :168
+ points :40
+ femaleId :201
+ 
+ maleId :173
+ points :50
+ femaleId :201
+ 
+ maleId :232
+ points :30
+ femaleId :201
+ 
+ maleId :246
+ points :40
+ femaleId :201
+ 
+ maleId :253
+ points :30
+ femaleId :201
+ 
+ maleId :256
+ points :40
+ femaleId :201
+ 
+ maleId :264
+ points :40
+ femaleId :201
+ 
+ maleId :271
+ points :40
+ femaleId :201
+ 
+ maleId :274
+ points :50
+ femaleId :201
+ 
+ maleId :282
+ points :40
+ femaleId :201
+ 
+ maleId :283
+ points :50
+ femaleId :201
+ 
+ maleId :286
+ points :40
+ femaleId :201
+ 
+ maleId :290
+ points :50
+ femaleId :201
+ 
+ maleId :292
+ points :30
+ femaleId :201
+ 
+ maleId :293
+ points :40
+ femaleId :201
+ 
+ maleId :299
+ points :40
+ femaleId :201
+ 
+ maleId :311
+ points :50
+ femaleId :201
+ 
+ maleId :312
+ points :40
+ femaleId :201
+ 
+ maleId :314
+ points :40
+ femaleId :201
+ 
+ maleId :315
+ points :50
+ femaleId :201
+ 
+ maleId :100
+ points :30
+ femaleId :204
+ 
+ maleId :101
+ points :40
+ femaleId :204
+ 
+ maleId :102
+ points :50
+ femaleId :204
+ 
+ maleId :115
+ points :40
+ femaleId :204
+ 
+ maleId :124
+ points :50
+ femaleId :204
+ 
+ maleId :143
+ points :50
+ femaleId :204
+ 
+ maleId :148
+ points :40
+ femaleId :204
+ 
+ maleId :160
+ points :30
+ femaleId :204
+ 
+ maleId :166
+ points :40
+ femaleId :204
+ 
+ maleId :168
+ points :30
+ femaleId :204
+ 
+ maleId :173
+ points :50
+ femaleId :204
+ 
+ maleId :232
+ points :40
+ femaleId :204
+ 
+ maleId :246
+ points :50
+ femaleId :204
+ 
+ maleId :253
+ points :30
+ femaleId :204
+ 
+ maleId :256
+ points :50
+ femaleId :204
+ 
+ maleId :264
+ points :50
+ femaleId :204
+ 
+ maleId :271
+ points :30
+ femaleId :204
+ 
+ maleId :274
+ points :50
+ femaleId :204
+ 
+ maleId :282
+ points :50
+ femaleId :204
+ 
+ maleId :283
+ points :50
+ femaleId :204
+ 
+ maleId :286
+ points :20
+ femaleId :204
+ 
+ maleId :290
+ points :40
+ femaleId :204
+ 
+ maleId :292
+ points :30
+ femaleId :204
+ 
+ maleId :293
+ points :40
+ femaleId :204
+ 
+ maleId :299
+ points :30
+ femaleId :204
+ 
+ maleId :311
+ points :50
+ femaleId :204
+ 
+ maleId :312
+ points :50
+ femaleId :204
+ 
+ maleId :314
+ points :50
+ femaleId :204
+ 
+ maleId :315
+ points :40
+ femaleId :204
+ 
+ maleId :100
+ points :40
+ femaleId :207
+ 
+ maleId :101
+ points :40
+ femaleId :207
+ 
+ maleId :102
+ points :40
+ femaleId :207
+ 
+ maleId :115
+ points :60
+ femaleId :207
+ 
+ maleId :124
+ points :40
+ femaleId :207
+ 
+ maleId :143
+ points :40
+ femaleId :207
+ 
+ maleId :148
+ points :40
+ femaleId :207
+ 
+ maleId :160
+ points :20
+ femaleId :207
+ 
+ maleId :166
+ points :40
+ femaleId :207
+ 
+ maleId :168
+ points :40
+ femaleId :207
+ 
+ maleId :173
+ points :40
+ femaleId :207
+ 
+ maleId :232
+ points :30
+ femaleId :207
+ 
+ maleId :246
+ points :40
+ femaleId :207
+ 
+ maleId :253
+ points :30
+ femaleId :207
+ 
+ maleId :256
+ points :40
+ femaleId :207
+ 
+ maleId :264
+ points :40
+ femaleId :207
+ 
+ maleId :271
+ points :50
+ femaleId :207
+ 
+ maleId :274
+ points :50
+ femaleId :207
+ 
+ maleId :282
+ points :40
+ femaleId :207
+ 
+ maleId :283
+ points :50
+ femaleId :207
+ 
+ maleId :286
+ points :40
+ femaleId :207
+ 
+ maleId :290
+ points :50
+ femaleId :207
+ 
+ maleId :292
+ points :40
+ femaleId :207
+ 
+ maleId :293
+ points :40
+ femaleId :207
+ 
+ maleId :299
+ points :50
+ femaleId :207
+ 
+ maleId :311
+ points :60
+ femaleId :207
+ 
+ maleId :312
+ points :40
+ femaleId :207
+ 
+ maleId :314
+ points :40
+ femaleId :207
+ 
+ maleId :315
+ points :50
+ femaleId :207
+ 
+ maleId :100
+ points :40
+ femaleId :208
+ 
+ maleId :101
+ points :30
+ femaleId :208
+ 
+ maleId :102
+ points :50
+ femaleId :208
+ 
+ maleId :115
+ points :60
+ femaleId :208
+ 
+ maleId :124
+ points :50
+ femaleId :208
+ 
+ maleId :143
+ points :40
+ femaleId :208
+ 
+ maleId :148
+ points :30
+ femaleId :208
+ 
+ maleId :160
+ points :30
+ femaleId :208
+ 
+ maleId :166
+ points :50
+ femaleId :208
+ 
+ maleId :168
+ points :50
+ femaleId :208
+ 
+ maleId :173
+ points :60
+ femaleId :208
+ 
+ maleId :232
+ points :50
+ femaleId :208
+ 
+ maleId :246
+ points :40
+ femaleId :208
+ 
+ maleId :253
+ points :40
+ femaleId :208
+ 
+ maleId :256
+ points :50
+ femaleId :208
+ 
+ maleId :264
+ points :50
+ femaleId :208
+ 
+ maleId :271
+ points :40
+ femaleId :208
+ 
+ maleId :274
+ points :50
+ femaleId :208
+ 
+ maleId :282
+ points :50
+ femaleId :208
+ 
+ maleId :283
+ points :50
+ femaleId :208
+ 
+ maleId :286
+ points :50
+ femaleId :208
+ 
+ maleId :290
+ points :60
+ femaleId :208
+ 
+ maleId :292
+ points :40
+ femaleId :208
+ 
+ maleId :293
+ points :50
+ femaleId :208
+ 
+ maleId :299
+ points :50
+ femaleId :208
+ 
+ maleId :311
+ points :60
+ femaleId :208
+ 
+ maleId :312
+ points :50
+ femaleId :208
+ 
+ maleId :314
+ points :50
+ femaleId :208
+ 
+ maleId :315
+ points :60
+ femaleId :208
+ 
+ maleId :100
+ points :40
+ femaleId :209
+ 
+ maleId :101
+ points :20
+ femaleId :209
+ 
+ maleId :102
+ points :50
+ femaleId :209
+ 
+ maleId :115
+ points :50
+ femaleId :209
+ 
+ maleId :124
+ points :40
+ femaleId :209
+ 
+ maleId :143
+ points :50
+ femaleId :209
+ 
+ maleId :148
+ points :30
+ femaleId :209
+ 
+ maleId :160
+ points :30
+ femaleId :209
+ 
+ maleId :166
+ points :40
+ femaleId :209
+ 
+ maleId :168
+ points :30
+ femaleId :209
+ 
+ maleId :173
+ points :50
+ femaleId :209
+ 
+ maleId :232
+ points :30
+ femaleId :209
+ 
+ maleId :246
+ points :40
+ femaleId :209
+ 
+ maleId :253
+ points :30
+ femaleId :209
+ 
+ maleId :256
+ points :40
+ femaleId :209
+ 
+ maleId :264
+ points :40
+ femaleId :209
+ 
+ maleId :271
+ points :40
+ femaleId :209
+ 
+ maleId :274
+ points :60
+ femaleId :209
+ 
+ maleId :282
+ points :40
+ femaleId :209
+ 
+ maleId :283
+ points :40
+ femaleId :209
+ 
+ maleId :286
+ points :40
+ femaleId :209
+ 
+ maleId :290
+ points :60
+ femaleId :209
+ 
+ maleId :292
+ points :30
+ femaleId :209
+ 
+ maleId :293
+ points :40
+ femaleId :209
+ 
+ maleId :299
+ points :40
+ femaleId :209
+ 
+ maleId :311
+ points :50
+ femaleId :209
+ 
+ maleId :312
+ points :40
+ femaleId :209
+ 
+ maleId :314
+ points :40
+ femaleId :209
+ 
+ maleId :315
+ points :50
+ femaleId :209
+ 
+ maleId :100
+ points :40
+ femaleId :213
+ 
+ maleId :101
+ points :40
+ femaleId :213
+ 
+ maleId :102
+ points :40
+ femaleId :213
+ 
+ maleId :115
+ points :60
+ femaleId :213
+ 
+ maleId :124
+ points :40
+ femaleId :213
+ 
+ maleId :143
+ points :40
+ femaleId :213
+ 
+ maleId :148
+ points :40
+ femaleId :213
+ 
+ maleId :160
+ points :20
+ femaleId :213
+ 
+ maleId :166
+ points :30
+ femaleId :213
+ 
+ maleId :168
+ points :40
+ femaleId :213
+ 
+ maleId :173
+ points :50
+ femaleId :213
+ 
+ maleId :232
+ points :30
+ femaleId :213
+ 
+ maleId :246
+ points :40
+ femaleId :213
+ 
+ maleId :253
+ points :30
+ femaleId :213
+ 
+ maleId :256
+ points :40
+ femaleId :213
+ 
+ maleId :264
+ points :40
+ femaleId :213
+ 
+ maleId :271
+ points :50
+ femaleId :213
+ 
+ maleId :274
+ points :50
+ femaleId :213
+ 
+ maleId :282
+ points :40
+ femaleId :213
+ 
+ maleId :283
+ points :50
+ femaleId :213
+ 
+ maleId :286
+ points :50
+ femaleId :213
+ 
+ maleId :290
+ points :50
+ femaleId :213
+ 
+ maleId :292
+ points :30
+ femaleId :213
+ 
+ maleId :293
+ points :40
+ femaleId :213
+ 
+ maleId :299
+ points :40
+ femaleId :213
+ 
+ maleId :311
+ points :60
+ femaleId :213
+ 
+ maleId :312
+ points :40
+ femaleId :213
+ 
+ maleId :314
+ points :40
+ femaleId :213
+ 
+ maleId :315
+ points :60
+ femaleId :213
+ 
+ maleId :100
+ points :40
+ femaleId :215
+ 
+ maleId :101
+ points :40
+ femaleId :215
+ 
+ maleId :102
+ points :40
+ femaleId :215
+ 
+ maleId :115
+ points :50
+ femaleId :215
+ 
+ maleId :124
+ points :40
+ femaleId :215
+ 
+ maleId :143
+ points :40
+ femaleId :215
+ 
+ maleId :148
+ points :50
+ femaleId :215
+ 
+ maleId :160
+ points :20
+ femaleId :215
+ 
+ maleId :166
+ points :40
+ femaleId :215
+ 
+ maleId :168
+ points :50
+ femaleId :215
+ 
+ maleId :173
+ points :40
+ femaleId :215
+ 
+ maleId :232
+ points :30
+ femaleId :215
+ 
+ maleId :246
+ points :40
+ femaleId :215
+ 
+ maleId :253
+ points :40
+ femaleId :215
+ 
+ maleId :256
+ points :40
+ femaleId :215
+ 
+ maleId :264
+ points :40
+ femaleId :215
+ 
+ maleId :271
+ points :50
+ femaleId :215
+ 
+ maleId :274
+ points :50
+ femaleId :215
+ 
+ maleId :282
+ points :30
+ femaleId :215
+ 
+ maleId :283
+ points :30
+ femaleId :215
+ 
+ maleId :286
+ points :40
+ femaleId :215
+ 
+ maleId :290
+ points :40
+ femaleId :215
+ 
+ maleId :292
+ points :50
+ femaleId :215
+ 
+ maleId :293
+ points :40
+ femaleId :215
+ 
+ maleId :299
+ points :50
+ femaleId :215
+ 
+ maleId :311
+ points :60
+ femaleId :215
+ 
+ maleId :312
+ points :40
+ femaleId :215
+ 
+ maleId :314
+ points :40
+ femaleId :215
+ 
+ maleId :315
+ points :50
+ femaleId :215

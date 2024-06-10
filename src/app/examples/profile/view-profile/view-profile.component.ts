@@ -34,9 +34,9 @@ export class ViewProfileComponent implements OnInit {
   getCurrentUser(userid, usertype) {
     if(this.xuser != '0') {
       if(usertype=='1') {
-          this.service.getMaleUserList(userid).subscribe(data=>{
-            this.user = data;
-            if(this.user.reqAccepted.split(',').includes(this.xuser)) {
+          this.service.getTopMatchFemales(userid).subscribe(data=>{
+            this.user = data["Matching"].filter(item => item.userId==this.xuser && (item.statusReq==3 || item.statusReq>4) );
+            if(this.user.length > 0) {
               this.service.getFemaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;
@@ -46,9 +46,9 @@ export class ViewProfileComponent implements OnInit {
           });
       }
       else if(usertype=='2') {
-          this.service.getFemaleUserList(userid).subscribe(data=>{
-            this.user = data;
-            if(this.user.reqAccepted.split(',').includes(this.xuser)) {
+          this.service.getTopMatchMales(userid).subscribe(data=>{
+            this.user = data["Matching"].filter(item => item.userId==this.xuser && (item.statusReq==3 || item.statusReq>4));
+            if(this.user.length > 0) {
               this.service.getMaleUserList(Number(this.xuser)).subscribe(xuser=>{
                 this.currentUser = xuser;
                 this.PhotoFilePath=this.service.PhotoUrl+this.currentUser.photo;

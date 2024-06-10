@@ -1,0 +1,4 @@
+Operations to perform:
+  Apply all migrations: UserApp, admin, auth, contenttypes, sessions
+Running migrations:
+  Applying UserApp.0004_post_posttype... OK

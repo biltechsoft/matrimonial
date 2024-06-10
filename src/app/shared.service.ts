@@ -10,10 +10,10 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class SharedService {
-//readonly APIUrl = "http://127.0.0.1:8000";
+readonly APIUrl = "http://127.0.0.1:8000";
 //readonly PhotoUrl = "http://127.0.0.1:8000/media/";
 
-readonly APIUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzVkV0ZYUm5OTmFsRXdUWHBSUFE9PQ==";
+//readonly APIUrl = "https://munamatrimonial.com/api/WWxoV2RWbFhNV2hrU0Vwd1lsYzVkV0ZYUm5OTmFsRXdUWHBSUFE9PQ==";
 readonly PhotoUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof/media/";
 readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof";
 
@@ -89,6 +89,9 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
 
   mEncrypt(val) {
     return btoa(btoa(btoa(val)));
+  }
+  mDecrypt(val) {
+    return atob(atob(atob(val)));
   }
 
   validateEmail(email) {
@@ -259,6 +262,45 @@ readonly PhotoAPIUrl = "https://munamatrimonial.com/api/weriojfklmsdklfksdweiof"
   }
   deletePost(val:any) {
     return this.http.delete (this.APIUrl + '/post/' + val);
+  }
+
+  getMatchingList(id=0): Observable<any[]> {
+    if(id==0) {
+      return this.http.get<any[]> (this.APIUrl + '/matchmakingdemo');
+    }
+    else {
+      return this.http.get<any[]> (this.APIUrl + '/matchmakingdemo/' + id);
+    }
+  }
+  addMatching(val:any) {
+    return this.http.post (this.APIUrl + '/matchmakingdemo', val);
+  }
+  updateMatching(val:any) {
+    return this.http.put (this.APIUrl + '/matchmakingdemo', val);
+  }
+  deleteMatching(val:any) {
+    return this.http.delete (this.APIUrl + '/matchmakingdemo/' + val);
+  }
+
+   //get all matching males from a female id
+  getTopMatchMales(femaleid) {
+    return this.http.get<any[]> (this.APIUrl + '/male-info/' + femaleid);
+  }
+  //get all matching females from a male id
+  getTopMatchFemales(maleid) {
+    return this.http.get<any[]> (this.APIUrl + '/female-info/' + maleid);
+  }
+  getReqMales() {
+    return this.http.get<any[]> (this.APIUrl + '/all-male-req/');
+  }
+  getReqFemales() {
+    return this.http.get<any[]> (this.APIUrl + '/all-female-req/');
+  }
+  getReqLockMales() {
+    return this.http.get<any[]> (this.APIUrl + '/lock-req-by-male/');
+  }
+  getReqLockFemales() {
+    return this.http.get<any[]> (this.APIUrl + '/lock-req-by-female/');
   }
 
   sendEmail(val:any) {

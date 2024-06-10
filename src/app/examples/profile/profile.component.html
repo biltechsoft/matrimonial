@@ -39,8 +39,39 @@
   <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
       <p>Your profile is {{currentUser.status}}.</p>
-      <p *ngIf="currentUser.status == 'Active'">Your profile is visible to anyone who has access to view your profile.
+      <p *ngIf="currentUser.status == 'Active' && !anyidAccepted">
+        You cannot view your Top Matches' profile untill you request their info. You can view their profile after admin approval.</p>
+      <p *ngIf="currentUser.status == 'Active' && !locked && anyidAccepted">Your profile is visible to anyone who has access to view your profile.
         If you are communicating with someone, you may 
+        <a [routerLink]="['/user-profile',usertype,userid]" data-bs-toggle="modal" data-bs-target="#statusModal">Request Admin</a> 
+        to temporarily LOCK your profile.
+        You can change your mind later by requesting admin to unlock/Activate your profile again.</p>
+      <p *ngIf="currentUser.status == 'Active' && locked && anyidAccepted">Your profile is visible to anyone who has access to view your profile.
+        You have already requested admin to LOCK your profile with <a [routerLink]="['/view-profile',usertype, userid, lockedProfile[0].userId]" 
+        target="_blank">{{lockedProfile[0].fullName}}</a>. If admin approves your request, your profile will not be visible to other ones.
+        <a [routerLink]="['/user-profile',usertype,userid]" 
+         (click)="cancelLockRequest()">Cancel LOCK Request</a>
+      </p>
+      <p *ngIf="currentUser.status == profileStatus[3] && lockedProfile[0].statusReq==7">Your profile is not visible to anyone except 
+        <a [routerLink]="['/view-profile',usertype, userid, lockedProfile[0].userId]" target="_blank">
+          {{lockedProfile[0].fullName}}</a>.
+        If you feel you are not interested to communicate with this person anymore, you may 
+        <a [routerLink]="['/user-profile',usertype,userid]" (click)="unlockRequest()">Request Admin</a> 
+        to reject this ID and UNLOCK your profile.
+        </p>
+      <p *ngIf="currentUser.status == profileStatus[3] && lockedProfile[0].statusReq>7">Your profile is not visible to anyone except 
+        <a [routerLink]="['/view-profile',usertype, userid, lockedProfile[0].userId]" target="_blank">
+          {{lockedProfile[0].fullName}}</a>.
+        Admin has received request to reject of this ID and UNLOCK your profile. Your profile will be unlocked when admin approves it.
+        </p>
+    </div>
+  </div>
+  <!-- For editing new instruction message, if anyone want to engage or not? -->
+  <!-- <div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+      <p>Your profile is {{currentUser.status}}.</p>
+      <p *ngIf="currentUser.status == 'Active'">Your profile is visible to anyone who has access to view your profile.
+        If you want to engage with your desired one, you may engage and lock your profile by the "ENGAGE?" button rigthside of the each id.
         <a [routerLink]="['/user-profile',usertype,userid]" data-bs-toggle="modal" data-bs-target="#statusModal">Request Admin</a> 
         to temporarily LOCK your profile.
         You can change your mind later by requesting admin to unlock/Activate your profile again.</p>
@@ -52,7 +83,7 @@
         to UNLOCK your profile.
         </p>
     </div>
-  </div>
+  </div> -->
   <br />
 
   <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -69,9 +100,9 @@
               <p>I would like to request to LOCK my ID with the following ID</p>
               <div class="form-group form-floating">
                 <select [(ngModel)]="reqLock" class="form-select" id="reqLock">
-                  <ng-container *ngFor="let id of reqAccepted">
-                    <option *ngIf=!isLocked(id) value="{{id}}">
-                      {{id}} - {{getName(id)}}
+                  <ng-container *ngFor="let id of acceptedIds">
+                    <option value="{{id.matchingId}}">
+                      {{id.userId}} - {{id.fullName}}
                     </option>
                   </ng-container>
                 </select>
@@ -81,7 +112,42 @@
           </div>
 
           <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
-            (click)=sendMessage(true)>OK</button>
+            (click)=lockRequest(reqLock)>OK</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="engageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request Admin to Engage!</h5>
+          <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row bd-highlight">
+            <div class="p-4 w-100 bd-highlight">
+
+              <!-- <p>I would like to request to LOCK my ID with the following ID</p> -->
+              <p>Surely, do you want to engage with this person? Do we lock your profile with this person?</p>
+              <!-- <div class="form-group form-floating"> -->
+                <!-- <select [(ngModel)]="reqLock" class="form-select" id="reqLock">
+                  <ng-container *ngFor="let id of reqAccepted">
+                    <option *ngIf=!isLocked(id) value="{{id}}">
+                      {{id}} - {{getName(id)}}
+                    </option>
+                  </ng-container>
+                </select> -->
+                <!-- <label for="reqLock">To Whom you want to LOCK with?</label>
+              </div> -->
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary float-end" data-bs-dismiss="modal"
+            (click)=requestLock()>Yes, Sure!</button>
 
         </div>
 
@@ -115,7 +181,7 @@
 
   <div class="row">
     <div class="col-md-6 ml-auto mr-auto text-center">
-      <ng-container *ngIf="currentUser.status != 'Deactivated'"><h6 class="description">Profile Completeness</h6>
+      <ng-container *ngIf="currentUser.status != 'Deactivated'"><h6 class="description" (click)="clickConsole()">Profile Completeness</h6>
       <ngb-progressbar type="success" class="mt-0" [value]=pct [striped]="true" [animated]="true"><i>{{pct}}%</i>
       </ngb-progressbar><br></ng-container>
       <div *ngIf="currentUser.status == 'Inactive'">
@@ -156,16 +222,18 @@
                 <ul class="list-unstyled follows">
                   <!--li>{{topMatcheUsers}}</li-->
                     <li *ngFor="let user of topMatcheUsers; let i=index">
+                      <ng-container *ngIf="i<5 || user.statusReq==1 || user.statusReq==2">
                       <div class="row">
+                        
                         <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
-                          <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
+                          <img src="{{PhotoUrl+user.photoUrl}}" alt="Circle Image"
                             class="img-circle img-no-padding img-responsive" height="70px;" width="70px;">
                         </div>
                         <div class="col-md-3 col-sm-4 ml-auto">
                           <h6>{{user.fullName}}<br /><small>Age {{user.age}}, {{user.highestEducation}}</small></h6>
                         </div>
                         <div class="col-md-3 col-sm-4 ml-auto">
-                          <h6>{{topMatchPct[i]}}% Matching<br /><small>State: {{user.state}}</small></h6>
+                          <h6>{{user.percentage}}% Matching<br /><small>State: {{user.state}}</small></h6>
                         </div>
                         <div *ngIf="user.status!='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
                           style="padding-top:15px;">
@@ -181,31 +249,33 @@
                         </div>
                         <div *ngIf="user.status=='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
                           style="padding-top:15px;">
-                          <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
-                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request
+                          <button *ngIf="user.statusReq==0 && !isAdmin()"
+                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user)>Request
                             Info</button>
-                          <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
+                          <div *ngIf="(user.statusReq==1 || user.statusReq==2) && !isAdmin()" class="form-check">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                              <span class="form-check-sign">Request Sent</span>
+                              <span class="form-check-sign">Requested</span>
                             </label>
                           </div>
-                          <div *ngIf="isReqRejected(user)">
+                          <div *ngIf="user.statusReq==4">
                             <label class="form-check-label">
                               <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"
                               placement="top" ngbTooltip="You have requested to view this profile, but admin found this profile inappropriate for you for some reason. So your request is rejected by admin."></i>
                               <span class="form-check-sign">Profile Rejected</span>
                             </label>
                           </div>
-                          <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
-                            target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button"
+
+                          <a
+                            [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
+                            target="_blank"><button *ngIf="(user.statusReq==3 || user.statusReq>4) && !isAdmin()" type="button"
                               class="btn btn-success btn-sm" (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
-                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
-                            (click)=giveAccess(user,i)>Give Access</button>
-                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
+                          <button *ngIf="(user.statusReq==1 || user.statusReq==2) && isAdmin()" type="button" class="btn btn-success btn-sm"
+                            (click)=giveAccess(user)>Give Access</button>
+                          <button *ngIf="(user.statusReq==1 || user.statusReq==2) && isAdmin()" type="button" class="btn btn-danger btn-sm"
                             (click)=clickReject(user,i) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
-                          <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
+                          <div *ngIf="user.statusReq==3 && isAdmin()" class="form-check">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" checked="" disabled>
                               <span class="form-check-sign">Access Given</span>
@@ -214,6 +284,7 @@
                         </div>
                       </div>
                       <hr />
+                    </ng-container>
                     </li>
                 </ul>
               </div>
@@ -224,26 +295,30 @@
         <ngb-tab title="Requested">
           <ng-template ngbTabContent>
             <div class="row following" id="follows">
-              <div class="col-lg-9 col-md-6 ml-auto mr-auto">
+              <div class="col-lg-9 col-md-7 ml-auto mr-auto">
                 <ul class="list-unstyled follows">
-                    <li *ngFor="let user of requestedUsers">
+                  <!--li>{{topMatcheUsers}}</li-->
+                    <li *ngFor="let user of topMatcheUsers; let i=index">
+                      <ng-container *ngIf="user.statusReq>0">
                       <div class="row">
+                        
                         <div class="avatar col-md-2 col-sm-2 ml-auto mr-auto">
-                          <img src="{{PhotoUrl+user.photo}}" alt="Circle Image"
+                          <img src="{{PhotoUrl+user.photoUrl}}" alt="Circle Image"
                             class="img-circle img-no-padding img-responsive" height="70px;" width="70px;">
                         </div>
-                        <div class="col-md-3 col-sm-4 ml-auto">
-                          <h6>{{user.fullName}}<br /><small>Age {{user.age}}, {{user.highestEducation}}
-                              <br />State: {{user.state}}</small></h6>
+                        <div class="col-md-2 col-sm-4 ml-auto">
+                          <h6>{{user.fullName}}<br /><small>Age {{user.age}}, {{user.highestEducation}}</small></h6>
                         </div>
-                        <!--div class="col-md-3 col-sm-4 ml-auto">
-                                            <h6>{{topMatchPct[i]}}% Matching<br/><small>State: {{user.state}}</small></h6>
-                                        </div-->
+
+                        
+                        
+                        <div class="col-md-2 col-sm-4 ml-auto">
+                          <h6>{{user.percentage}}% Matching<br /><small>State: {{user.state}}</small></h6>
+                        </div>
                         <div *ngIf="user.status!='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
                           style="padding-top:15px;">
                           <div>
                             <label class="form-check-label">
-                              <!--i *ngIf="user.status!=profileStatus[3]" style="color:yellow;" class="fa fa-question-circle" aria-hidden="true"></i-->
                               <i *ngIf="user.status==profileStatus[3]" style="color:yellow;" class="fa fa-question-circle" aria-hidden="true" 
                               placement="top" ngbTooltip="This profile is in progress with some other Person. So you cannot view this profile at this moment. If the current progress is cancelled, the profile will be activated and you can view this profile."></i>
                               <i *ngIf="user.status==profileStatus[4]" style="color:yellow;" class="fa fa-question-circle" aria-hidden="true" 
@@ -254,39 +329,54 @@
                         </div>
                         <div *ngIf="user.status=='Active'" class="col-md-4 col-sm-2 ml-auto mr-auto"
                           style="padding-top:15px;">
-                          <button *ngIf="!isReqSent(user) && !isReqAccepted(user) && !isReqRejected(user) && !isAdmin()"
-                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user,i)>Request
+                          <button *ngIf="user.statusReq==0 && !isAdmin()"
+                            type="button" class="btn btn-warning btn-sm" (click)=requestInfo(user)>Request
                             Info</button>
-                          <div *ngIf="isReqSent(user) && !isAdmin()" class="form-check">
+                          <div *ngIf="(user.statusReq==1 || user.statusReq==2) && !isAdmin()" class="form-check">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" checked="" disabled>
-                              <span class="form-check-sign">Request Sent</span>
+                              <span class="form-check-sign">Requested</span>
                             </label>
                           </div>
-                          <div *ngIf="isReqRejected(user)">
+                          <div *ngIf="user.statusReq==4">
                             <label class="form-check-label">
                               <i style="color:red;" class="fa fa-exclamation-circle" aria-hidden="true"
                               placement="top" ngbTooltip="You have requested to view this profile, but admin found this profile inappropriate for you for some reason. So your request is rejected by admin."></i>
                               <span class="form-check-sign">Profile Rejected</span>
                             </label>
                           </div>
-                          <a [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
-                            target="_blank"><button *ngIf="isReqAccepted(user) && !isAdmin()" type="button"
-                              class="btn btn-success btn-sm" (mouseover)=setXuser(user.userId)>View Profile</button></a>
 
-                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-success btn-sm"
-                            (click)=giveAccess(user,i)>Give Access</button>
-                          <button *ngIf="isReqSent(user) && isAdmin()" type="button" class="btn btn-danger btn-sm"
+                          <a
+                            [routerLink]="['/view-profile',genderMap(currentUser.gender),currentUser.userId,user.userId]"
+                            target="_blank"><button *ngIf="(user.statusReq==3 || user.statusReq>4) && !isAdmin()" type="button"
+                              class="btn btn-success btn-sm" (mouseover)=setXuser(user.userId)>View Profile</button>
+                            </a>
+                          <!-- <button *ngIf="(user.statusReq==3 && locked == false) && !isAdmin()" type="button" co class="btn btn-success btn-sm"
+                            (click)=lockRequest(user)>Engage?</button> -->
+
+                          <button *ngIf="(user.statusReq==1 || user.statusReq==2) && isAdmin()" type="button" class="btn btn-success btn-sm"
+                            (click)=giveAccess(user)>Give Access</button>
+                          <button *ngIf="(user.statusReq==1 || user.statusReq==2) && isAdmin()" type="button" class="btn btn-danger btn-sm"
                             (click)=clickReject(user,i) data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
-                          <div *ngIf="isReqAccepted(user) && isAdmin()" class="form-check">
+                          <div *ngIf="user.statusReq==3 && isAdmin()" class="form-check">
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" checked="" disabled>
                               <span class="form-check-sign">Access Given</span>
                             </label>
                           </div>
                         </div>
+
+                        <!-- Engage button -->
+
+                        
+
+                        <!-- Engage Button -->
+                        
+                        
                       </div>
+                    
                       <hr />
+                    </ng-container>
                     </li>
                 </ul>
               </div>
