@@ -1,4 +1,0 @@
-#a new field name userToken is added after
-#'lastEdit' field in both maleuser and FemaleUser
-userToken=models.CharField(max_length=100,null=True)
-#and accordingly in serializer.py

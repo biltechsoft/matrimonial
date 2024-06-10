@@ -1,3 +1,0 @@
-pip install sendgrid-django
-pip install python-dotenv
-pip install -U 
